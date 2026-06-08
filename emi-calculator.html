@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMI Calculator - Prime Tools</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e;
+      color: white;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white;
+      text-align: center;
+      padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 600px;
+      margin: 36px auto;
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .field { margin-bottom: 24px; }
+    .field label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 10px;
+    }
+    .field label span {
+      color: #00d4aa;
+      font-size: 15px;
+    }
+    input[type="range"] {
+      width: 100%;
+      accent-color: #00d4aa;
+      height: 6px;
+      cursor: pointer;
+    }
+    .range-limits {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #aaa;
+      margin-top: 4px;
+    }
+    .field input[type="number"] {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      margin-top: 8px;
+    }
+    .field input[type="number"]:focus { border-color: #00d4aa; }
+
+    .calc-button {
+      width: 100%;
+      padding: 14px;
+      background: #00d4aa;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 24px;
+    }
+    .calc-button:hover { background: #00b894; }
+
+    .result-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .result-card {
+      background: #f8fffe;
+      border: 2px solid #e0f7f3;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .result-card .r-label {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .result-card .r-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    .result-card.highlight { border-color: #00d4aa; background: #e8fdf8; }
+    .result-card.highlight .r-value { color: #00d4aa; font-size: 22px; }
+
+    .breakdown-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 12px;
+    }
+
+    .bar-container { margin-bottom: 20px; }
+    .bar-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .bar-track {
+      width: 100%;
+      height: 14px;
+      background: #f0f4f8;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+    }
+    .bar-principal {
+      height: 100%;
+      background: #00d4aa;
+      border-radius: 8px 0 0 8px;
+      transition: width 0.5s;
+    }
+    .bar-interest {
+      height: 100%;
+      background: #ff6b6b;
+      border-radius: 0 8px 8px 0;
+      transition: width 0.5s;
+    }
+    .bar-legend {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+      font-size: 12px;
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .schedule-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #333;
+      margin: 20px 0 10px;
+    }
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .schedule-table th {
+      background: #1a1a2e;
+      color: white;
+      padding: 10px 8px;
+      text-align: right;
+    }
+    .schedule-table th:first-child { text-align: left; }
+    .schedule-table td {
+      padding: 9px 8px;
+      border-bottom: 1px solid #f0f0f0;
+      text-align: right;
+      color: #444;
+    }
+    .schedule-table td:first-child { text-align: left; font-weight: 600; }
+    .schedule-table tr:hover td { background: #f8fffe; }
+
+    .result-section { display: none; }
+    .result-section.show { display: block; }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      background: #1a1a2e;
+      color: #aaa;
+      font-size: 13px;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html">← Back to Home</a>
+    <h1>Prime Tools</h1>
+  </header>
+
+  <div class="page-title">
+    <h2>EMI Calculator</h2>
+    <p>Calculate your monthly loan EMI — home, car, personal or any loan</p>
+  </div>
+
+  <div class="calculator-box">
+
+    <div class="field">
+      <label>Loan Amount (₹) <span id="loanDisplay">₹10,00,000</span></label>
+      <input type="range" id="loanRange" min="10000" max="10000000" step="10000" value="1000000" oninput="syncLoan(this.value)">
+      <div class="range-limits"><span>₹10,000</span><span>₹1 Crore</span></div>
+      <input type="number" id="loanInput" value="1000000" placeholder="Or type amount" oninput="syncLoanInput(this.value)">
+    </div>
+
+    <div class="field">
+      <label>Interest Rate (% per year) <span id="rateDisplay">8.5%</span></label>
+      <input type="range" id="rateRange" min="1" max="30" step="0.1" value="8.5" oninput="syncRate(this.value)">
+      <div class="range-limits"><span>1%</span><span>30%</span></div>
+      <input type="number" id="rateInput" value="8.5" step="0.1" placeholder="Or type rate" oninput="syncRateInput(this.value)">
+    </div>
+
+    <div class="field">
+      <label>Loan Tenure <span id="tenureDisplay">20 Years</span></label>
+      <input type="range" id="tenureRange" min="1" max="30" step="1" value="20" oninput="syncTenure(this.value)">
+      <div class="range-limits"><span>1 Year</span><span>30 Years</span></div>
+      <input type="number" id="tenureInput" value="20" placeholder="Or type years" oninput="syncTenureInput(this.value)">
+    </div>
+
+    <button class="calc-button" onclick="calculate()">Calculate EMI</button>
+
+    <div class="result-section" id="resultSection">
+
+      <div class="result-cards">
+        <div class="result-card highlight">
+          <div class="r-label">Monthly EMI</div>
+          <div class="r-value" id="r-emi">₹0</div>
+        </div>
+        <div class="result-card">
+          <div class="r-label">Total Interest</div>
+          <div class="r-value" id="r-interest">₹0</div>
+        </div>
+        <div class="result-card">
+          <div class="r-label">Total Payment</div>
+          <div class="r-value" id="r-total">₹0</div>
+        </div>
+      </div>
+
+      <div class="breakdown-title">Principal vs Interest Breakdown</div>
+      <div class="bar-container">
+        <div class="bar-labels">
+          <span id="principal-pct" style="color:#00d4aa;font-weight:600;">Principal 0%</span>
+          <span id="interest-pct" style="color:#ff6b6b;font-weight:600;">Interest 0%</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-principal" id="barPrincipal"></div>
+          <div class="bar-interest" id="barInterest"></div>
+        </div>
+        <div class="bar-legend">
+          <span><span class="legend-dot" style="background:#00d4aa;"></span>Principal</span>
+          <span><span class="legend-dot" style="background:#ff6b6b;"></span>Interest</span>
+        </div>
+      </div>
+
+      <div class="schedule-title">Yearly Payment Schedule</div>
+      <table class="schedule-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Principal (₹)</th>
+            <th>Interest (₹)</th>
+            <th>Balance (₹)</th>
+          </tr>
+        </thead>
+        <tbody id="scheduleBody"></tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+  </footer>
+
+  <script>
+    function fmt(n) {
+      return Math.round(n).toLocaleString('en-IN');
+    }
+
+    function syncLoan(v) {
+      document.getElementById('loanInput').value = v;
+      document.getElementById('loanDisplay').textContent = '₹' + fmt(v);
+    }
+    function syncLoanInput(v) {
+      document.getElementById('loanRange').value = Math.min(v, 10000000);
+      document.getElementById('loanDisplay').textContent = '₹' + fmt(v);
+    }
+    function syncRate(v) {
+      document.getElementById('rateInput').value = v;
+      document.getElementById('rateDisplay').textContent = v + '%';
+    }
+    function syncRateInput(v) {
+      document.getElementById('rateRange').value = Math.min(v, 30);
+      document.getElementById('rateDisplay').textContent = v + '%';
+    }
+    function syncTenure(v) {
+      document.getElementById('tenureInput').value = v;
+      document.getElementById('tenureDisplay').textContent = v + ' Years';
+    }
+    function syncTenureInput(v) {
+      document.getElementById('tenureRange').value = Math.min(v, 30);
+      document.getElementById('tenureDisplay').textContent = v + ' Years';
+    }
+
+    function calculate() {
+      const P = parseFloat(document.getElementById('loanInput').value);
+      const annualRate = parseFloat(document.getElementById('rateInput').value);
+      const years = parseInt(document.getElementById('tenureInput').value);
+
+      if (!P || !annualRate || !years) return;
+
+      const r = annualRate / 12 / 100;
+      const n = years * 12;
+      const emi = P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+      const totalPayment = emi * n;
+      const totalInterest = totalPayment - P;
+      const principalPct = Math.round((P / totalPayment) * 100);
+      const interestPct = 100 - principalPct;
+
+      document.getElementById('r-emi').textContent = '₹' + fmt(emi);
+      document.getElementById('r-interest').textContent = '₹' + fmt(totalInterest);
+      document.getElementById('r-total').textContent = '₹' + fmt(totalPayment);
+      document.getElementById('barPrincipal').style.width = principalPct + '%';
+      document.getElementById('barInterest').style.width = interestPct + '%';
+      document.getElementById('principal-pct').textContent = 'Principal ' + principalPct + '%';
+      document.getElementById('interest-pct').textContent = 'Interest ' + interestPct + '%';
+
+      let balance = P;
+      let scheduleHTML = '';
+      for (let y = 1; y <= years; y++) {
+        let yearPrincipal = 0, yearInterest = 0;
+        for (let m = 0; m < 12; m++) {
+          const interestPart = balance * r;
+          const principalPart = emi - interestPart;
+          yearInterest += interestPart;
+          yearPrincipal += principalPart;
+          balance -= principalPart;
+        }
+        if (balance < 0) balance = 0;
+        scheduleHTML += `<tr>
+          <td>Year ${y}</td>
+          <td>₹${fmt(yearPrincipal)}</td>
+          <td>₹${fmt(yearInterest)}</td>
+          <td>₹${fmt(balance)}</td>
+        </tr>`;
+      }
+      document.getElementById('scheduleBody').innerHTML = scheduleHTML;
+      document.getElementById('resultSection').classList.add('show');
+    }
+
+    calculate();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIP Calculator - Prime Tools</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 620px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .field { margin-bottom: 24px; }
+    .field label {
+      display: flex; justify-content: space-between;
+      font-size: 14px; font-weight: 600; color: #555; margin-bottom: 10px;
+    }
+    .field label span { color: #00d4aa; font-size: 15px; }
+    input[type="range"] {
+      width: 100%; accent-color: #00d4aa; height: 6px; cursor: pointer;
+    }
+    .range-limits {
+      display: flex; justify-content: space-between;
+      font-size: 12px; color: #aaa; margin-top: 4px;
+    }
+    .field input[type="number"] {
+      width: 100%; padding: 11px 14px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 15px; outline: none; transition: border-color 0.2s; margin-top: 8px;
+    }
+    .field input[type="number"]:focus { border-color: #00d4aa; }
+
+    .calc-button {
+      width: 100%; padding: 14px; background: #00d4aa;
+      color: white; border: none; border-radius: 8px;
+      font-size: 16px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s; margin-bottom: 28px;
+    }
+    .calc-button:hover { background: #00b894; }
+
+    .result-section { display: none; }
+    .result-section.show { display: block; }
+
+    .result-cards {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 24px;
+    }
+    .result-card {
+      background: #f8fffe; border: 2px solid #e0f7f3;
+      border-radius: 12px; padding: 16px; text-align: center;
+    }
+    .result-card .r-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .result-card .r-value { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+    .result-card.highlight { border-color: #00d4aa; background: #e8fdf8; }
+    .result-card.highlight .r-value { color: #00d4aa; font-size: 20px; }
+    .result-card.green .r-value { color: #00b894; }
+
+    .chart-area {
+      margin-bottom: 24px;
+    }
+    .chart-title { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 16px; }
+
+    .donut-row {
+      display: flex; align-items: center; gap: 24px; margin-bottom: 20px;
+    }
+    canvas#donut { flex-shrink: 0; }
+    .donut-legend { flex: 1; }
+    .legend-item {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px; font-size: 14px;
+    }
+    .legend-dot {
+      width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0;
+    }
+    .legend-item .l-label { color: #666; flex: 1; }
+    .legend-item .l-value { font-weight: 700; color: #1a1a2e; }
+
+    .growth-title { font-size: 14px; font-weight: 600; color: #555; margin-bottom: 10px; }
+    .year-bars { display: flex; flex-direction: column; gap: 8px; }
+    .year-row { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+    .year-label { width: 48px; color: #888; flex-shrink: 0; }
+    .year-bar-track {
+      flex: 1; height: 20px; background: #f0f4f8;
+      border-radius: 6px; overflow: hidden; display: flex;
+    }
+    .year-bar-invested {
+      height: 100%; background: #b2ead9;
+      transition: width 0.4s;
+    }
+    .year-bar-returns {
+      height: 100%; background: #00d4aa;
+      transition: width 0.4s;
+    }
+    .year-value { width: 80px; text-align: right; font-weight: 600; color: #1a1a2e; }
+
+    .bar-legend-row {
+      display: flex; gap: 16px; font-size: 12px;
+      margin-bottom: 12px;
+    }
+    .bl-dot {
+      width: 10px; height: 10px; border-radius: 3px;
+      display: inline-block; margin-right: 4px;
+    }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>SIP Calculator</h2>
+  <p>Calculate returns on your Systematic Investment Plan — see how your money grows</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="field">
+    <label>Monthly Investment (₹) <span id="sipDisplay">₹5,000</span></label>
+    <input type="range" id="sipRange" min="500" max="100000" step="500" value="5000"
+      oninput="syncSip(this.value)">
+    <div class="range-limits"><span>₹500</span><span>₹1,00,000</span></div>
+    <input type="number" id="sipInput" value="5000" placeholder="Or type amount"
+      oninput="syncSipInput(this.value)">
+  </div>
+
+  <div class="field">
+    <label>Expected Annual Return (%) <span id="returnDisplay">12%</span></label>
+    <input type="range" id="returnRange" min="1" max="30" step="0.5" value="12"
+      oninput="syncReturn(this.value)">
+    <div class="range-limits"><span>1%</span><span>30%</span></div>
+    <input type="number" id="returnInput" value="12" step="0.5" placeholder="Or type rate"
+      oninput="syncReturnInput(this.value)">
+  </div>
+
+  <div class="field">
+    <label>Investment Period (Years) <span id="periodDisplay">10 Years</span></label>
+    <input type="range" id="periodRange" min="1" max="40" step="1" value="10"
+      oninput="syncPeriod(this.value)">
+    <div class="range-limits"><span>1 Year</span><span>40 Years</span></div>
+    <input type="number" id="periodInput" value="10" placeholder="Or type years"
+      oninput="syncPeriodInput(this.value)">
+  </div>
+
+  <button class="calc-button" onclick="calculate()">Calculate Returns</button>
+
+  <div class="result-section" id="resultSection">
+
+    <div class="result-cards">
+      <div class="result-card">
+        <div class="r-label">Amount Invested</div>
+        <div class="r-value" id="r-invested">₹0</div>
+      </div>
+      <div class="result-card green">
+        <div class="r-label">Total Returns</div>
+        <div class="r-value" id="r-returns">₹0</div>
+      </div>
+      <div class="result-card highlight">
+        <div class="r-label">Total Value</div>
+        <div class="r-value" id="r-total">₹0</div>
+      </div>
+    </div>
+
+    <div class="chart-area">
+      <div class="chart-title">Investment Breakdown</div>
+      <div class="donut-row">
+        <canvas id="donut" width="140" height="140"></canvas>
+        <div class="donut-legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#b2ead9;"></div>
+            <span class="l-label">Amount Invested</span>
+            <span class="l-value" id="l-invested">₹0</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#00d4aa;"></div>
+            <span class="l-label">Returns Earned</span>
+            <span class="l-value" id="l-returns">₹0</span>
+          </div>
+          <div class="legend-item" style="border-top:1px solid #eee;padding-top:12px;margin-top:4px;">
+            <div class="legend-dot" style="background:#1a1a2e;"></div>
+            <span class="l-label">Total Corpus</span>
+            <span class="l-value" id="l-total">₹0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="growth-title">Year-by-Year Growth</div>
+      <div class="bar-legend-row">
+        <span><span class="bl-dot" style="background:#b2ead9;"></span>Invested</span>
+        <span><span class="bl-dot" style="background:#00d4aa;"></span>Returns</span>
+      </div>
+      <div class="year-bars" id="yearBars"></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  function fmt(n) { return Math.round(n).toLocaleString('en-IN'); }
+
+  function syncSip(v) {
+    document.getElementById('sipInput').value = v;
+    document.getElementById('sipDisplay').textContent = '₹' + fmt(v);
+  }
+  function syncSipInput(v) {
+    document.getElementById('sipRange').value = Math.min(v, 100000);
+    document.getElementById('sipDisplay').textContent = '₹' + fmt(v);
+  }
+  function syncReturn(v) {
+    document.getElementById('returnInput').value = v;
+    document.getElementById('returnDisplay').textContent = v + '%';
+  }
+  function syncReturnInput(v) {
+    document.getElementById('returnRange').value = Math.min(v, 30);
+    document.getElementById('returnDisplay').textContent = v + '%';
+  }
+  function syncPeriod(v) {
+    document.getElementById('periodInput').value = v;
+    document.getElementById('periodDisplay').textContent = v + ' Years';
+  }
+  function syncPeriodInput(v) {
+    document.getElementById('periodRange').value = Math.min(v, 40);
+    document.getElementById('periodDisplay').textContent = v + ' Years';
+  }
+
+  function drawDonut(invested, returns) {
+    const canvas = document.getElementById('donut');
+    const ctx = canvas.getContext('2d');
+    const total = invested + returns;
+    const cx = 70, cy = 70, r = 55, thick = 22;
+    ctx.clearRect(0, 0, 140, 140);
+
+    function arc(start, end, color) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, start, end);
+      ctx.lineWidth = thick;
+      ctx.strokeStyle = color;
+      ctx.stroke();
+    }
+
+    const investedAngle = (invested / total) * 2 * Math.PI;
+    arc(-Math.PI / 2, -Math.PI / 2 + investedAngle, '#b2ead9');
+    arc(-Math.PI / 2 + investedAngle, 3 * Math.PI / 2, '#00d4aa');
+
+    ctx.fillStyle = '#1a1a2e';
+    ctx.font = 'bold 13px Segoe UI';
+    ctx.textAlign = 'center';
+    ctx.fillText(Math.round((returns / total) * 100) + '%', cx, cy - 6);
+    ctx.font = '11px Segoe UI';
+    ctx.fillStyle = '#888';
+    ctx.fillText('returns', cx, cy + 10);
+  }
+
+  function calculate() {
+    const sip = parseFloat(document.getElementById('sipInput').value) || 0;
+    const rate = parseFloat(document.getElementById('returnInput').value) || 0;
+    const years = parseInt(document.getElementById('periodInput').value) || 0;
+    if (!sip || !rate || !years) return;
+
+    const r = rate / 12 / 100;
+    const n = years * 12;
+    const totalValue = sip * ((Math.pow(1 + r, n) - 1) / r) * (1 + r);
+    const invested = sip * n;
+    const returns = totalValue - invested;
+
+    document.getElementById('r-invested').textContent = '₹' + fmt(invested);
+    document.getElementById('r-returns').textContent = '₹' + fmt(returns);
+    document.getElementById('r-total').textContent = '₹' + fmt(totalValue);
+    document.getElementById('l-invested').textContent = '₹' + fmt(invested);
+    document.getElementById('l-returns').textContent = '₹' + fmt(returns);
+    document.getElementById('l-total').textContent = '₹' + fmt(totalValue);
+
+    drawDonut(invested, returns);
+
+    let barsHTML = '';
+    let maxVal = 0;
+    let yearData = [];
+    for (let y = 1; y <= years; y++) {
+      const mn = y * 12;
+      const val = sip * ((Math.pow(1 + r, mn) - 1) / r) * (1 + r);
+      const inv = sip * mn;
+      yearData.push({ y, val, inv, ret: val - inv });
+      if (val > maxVal) maxVal = val;
+    }
+
+    const step = years <= 10 ? 1 : years <= 20 ? 2 : 5;
+    for (let i = 0; i < yearData.length; i += step) {
+      const d = yearData[i];
+      const invPct = (d.inv / maxVal * 100).toFixed(1);
+      const retPct = (d.ret / maxVal * 100).toFixed(1);
+      barsHTML += `
+        <div class="year-row">
+          <span class="year-label">Yr ${d.y}</span>
+          <div class="year-bar-track">
+            <div class="year-bar-invested" style="width:${invPct}%"></div>
+            <div class="year-bar-returns" style="width:${retPct}%"></div>
+          </div>
+          <span class="year-value">₹${fmt(d.val)}</span>
+        </div>`;
+    }
+    document.getElementById('yearBars').innerHTML = barsHTML;
+    document.getElementById('resultSection').classList.add('show');
+  }
+
+  calculate();
+</script>
+
+</body>
+</html>

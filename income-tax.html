@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Income Tax Calculator - Prime Tools</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 640px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .regime-toggle {
+      display: flex; background: #f0f4f8;
+      border-radius: 8px; padding: 4px; margin-bottom: 28px; gap: 4px;
+    }
+    .regime-btn {
+      flex: 1; padding: 12px; border: none; border-radius: 6px;
+      background: transparent; font-size: 14px; font-weight: 600;
+      cursor: pointer; color: #888; transition: all 0.2s;
+    }
+    .regime-btn.active {
+      background: white; color: #1a1a2e;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .section-title {
+      font-size: 13px; font-weight: 700; color: #00d4aa;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin: 20px 0 12px; padding-bottom: 6px;
+      border-bottom: 2px solid #e8fdf8;
+    }
+
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 6px; }
+    .field input, .field select {
+      width: 100%; padding: 11px 14px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 15px; outline: none; transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .deductions-section { display: block; }
+    .deductions-section.hidden { display: none; }
+
+    .calc-button {
+      width: 100%; padding: 14px; background: #00d4aa;
+      color: white; border: none; border-radius: 8px;
+      font-size: 16px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s; margin-top: 8px;
+    }
+    .calc-button:hover { background: #00b894; }
+
+    .result-section { display: none; margin-top: 28px; }
+    .result-section.show { display: block; }
+
+    .tax-summary {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 24px;
+    }
+    .summary-card {
+      background: #f8fffe; border: 2px solid #e0f7f3;
+      border-radius: 12px; padding: 16px; text-align: center;
+    }
+    .summary-card .s-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .summary-card .s-value { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+    .summary-card.highlight { border-color: #00d4aa; background: #e8fdf8; }
+    .summary-card.highlight .s-value { color: #00d4aa; font-size: 20px; }
+    .summary-card.red { border-color: #ff6b6b; background: #fff5f5; }
+    .summary-card.red .s-value { color: #ff6b6b; }
+
+    .slab-title { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 12px; }
+    .slab-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .slab-table th {
+      background: #1a1a2e; color: white;
+      padding: 10px 12px; text-align: left;
+    }
+    .slab-table th:last-child { text-align: right; }
+    .slab-table td {
+      padding: 10px 12px; border-bottom: 1px solid #f0f0f0; color: #444;
+    }
+    .slab-table td:last-child { text-align: right; font-weight: 600; color: #1a1a2e; }
+    .slab-table tr.active-slab td { background: #e8fdf8; }
+    .slab-table tr:hover td { background: #f8fffe; }
+
+    .regime-compare {
+      margin-top: 20px; padding: 16px;
+      background: #fffbea; border: 2px solid #ffd700;
+      border-radius: 12px; font-size: 13px;
+    }
+    .regime-compare strong { color: #333; }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Income Tax Calculator</h2>
+  <p id="fySubtitle">Calculate your tax — Old & New regime comparison</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="regime-toggle">
+    <button class="regime-btn active" onclick="setRegime('new', this)">New Regime (Default)</button>
+    <button class="regime-btn" onclick="setRegime('old', this)">Old Regime</button>
+    <button class="regime-btn" onclick="setRegime('compare', this)">Compare Both</button>
+  </div>
+
+  <div class="section-title">Income Details</div>
+
+  <div class="two-col">
+    <div class="field">
+      <label>Annual Salary (₹)</label>
+      <input type="number" id="salary" placeholder="e.g. 1200000" value="1200000">
+    </div>
+    <div class="field">
+      <label>Age Group</label>
+      <select id="age">
+        <option value="below60">Below 60 years</option>
+        <option value="60to80">60 to 80 years</option>
+        <option value="above80">Above 80 years</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="field">
+      <label>Other Income (₹)</label>
+      <input type="number" id="otherIncome" placeholder="Interest, rent etc." value="0">
+    </div>
+    <div class="field">
+      <label>Financial Year</label>
+      <select id="fy">
+        <option value="2425">FY 2024-25</option>
+        <option value="2526">FY 2025-26</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="deductions-section" id="deductionsSection">
+    <div class="section-title">Deductions (Old Regime Only)</div>
+    <div class="two-col">
+      <div class="field">
+        <label>80C (PPF, LIC, ELSS etc.) ₹</label>
+        <input type="number" id="d80c" placeholder="Max ₹1,50,000" value="150000">
+      </div>
+      <div class="field">
+        <label>80D (Health Insurance) ₹</label>
+        <input type="number" id="d80d" placeholder="Max ₹25,000" value="25000">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>HRA Exemption (₹)</label>
+        <input type="number" id="hra" placeholder="As per salary" value="0">
+      </div>
+      <div class="field">
+        <label>Home Loan Interest (₹)</label>
+        <input type="number" id="homeLoan" placeholder="Max ₹2,00,000" value="0">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>80CCD (NPS) ₹</label>
+        <input type="number" id="nps" placeholder="Max ₹50,000" value="0">
+      </div>
+      <div class="field">
+        <label>Other Deductions (₹)</label>
+        <input type="number" id="otherDed" placeholder="LTA, etc." value="0">
+      </div>
+    </div>
+  </div>
+
+  <button class="calc-button" onclick="calculate()">Calculate Tax</button>
+
+  <div class="result-section" id="resultSection">
+
+    <div class="tax-summary" id="taxSummary"></div>
+
+    <div class="slab-title" id="slabTitle">Tax Slab Breakdown</div>
+    <table class="slab-table">
+      <thead>
+        <tr><th>Income Slab</th><th>Rate</th><th>Tax</th></tr>
+      </thead>
+      <tbody id="slabBody"></tbody>
+    </table>
+
+    <div class="regime-compare" id="regimeCompare" style="display:none"></div>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+    // Auto-set current financial year
+  const today = new Date();
+  const month = today.getMonth() + 1;
+  const year = today.getFullYear();
+  const fyStart = month >= 4 ? year : year - 1;
+  const fyEnd = fyStart + 1;
+  const fyLabel = 'FY ' + fyStart + '-' + String(fyEnd).slice(2);
+  document.getElementById('fySubtitle').textContent =
+    'Calculate your tax for ' + fyLabel + ' — Old & New regime comparison';
+
+  // Also set the FY dropdown to current year automatically
+  const fySelect = document.getElementById('fy');
+  const fyValue = String(fyStart).slice(2) + String(fyEnd).slice(2);
+  for (let opt of fySelect.options) {
+    if (opt.value === fyValue) { opt.selected = true; break; }
+  }
+  let currentRegime = 'new';
+
+  function setRegime(regime, btn) {
+    currentRegime = regime;
+    document.querySelectorAll('.regime-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('deductionsSection').classList.toggle('hidden',
+      regime === 'new');
+  }
+
+  function fmt(n) { return Math.round(n).toLocaleString('en-IN'); }
+
+  function calcNewTax(income) {
+    const rebate = income <= 700000 ? true : false;
+    const slabs = [
+      { limit: 300000, rate: 0, label: 'Up to ₹3,00,000' },
+      { limit: 600000, rate: 5, label: '₹3,00,001 – ₹6,00,000' },
+      { limit: 900000, rate: 10, label: '₹6,00,001 – ₹9,00,000' },
+      { limit: 1200000, rate: 15, label: '₹9,00,001 – ₹12,00,000' },
+      { limit: 1500000, rate: 20, label: '₹12,00,001 – ₹15,00,000' },
+      { limit: Infinity, rate: 30, label: 'Above ₹15,00,000' }
+    ];
+    let tax = 0; let prev = 0; let rows = [];
+    for (let s of slabs) {
+      if (income <= prev) break;
+      const taxable = Math.min(income, s.limit) - prev;
+      const t = taxable * s.rate / 100;
+      rows.push({ label: s.label, rate: s.rate + '%', tax: t, active: income > prev });
+      tax += t; prev = s.limit;
+    }
+    const std = 75000;
+    if (rebate && income <= 700000) tax = 0;
+    const cess = tax * 0.04;
+    return { tax, cess, total: tax + cess, rows, stdDed: std };
+  }
+
+  function calcOldTax(income, age, deductions) {
+    const std = 50000;
+    let totalDed = std + Math.min(deductions.d80c, 150000) +
+      Math.min(deductions.d80d, 25000) + deductions.hra +
+      Math.min(deductions.homeLoan, 200000) +
+      Math.min(deductions.nps, 50000) + deductions.otherDed;
+    const taxable = Math.max(0, income - totalDed);
+
+    let exemption = age === 'below60' ? 250000 : age === '60to80' ? 300000 : 500000;
+    const slabs = age === 'above80'
+      ? [
+          { limit: 500000, rate: 0, label: 'Up to ₹5,00,000' },
+          { limit: 1000000, rate: 20, label: '₹5,00,001 – ₹10,00,000' },
+          { limit: Infinity, rate: 30, label: 'Above ₹10,00,000' }
+        ]
+      : age === '60to80'
+      ? [
+          { limit: 300000, rate: 0, label: 'Up to ₹3,00,000' },
+          { limit: 500000, rate: 5, label: '₹3,00,001 – ₹5,00,000' },
+          { limit: 1000000, rate: 20, label: '₹5,00,001 – ₹10,00,000' },
+          { limit: Infinity, rate: 30, label: 'Above ₹10,00,000' }
+        ]
+      : [
+          { limit: 250000, rate: 0, label: 'Up to ₹2,50,000' },
+          { limit: 500000, rate: 5, label: '₹2,50,001 – ₹5,00,000' },
+          { limit: 1000000, rate: 20, label: '₹5,00,001 – ₹10,00,000' },
+          { limit: Infinity, rate: 30, label: 'Above ₹10,00,000' }
+        ];
+
+    let tax = 0; let prev = 0; let rows = [];
+    for (let s of slabs) {
+      if (taxable <= prev) break;
+      const t = (Math.min(taxable, s.limit) - prev) * s.rate / 100;
+      rows.push({ label: s.label, rate: s.rate + '%', tax: t, active: taxable > prev });
+      tax += t; prev = s.limit;
+    }
+    if (taxable <= 500000) tax = 0;
+    const cess = tax * 0.04;
+    return { tax, cess, total: tax + cess, rows, stdDed: std, totalDed, taxable };
+  }
+
+  function renderResult(result, regime, grossIncome) {
+    const effectiveRate = grossIncome > 0 ? ((result.total / grossIncome) * 100).toFixed(1) : 0;
+    const monthly = Math.round(result.total / 12);
+
+    document.getElementById('taxSummary').innerHTML = `
+      <div class="summary-card red">
+        <div class="s-label">Total Tax + Cess</div>
+        <div class="s-value">₹${fmt(result.total)}</div>
+      </div>
+      <div class="summary-card highlight">
+        <div class="s-label">Monthly Tax Outgo</div>
+        <div class="s-value">₹${fmt(monthly)}</div>
+      </div>
+      <div class="summary-card">
+        <div class="s-label">Effective Tax Rate</div>
+        <div class="s-value">${effectiveRate}%</div>
+      </div>`;
+
+    let rows = '';
+    for (let r of result.rows) {
+      rows += `<tr class="${r.active ? 'active-slab' : ''}">
+        <td>${r.label}</td><td>${r.rate}</td>
+        <td>₹${fmt(r.tax)}</td></tr>`;
+    }
+    rows += `<tr><td><strong>Income Tax</strong></td><td></td><td><strong>₹${fmt(result.tax)}</strong></td></tr>`;
+    rows += `<tr><td>Health & Education Cess (4%)</td><td>4%</td><td>₹${fmt(result.cess)}</td></tr>`;
+    rows += `<tr><td><strong>Total Tax Payable</strong></td><td></td><td><strong>₹${fmt(result.total)}</strong></td></tr>`;
+    document.getElementById('slabBody').innerHTML = rows;
+    document.getElementById('resultSection').classList.add('show');
+  }
+
+  function calculate() {
+    const salary = parseFloat(document.getElementById('salary').value) || 0;
+    const other = parseFloat(document.getElementById('otherIncome').value) || 0;
+    const age = document.getElementById('age').value;
+    const gross = salary + other;
+
+    const deductions = {
+      d80c: parseFloat(document.getElementById('d80c').value) || 0,
+      d80d: parseFloat(document.getElementById('d80d').value) || 0,
+      hra: parseFloat(document.getElementById('hra').value) || 0,
+      homeLoan: parseFloat(document.getElementById('homeLoan').value) || 0,
+      nps: parseFloat(document.getElementById('nps').value) || 0,
+      otherDed: parseFloat(document.getElementById('otherDed').value) || 0,
+    };
+
+    if (currentRegime === 'new') {
+      const r = calcNewTax(gross);
+      document.getElementById('slabTitle').textContent = 'New Regime — Tax Slab Breakdown';
+      document.getElementById('regimeCompare').style.display = 'none';
+      renderResult(r, 'new', gross);
+
+    } else if (currentRegime === 'old') {
+      const r = calcOldTax(gross, age, deductions);
+      document.getElementById('slabTitle').textContent = 'Old Regime — Tax Slab Breakdown';
+      document.getElementById('regimeCompare').style.display = 'none';
+      renderResult(r, 'old', gross);
+
+    } else {
+      const newR = calcNewTax(gross);
+      const oldR = calcOldTax(gross, age, deductions);
+      const better = newR.total <= oldR.total ? 'New' : 'Old';
+      const saving = Math.abs(newR.total - oldR.total);
+      document.getElementById('slabTitle').textContent = 'New Regime — Tax Slab Breakdown';
+      document.getElementById('regimeCompare').style.display = 'block';
+      document.getElementById('regimeCompare').innerHTML = `
+        <strong>Comparison Result:</strong><br><br>
+        New Regime Tax: <strong>₹${fmt(newR.total)}</strong><br>
+        Old Regime Tax: <strong>₹${fmt(oldR.total)}</strong><br><br>
+        <strong style="color:#00b894;">✓ ${better} Regime is better for you — saving ₹${fmt(saving)} per year!</strong>`;
+      renderResult(newR, 'new', gross);
+    }
+  }
+</script>
+
+</body>
+</html>

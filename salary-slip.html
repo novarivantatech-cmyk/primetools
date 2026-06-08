@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salary Slip Generator - Prime Tools</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      max-width: 1100px;
+      margin: 36px auto;
+      padding: 0 16px;
+    }
+
+    .form-box {
+      background: white; border-radius: 16px;
+      padding: 28px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-size: 13px; font-weight: 700; color: #00d4aa;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin: 20px 0 12px; padding-bottom: 6px;
+      border-bottom: 2px solid #e8fdf8;
+    }
+    .section-title:first-child { margin-top: 0; }
+
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 6px; }
+    .field input, .field select {
+      width: 100%; padding: 10px 14px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 14px; outline: none; transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .generate-btn {
+      width: 100%; padding: 14px; background: #00d4aa;
+      color: white; border: none; border-radius: 8px;
+      font-size: 16px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s; margin-top: 8px;
+    }
+    .generate-btn:hover { background: #00b894; }
+
+    /* SALARY SLIP PREVIEW */
+    .slip-box {
+      background: white; border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .slip-preview {
+      padding: 28px;
+      font-size: 13px;
+    }
+
+    .slip-header {
+      text-align: center;
+      border-bottom: 2px solid #1a1a2e;
+      padding-bottom: 16px; margin-bottom: 16px;
+    }
+    .slip-company { font-size: 20px; font-weight: 700; color: #1a1a2e; }
+    .slip-address { font-size: 11px; color: #666; margin-top: 4px; }
+    .slip-title {
+      background: #1a1a2e; color: white;
+      text-align: center; padding: 8px;
+      font-weight: 600; font-size: 13px;
+      margin-bottom: 16px; border-radius: 4px;
+    }
+
+    .slip-info-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 6px; margin-bottom: 16px;
+    }
+    .slip-info-row { display: flex; gap: 6px; font-size: 12px; }
+    .slip-info-row .si-label { color: #888; min-width: 90px; }
+    .slip-info-row .si-value { font-weight: 600; color: #1a1a2e; }
+
+    .slip-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 12px; margin-bottom: 16px;
+    }
+    .slip-table th {
+      background: #1a1a2e; color: white;
+      padding: 8px 10px; text-align: left;
+    }
+    .slip-table th:last-child { text-align: right; }
+    .slip-table td {
+      padding: 7px 10px; border-bottom: 1px solid #f0f0f0;
+    }
+    .slip-table td:last-child { text-align: right; font-weight: 600; }
+    .slip-table tr.total-row td {
+      background: #f8fffe; font-weight: 700;
+      border-top: 2px solid #1a1a2e;
+    }
+
+    .slip-net {
+      background: #1a1a2e; color: white;
+      border-radius: 8px; padding: 12px 16px;
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 16px;
+    }
+    .slip-net .net-label { font-size: 14px; font-weight: 600; }
+    .slip-net .net-amount { font-size: 20px; font-weight: 700; color: #00d4aa; }
+
+    .slip-inwords {
+      font-size: 11px; color: #555; margin-bottom: 16px;
+      padding: 8px 12px; background: #f8f8f8; border-radius: 6px;
+      font-style: italic;
+    }
+
+    .slip-footer {
+      display: flex; justify-content: space-between;
+      border-top: 1px solid #eee; padding-top: 16px;
+      font-size: 11px; color: #888;
+    }
+    .sign-box { text-align: center; }
+    .sign-line { width: 100px; border-top: 1px solid #333; margin: 20px auto 4px; }
+
+    .download-btn {
+      width: 100%; padding: 12px; background: #1a1a2e;
+      color: white; border: none; border-radius: 8px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s; margin: 16px 28px 28px;
+      width: calc(100% - 56px);
+    }
+    .download-btn:hover { background: #2d2d4e; }
+
+    .placeholder-msg {
+      text-align: center; padding: 60px 20px;
+      color: #aaa; font-size: 14px;
+    }
+    .placeholder-msg div { font-size: 48px; margin-bottom: 12px; }
+
+    @media print {
+      header, .page-title, .form-box, .download-btn { display: none !important; }
+      .main-layout { grid-template-columns: 1fr; margin: 0; padding: 0; }
+      .slip-box { box-shadow: none; }
+    }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .main-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Salary Slip Generator</h2>
+  <p>Generate professional salary slips instantly — print or download as PDF</p>
+</div>
+
+<div class="main-layout">
+
+  <!-- LEFT: FORM -->
+  <div class="form-box">
+
+    <div class="section-title">Company Details</div>
+    <div class="field">
+      <label>Company Name</label>
+      <input type="text" id="companyName" placeholder="e.g. Acme Pvt. Ltd." value="Acme Technologies Pvt. Ltd.">
+    </div>
+    <div class="field">
+      <label>Company Address</label>
+      <input type="text" id="companyAddress" placeholder="City, State" value="Pune, Maharashtra">
+    </div>
+
+    <div class="section-title">Employee Details</div>
+    <div class="two-col">
+      <div class="field">
+        <label>Employee Name</label>
+        <input type="text" id="empName" placeholder="Full name" value="Rahul Sharma">
+      </div>
+      <div class="field">
+        <label>Employee ID</label>
+        <input type="text" id="empId" placeholder="EMP001" value="EMP001">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Designation</label>
+        <input type="text" id="designation" placeholder="e.g. Manager" value="Senior Manager">
+      </div>
+      <div class="field">
+        <label>Department</label>
+        <input type="text" id="department" placeholder="e.g. Finance" value="Finance">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Date of Joining</label>
+        <input type="date" id="doj" value="2022-04-01">
+      </div>
+      <div class="field">
+        <label>Pay Period (Month)</label>
+        <input type="month" id="payPeriod" value="2026-06">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>PAN Number</label>
+        <input type="text" id="pan" placeholder="ABCDE1234F" value="ABCDE1234F">
+      </div>
+      <div class="field">
+        <label>PF Account No.</label>
+        <input type="text" id="pf" placeholder="MH/12345/67890" value="MH/12345/67890">
+      </div>
+    </div>
+
+    <div class="section-title">Earnings (₹ per month)</div>
+    <div class="two-col">
+      <div class="field">
+        <label>Basic Salary</label>
+        <input type="number" id="basic" value="40000" oninput="autoCalc()">
+      </div>
+      <div class="field">
+        <label>HRA</label>
+        <input type="number" id="hra" value="16000" oninput="autoCalc()">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Conveyance Allowance</label>
+        <input type="number" id="conveyance" value="1600" oninput="autoCalc()">
+      </div>
+      <div class="field">
+        <label>Medical Allowance</label>
+        <input type="number" id="medical" value="1250" oninput="autoCalc()">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Special Allowance</label>
+        <input type="number" id="special" value="5000" oninput="autoCalc()">
+      </div>
+      <div class="field">
+        <label>Bonus / Incentive</label>
+        <input type="number" id="bonus" value="0" oninput="autoCalc()">
+      </div>
+    </div>
+
+    <div class="section-title">Deductions (₹ per month)</div>
+    <div class="two-col">
+      <div class="field">
+        <label>PF Deduction (12%)</label>
+        <input type="number" id="pfDed" value="4800" oninput="autoCalc()">
+      </div>
+      <div class="field">
+        <label>Professional Tax</label>
+        <input type="number" id="profTax" value="200" oninput="autoCalc()">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Income Tax (TDS)</label>
+        <input type="number" id="tds" value="2000" oninput="autoCalc()">
+      </div>
+      <div class="field">
+        <label>Other Deductions</label>
+        <input type="number" id="otherDed" value="0" oninput="autoCalc()">
+      </div>
+    </div>
+
+    <button class="generate-btn" onclick="generateSlip()">Generate Salary Slip</button>
+  </div>
+
+  <!-- RIGHT: PREVIEW -->
+  <div class="slip-box" id="slipBox">
+    <div class="placeholder-msg" id="placeholderMsg">
+      <div>🧾</div>
+      Fill in the details and click<br><strong>Generate Salary Slip</strong>
+    </div>
+    <div id="slipPreview" style="display:none;">
+      <div class="slip-preview" id="printArea">
+
+        <div class="slip-header">
+          <div class="slip-company" id="s-company"></div>
+          <div class="slip-address" id="s-address"></div>
+        </div>
+
+        <div class="slip-title" id="s-title"></div>
+
+        <div class="slip-info-grid">
+          <div>
+            <div class="slip-info-row"><span class="si-label">Employee Name</span><span class="si-value" id="s-name"></span></div>
+            <div class="slip-info-row"><span class="si-label">Employee ID</span><span class="si-value" id="s-id"></span></div>
+            <div class="slip-info-row"><span class="si-label">Designation</span><span class="si-value" id="s-desig"></span></div>
+            <div class="slip-info-row"><span class="si-label">Department</span><span class="si-value" id="s-dept"></span></div>
+          </div>
+          <div>
+            <div class="slip-info-row"><span class="si-label">Date of Joining</span><span class="si-value" id="s-doj"></span></div>
+            <div class="slip-info-row"><span class="si-label">PAN Number</span><span class="si-value" id="s-pan"></span></div>
+            <div class="slip-info-row"><span class="si-label">PF Account</span><span class="si-value" id="s-pf"></span></div>
+            <div class="slip-info-row"><span class="si-label">Days Worked</span><span class="si-value">30 / 30</span></div>
+          </div>
+        </div>
+
+        <table class="slip-table">
+          <thead>
+            <tr><th>Earnings</th><th>Amount (₹)</th><th>Deductions</th><th>Amount (₹)</th></tr>
+          </thead>
+          <tbody id="s-tableBody"></tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td>Total Earnings</td>
+              <td id="s-totalEarnings"></td>
+              <td>Total Deductions</td>
+              <td id="s-totalDeductions"></td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div class="slip-net">
+          <span class="net-label">Net Salary (Take Home)</span>
+          <span class="net-amount" id="s-net"></span>
+        </div>
+
+        <div class="slip-inwords" id="s-inwords"></div>
+
+        <div class="slip-footer">
+          <div class="sign-box">
+            <div class="sign-line"></div>
+            Employee Signature
+          </div>
+          <div style="text-align:center; font-size:11px; color:#aaa;">
+            This is a computer generated slip<br>No signature required
+          </div>
+          <div class="sign-box">
+            <div class="sign-line"></div>
+            Authorised Signatory
+          </div>
+        </div>
+
+      </div>
+      <button class="download-btn" onclick="window.print()">🖨️ Print / Download as PDF</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  function fmt(n) {
+    return Math.round(n || 0).toLocaleString('en-IN');
+  }
+
+  function autoCalc() {
+    const basic = parseFloat(document.getElementById('basic').value) || 0;
+    document.getElementById('pfDed').value = Math.round(basic * 0.12);
+  }
+
+  function numberToWords(n) {
+    const a = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine',
+      'Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen',
+      'Seventeen','Eighteen','Nineteen'];
+    const b = ['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety'];
+    if (n === 0) return 'Zero';
+    if (n < 20) return a[n];
+    if (n < 100) return b[Math.floor(n/10)] + (n%10 ? ' ' + a[n%10] : '');
+    if (n < 1000) return a[Math.floor(n/100)] + ' Hundred' + (n%100 ? ' ' + numberToWords(n%100) : '');
+    if (n < 100000) return numberToWords(Math.floor(n/1000)) + ' Thousand' + (n%1000 ? ' ' + numberToWords(n%1000) : '');
+    if (n < 10000000) return numberToWords(Math.floor(n/100000)) + ' Lakh' + (n%100000 ? ' ' + numberToWords(n%100000) : '');
+    return numberToWords(Math.floor(n/10000000)) + ' Crore' + (n%10000000 ? ' ' + numberToWords(n%10000000) : '');
+  }
+
+  function formatMonth(ym) {
+    if (!ym) return '';
+    const [y, m] = ym.split('-');
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[parseInt(m) - 1] + ' ' + y;
+  }
+
+  function generateSlip() {
+    const basic      = parseFloat(document.getElementById('basic').value) || 0;
+    const hra        = parseFloat(document.getElementById('hra').value) || 0;
+    const conveyance = parseFloat(document.getElementById('conveyance').value) || 0;
+    const medical    = parseFloat(document.getElementById('medical').value) || 0;
+    const special    = parseFloat(document.getElementById('special').value) || 0;
+    const bonus      = parseFloat(document.getElementById('bonus').value) || 0;
+    const pfDed      = parseFloat(document.getElementById('pfDed').value) || 0;
+    const profTax    = parseFloat(document.getElementById('profTax').value) || 0;
+    const tds        = parseFloat(document.getElementById('tds').value) || 0;
+    const otherDed   = parseFloat(document.getElementById('otherDed').value) || 0;
+
+    const totalEarnings    = basic + hra + conveyance + medical + special + bonus;
+    const totalDeductions  = pfDed + profTax + tds + otherDed;
+    const netSalary        = totalEarnings - totalDeductions;
+
+    const earnings = [
+      { label: 'Basic Salary', amount: basic },
+      { label: 'House Rent Allowance (HRA)', amount: hra },
+      { label: 'Conveyance Allowance', amount: conveyance },
+      { label: 'Medical Allowance', amount: medical },
+      { label: 'Special Allowance', amount: special },
+      { label: 'Bonus / Incentive', amount: bonus },
+    ];
+    const deductions = [
+      { label: 'Provident Fund (PF)', amount: pfDed },
+      { label: 'Professional Tax', amount: profTax },
+      { label: 'Income Tax (TDS)', amount: tds },
+      { label: 'Other Deductions', amount: otherDed },
+    ];
+
+    document.getElementById('s-company').textContent  = document.getElementById('companyName').value;
+    document.getElementById('s-address').textContent  = document.getElementById('companyAddress').value;
+    document.getElementById('s-title').textContent    = 'Salary Slip — ' + formatMonth(document.getElementById('payPeriod').value);
+    document.getElementById('s-name').textContent     = document.getElementById('empName').value;
+    document.getElementById('s-id').textContent       = document.getElementById('empId').value;
+    document.getElementById('s-desig').textContent    = document.getElementById('designation').value;
+    document.getElementById('s-dept').textContent     = document.getElementById('department').value;
+    document.getElementById('s-doj').textContent      = document.getElementById('doj').value;
+    document.getElementById('s-pan').textContent      = document.getElementById('pan').value;
+    document.getElementById('s-pf').textContent       = document.getElementById('pf').value;
+    document.getElementById('s-totalEarnings').textContent   = '₹' + fmt(totalEarnings);
+    document.getElementById('s-totalDeductions').textContent = '₹' + fmt(totalDeductions);
+    document.getElementById('s-net').textContent      = '₹' + fmt(netSalary);
+    document.getElementById('s-inwords').textContent  =
+      'Net Salary in words: ' + numberToWords(Math.round(netSalary)) + ' Rupees Only';
+
+    const maxRows = Math.max(earnings.length, deductions.length);
+    let rows = '';
+    for (let i = 0; i < maxRows; i++) {
+      const e = earnings[i]   || { label: '', amount: '' };
+      const d = deductions[i] || { label: '', amount: '' };
+      rows += `<tr>
+        <td>${e.label}</td>
+        <td>${e.amount !== '' ? '₹' + fmt(e.amount) : ''}</td>
+        <td>${d.label}</td>
+        <td>${d.amount !== '' ? '₹' + fmt(d.amount) : ''}</td>
+      </tr>`;
+    }
+    document.getElementById('s-tableBody').innerHTML = rows;
+
+    document.getElementById('placeholderMsg').style.display = 'none';
+    document.getElementById('slipPreview').style.display = 'block';
+  }
+
+  autoCalc();
+</script>
+
+</body>
+</html>
