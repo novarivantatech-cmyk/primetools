@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple & Compound Interest Calculator India - Prime Tools</title>
+  <meta name="description" content="Free Simple and Compound Interest Calculator India - Calculate SI and CI instantly. Compare simple vs compound interest. Shows yearly breakdown.">
+  <meta name="keywords" content="simple interest calculator, compound interest calculator India, SI CI calculator, interest calculator, simple vs compound interest">
+  <link rel="canonical" href="https://primetoolsapp.com/interest-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+    .calculator-box { max-width: 660px; margin: 36px auto; background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .toggle-row { display: flex; background: #f0f4f8; border-radius: 8px; padding: 4px; margin-bottom: 28px; gap: 4px; }
+    .toggle-btn { flex: 1; padding: 12px; border: none; border-radius: 6px; background: transparent; font-size: 14px; font-weight: 600; cursor: pointer; color: #888; transition: all 0.2s; }
+    .toggle-btn.active { background: white; color: #1a1a2e; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .field { margin-bottom: 22px; }
+    .field label { display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; color: #555; margin-bottom: 10px; }
+    .field label span { color: #00d4aa; }
+    input[type="range"] { width: 100%; accent-color: #00d4aa; height: 6px; cursor: pointer; }
+    .range-limits { display: flex; justify-content: space-between; font-size: 12px; color: #aaa; margin-top: 4px; }
+    .field input[type="number"] { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; margin-top: 8px; }
+    .field input[type="number"]:focus { border-color: #00d4aa; }
+    .field select { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; background: white; }
+    .ci-options { display: none; }
+    .ci-options.show { display: block; }
+    .calc-button { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-bottom: 28px; }
+    .calc-button:hover { background: #00b894; }
+    .result-section { display: none; }
+    .result-section.show { display: block; }
+    .result-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .result-card { background: #f8fffe; border: 2px solid #e0f7f3; border-radius: 12px; padding: 16px; text-align: center; }
+    .result-card .r-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .result-card .r-value { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+    .result-card.highlight { border-color: #00d4aa; background: #e8fdf8; }
+    .result-card.highlight .r-value { color: #00d4aa; font-size: 20px; }
+    .formula-box { background: #f8fffe; border: 1px solid #e0f7f3; border-radius: 10px; padding: 16px; margin-bottom: 20px; font-size: 13px; }
+    .formula-box strong { color: #1a1a2e; }
+    .formula-box code { background: #e8fdf8; padding: 2px 8px; border-radius: 4px; font-family: monospace; color: #00b894; }
+    .compare-box { background: #fffbea; border: 1px solid #ffd54f; border-radius: 10px; padding: 16px; margin-bottom: 20px; }
+    .compare-title { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+    .compare-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; border-bottom: 1px solid #f5e79e; }
+    .compare-row:last-child { border: none; font-weight: 700; }
+    .yr-title { font-size: 14px; font-weight: 600; color: #333; margin-bottom: 10px; }
+    .yr-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .yr-table th { background: #1a1a2e; color: white; padding: 10px 12px; text-align: right; }
+    .yr-table th:first-child { text-align: left; }
+    .yr-table td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; text-align: right; }
+    .yr-table td:first-child { text-align: left; font-weight: 600; }
+    .yr-table tr:hover td { background: #f8fffe; }
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; margin-top: 40px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>Simple & Compound Interest Calculator</h2>
+  <p>Calculate SI and CI instantly — compare both and see yearly breakdown</p>
+</div>
+<div class="calculator-box">
+
+  <div class="toggle-row">
+    <button class="toggle-btn active" onclick="setMode('both',this)">Compare SI vs CI</button>
+    <button class="toggle-btn" onclick="setMode('si',this)">Simple Interest</button>
+    <button class="toggle-btn" onclick="setMode('ci',this)">Compound Interest</button>
+  </div>
+
+  <div class="field">
+    <label>Principal Amount (₹) <span id="pDisplay">₹1,00,000</span></label>
+    <input type="range" id="pRange" min="1000" max="10000000" step="1000" value="100000" oninput="syncP(this.value)">
+    <div class="range-limits"><span>₹1,000</span><span>₹1 Crore</span></div>
+    <input type="number" id="pInput" value="100000" oninput="syncPInput(this.value)">
+  </div>
+
+  <div class="field">
+    <label>Annual Interest Rate (%) <span id="rDisplay">10%</span></label>
+    <input type="range" id="rRange" min="1" max="30" step="0.5" value="10" oninput="syncR(this.value)">
+    <div class="range-limits"><span>1%</span><span>30%</span></div>
+    <input type="number" id="rInput" value="10" step="0.5" oninput="syncRInput(this.value)">
+  </div>
+
+  <div class="field">
+    <label>Time Period (Years) <span id="tDisplay">5 Years</span></label>
+    <input type="range" id="tRange" min="1" max="30" step="1" value="5" oninput="syncT(this.value)">
+    <div class="range-limits"><span>1 Year</span><span>30 Years</span></div>
+    <input type="number" id="tInput" value="5" oninput="syncTInput(this.value)">
+  </div>
+
+  <div class="ci-options show" id="ciOptions">
+    <div class="field">
+      <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:8px;">Compounding Frequency</label>
+      <select id="freq" onchange="calculate()">
+        <option value="1">Annually</option>
+        <option value="2">Half-Yearly</option>
+        <option value="4" selected>Quarterly</option>
+        <option value="12">Monthly</option>
+        <option value="365">Daily</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="calc-button" onclick="calculate()">Calculate Interest</button>
+
+  <div class="result-section" id="resultSection">
+    <div class="result-cards" id="resultCards"></div>
+    <div class="formula-box" id="formulaBox"></div>
+    <div class="compare-box" id="compareBox" style="display:none;"></div>
+    <div class="yr-title">Year-by-Year Breakdown</div>
+    <table class="yr-table">
+      <thead><tr><th>Year</th><th id="col2">SI Amount (₹)</th><th id="col3">CI Amount (₹)</th><th id="col4">Difference (₹)</th></tr></thead>
+      <tbody id="yrBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  let mode = 'both';
+  function fmt(n) { return Math.round(n||0).toLocaleString('en-IN'); }
+  function fmtD(n) { return n.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+  function setMode(m,btn) {
+    mode=m;
+    document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('ciOptions').classList.toggle('show', m!=='si');
+    calculate();
+  }
+
+  function syncP(v){document.getElementById('pInput').value=v;document.getElementById('pDisplay').textContent='₹'+fmt(v);calculate();}
+  function syncPInput(v){document.getElementById('pRange').value=Math.min(v,10000000);document.getElementById('pDisplay').textContent='₹'+fmt(v);calculate();}
+  function syncR(v){document.getElementById('rInput').value=v;document.getElementById('rDisplay').textContent=parseFloat(v).toFixed(1)+'%';calculate();}
+  function syncRInput(v){document.getElementById('rRange').value=Math.min(v,30);document.getElementById('rDisplay').textContent=parseFloat(v).toFixed(1)+'%';calculate();}
+  function syncT(v){document.getElementById('tInput').value=v;document.getElementById('tDisplay').textContent=v+' Year'+(v>1?'s':'');calculate();}
+  function syncTInput(v){document.getElementById('tRange').value=Math.min(v,30);document.getElementById('tDisplay').textContent=v+' Year'+(v>1?'s':'');calculate();}
+
+  function calculate() {
+    const P=parseFloat(document.getElementById('pInput').value)||0;
+    const r=parseFloat(document.getElementById('rInput').value)||0;
+    const t=parseInt(document.getElementById('tInput').value)||0;
+    const n=parseInt(document.getElementById('freq').value)||4;
+    if(!P||!r||!t) return;
+
+    const SI = P*r*t/100;
+    const SI_total = P+SI;
+    const CI_total = P*Math.pow(1+(r/100)/n,n*t);
+    const CI = CI_total-P;
+    const diff = CI-SI;
+
+    let cards='', formula='', compare='', rows='';
+
+    if (mode==='si') {
+      cards=`<div class="result-card"><div class="r-label">Principal</div><div class="r-value">₹${fmt(P)}</div></div>
+             <div class="result-card" style="border-color:#00b894;background:#e8fdf8;"><div class="r-label">Simple Interest</div><div class="r-value" style="color:#00b894;">₹${fmt(SI)}</div></div>
+             <div class="result-card highlight"><div class="r-label">Total Amount</div><div class="r-value">₹${fmt(SI_total)}</div></div>`;
+      formula=`<strong>Formula:</strong> SI = P × R × T / 100<br><br>
+               <code>SI = ₹${fmt(P)} × ${r}% × ${t} / 100 = ₹${fmt(SI)}</code><br>
+               <code>Total = ₹${fmt(P)} + ₹${fmt(SI)} = ₹${fmt(SI_total)}</code>`;
+      document.getElementById('col2').textContent='Opening Balance (₹)';
+      document.getElementById('col3').textContent='Interest (₹)';
+      document.getElementById('col4').textContent='Total Amount (₹)';
+      for(let y=1;y<=t;y++){
+        const yInt=P*r/100;
+        rows+=`<tr><td>Year ${y}</td><td>₹${fmt(P)}</td><td>₹${fmt(yInt)}</td><td>₹${fmt(P+yInt*y)}</td></tr>`;
+      }
+    } else if (mode==='ci') {
+      cards=`<div class="result-card"><div class="r-label">Principal</div><div class="r-value">₹${fmt(P)}</div></div>
+             <div class="result-card" style="border-color:#00b894;background:#e8fdf8;"><div class="r-label">Compound Interest</div><div class="r-value" style="color:#00b894;">₹${fmt(CI)}</div></div>
+             <div class="result-card highlight"><div class="r-label">Total Amount</div><div class="r-value">₹${fmt(CI_total)}</div></div>`;
+      formula=`<strong>Formula:</strong> A = P × (1 + R/n)^(n×T)<br><br>
+               <code>A = ₹${fmt(P)} × (1 + ${r}%/${n})^(${n}×${t})</code><br>
+               <code>CI = ₹${fmt(CI_total)} - ₹${fmt(P)} = ₹${fmt(CI)}</code>`;
+      document.getElementById('col2').textContent='Opening Balance (₹)';
+      document.getElementById('col3').textContent='Interest (₹)';
+      document.getElementById('col4').textContent='Closing Balance (₹)';
+      let bal=P;
+      for(let y=1;y<=t;y++){
+        const opening=bal;
+        bal=bal*Math.pow(1+(r/100)/n,n);
+        rows+=`<tr><td>Year ${y}</td><td>₹${fmt(opening)}</td><td>₹${fmt(bal-opening)}</td><td>₹${fmt(bal)}</td></tr>`;
+      }
+    } else {
+      cards=`<div class="result-card"><div class="r-label">Simple Interest</div><div class="r-value">₹${fmt(SI)}</div></div>
+             <div class="result-card"><div class="r-label">Compound Interest</div><div class="r-value" style="color:#00b894;">₹${fmt(CI)}</div></div>
+             <div class="result-card highlight"><div class="r-label">CI Advantage</div><div class="r-value">₹${fmt(diff)}</div></div>`;
+      formula=`<strong>SI Formula:</strong> <code>P×R×T/100 = ₹${fmt(SI)}</code><br>
+               <strong>CI Formula:</strong> <code>P×(1+R/n)^(n×T)-P = ₹${fmt(CI)}</code>`;
+      compare=`<div class="compare-title">SI vs CI Comparison</div>
+               <div class="compare-row"><span>Principal</span><span>₹${fmt(P)}</span></div>
+               <div class="compare-row"><span>Simple Interest Amount</span><span>₹${fmt(SI_total)}</span></div>
+               <div class="compare-row"><span>Compound Interest Amount</span><span>₹${fmt(CI_total)}</span></div>
+               <div class="compare-row"><span>Extra earned with CI</span><span style="color:#00b894;">+₹${fmt(diff)}</span></div>`;
+      document.getElementById('compareBox').style.display='block';
+      document.getElementById('compareBox').innerHTML=compare;
+      document.getElementById('col2').textContent='SI Total (₹)';
+      document.getElementById('col3').textContent='CI Total (₹)';
+      document.getElementById('col4').textContent='CI Advantage (₹)';
+      let siTotal=P; let bal=P;
+      for(let y=1;y<=t;y++){
+        siTotal+=P*r/100;
+        bal=bal*Math.pow(1+(r/100)/n,n);
+        rows+=`<tr><td>Year ${y}</td><td>₹${fmt(siTotal)}</td><td>₹${fmt(bal)}</td><td style="color:#00b894;">+₹${fmt(bal-siTotal)}</td></tr>`;
+      }
+    }
+
+    document.getElementById('resultCards').innerHTML=cards;
+    document.getElementById('formulaBox').innerHTML=formula;
+    document.getElementById('yrBody').innerHTML=rows;
+    document.getElementById('resultSection').classList.add('show');
+  }
+  calculate();
+</script>
+</body>
+</html>

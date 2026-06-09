@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPF Calculator - Public Provident Fund Calculator India - Prime Tools</title>
+  <meta name="description" content="Free PPF Calculator India - Calculate Public Provident Fund maturity amount, yearly interest and tax benefits. PPF interest rate 2026 is 7.1% per annum.">
+  <meta name="keywords" content="PPF calculator India, public provident fund calculator, PPF maturity calculator, PPF interest rate 2026, PPF tax benefit 80C">
+  <link rel="canonical" href="https://primetoolsapp.com/ppf-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+    .main-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin: 36px auto; padding: 0 16px; }
+    .calculator-box { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .field { margin-bottom: 20px; }
+    .field label { display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; color: #555; margin-bottom: 10px; }
+    .field label span { color: #00d4aa; }
+    input[type="range"] { width: 100%; accent-color: #00d4aa; height: 6px; cursor: pointer; }
+    .range-limits { display: flex; justify-content: space-between; font-size: 12px; color: #aaa; margin-top: 4px; }
+    .field input[type="number"] { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; margin-top: 8px; }
+    .field input[type="number"]:focus { border-color: #00d4aa; }
+    .info-box { background: #fffbea; border: 1px solid #ffd54f; border-radius: 8px; padding: 12px 16px; font-size: 12px; color: #555; margin-bottom: 20px; line-height: 1.7; }
+    .calc-button { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+    .calc-button:hover { background: #00b894; }
+
+    .result-box { background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 32px; }
+    .placeholder-msg { text-align: center; padding: 60px 20px; color: #aaa; }
+    .placeholder-msg div { font-size: 48px; margin-bottom: 12px; }
+
+    .summary-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .sum-card { background: #f8fffe; border: 2px solid #e0f7f3; border-radius: 12px; padding: 14px; text-align: center; }
+    .sum-card .sl { font-size: 11px; color: #888; margin-bottom: 4px; }
+    .sum-card .sv { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+    .sum-card.big { border-color: #00d4aa; background: #e8fdf8; grid-column: span 2; }
+    .sum-card.big .sv { color: #00d4aa; font-size: 28px; }
+
+    .tax-banner { background: #e8fdf8; border: 2px solid #00d4aa; border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: 13px; }
+    .tax-banner strong { color: #00b894; }
+
+    .yr-title { font-size: 14px; font-weight: 600; color: #333; margin-bottom: 10px; }
+    .yr-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .yr-table th { background: #1a1a2e; color: white; padding: 8px 10px; text-align: right; }
+    .yr-table th:first-child { text-align: left; }
+    .yr-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; text-align: right; }
+    .yr-table td:first-child { text-align: left; font-weight: 600; }
+    .yr-table tr:hover td { background: #f8fffe; }
+    .yr-table tr.ext-yr td { background: #e8fdf8; color: #00b894; font-weight: 600; }
+
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; margin-top: 40px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+    @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>PPF Calculator</h2>
+  <p>Public Provident Fund — Calculate maturity, interest and tax savings</p>
+</div>
+
+<div class="main-layout">
+  <div class="calculator-box">
+    <div class="info-box">
+      <strong>PPF Key Facts:</strong> Lock-in period 15 years • Current rate 7.1% p.a. • Max deposit ₹1.5 lakh/year • Tax-free returns (EEE status) • Deposits qualify for 80C deduction
+    </div>
+
+    <div class="field">
+      <label>Yearly Investment (₹) <span id="invDisplay">₹50,000</span></label>
+      <input type="range" id="invRange" min="500" max="150000" step="500" value="50000" oninput="syncInv(this.value)">
+      <div class="range-limits"><span>₹500</span><span>₹1,50,000 (Max)</span></div>
+      <input type="number" id="invInput" value="50000" max="150000" oninput="syncInvInput(this.value)">
+    </div>
+
+    <div class="field">
+      <label>PPF Interest Rate (%) <span id="rateDisplay">7.1%</span></label>
+      <input type="range" id="rateRange" min="6" max="10" step="0.1" value="7.1" oninput="syncRate(this.value)">
+      <div class="range-limits"><span>6%</span><span>10%</span></div>
+      <input type="number" id="rateInput" value="7.1" step="0.1" oninput="syncRateInput(this.value)">
+    </div>
+
+    <div class="field">
+      <label>Tenure (Years) <span id="tenureDisplay">15 Years</span></label>
+      <input type="range" id="tenureRange" min="15" max="50" step="5" value="15" oninput="syncTenure(this.value)">
+      <div class="range-limits"><span>15 Yrs (min)</span><span>50 Yrs (with extensions)</span></div>
+      <input type="number" id="tenureInput" value="15" min="15" oninput="syncTenureInput(this.value)">
+    </div>
+
+    <button class="calc-button" onclick="calculate()">Calculate PPF Returns</button>
+  </div>
+
+  <div class="result-box">
+    <div class="placeholder-msg" id="placeholderMsg">
+      <div>🏦</div>
+      Enter your investment details<br>to see PPF maturity amount
+    </div>
+    <div id="resultArea" style="display:none;">
+      <div class="summary-cards">
+        <div class="sum-card big">
+          <div class="sl">Total Maturity Amount (Tax Free)</div>
+          <div class="sv" id="r-maturity">₹0</div>
+        </div>
+        <div class="sum-card">
+          <div class="sl">Total Invested</div>
+          <div class="sv" id="r-invested">₹0</div>
+        </div>
+        <div class="sum-card">
+          <div class="sl">Total Interest Earned</div>
+          <div class="sv" style="color:#00b894;" id="r-interest">₹0</div>
+        </div>
+      </div>
+
+      <div class="tax-banner">
+        <strong>💚 Tax Savings under 80C:</strong> You save approximately <strong id="r-taxsaving">₹0</strong> in taxes over the tenure (at 30% tax bracket). PPF follows EEE — Exempt-Exempt-Exempt status.
+      </div>
+
+      <div class="yr-title">Year-by-Year Growth</div>
+      <table class="yr-table">
+        <thead><tr><th>Year</th><th>Deposit (₹)</th><th>Interest (₹)</th><th>Balance (₹)</th></tr></thead>
+        <tbody id="yrBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  function fmt(n) { return Math.round(n||0).toLocaleString('en-IN'); }
+  function syncInv(v) { document.getElementById('invInput').value=v; document.getElementById('invDisplay').textContent='₹'+fmt(v); calculate(); }
+  function syncInvInput(v) { const val=Math.min(v,150000); document.getElementById('invRange').value=val; document.getElementById('invDisplay').textContent='₹'+fmt(val); calculate(); }
+  function syncRate(v) { document.getElementById('rateInput').value=v; document.getElementById('rateDisplay').textContent=parseFloat(v).toFixed(1)+'%'; calculate(); }
+  function syncRateInput(v) { document.getElementById('rateRange').value=Math.min(v,10); document.getElementById('rateDisplay').textContent=parseFloat(v).toFixed(1)+'%'; calculate(); }
+  function syncTenure(v) { document.getElementById('tenureInput').value=v; document.getElementById('tenureDisplay').textContent=v+' Years'; calculate(); }
+  function syncTenureInput(v) { const val=Math.max(15,v); document.getElementById('tenureRange').value=Math.min(val,50); document.getElementById('tenureDisplay').textContent=val+' Years'; calculate(); }
+
+  function calculate() {
+    const inv=parseFloat(document.getElementById('invInput').value)||0;
+    const r=parseFloat(document.getElementById('rateInput').value)||0;
+    const years=parseInt(document.getElementById('tenureInput').value)||15;
+    if (!inv||!r) return;
+
+    let balance=0; let totalInv=0; let totalInt=0;
+    let rows='';
+    for (let y=1;y<=years;y++) {
+      balance+=inv;
+      const interest=balance*r/100;
+      balance+=interest;
+      totalInv+=inv;
+      totalInt+=interest;
+      const isExt = y>15;
+      rows+=`<tr class="${isExt?'ext-yr':''}">
+        <td>Year ${y}${isExt?' (Ext)':''}</td>
+        <td>₹${fmt(inv)}</td>
+        <td>₹${fmt(interest)}</td>
+        <td>₹${fmt(balance)}</td>
+      </tr>`;
+    }
+
+    const taxSaving = totalInv * 0.30;
+    document.getElementById('r-maturity').textContent='₹'+fmt(balance);
+    document.getElementById('r-invested').textContent='₹'+fmt(totalInv);
+    document.getElementById('r-interest').textContent='₹'+fmt(totalInt);
+    document.getElementById('r-taxsaving').textContent='₹'+fmt(taxSaving);
+    document.getElementById('yrBody').innerHTML=rows;
+    document.getElementById('placeholderMsg').style.display='none';
+    document.getElementById('resultArea').style.display='block';
+  }
+  calculate();
+</script>
+</body>
+</html>

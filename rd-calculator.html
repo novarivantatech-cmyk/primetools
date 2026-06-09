@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RD Calculator - Recurring Deposit Calculator India - Prime Tools</title>
+  <meta name="description" content="Free RD Calculator India - Calculate Recurring Deposit maturity amount and interest. Compare RD rates from SBI, HDFC, ICICI and more banks.">
+  <meta name="keywords" content="RD calculator India, recurring deposit calculator, RD maturity calculator, recurring deposit interest calculator, best RD rates India 2026">
+  <link rel="canonical" href="https://primetoolsapp.com/rd-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+    .calculator-box { max-width: 620px; margin: 36px auto; background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .field { margin-bottom: 24px; }
+    .field label { display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; color: #555; margin-bottom: 10px; }
+    .field label span { color: #00d4aa; font-size: 15px; }
+    input[type="range"] { width: 100%; accent-color: #00d4aa; height: 6px; cursor: pointer; }
+    .range-limits { display: flex; justify-content: space-between; font-size: 12px; color: #aaa; margin-top: 4px; }
+    .field input[type="number"] { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; margin-top: 8px; }
+    .field input[type="number"]:focus { border-color: #00d4aa; }
+    .field select { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; background: white; cursor: pointer; }
+    .field select:focus { border-color: #00d4aa; }
+    .calc-button { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 28px; }
+    .calc-button:hover { background: #00b894; }
+    .result-section { display: none; }
+    .result-section.show { display: block; }
+    .result-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .result-card { background: #f8fffe; border: 2px solid #e0f7f3; border-radius: 12px; padding: 16px; text-align: center; }
+    .result-card .r-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .result-card .r-value { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+    .result-card.highlight { border-color: #00d4aa; background: #e8fdf8; }
+    .result-card.highlight .r-value { color: #00d4aa; font-size: 20px; }
+    .result-card.green .r-value { color: #00b894; }
+    .bar-title { font-size: 14px; font-weight: 600; color: #333; margin-bottom: 10px; }
+    .bar-labels { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+    .bar-track { width: 100%; height: 14px; background: #f0f4f8; border-radius: 8px; overflow: hidden; display: flex; margin-bottom: 8px; }
+    .bar-principal { height: 100%; background: #b2ead9; transition: width 0.5s; }
+    .bar-interest { height: 100%; background: #00d4aa; transition: width 0.5s; }
+    .bar-legend { display: flex; gap: 16px; font-size: 12px; margin-bottom: 24px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+    .sched-title { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 12px; }
+    .sched-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .sched-table th { background: #1a1a2e; color: white; padding: 10px 12px; text-align: left; }
+    .sched-table th:last-child { text-align: right; }
+    .sched-table td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; color: #444; }
+    .sched-table td:last-child { text-align: right; font-weight: 600; color: #1a1a2e; }
+    .sched-table tr:hover td { background: #f8fffe; }
+    .bank-rates { margin-top: 28px; }
+    .bank-title { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 12px; }
+    .bank-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .bank-table th { background: #1a1a2e; color: white; padding: 10px 12px; text-align: left; }
+    .bank-table td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; color: #444; cursor: pointer; }
+    .bank-table td:last-child { color: #00d4aa; font-weight: 700; }
+    .bank-table tr:hover td { background: #f8fffe; }
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; margin-top: 40px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>RD Calculator</h2>
+  <p>Calculate Recurring Deposit maturity amount and total interest earned</p>
+</div>
+<div class="calculator-box">
+
+  <div class="field">
+    <label>Monthly Deposit Amount (₹) <span id="amtDisplay">₹5,000</span></label>
+    <input type="range" id="amtRange" min="100" max="100000" step="100" value="5000" oninput="syncAmt(this.value)">
+    <div class="range-limits"><span>₹100</span><span>₹1,00,000</span></div>
+    <input type="number" id="amtInput" value="5000" placeholder="Monthly amount" oninput="syncAmtInput(this.value)">
+  </div>
+
+  <div class="field">
+    <label>Annual Interest Rate (%) <span id="rateDisplay">7.0%</span></label>
+    <input type="range" id="rateRange" min="1" max="15" step="0.1" value="7" oninput="syncRate(this.value)">
+    <div class="range-limits"><span>1%</span><span>15%</span></div>
+    <input type="number" id="rateInput" value="7" step="0.1" placeholder="Rate %" oninput="syncRateInput(this.value)">
+  </div>
+
+  <div class="field">
+    <label>Tenure (Months) <span id="tenureDisplay">12 Months</span></label>
+    <input type="range" id="tenureRange" min="3" max="120" step="1" value="12" oninput="syncTenure(this.value)">
+    <div class="range-limits"><span>3 Months</span><span>10 Years</span></div>
+    <input type="number" id="tenureInput" value="12" placeholder="Months" oninput="syncTenureInput(this.value)">
+  </div>
+
+  <div class="field">
+    <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:8px;">Account Type</label>
+    <select id="rdType" onchange="calculate()">
+      <option value="regular">Regular RD</option>
+      <option value="senior">Senior Citizen RD (+0.5%)</option>
+    </select>
+  </div>
+
+  <button class="calc-button" onclick="calculate()">Calculate RD Maturity</button>
+
+  <div class="result-section" id="resultSection">
+    <div class="result-cards">
+      <div class="result-card">
+        <div class="r-label">Total Deposited</div>
+        <div class="r-value" id="r-deposited">₹0</div>
+      </div>
+      <div class="result-card green">
+        <div class="r-label">Interest Earned</div>
+        <div class="r-value" id="r-interest">₹0</div>
+      </div>
+      <div class="result-card highlight">
+        <div class="r-label">Maturity Amount</div>
+        <div class="r-value" id="r-maturity">₹0</div>
+      </div>
+    </div>
+
+    <div class="bar-title">Deposit vs Interest Breakdown</div>
+    <div class="bar-labels">
+      <span id="dep-pct" style="color:#b2ead9;font-weight:600;">Deposit 0%</span>
+      <span id="int-pct" style="color:#00d4aa;font-weight:600;">Interest 0%</span>
+    </div>
+    <div class="bar-track">
+      <div class="bar-principal" id="barDep"></div>
+      <div class="bar-interest" id="barInt"></div>
+    </div>
+    <div class="bar-legend">
+      <span><span class="legend-dot" style="background:#b2ead9;"></span>Total Deposit</span>
+      <span><span class="legend-dot" style="background:#00d4aa;"></span>Interest Earned</span>
+    </div>
+
+    <div class="sched-title">Month-by-Month Summary (Quarterly)</div>
+    <table class="sched-table">
+      <thead><tr><th>Quarter</th><th>Deposited</th><th>Interest</th><th>Balance</th></tr></thead>
+      <tbody id="schedBody"></tbody>
+    </table>
+  </div>
+
+  <div class="bank-rates">
+    <div class="bank-title">Current RD Rates 2026 — Click to apply</div>
+    <table class="bank-table">
+      <thead><tr><th>Bank</th><th>Tenure</th><th>Rate</th></tr></thead>
+      <tbody>
+        <tr onclick="applyRate(7.0)"><td>SBI</td><td>1-2 years</td><td>7.00%</td></tr>
+        <tr onclick="applyRate(7.4)"><td>HDFC Bank</td><td>1-2 years</td><td>7.40%</td></tr>
+        <tr onclick="applyRate(7.6)"><td>ICICI Bank</td><td>1-2 years</td><td>7.60%</td></tr>
+        <tr onclick="applyRate(7.75)"><td>Axis Bank</td><td>1-2 years</td><td>7.75%</td></tr>
+        <tr onclick="applyRate(7.5)"><td>Kotak Mahindra</td><td>1-2 years</td><td>7.50%</td></tr>
+        <tr onclick="applyRate(8.25)"><td>IDFC FIRST Bank</td><td>1-2 years</td><td>8.25%</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:#aaa;margin-top:8px;">* Rates are indicative. Verify current rates on respective bank websites.</p>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  function fmt(n) { return Math.round(n||0).toLocaleString('en-IN'); }
+  function syncAmt(v) { document.getElementById('amtInput').value=v; document.getElementById('amtDisplay').textContent='₹'+fmt(v); calculate(); }
+  function syncAmtInput(v) { document.getElementById('amtRange').value=Math.min(v,100000); document.getElementById('amtDisplay').textContent='₹'+fmt(v); calculate(); }
+  function syncRate(v) { document.getElementById('rateInput').value=v; document.getElementById('rateDisplay').textContent=parseFloat(v).toFixed(1)+'%'; calculate(); }
+  function syncRateInput(v) { document.getElementById('rateRange').value=Math.min(v,15); document.getElementById('rateDisplay').textContent=parseFloat(v).toFixed(1)+'%'; calculate(); }
+  function syncTenure(v) { document.getElementById('tenureInput').value=v; document.getElementById('tenureDisplay').textContent=v+' Month'+(v>1?'s':''); calculate(); }
+  function syncTenureInput(v) { document.getElementById('tenureRange').value=Math.min(v,120); syncTenure(v); }
+  function applyRate(r) { document.getElementById('rateInput').value=r; document.getElementById('rateRange').value=r; document.getElementById('rateDisplay').textContent=r.toFixed(1)+'%'; calculate(); }
+
+  function calculate() {
+    const P = parseFloat(document.getElementById('amtInput').value)||0;
+    let r = parseFloat(document.getElementById('rateInput').value)||0;
+    const n = parseInt(document.getElementById('tenureInput').value)||0;
+    if (document.getElementById('rdType').value==='senior') r+=0.5;
+    if (!P||!r||!n) return;
+
+    const monthlyRate = r/100/4;
+    let maturity = 0;
+    for (let i=1;i<=n;i++) {
+      const quartersLeft = Math.ceil((n-i+1)/3);
+      maturity += P * Math.pow(1+monthlyRate, quartersLeft);
+    }
+    const totalDep = P*n;
+    const interest = maturity-totalDep;
+    const dPct = Math.round(totalDep/maturity*100);
+    const iPct = 100-dPct;
+
+    document.getElementById('r-deposited').textContent='₹'+fmt(totalDep);
+    document.getElementById('r-interest').textContent='₹'+fmt(interest);
+    document.getElementById('r-maturity').textContent='₹'+fmt(maturity);
+    document.getElementById('barDep').style.width=dPct+'%';
+    document.getElementById('barInt').style.width=iPct+'%';
+    document.getElementById('dep-pct').textContent='Deposit '+dPct+'%';
+    document.getElementById('int-pct').textContent='Interest '+iPct+'%';
+
+    let rows=''; let cumDep=0; let cumInt=0;
+    for (let q=1;q<=Math.ceil(n/3);q++) {
+      const mStart=(q-1)*3+1; const mEnd=Math.min(q*3,n);
+      const months=mEnd-mStart+1;
+      cumDep+=P*months;
+      const qMaturity = (() => { let m=0; for(let i=1;i<=mEnd;i++){ const qL=Math.ceil((n-i+1)/3); m+=P*Math.pow(1+monthlyRate,qL); } return m; })();
+      cumInt=qMaturity-cumDep;
+      rows+=`<tr><td>Q${q} (Month ${mStart}–${mEnd})</td><td>₹${fmt(cumDep)}</td><td>₹${fmt(cumInt)}</td><td>₹${fmt(qMaturity)}</td></tr>`;
+    }
+    document.getElementById('schedBody').innerHTML=rows;
+    document.getElementById('resultSection').classList.add('show');
+  }
+  calculate();
+</script>
+</body>
+</html>
