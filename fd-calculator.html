@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FD Calculator - Fixed Deposit Calculator India - Prime Tools</title>
+  <meta name="description" content="Free FD Calculator India - Calculate Fixed Deposit maturity amount and interest earned. Compare simple and compound interest. Best FD rates 2026.">
+  <meta name="keywords" content="FD calculator India, fixed deposit calculator, FD maturity calculator, fixed deposit interest calculator, best FD rates India 2026">
+  <link rel="canonical" href="https://primetoolsapp.com/fd-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+    .calculator-box { max-width: 620px; margin: 36px auto; background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .field { margin-bottom: 24px; }
+    .field label { display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; color: #555; margin-bottom: 10px; }
+    .field label span { color: #00d4aa; font-size: 15px; }
+    input[type="range"] { width: 100%; accent-color: #00d4aa; height: 6px; cursor: pointer; }
+    .range-limits { display: flex; justify-content: space-between; font-size: 12px; color: #aaa; margin-top: 4px; }
+    .field input[type="number"] { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; margin-top: 8px; }
+    .field input[type="number"]:focus { border-color: #00d4aa; }
+    .field select { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; background: white; cursor: pointer; }
+    .field select:focus { border-color: #00d4aa; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-button { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-bottom: 28px; }
+    .calc-button:hover { background: #00b894; }
+    .result-section { display: none; }
+    .result-section.show { display: block; }
+    .result-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .result-card { background: #f8fffe; border: 2px solid #e0f7f3; border-radius: 12px; padding: 16px; text-align: center; }
+    .result-card .r-label { font-size: 12px; color: #888; margin-bottom: 6px; }
+    .result-card .r-value { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+    .result-card.highlight { border-color: #00d4aa; background: #e8fdf8; }
+    .result-card.highlight .r-value { color: #00d4aa; font-size: 20px; }
+    .result-card.green .r-value { color: #00b894; }
+    .bar-container { margin-bottom: 24px; }
+    .bar-title { font-size: 14px; font-weight: 600; color: #333; margin-bottom: 10px; }
+    .bar-labels { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
+    .bar-track { width: 100%; height: 14px; background: #f0f4f8; border-radius: 8px; overflow: hidden; display: flex; }
+    .bar-principal { height: 100%; background: #b2ead9; border-radius: 8px 0 0 8px; transition: width 0.5s; }
+    .bar-interest { height: 100%; background: #00d4aa; transition: width 0.5s; }
+    .bar-legend { display: flex; gap: 16px; margin-top: 8px; font-size: 12px; }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+    .bank-rates { margin-top: 24px; }
+    .bank-title { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 12px; }
+    .bank-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .bank-table th { background: #1a1a2e; color: white; padding: 10px 12px; text-align: left; }
+    .bank-table th:last-child { text-align: right; }
+    .bank-table td { padding: 9px 12px; border-bottom: 1px solid #f0f0f0; color: #444; }
+    .bank-table td:last-child { text-align: right; font-weight: 600; color: #00d4aa; }
+    .bank-table tr:hover td { background: #f8fffe; cursor: pointer; }
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; margin-top: 40px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>FD Calculator</h2>
+  <p>Calculate Fixed Deposit maturity amount and interest earned instantly</p>
+</div>
+<div class="calculator-box">
+
+  <div class="field">
+    <label>Principal Amount (₹) <span id="principalDisplay">₹1,00,000</span></label>
+    <input type="range" id="principalRange" min="1000" max="10000000" step="1000" value="100000" oninput="syncPrincipal(this.value)">
+    <div class="range-limits"><span>₹1,000</span><span>₹1 Crore</span></div>
+    <input type="number" id="principalInput" value="100000" placeholder="Enter amount" oninput="syncPrincipalInput(this.value)">
+  </div>
+
+  <div class="field">
+    <label>Annual Interest Rate (%) <span id="rateDisplay">7.0%</span></label>
+    <input type="range" id="rateRange" min="1" max="15" step="0.1" value="7" oninput="syncRate(this.value)">
+    <div class="range-limits"><span>1%</span><span>15%</span></div>
+    <input type="number" id="rateInput" value="7" step="0.1" placeholder="Enter rate" oninput="syncRateInput(this.value)">
+  </div>
+
+  <div class="field">
+    <label>Tenure <span id="tenureDisplay">1 Year</span></label>
+    <input type="range" id="tenureRange" min="1" max="120" step="1" value="12" oninput="syncTenure(this.value)">
+    <div class="range-limits"><span>1 Month</span><span>10 Years</span></div>
+    <input type="number" id="tenureInput" value="12" placeholder="Months" oninput="syncTenureInput(this.value)">
+  </div>
+
+  <div class="two-col">
+    <div class="field">
+      <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:8px;">Compounding Frequency</label>
+      <select id="compounding" onchange="calculate()">
+        <option value="4">Quarterly (most common)</option>
+        <option value="12">Monthly</option>
+        <option value="2">Half-Yearly</option>
+        <option value="1">Annually</option>
+        <option value="0">Simple Interest</option>
+      </select>
+    </div>
+    <div class="field">
+      <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:8px;">FD Type</label>
+      <select id="fdType" onchange="calculate()">
+        <option value="regular">Regular FD</option>
+        <option value="senior">Senior Citizen (+0.5%)</option>
+        <option value="taxsaver">Tax Saver FD (5yr)</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="calc-button" onclick="calculate()">Calculate FD Returns</button>
+
+  <div class="result-section" id="resultSection">
+    <div class="result-cards">
+      <div class="result-card">
+        <div class="r-label">Principal Amount</div>
+        <div class="r-value" id="r-principal">₹0</div>
+      </div>
+      <div class="result-card green">
+        <div class="r-label">Interest Earned</div>
+        <div class="r-value" id="r-interest">₹0</div>
+      </div>
+      <div class="result-card highlight">
+        <div class="r-label">Maturity Amount</div>
+        <div class="r-value" id="r-maturity">₹0</div>
+      </div>
+    </div>
+
+    <div class="bar-container">
+      <div class="bar-title">Principal vs Interest Breakdown</div>
+      <div class="bar-labels">
+        <span id="principal-pct" style="color:#b2ead9;font-weight:600;">Principal 0%</span>
+        <span id="interest-pct" style="color:#00d4aa;font-weight:600;">Interest 0%</span>
+      </div>
+      <div class="bar-track">
+        <div class="bar-principal" id="barPrincipal"></div>
+        <div class="bar-interest" id="barInterest"></div>
+      </div>
+      <div class="bar-legend">
+        <span><span class="legend-dot" style="background:#b2ead9;"></span>Principal</span>
+        <span><span class="legend-dot" style="background:#00d4aa;"></span>Interest</span>
+      </div>
+    </div>
+
+    <div class="bank-title">Yearly Breakdown</div>
+    <table class="bank-table">
+      <thead><tr><th>Year</th><th>Opening Balance</th><th>Interest</th><th>Closing Balance</th></tr></thead>
+      <tbody id="yearlyBody"></tbody>
+    </table>
+  </div>
+
+  <div class="bank-rates">
+    <div class="bank-title">Current FD Rates (2026) — Click to apply rate</div>
+    <table class="bank-table">
+      <thead><tr><th>Bank</th><th>General Rate</th><th>Senior Citizen</th></tr></thead>
+      <tbody>
+        <tr onclick="applyRate(7.25)"><td>SBI</td><td>6.50% – 7.25%</td><td>7.00% – 7.75%</td></tr>
+        <tr onclick="applyRate(7.5)"><td>HDFC Bank</td><td>6.60% – 7.40%</td><td>7.10% – 7.90%</td></tr>
+        <tr onclick="applyRate(7.6)"><td>ICICI Bank</td><td>6.70% – 7.60%</td><td>7.20% – 8.10%</td></tr>
+        <tr onclick="applyRate(7.75)"><td>Axis Bank</td><td>6.75% – 7.75%</td><td>7.25% – 8.25%</td></tr>
+        <tr onclick="applyRate(8.0)"><td>Kotak Mahindra</td><td>6.20% – 7.90%</td><td>6.70% – 8.40%</td></tr>
+        <tr onclick="applyRate(8.5)"><td>IDFC FIRST Bank</td><td>6.50% – 8.25%</td><td>7.00% – 8.75%</td></tr>
+        <tr onclick="applyRate(9.0)"><td>Unity Small Finance</td><td>7.00% – 9.00%</td><td>7.50% – 9.50%</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:#aaa;margin-top:8px;">* Rates are indicative. Click any bank to use that rate. Verify current rates on respective bank websites.</p>
+  </div>
+
+</div>
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+<script>
+  function fmt(n) { return Math.round(n).toLocaleString('en-IN'); }
+  function fmtDec(n) { return n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+
+  function syncPrincipal(v) { document.getElementById('principalInput').value = v; document.getElementById('principalDisplay').textContent = '₹' + fmt(v); calculate(); }
+  function syncPrincipalInput(v) { document.getElementById('principalRange').value = Math.min(v, 10000000); document.getElementById('principalDisplay').textContent = '₹' + fmt(v); calculate(); }
+  function syncRate(v) { document.getElementById('rateInput').value = v; document.getElementById('rateDisplay').textContent = parseFloat(v).toFixed(1) + '%'; calculate(); }
+  function syncRateInput(v) { document.getElementById('rateRange').value = Math.min(v, 15); document.getElementById('rateDisplay').textContent = parseFloat(v).toFixed(1) + '%'; calculate(); }
+  function syncTenure(v) { document.getElementById('tenureInput').value = v; document.getElementById('tenureDisplay').textContent = v >= 12 ? Math.floor(v/12) + ' Year' + (Math.floor(v/12) > 1 ? 's' : '') + (v%12 > 0 ? ' ' + v%12 + ' Mo' : '') : v + ' Month' + (v > 1 ? 's' : ''); calculate(); }
+  function syncTenureInput(v) { document.getElementById('tenureRange').value = Math.min(v, 120); syncTenure(v); }
+
+  function applyRate(rate) {
+    document.getElementById('rateInput').value = rate;
+    document.getElementById('rateRange').value = rate;
+    document.getElementById('rateDisplay').textContent = rate.toFixed(1) + '%';
+    calculate();
+    document.querySelector('.calculator-box').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function calculate() {
+    let P = parseFloat(document.getElementById('principalInput').value) || 0;
+    let r = parseFloat(document.getElementById('rateInput').value) || 0;
+    const months = parseInt(document.getElementById('tenureInput').value) || 0;
+    const n = parseInt(document.getElementById('compounding').value);
+    const fdType = document.getElementById('fdType').value;
+    if (fdType === 'senior') r += 0.5;
+    if (!P || !r || !months) return;
+
+    const years = months / 12;
+    let maturity, interest;
+    if (n === 0) {
+      interest = P * r / 100 * years;
+      maturity = P + interest;
+    } else {
+      maturity = P * Math.pow(1 + (r / 100) / n, n * years);
+      interest = maturity - P;
+    }
+
+    const pPct = Math.round((P / maturity) * 100);
+    const iPct = 100 - pPct;
+
+    document.getElementById('r-principal').textContent = '₹' + fmt(P);
+    document.getElementById('r-interest').textContent = '₹' + fmt(interest);
+    document.getElementById('r-maturity').textContent = '₹' + fmt(maturity);
+    document.getElementById('barPrincipal').style.width = pPct + '%';
+    document.getElementById('barInterest').style.width = iPct + '%';
+    document.getElementById('principal-pct').textContent = 'Principal ' + pPct + '%';
+    document.getElementById('interest-pct').textContent = 'Interest ' + iPct + '%';
+
+    let rows = '';
+    let balance = P;
+    const totalYears = Math.ceil(years);
+    for (let y = 1; y <= totalYears; y++) {
+      const yFrac = Math.min(1, years - (y - 1));
+      let closing;
+      if (n === 0) {
+        closing = balance + P * r / 100 * yFrac;
+      } else {
+        closing = balance * Math.pow(1 + (r / 100) / n, n * yFrac);
+      }
+      const yInterest = closing - balance;
+      rows += `<tr><td>Year ${y}</td><td>₹${fmt(balance)}</td><td>₹${fmt(yInterest)}</td><td>₹${fmt(closing)}</td></tr>`;
+      balance = closing;
+    }
+    document.getElementById('yearlyBody').innerHTML = rows;
+    document.getElementById('resultSection').classList.add('show');
+  }
+
+  calculate();
+</script>
+</body>
+</html>

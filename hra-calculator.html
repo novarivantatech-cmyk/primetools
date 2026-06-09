@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HRA Calculator - House Rent Allowance Exemption Calculator India - Prime Tools</title>
+  <meta name="description" content="Free HRA Calculator India - Calculate House Rent Allowance exemption for income tax. Know how much HRA is tax exempt as per Income Tax Act Section 10(13A).">
+  <meta name="keywords" content="HRA calculator India, house rent allowance calculator, HRA exemption calculator, HRA tax exemption, section 10 13A HRA">
+  <link rel="canonical" href="https://primetoolsapp.com/hra-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+    .main-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin: 36px auto; padding: 0 16px; }
+    .calculator-box { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .section-title { font-size: 13px; font-weight: 700; color: #00d4aa; text-transform: uppercase; letter-spacing: 1px; margin: 20px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #e8fdf8; }
+    .section-title:first-child { margin-top: 0; }
+    .field { margin-bottom: 16px; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 6px; }
+    .field input, .field select { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s; background: white; }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .calc-button { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+    .calc-button:hover { background: #00b894; }
+
+    .result-box { background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 32px; }
+    .placeholder-msg { text-align: center; padding: 60px 20px; color: #aaa; font-size: 14px; }
+    .placeholder-msg div { font-size: 48px; margin-bottom: 12px; }
+
+    .exempt-banner { background: #1a1a2e; color: white; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 24px; }
+    .exempt-banner .label { font-size: 13px; color: #aaa; margin-bottom: 6px; }
+    .exempt-banner .amount { font-size: 32px; font-weight: 700; color: #00d4aa; }
+    .exempt-banner .sub { font-size: 12px; color: #aaa; margin-top: 4px; }
+
+    .three-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+    .mini-card { background: #f8fffe; border: 1px solid #e0f7f3; border-radius: 10px; padding: 12px; text-align: center; }
+    .mini-card .ml { font-size: 11px; color: #888; margin-bottom: 4px; }
+    .mini-card .mv { font-size: 14px; font-weight: 700; color: #1a1a2e; }
+
+    .rule-box { background: #f8fffe; border: 2px solid #e0f7f3; border-radius: 10px; padding: 16px; margin-bottom: 20px; }
+    .rule-title { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 10px; }
+    .rule-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; }
+    .rule-row:last-child { border-bottom: none; }
+    .rule-row .rl { color: #666; }
+    .rule-row .rv { font-weight: 600; color: #1a1a2e; }
+    .rule-row.winner .rl { color: #00b894; font-weight: 700; }
+    .rule-row.winner .rv { color: #00b894; font-weight: 700; }
+
+    .taxable-box { background: #fff5f5; border: 2px solid #ffcccc; border-radius: 10px; padding: 16px; }
+    .taxable-box .tl { font-size: 13px; color: #cc0000; font-weight: 700; margin-bottom: 8px; }
+    .taxable-box .tv { font-size: 20px; font-weight: 700; color: #cc0000; }
+
+    .info-box { background: #fffbea; border: 1px solid #ffd54f; border-radius: 8px; padding: 14px 16px; font-size: 12px; color: #555; margin-top: 16px; line-height: 1.7; }
+
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; margin-top: 40px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+    @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>HRA Calculator</h2>
+  <p>Calculate House Rent Allowance (HRA) tax exemption as per Section 10(13A)</p>
+</div>
+
+<div class="main-layout">
+  <div class="calculator-box">
+    <div class="section-title">Salary Details (Monthly)</div>
+    <div class="field">
+      <label>Basic Salary per month (₹)</label>
+      <input type="number" id="basic" placeholder="e.g. 40000" value="40000">
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>HRA Received per month (₹)</label>
+        <input type="number" id="hraReceived" placeholder="e.g. 16000" value="16000">
+      </div>
+      <div class="field">
+        <label>Dearness Allowance (₹)</label>
+        <input type="number" id="da" placeholder="If applicable" value="0">
+      </div>
+    </div>
+
+    <div class="section-title">Rent Details</div>
+    <div class="field">
+      <label>Rent Paid per month (₹)</label>
+      <input type="number" id="rentPaid" placeholder="e.g. 15000" value="15000">
+    </div>
+    <div class="field">
+      <label>City Type</label>
+      <select id="cityType">
+        <option value="metro">Metro City (Delhi, Mumbai, Chennai, Kolkata) — 50% of Basic</option>
+        <option value="nonmetro">Non-Metro City — 40% of Basic</option>
+      </select>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Months Employed</label>
+        <input type="number" id="months" value="12" min="1" max="12">
+      </div>
+      <div class="field">
+        <label>Financial Year</label>
+        <select id="fy">
+          <option value="2526">FY 2025-26</option>
+          <option value="2425">FY 2024-25</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="calc-button" onclick="calculate()">Calculate HRA Exemption</button>
+  </div>
+
+  <div class="result-box">
+    <div class="placeholder-msg" id="placeholderMsg">
+      <div>🏠</div>
+      Fill in your salary and rent details<br>to calculate HRA exemption
+    </div>
+    <div id="resultArea" style="display:none;">
+      <div class="exempt-banner">
+        <div class="label">Total HRA Exempt from Tax (Annual)</div>
+        <div class="amount" id="r-exempt">₹0</div>
+        <div class="sub" id="r-exempt-monthly"></div>
+      </div>
+
+      <div class="three-cards">
+        <div class="mini-card">
+          <div class="ml">HRA Received</div>
+          <div class="mv" id="r-received">₹0</div>
+        </div>
+        <div class="mini-card">
+          <div class="ml">Exempt Amount</div>
+          <div class="mv" style="color:#00b894;" id="r-exempt2">₹0</div>
+        </div>
+        <div class="mini-card">
+          <div class="ml">Taxable HRA</div>
+          <div class="mv" style="color:#e05;" id="r-taxable2">₹0</div>
+        </div>
+      </div>
+
+      <div class="rule-box">
+        <div class="rule-title">HRA Exemption Calculation (Least of 3 conditions)</div>
+        <div class="rule-row" id="rule1-row">
+          <span class="rl">1. Actual HRA received</span>
+          <span class="rv" id="rule1">₹0</span>
+        </div>
+        <div class="rule-row" id="rule2-row">
+          <span class="rl" id="rule2-label">2. 50% of Basic (Metro)</span>
+          <span class="rv" id="rule2">₹0</span>
+        </div>
+        <div class="rule-row" id="rule3-row">
+          <span class="rl">3. Rent paid minus 10% of Basic</span>
+          <span class="rv" id="rule3">₹0</span>
+        </div>
+        <div class="rule-row winner">
+          <span class="rl">✓ Minimum (Tax Exempt)</span>
+          <span class="rv" id="rule-min">₹0</span>
+        </div>
+      </div>
+
+      <div class="taxable-box">
+        <div class="tl">Taxable HRA (Annual) — add to income tax calculation</div>
+        <div class="tv" id="r-taxable">₹0</div>
+      </div>
+
+      <div class="info-box">
+        <strong>Important:</strong> To claim HRA exemption, you must submit rent receipts to your employer. If annual rent exceeds ₹1,00,000, landlord's PAN is required. HRA exemption is only available under the Old Tax Regime. Under New Tax Regime, HRA is fully taxable.
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+<script>
+  function fmt(n) { return Math.round(n || 0).toLocaleString('en-IN'); }
+
+  function calculate() {
+    const basic     = parseFloat(document.getElementById('basic').value) || 0;
+    const hraRcvd   = parseFloat(document.getElementById('hraReceived').value) || 0;
+    const da        = parseFloat(document.getElementById('da').value) || 0;
+    const rent      = parseFloat(document.getElementById('rentPaid').value) || 0;
+    const city      = document.getElementById('cityType').value;
+    const months    = parseInt(document.getElementById('months').value) || 12;
+
+    const basicDA   = basic + da;
+    const pct       = city === 'metro' ? 0.5 : 0.4;
+    const cityLabel = city === 'metro' ? '50% of Basic+DA (Metro)' : '40% of Basic+DA (Non-Metro)';
+
+    const rule1 = hraRcvd;
+    const rule2 = basicDA * pct;
+    const rule3 = Math.max(0, rent - basicDA * 0.1);
+    const minVal = Math.min(rule1, rule2, rule3);
+
+    const annualExempt  = minVal * months;
+    const annualReceived = hraRcvd * months;
+    const annualTaxable = Math.max(0, annualReceived - annualExempt);
+
+    document.getElementById('r-exempt').textContent    = '₹' + fmt(annualExempt);
+    document.getElementById('r-exempt-monthly').textContent = '₹' + fmt(minVal) + ' per month × ' + months + ' months';
+    document.getElementById('r-received').textContent  = '₹' + fmt(annualReceived);
+    document.getElementById('r-exempt2').textContent   = '₹' + fmt(annualExempt);
+    document.getElementById('r-taxable2').textContent  = '₹' + fmt(annualTaxable);
+    document.getElementById('r-taxable').textContent   = '₹' + fmt(annualTaxable);
+
+    document.getElementById('rule1').textContent = '₹' + fmt(rule1) + '/mo';
+    document.getElementById('rule2').textContent = '₹' + fmt(rule2) + '/mo';
+    document.getElementById('rule3').textContent = '₹' + fmt(rule3) + '/mo';
+    document.getElementById('rule-min').textContent = '₹' + fmt(minVal) + '/mo';
+    document.getElementById('rule2-label').textContent = '2. ' + cityLabel;
+
+    ['rule1-row','rule2-row','rule3-row'].forEach(id => document.getElementById(id).classList.remove('winner'));
+    const vals = [rule1, rule2, rule3];
+    const ids  = ['rule1-row','rule2-row','rule3-row'];
+    const minIdx = vals.indexOf(Math.min(...vals));
+    document.getElementById(ids[minIdx]).classList.add('winner');
+
+    document.getElementById('placeholderMsg').style.display = 'none';
+    document.getElementById('resultArea').style.display = 'block';
+  }
+</script>
+</body>
+</html>
