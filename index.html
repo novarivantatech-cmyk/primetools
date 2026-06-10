@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Prime Tools - Free Financial Calculators for India</title>
-  <meta name="description" content="Prime Tools - Free financial calculators for India. GST Calculator, EMI Calculator, Income Tax, SIP, FD, HRA, Currency Converter and more. Fast, free, no login needed.">
+  <meta name="description" content="Prime Tools - Free financial calculators for India. GST, EMI, Income Tax, SIP, FD, HRA, Currency Converter and more. Fast, accurate, no login needed.">
   <meta name="keywords" content="GST calculator India, EMI calculator, income tax calculator, SIP calculator, FD calculator, HRA calculator, currency converter, free financial tools India">
   <meta property="og:title" content="Prime Tools - Free Financial Calculators for India">
   <meta property="og:description" content="Free GST, EMI, Tax, SIP, FD, HRA calculators for India. No login needed.">
@@ -12,525 +12,649 @@
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://primetoolsapp.com">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #f5f7fa; color: #1a1a2e; }
 
+    /* ── HEADER ── */
     header {
-      background: #1a1a2e; color: white;
-      padding: 16px 32px;
+      background: #fff; border-bottom: 1px solid #e8edf2;
+      padding: 0 40px; height: 64px;
       display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
-    .logo h1 { font-size: 24px; color: #00d4aa; }
-    .logo p { font-size: 13px; color: #aaa; }
-
-    .hero {
-      background: linear-gradient(135deg, #1a1a2e, #16213e);
-      color: white; text-align: center; padding: 60px 20px;
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-icon {
+      width: 36px; height: 36px; background: #1a1a2e;
+      border-radius: 8px; display: flex; align-items: center;
+      justify-content: center; font-size: 18px;
     }
-    .hero h2 { font-size: 36px; margin-bottom: 12px; }
-    .hero p { font-size: 16px; color: #ccc; margin-bottom: 28px; }
-    .hero span { color: #00d4aa; }
-
-    .search-bar {
-      max-width: 500px; margin: 0 auto 20px;
-      display: flex; gap: 8px;
-    }
-    .search-bar input {
-      flex: 1; padding: 12px 20px; border: none;
-      border-radius: 8px; font-size: 15px; outline: none;
-    }
-    .search-bar button {
-      padding: 12px 20px; background: #00d4aa;
-      color: white; border: none; border-radius: 8px;
-      font-size: 15px; cursor: pointer; font-weight: 600;
-    }
-
-    .stats-row {
-      display: flex; justify-content: center; gap: 32px;
-      flex-wrap: wrap; margin-top: 16px;
-    }
-    .stat { text-align: center; }
-    .stat .num { font-size: 24px; font-weight: 700; color: #00d4aa; }
-    .stat .lbl { font-size: 12px; color: #aaa; }
-
-    /* Category navigation */
-    .cat-nav {
-      background: white; border-bottom: 2px solid #f0f4f8;
-      padding: 0 32px; display: flex; gap: 4px;
-      overflow-x: auto; position: sticky; top: 0; z-index: 100;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    }
-    .cat-nav::-webkit-scrollbar { display: none; }
-    .cat-tab {
-      padding: 14px 20px; border: none; background: none;
-      font-size: 13px; font-weight: 600; color: #888;
-      cursor: pointer; white-space: nowrap;
-      border-bottom: 3px solid transparent;
+    .logo-text { font-size: 20px; font-weight: 700; color: #1a1a2e; }
+    .logo-text span { color: #00d4aa; }
+    nav { display: flex; align-items: center; gap: 8px; }
+    .nav-link {
+      padding: 8px 16px; border-radius: 8px; font-size: 14px;
+      font-weight: 500; color: #555; text-decoration: none;
       transition: all 0.2s;
     }
-    .cat-tab:hover { color: #00d4aa; }
+    .nav-link:hover { background: #f0f4f8; color: #1a1a2e; }
+    .nav-cta {
+      padding: 8px 18px; background: #1a1a2e; color: white;
+      border-radius: 8px; font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-cta:hover { background: #00d4aa; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, #f0f9ff 0%, #e8fdf8 50%, #f5f7fa 100%);
+      text-align: center; padding: 80px 20px 60px;
+      border-bottom: 1px solid #e0f7f3;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #e8fdf8; color: #00b894; border: 1px solid #b2ead9;
+      padding: 6px 16px; border-radius: 100px; font-size: 13px;
+      font-weight: 600; margin-bottom: 24px; letter-spacing: 0.5px;
+    }
+    .hero h1 {
+      font-size: 52px; font-weight: 800; color: #1a1a2e;
+      line-height: 1.15; margin-bottom: 16px; letter-spacing: -1px;
+    }
+    .hero h1 span { color: #00d4aa; }
+    .hero p {
+      font-size: 18px; color: #666; max-width: 520px;
+      margin: 0 auto 32px; line-height: 1.6;
+    }
+    .search-wrap {
+      max-width: 480px; margin: 0 auto 32px;
+      position: relative;
+    }
+    .search-wrap input {
+      width: 100%; padding: 16px 56px 16px 20px;
+      border: 2px solid #e0e8f0; border-radius: 12px;
+      font-size: 15px; outline: none; background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: border-color 0.2s;
+    }
+    .search-wrap input:focus { border-color: #00d4aa; }
+    .search-wrap button {
+      position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+      width: 40px; height: 40px; background: #00d4aa; color: white;
+      border: none; border-radius: 8px; cursor: pointer; font-size: 16px;
+    }
+    .hero-stats {
+      display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
+    }
+    .hero-stat .num { font-size: 28px; font-weight: 800; color: #1a1a2e; }
+    .hero-stat .lbl { font-size: 13px; color: #888; margin-top: 2px; }
+
+    /* ── CATEGORY TABS ── */
+    .cat-bar {
+      background: white; border-bottom: 1px solid #e8edf2;
+      padding: 0 40px; display: flex; gap: 0;
+      overflow-x: auto; position: sticky; top: 64px; z-index: 100;
+    }
+    .cat-bar::-webkit-scrollbar { display: none; }
+    .cat-tab {
+      padding: 16px 20px; border: none; background: none;
+      font-size: 13px; font-weight: 600; color: #888; cursor: pointer;
+      white-space: nowrap; border-bottom: 3px solid transparent;
+      transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+    }
+    .cat-tab:hover { color: #1a1a2e; }
     .cat-tab.active { color: #00d4aa; border-bottom-color: #00d4aa; }
 
-    /* Tools section */
-    .tools-section {
-      max-width: 1100px; margin: 0 auto; padding: 32px 16px;
-    }
-    .category-block { margin-bottom: 48px; }
-    .category-header {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 20px; padding-bottom: 12px;
-      border-bottom: 2px solid #e0f7f3;
-    }
-    .category-icon { font-size: 28px; }
-    .category-title { font-size: 20px; font-weight: 700; color: #1a1a2e; }
-    .category-count { font-size: 12px; color: #00d4aa; background: #e8fdf8; padding: 4px 10px; border-radius: 20px; font-weight: 600; }
+    /* ── MAIN CONTENT ── */
+    .content { max-width: 1100px; margin: 0 auto; padding: 40px 24px 60px; }
 
+    /* ── CATEGORY SECTION ── */
+    .cat-section { margin-bottom: 52px; }
+    .cat-header {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 24px;
+    }
+    .cat-icon-wrap {
+      width: 44px; height: 44px; background: #f0f9ff;
+      border: 1px solid #b2d8f0; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; font-size: 22px;
+    }
+    .cat-info h2 { font-size: 20px; font-weight: 700; color: #1a1a2e; }
+    .cat-info p { font-size: 13px; color: #888; margin-top: 2px; }
+    .cat-badge {
+      margin-left: auto; background: #f0f9ff; color: #0088cc;
+      padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 600;
+    }
+
+    /* ── TOOLS GRID — FIXED 4 columns ── */
     .tools-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
     }
+    @media (max-width: 900px) { .tools-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 640px) { .tools-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ── TOOL CARD ── */
     .tool-card {
-      background: white; border-radius: 12px; padding: 20px;
-      text-align: center; cursor: pointer;
-      border: 2px solid transparent; transition: all 0.3s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      text-decoration: none; color: inherit; display: block;
+      background: white; border: 1.5px solid #e8edf2;
+      border-radius: 14px; padding: 20px 16px;
+      text-align: center; text-decoration: none; color: inherit;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 8px; transition: all 0.25s; cursor: pointer;
+      min-height: 140px; justify-content: center;
     }
     .tool-card:hover {
-      border-color: #00d4aa; transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0,212,170,0.15);
+      border-color: #00d4aa; background: #f8fffe;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,212,170,0.12);
     }
-    .tool-card.coming-soon { opacity: 0.5; cursor: default; }
-    .tool-card.coming-soon:hover { transform: none; border-color: transparent; }
-    .tool-icon { font-size: 32px; margin-bottom: 10px; }
-    .tool-card h3 { font-size: 14px; margin-bottom: 4px; color: #1a1a2e; font-weight: 700; }
-    .tool-card p { font-size: 12px; color: #888; }
-    .tool-badge {
-      display: inline-block; font-size: 10px; padding: 2px 8px;
-      border-radius: 20px; margin-top: 6px; font-weight: 600;
+    .tool-card.soon {
+      opacity: 0.55; cursor: default;
+      background: #fafafa;
     }
-    .badge-new { background: #e8fdf8; color: #00b894; }
-    .badge-soon { background: #f0f4f8; color: #aaa; }
-    .badge-popular { background: #fff3e0; color: #ff8c00; }
+    .tool-card.soon:hover { transform: none; border-color: #e8edf2; box-shadow: none; background: #fafafa; }
+    .tool-emoji { font-size: 28px; line-height: 1; }
+    .tool-name { font-size: 13px; font-weight: 700; color: #1a1a2e; line-height: 1.3; }
+    .tool-desc { font-size: 11px; color: #999; line-height: 1.4; }
+    .tool-tag {
+      font-size: 10px; font-weight: 700; padding: 3px 9px;
+      border-radius: 100px; letter-spacing: 0.3px;
+    }
+    .tag-popular { background: #fff3e0; color: #e65c00; }
+    .tag-new { background: #e8fdf8; color: #00a878; }
+    .tag-soon { background: #f0f0f0; color: #aaa; }
 
-    footer {
-      background: #1a1a2e; color: #aaa;
-      padding: 32px; text-align: center;
-      margin-top: 40px;
+    /* ── WHY SECTION ── */
+    .why-section {
+      background: #f0f9ff; border-top: 1px solid #d0e8f5;
+      border-bottom: 1px solid #d0e8f5; padding: 60px 40px;
+      text-align: center; margin-bottom: 0;
     }
-    footer .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 16px; }
+    .why-label { font-size: 12px; font-weight: 700; color: #0088cc; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .why-section h2 { font-size: 32px; font-weight: 800; color: #1a1a2e; margin-bottom: 8px; }
+    .why-section p { font-size: 15px; color: #666; max-width: 500px; margin: 0 auto 40px; }
+    .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1000px; margin: 0 auto; }
+    @media (max-width: 700px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+    .why-card { background: white; border: 1px solid #d0e8f5; border-radius: 14px; padding: 24px 20px; text-align: left; }
+    .why-icon { width: 44px; height: 44px; background: #e8f4fd; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 14px; }
+    .why-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: #1a1a2e; }
+    .why-card p { font-size: 13px; color: #777; line-height: 1.6; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #1a1a2e; color: #aaa; padding: 40px;
+      text-align: center;
+    }
+    .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 16px; }
     footer a { color: #aaa; text-decoration: none; font-size: 13px; }
     footer a:hover { color: #00d4aa; }
     footer p { font-size: 13px; }
+    footer p + p { margin-top: 8px; font-size: 11px; color: #666; }
 
-    /* Search highlight */
+    /* hidden for search */
     .tool-card.hidden { display: none; }
-
-    @media (max-width: 600px) {
-      .hero h2 { font-size: 24px; }
-      .tools-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    .cat-section.hidden { display: none; }
   </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="logo">
-    <h1>Prime Tools</h1>
-    <p>Free Financial Calculators for India</p>
-  </div>
+  <a href="index.html" class="logo">
+    <div class="logo-icon">💹</div>
+    <div class="logo-text">Prime<span>Tools</span></div>
+  </a>
+  <nav>
+    <a href="#tax" class="nav-link">Tax</a>
+    <a href="#investment" class="nav-link">Investment</a>
+    <a href="#loan" class="nav-link">Loans</a>
+    <a href="#salary" class="nav-link">Salary</a>
+    <a href="#business" class="nav-link">Business</a>
+    <a href="gst-calculator.html" class="nav-cta">Try GST Calc →</a>
+  </nav>
 </header>
 
+<!-- HERO -->
 <div class="hero">
-  <h2>Smart Tools for <span>Everyday Finance</span></h2>
-  <p>GST, EMI, Tax, SIP, FD, HRA and more — fast, free, no login needed</p>
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search tools... (e.g. GST, EMI, Tax)" oninput="searchTools()">
+  <div class="hero-badge">✦ FREE · ACCURATE · NO SIGN-UP REQUIRED</div>
+  <h1>Tools for the <span>decisions</span><br>that matter</h1>
+  <p>Simple, accurate calculators for everyday financial decisions. Fast, free, forever.</p>
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search tools... GST, EMI, SIP, FD, HRA..." oninput="searchTools()">
     <button onclick="searchTools()">🔍</button>
   </div>
-  <div class="stats-row">
-    <div class="stat"><div class="num">10+</div><div class="lbl">Free Tools</div></div>
-    <div class="stat"><div class="num">7</div><div class="lbl">Categories</div></div>
-    <div class="stat"><div class="num">100%</div><div class="lbl">Free Forever</div></div>
-    <div class="stat"><div class="num">0</div><div class="lbl">Login Required</div></div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num" id="liveCount">13</div><div class="lbl">Free Tools</div></div>
+    <div class="hero-stat"><div class="num">7</div><div class="lbl">Categories</div></div>
+    <div class="hero-stat"><div class="num">0</div><div class="lbl">Login Required</div></div>
+    <div class="hero-stat"><div class="num">100%</div><div class="lbl">Free Forever</div></div>
   </div>
 </div>
 
-<!-- Category Navigation -->
-<div class="cat-nav">
-  <button class="cat-tab active" onclick="scrollTo('all')">🔥 All Tools</button>
-  <button class="cat-tab" onclick="scrollTo('tax')">🧾 Tax</button>
-  <button class="cat-tab" onclick="scrollTo('investment')">📈 Investment</button>
-  <button class="cat-tab" onclick="scrollTo('loan')">🏦 Loan</button>
-  <button class="cat-tab" onclick="scrollTo('salary')">💼 Salary & HR</button>
-  <button class="cat-tab" onclick="scrollTo('business')">📄 Business</button>
-  <button class="cat-tab" onclick="scrollTo('finance')">💱 Finance</button>
-  <button class="cat-tab" onclick="scrollTo('utility')">🔧 Daily Utility</button>
-  <button class="cat-tab" onclick="scrollTo('health')">❤️ Health</button>
+<!-- CATEGORY TABS -->
+<div class="cat-bar" id="catBar">
+  <button class="cat-tab active" onclick="filterCat('all',this)">🔥 All Tools</button>
+  <button class="cat-tab" onclick="filterCat('tax',this)">🧾 Tax</button>
+  <button class="cat-tab" onclick="filterCat('investment',this)">📈 Investment</button>
+  <button class="cat-tab" onclick="filterCat('loan',this)">🏦 Loan</button>
+  <button class="cat-tab" onclick="filterCat('salary',this)">💼 Salary & HR</button>
+  <button class="cat-tab" onclick="filterCat('business',this)">📄 Business</button>
+  <button class="cat-tab" onclick="filterCat('finance',this)">💱 Finance</button>
+  <button class="cat-tab" onclick="filterCat('utility',this)">🔧 Utility</button>
+  <button class="cat-tab" onclick="filterCat('health',this)">❤️ Health</button>
 </div>
 
-<div class="tools-section">
+<!-- TOOLS CONTENT -->
+<div class="content">
 
   <!-- TAX -->
-  <div class="category-block" id="tax">
-    <div class="category-header">
-      <div class="category-icon">🧾</div>
-      <div class="category-title">Tax Calculators</div>
-      <div class="category-count">6 tools</div>
+  <div class="cat-section" id="sec-tax" data-cat="tax">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">🧾</div>
+      <div class="cat-info">
+        <h2>Tax Calculators</h2>
+        <p>GST, income tax, HRA and more</p>
+      </div>
+      <div class="cat-badge">6 tools</div>
     </div>
     <div class="tools-grid">
       <a href="gst-calculator.html" class="tool-card" data-name="gst calculator tax">
-        <div class="tool-icon">🧾</div>
-        <h3>GST Calculator</h3>
-        <p>Add or remove GST instantly</p>
-        <span class="tool-badge badge-popular">Popular</span>
+        <div class="tool-emoji">🧾</div>
+        <div class="tool-name">GST Calculator</div>
+        <div class="tool-desc">Add or remove GST instantly</div>
+        <span class="tool-tag tag-popular">Popular</span>
       </a>
-      <a href="income-tax.html" class="tool-card" data-name="income tax calculator old new regime">
-        <div class="tool-icon">💰</div>
-        <h3>Income Tax</h3>
-        <p>Old & new regime comparison</p>
-        <span class="tool-badge badge-popular">Popular</span>
+      <a href="income-tax.html" class="tool-card" data-name="income tax old new regime">
+        <div class="tool-emoji">💰</div>
+        <div class="tool-name">Income Tax</div>
+        <div class="tool-desc">Old & new regime comparison</div>
+        <span class="tool-tag tag-popular">Popular</span>
       </a>
       <a href="hra-calculator.html" class="tool-card" data-name="hra house rent allowance tax exemption">
-        <div class="tool-icon">🏠</div>
-        <h3>HRA Calculator</h3>
-        <p>HRA tax exemption calculator</p>
-        <span class="tool-badge badge-new">New</span>
+        <div class="tool-emoji">🏠</div>
+        <div class="tool-name">HRA Calculator</div>
+        <div class="tool-desc">HRA tax exemption (Sec 10)</div>
+        <span class="tool-tag tag-new">New</span>
       </a>
-      <div class="tool-card coming-soon" data-name="professional tax">
-        <div class="tool-icon">🏛️</div>
-        <h3>Professional Tax</h3>
-        <p>State-wise PT calculator</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="professional tax">
+        <div class="tool-emoji">🏛️</div>
+        <div class="tool-name">Professional Tax</div>
+        <div class="tool-desc">State-wise PT calculator</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="tds calculator">
-        <div class="tool-icon">📋</div>
-        <h3>TDS Calculator</h3>
-        <p>Tax deducted at source</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="tds calculator">
+        <div class="tool-emoji">📋</div>
+        <div class="tool-name">TDS Calculator</div>
+        <div class="tool-desc">Tax deducted at source</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="capital gain tax">
-        <div class="tool-icon">📊</div>
-        <h3>Capital Gain Tax</h3>
-        <p>LTCG & STCG calculator</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="capital gain tax ltcg stcg">
+        <div class="tool-emoji">📊</div>
+        <div class="tool-name">Capital Gain Tax</div>
+        <div class="tool-desc">LTCG & STCG calculator</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
     </div>
   </div>
 
   <!-- INVESTMENT -->
-  <div class="category-block" id="investment">
-    <div class="category-header">
-      <div class="category-icon">📈</div>
-      <div class="category-title">Investment Calculators</div>
-      <div class="category-count">8 tools</div>
+  <div class="cat-section" id="sec-investment" data-cat="investment">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">📈</div>
+      <div class="cat-info">
+        <h2>Investment Calculators</h2>
+        <p>SIP, FD, RD, PPF and more</p>
+      </div>
+      <div class="cat-badge">8 tools</div>
     </div>
     <div class="tools-grid">
       <a href="sip-calculator.html" class="tool-card" data-name="sip mutual fund investment calculator">
-        <div class="tool-icon">📈</div>
-        <h3>SIP Calculator</h3>
-        <p>Grow your investments</p>
-        <span class="tool-badge badge-popular">Popular</span>
+        <div class="tool-emoji">📈</div>
+        <div class="tool-name">SIP Calculator</div>
+        <div class="tool-desc">Grow your investments</div>
+        <span class="tool-tag tag-popular">Popular</span>
       </a>
       <a href="fd-calculator.html" class="tool-card" data-name="fd fixed deposit calculator interest maturity">
-        <div class="tool-icon">🏧</div>
-        <h3>FD Calculator</h3>
-        <p>Fixed deposit returns</p>
-        <span class="tool-badge badge-new">New</span>
+        <div class="tool-emoji">🏧</div>
+        <div class="tool-name">FD Calculator</div>
+        <div class="tool-desc">Fixed deposit returns</div>
+        <span class="tool-tag tag-new">New</span>
       </a>
-      <div class="tool-card coming-soon" data-name="rd recurring deposit calculator">
-        <div class="tool-icon">💳</div>
-        <h3>RD Calculator</h3>
-        <p>Recurring deposit returns</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <a href="rd-calculator.html" class="tool-card" data-name="rd recurring deposit calculator">
+        <div class="tool-emoji">💳</div>
+        <div class="tool-name">RD Calculator</div>
+        <div class="tool-desc">Recurring deposit returns</div>
+        <span class="tool-tag tag-new">New</span>
+      </a>
+      <a href="ppf-calculator.html" class="tool-card" data-name="ppf public provident fund calculator">
+        <div class="tool-emoji">🏦</div>
+        <div class="tool-name">PPF Calculator</div>
+        <div class="tool-desc">Public provident fund</div>
+        <span class="tool-tag tag-new">New</span>
+      </a>
+      <a href="interest-calculator.html" class="tool-card" data-name="simple compound interest calculator">
+        <div class="tool-emoji">💹</div>
+        <div class="tool-name">SI / CI Calculator</div>
+        <div class="tool-desc">Simple & compound interest</div>
+        <span class="tool-tag tag-new">New</span>
+      </a>
+      <div class="tool-card soon" data-name="lumpsum investment calculator">
+        <div class="tool-emoji">💵</div>
+        <div class="tool-name">Lumpsum Calculator</div>
+        <div class="tool-desc">One-time investment returns</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="ppf public provident fund calculator">
-        <div class="tool-icon">🏦</div>
-        <h3>PPF Calculator</h3>
-        <p>Public provident fund</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="swp systematic withdrawal plan">
+        <div class="tool-emoji">📉</div>
+        <div class="tool-name">SWP Calculator</div>
+        <div class="tool-desc">Systematic withdrawal plan</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="lumpsum investment calculator">
-        <div class="tool-icon">💵</div>
-        <h3>Lumpsum Calculator</h3>
-        <p>One-time investment returns</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
-      </div>
-      <div class="tool-card coming-soon" data-name="swp systematic withdrawal plan">
-        <div class="tool-icon">📉</div>
-        <h3>SWP Calculator</h3>
-        <p>Systematic withdrawal plan</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
-      </div>
-      <div class="tool-card coming-soon" data-name="retirement calculator planning">
-        <div class="tool-icon">👴</div>
-        <h3>Retirement Calculator</h3>
-        <p>Plan your retirement</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
-      </div>
-      <div class="tool-card coming-soon" data-name="inflation calculator">
-        <div class="tool-icon">📊</div>
-        <h3>Inflation Calculator</h3>
-        <p>Future value of money</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="retirement calculator planning">
+        <div class="tool-emoji">👴</div>
+        <div class="tool-name">Retirement Calculator</div>
+        <div class="tool-desc">Plan your retirement corpus</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
     </div>
   </div>
 
   <!-- LOAN -->
-  <div class="category-block" id="loan">
-    <div class="category-header">
-      <div class="category-icon">🏦</div>
-      <div class="category-title">Loan Calculators</div>
-      <div class="category-count">6 tools</div>
+  <div class="cat-section" id="sec-loan" data-cat="loan">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">🏦</div>
+      <div class="cat-info">
+        <h2>Loan Calculators</h2>
+        <p>EMI, home, car, personal loans</p>
+      </div>
+      <div class="cat-badge">6 tools</div>
     </div>
     <div class="tools-grid">
       <a href="emi-calculator.html" class="tool-card" data-name="emi loan calculator monthly installment">
-        <div class="tool-icon">🏦</div>
-        <h3>EMI Calculator</h3>
-        <p>Plan your loan repayments</p>
-        <span class="tool-badge badge-popular">Popular</span>
+        <div class="tool-emoji">🏦</div>
+        <div class="tool-name">EMI Calculator</div>
+        <div class="tool-desc">Plan your loan repayments</div>
+        <span class="tool-tag tag-popular">Popular</span>
       </a>
-      <div class="tool-card coming-soon" data-name="home loan calculator">
-        <div class="tool-icon">🏠</div>
-        <h3>Home Loan Calculator</h3>
-        <p>Housing loan EMI & eligibility</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="home loan calculator housing">
+        <div class="tool-emoji">🏠</div>
+        <div class="tool-name">Home Loan Calculator</div>
+        <div class="tool-desc">Housing loan EMI</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="car loan calculator">
-        <div class="tool-icon">🚗</div>
-        <h3>Car Loan Calculator</h3>
-        <p>Auto loan EMI calculator</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="car loan calculator auto">
+        <div class="tool-emoji">🚗</div>
+        <div class="tool-name">Car Loan Calculator</div>
+        <div class="tool-desc">Auto loan EMI calculator</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="personal loan calculator">
-        <div class="tool-icon">👤</div>
-        <h3>Personal Loan</h3>
-        <p>Personal loan EMI calculator</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="personal loan calculator">
+        <div class="tool-emoji">👤</div>
+        <div class="tool-name">Personal Loan</div>
+        <div class="tool-desc">Personal loan EMI</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="loan eligibility calculator">
-        <div class="tool-icon">✅</div>
-        <h3>Loan Eligibility</h3>
-        <p>Check how much you can borrow</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="loan eligibility calculator">
+        <div class="tool-emoji">✅</div>
+        <div class="tool-name">Loan Eligibility</div>
+        <div class="tool-desc">How much can you borrow?</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="loan comparison calculator">
-        <div class="tool-icon">⚖️</div>
-        <h3>Loan Comparison</h3>
-        <p>Compare multiple loan offers</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="loan comparison calculator">
+        <div class="tool-emoji">⚖️</div>
+        <div class="tool-name">Loan Comparison</div>
+        <div class="tool-desc">Compare multiple loan offers</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
     </div>
   </div>
 
   <!-- SALARY & HR -->
-  <div class="category-block" id="salary">
-    <div class="category-header">
-      <div class="category-icon">💼</div>
-      <div class="category-title">Salary & HR Tools</div>
-      <div class="category-count">6 tools</div>
+  <div class="cat-section" id="sec-salary" data-cat="salary">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">💼</div>
+      <div class="cat-info">
+        <h2>Salary & HR Tools</h2>
+        <p>Salary slips, CTC, PF, gratuity</p>
+      </div>
+      <div class="cat-badge">6 tools</div>
     </div>
     <div class="tools-grid">
       <a href="salary-slip.html" class="tool-card" data-name="salary slip generator payslip">
-        <div class="tool-icon">🧮</div>
-        <h3>Salary Slip Generator</h3>
-        <p>Generate professional payslips</p>
-        <span class="tool-badge badge-popular">Popular</span>
+        <div class="tool-emoji">🧮</div>
+        <div class="tool-name">Salary Slip Generator</div>
+        <div class="tool-desc">Generate professional payslips</div>
+        <span class="tool-tag tag-popular">Popular</span>
       </a>
-      <div class="tool-card coming-soon" data-name="ctc calculator cost to company">
-        <div class="tool-icon">💼</div>
-        <h3>CTC Calculator</h3>
-        <p>Cost to company breakdown</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="ctc calculator cost to company">
+        <div class="tool-emoji">💼</div>
+        <div class="tool-name">CTC Calculator</div>
+        <div class="tool-desc">Cost to company breakdown</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="in hand salary calculator take home">
-        <div class="tool-icon">✋</div>
-        <h3>In-Hand Salary</h3>
-        <p>Calculate take-home salary</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="in hand salary take home">
+        <div class="tool-emoji">✋</div>
+        <div class="tool-name">In-Hand Salary</div>
+        <div class="tool-desc">Calculate take-home salary</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="gratuity calculator">
-        <div class="tool-icon">🎁</div>
-        <h3>Gratuity Calculator</h3>
-        <p>Calculate gratuity amount</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="gratuity calculator">
+        <div class="tool-emoji">🎁</div>
+        <div class="tool-name">Gratuity Calculator</div>
+        <div class="tool-desc">Calculate gratuity amount</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="pf epf provident fund calculator">
-        <div class="tool-icon">🔒</div>
-        <h3>PF / EPF Calculator</h3>
-        <p>Provident fund calculator</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="pf epf provident fund calculator">
+        <div class="tool-emoji">🔒</div>
+        <div class="tool-name">PF / EPF Calculator</div>
+        <div class="tool-desc">Provident fund calculator</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="leave encashment calculator">
-        <div class="tool-icon">📅</div>
-        <h3>Leave Encashment</h3>
-        <p>Calculate leave payout</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="leave encashment calculator">
+        <div class="tool-emoji">📅</div>
+        <div class="tool-name">Leave Encashment</div>
+        <div class="tool-desc">Calculate leave payout</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
     </div>
   </div>
 
   <!-- BUSINESS -->
-  <div class="category-block" id="business">
-    <div class="category-header">
-      <div class="category-icon">📄</div>
-      <div class="category-title">Business Tools</div>
-      <div class="category-count">5 tools</div>
+  <div class="cat-section" id="sec-business" data-cat="business">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">📄</div>
+      <div class="cat-info">
+        <h2>Business Tools</h2>
+        <p>Invoices, quotations, receipts</p>
+      </div>
+      <div class="cat-badge">5 tools</div>
     </div>
     <div class="tools-grid">
       <a href="invoice-generator.html" class="tool-card" data-name="invoice generator gst bill">
-        <div class="tool-icon">📄</div>
-        <h3>GST Invoice Generator</h3>
-        <p>Create professional invoices</p>
-        <span class="tool-badge badge-popular">Popular</span>
+        <div class="tool-emoji">📄</div>
+        <div class="tool-name">GST Invoice Generator</div>
+        <div class="tool-desc">Create professional invoices</div>
+        <span class="tool-tag tag-popular">Popular</span>
       </a>
-      <div class="tool-card coming-soon" data-name="quotation generator estimate">
-        <div class="tool-icon">📝</div>
-        <h3>Quotation Generator</h3>
-        <p>Create business quotations</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="quotation generator estimate">
+        <div class="tool-emoji">📝</div>
+        <div class="tool-name">Quotation Generator</div>
+        <div class="tool-desc">Create business quotations</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="purchase order generator">
-        <div class="tool-icon">🛒</div>
-        <h3>Purchase Order</h3>
-        <p>Generate purchase orders</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="purchase order generator">
+        <div class="tool-emoji">🛒</div>
+        <div class="tool-name">Purchase Order</div>
+        <div class="tool-desc">Generate purchase orders</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="receipt generator">
-        <div class="tool-icon">🧾</div>
-        <h3>Receipt Generator</h3>
-        <p>Create payment receipts</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="receipt generator payment">
+        <div class="tool-emoji">🧾</div>
+        <div class="tool-name">Receipt Generator</div>
+        <div class="tool-desc">Create payment receipts</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="profit loss calculator business">
-        <div class="tool-icon">📊</div>
-        <h3>Profit & Loss Calculator</h3>
-        <p>Business P&L calculator</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="profit loss calculator business">
+        <div class="tool-emoji">📊</div>
+        <div class="tool-name">Profit & Loss</div>
+        <div class="tool-desc">Business P&L calculator</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
     </div>
   </div>
 
   <!-- FINANCE -->
-  <div class="category-block" id="finance">
-    <div class="category-header">
-      <div class="category-icon">💱</div>
-      <div class="category-title">Finance Calculators</div>
-      <div class="category-count">4 tools</div>
+  <div class="cat-section" id="sec-finance" data-cat="finance">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">💱</div>
+      <div class="cat-info">
+        <h2>Finance Calculators</h2>
+        <p>Currency, goals, interest</p>
+      </div>
+      <div class="cat-badge">3 tools</div>
     </div>
     <div class="tools-grid">
       <a href="currency-converter.html" class="tool-card" data-name="currency converter usd inr live rates">
-        <div class="tool-icon">💱</div>
-        <h3>Currency Converter</h3>
-        <p>Live exchange rates</p>
-        <span class="tool-badge badge-popular">Popular</span>
+        <div class="tool-emoji">💱</div>
+        <div class="tool-name">Currency Converter</div>
+        <div class="tool-desc">Live exchange rates</div>
+        <span class="tool-tag tag-popular">Popular</span>
       </a>
-      <div class="tool-card coming-soon" data-name="compound interest calculator">
-        <div class="tool-icon">📈</div>
-        <h3>Compound Interest</h3>
-        <p>Compound interest calculator</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="financial goal planner calculator">
+        <div class="tool-emoji">🎯</div>
+        <div class="tool-name">Financial Goal Planner</div>
+        <div class="tool-desc">Plan your financial goals</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="simple interest calculator">
-        <div class="tool-icon">📉</div>
-        <h3>Simple Interest</h3>
-        <p>Simple interest calculator</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
-      </div>
-      <div class="tool-card coming-soon" data-name="financial goal calculator">
-        <div class="tool-icon">🎯</div>
-        <h3>Financial Goal Planner</h3>
-        <p>Plan your financial goals</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="inflation calculator future value money">
+        <div class="tool-emoji">📊</div>
+        <div class="tool-name">Inflation Calculator</div>
+        <div class="tool-desc">Future value of money</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
     </div>
   </div>
 
   <!-- DAILY UTILITY -->
-  <div class="category-block" id="utility">
-    <div class="category-header">
-      <div class="category-icon">🔧</div>
-      <div class="category-title">Daily Utility Tools</div>
-      <div class="category-count">6 tools</div>
+  <div class="cat-section" id="sec-utility" data-cat="utility">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">🔧</div>
+      <div class="cat-info">
+        <h2>Daily Utility Tools</h2>
+        <p>Unit, age, percentage, discount</p>
+      </div>
+      <div class="cat-badge">6 tools</div>
     </div>
     <div class="tools-grid">
       <a href="unit-converter.html" class="tool-card" data-name="unit converter length weight temperature">
-        <div class="tool-icon">📐</div>
-        <h3>Unit Converter</h3>
-        <p>Length, weight & more</p>
+        <div class="tool-emoji">📐</div>
+        <div class="tool-name">Unit Converter</div>
+        <div class="tool-desc">Length, weight & more</div>
+        <span class="tool-tag tag-popular">Popular</span>
       </a>
-      <div class="tool-card coming-soon" data-name="age calculator date of birth">
-        <div class="tool-icon">🎂</div>
-        <h3>Age Calculator</h3>
-        <p>Calculate exact age</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="age calculator date of birth">
+        <div class="tool-emoji">🎂</div>
+        <div class="tool-name">Age Calculator</div>
+        <div class="tool-desc">Calculate exact age</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="percentage calculator">
-        <div class="tool-icon">%</div>
-        <h3>Percentage Calculator</h3>
-        <p>Calculate percentages fast</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="percentage calculator">
+        <div class="tool-emoji">%</div>
+        <div class="tool-name">Percentage Calculator</div>
+        <div class="tool-desc">Calculate percentages fast</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="discount calculator sale price">
-        <div class="tool-icon">🏷️</div>
-        <h3>Discount Calculator</h3>
-        <p>Calculate sale discounts</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="discount calculator sale price">
+        <div class="tool-emoji">🏷️</div>
+        <div class="tool-name">Discount Calculator</div>
+        <div class="tool-desc">Calculate sale discounts</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="tip calculator restaurant">
-        <div class="tool-icon">🍽️</div>
-        <h3>Tip Calculator</h3>
-        <p>Split bills & tips</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="tip calculator restaurant bill">
+        <div class="tool-emoji">🍽️</div>
+        <div class="tool-name">Tip Calculator</div>
+        <div class="tool-desc">Split bills & tips</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="time zone converter">
-        <div class="tool-icon">🌍</div>
-        <h3>Time Zone Converter</h3>
-        <p>Convert time zones</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="time zone converter world clock">
+        <div class="tool-emoji">🌍</div>
+        <div class="tool-name">Time Zone Converter</div>
+        <div class="tool-desc">Convert time zones</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
     </div>
   </div>
 
   <!-- HEALTH -->
-  <div class="category-block" id="health">
-    <div class="category-header">
-      <div class="category-icon">❤️</div>
-      <div class="category-title">Health Calculators</div>
-      <div class="category-count">4 tools</div>
+  <div class="cat-section" id="sec-health" data-cat="health">
+    <div class="cat-header">
+      <div class="cat-icon-wrap">❤️</div>
+      <div class="cat-info">
+        <h2>Health Calculators</h2>
+        <p>BMI, calories, water intake</p>
+      </div>
+      <div class="cat-badge">4 tools</div>
     </div>
     <div class="tools-grid">
-      <div class="tool-card coming-soon" data-name="bmi calculator body mass index">
-        <div class="tool-icon">⚖️</div>
-        <h3>BMI Calculator</h3>
-        <p>Body mass index calculator</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="bmi calculator body mass index">
+        <div class="tool-emoji">⚖️</div>
+        <div class="tool-name">BMI Calculator</div>
+        <div class="tool-desc">Body mass index calculator</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="bmr calculator metabolism">
-        <div class="tool-icon">🔥</div>
-        <h3>BMR Calculator</h3>
-        <p>Basal metabolic rate</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="bmr calculator basal metabolic rate">
+        <div class="tool-emoji">🔥</div>
+        <div class="tool-name">BMR Calculator</div>
+        <div class="tool-desc">Basal metabolic rate</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="calorie calculator diet">
-        <div class="tool-icon">🥗</div>
-        <h3>Calorie Calculator</h3>
-        <p>Daily calorie needs</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="calorie calculator diet food">
+        <div class="tool-emoji">🥗</div>
+        <div class="tool-name">Calorie Calculator</div>
+        <div class="tool-desc">Daily calorie needs</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
-      <div class="tool-card coming-soon" data-name="water intake calculator hydration">
-        <div class="tool-icon">💧</div>
-        <h3>Water Intake Calculator</h3>
-        <p>Daily water requirement</p>
-        <span class="tool-badge badge-soon">Coming Soon</span>
+      <div class="tool-card soon" data-name="water intake calculator hydration daily">
+        <div class="tool-emoji">💧</div>
+        <div class="tool-name">Water Intake</div>
+        <div class="tool-desc">Daily water requirement</div>
+        <span class="tool-tag tag-soon">Coming Soon</span>
       </div>
     </div>
   </div>
 
+</div><!-- end content -->
+
+<!-- WHY SECTION -->
+<div class="why-section">
+  <div class="why-label">WHY PRIME TOOLS</div>
+  <h2>Built to help you make<br>better decisions</h2>
+  <p>No fluff, no paywalls, no required accounts. Just accurate tools that respect your time.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">✅</div>
+      <h3>Always Free</h3>
+      <p>Every calculator is completely free to use, forever. No premium tiers, no hidden costs.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">⚡</div>
+      <h3>Instant Results</h3>
+      <p>Calculations happen in real time in your browser. No waiting, no server round-trips.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🔒</div>
+      <h3>No Account Needed</h3>
+      <p>Just open a tool and start calculating. We never ask for your email or personal information.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📱</div>
+      <h3>Mobile Friendly</h3>
+      <p>Every tool works beautifully on phones and tablets. Do the math wherever you are.</p>
+    </div>
+  </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-links">
     <a href="privacy-policy.html">Privacy Policy</a>
@@ -538,28 +662,57 @@
     <a href="disclaimer.html">Disclaimer</a>
     <a href="sitemap.xml">Sitemap</a>
   </div>
-  <p>© 2026 Prime Tools — primetoolsapp.com | Free financial tools for India</p>
-  <p style="margin-top:8px;font-size:12px;">All calculations are for informational purposes only. Not financial advice.</p>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free financial calculators for India</p>
+  <p>All calculations are for informational purposes only. Not financial advice.</p>
 </footer>
 
 <script>
-  function scrollTo(id) {
+  // Category filter
+  function filterCat(cat, btn) {
     document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-    event.target.classList.add('active');
-    if (id === 'all') { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    btn.classList.add('active');
+    document.querySelectorAll('.cat-section').forEach(s => {
+      if (cat === 'all') s.classList.remove('hidden');
+      else s.classList.toggle('hidden', s.dataset.cat !== cat);
+    });
+    if (cat !== 'all') {
+      const el = document.getElementById('sec-' + cat);
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
 
+  // Search
   function searchTools() {
-    const q = document.getElementById('searchInput').value.toLowerCase();
-    const cards = document.querySelectorAll('.tool-card');
-    cards.forEach(card => {
-      const name = (card.getAttribute('data-name') || '').toLowerCase();
-      const text = card.textContent.toLowerCase();
-      card.classList.toggle('hidden', q.length > 0 && !name.includes(q) && !text.includes(q));
+    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+    if (!q) {
+      document.querySelectorAll('.tool-card').forEach(c => c.classList.remove('hidden'));
+      document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('hidden'));
+      return;
+    }
+    document.querySelectorAll('.cat-section').forEach(sec => {
+      let anyVisible = false;
+      sec.querySelectorAll('.tool-card').forEach(card => {
+        const name = (card.dataset.name || '').toLowerCase();
+        const text = card.textContent.toLowerCase();
+        const match = name.includes(q) || text.includes(q);
+        card.classList.toggle('hidden', !match);
+        if (match) anyVisible = true;
+      });
+      sec.classList.toggle('hidden', !anyVisible);
     });
   }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById('sec-' + id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
 </script>
 
 </body>
