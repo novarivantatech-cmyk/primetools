@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discount Calculator - Calculate Sale Price Free - Prime Tools</title>
+  <meta name="description" content="Free Discount Calculator India - Calculate discounted price, savings amount, and final price after discount. Perfect for shopping, sales, and business pricing.">
+  <meta name="keywords" content="discount calculator India, sale price calculator, percentage discount calculator, how much is discount, calculate final price after discount">
+  <link rel="canonical" href="https://primetoolsapp.com/discount-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; font-weight: 600; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+    .calculator-box { max-width: 640px; margin: 36px auto; padding: 0 16px 60px; }
+    .mode-toggle { display: flex; background: #f0f4f8; border-radius: 8px; padding: 4px; margin-bottom: 24px; gap: 4px; }
+    .mode-btn { flex: 1; padding: 12px; border: none; border-radius: 6px; background: transparent; font-size: 13px; font-weight: 600; cursor: pointer; color: #888; transition: all 0.2s; }
+    .mode-btn.active { background: white; color: #1a1a2e; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .card { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; margin-bottom: 20px; display: none; }
+    .card.active { display: block; }
+    .field { margin-bottom: 18px; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
+    .field input { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; font-weight: 700; outline: none; transition: border-color 0.2s; }
+    .field input:focus { border-color: #00d4aa; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-btn { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+    .calc-btn:hover { background: #00b894; }
+    .result-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 20px; display: none; }
+    .result-cards.show { display: grid; }
+    .res-card { background: #f8fffe; border: 2px solid #e0f7f3; border-radius: 12px; padding: 16px; text-align: center; }
+    .res-card.main { border-color: #00d4aa; background: #e8fdf8; }
+    .res-card.save { border-color: #ff6b6b; background: #fff5f5; }
+    .res-card .rl { font-size: 11px; color: #888; margin-bottom: 6px; text-transform: uppercase; }
+    .res-card .rv { font-size: 20px; font-weight: 800; color: #1a1a2e; }
+    .res-card.main .rv { color: #00d4aa; font-size: 24px; }
+    .res-card.save .rv { color: #ff6b6b; }
+    .discount-badge { background: #ff6b6b; color: white; border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 700; display: inline-block; margin-top: 12px; }
+
+    /* Multi discount */
+    .multi-row { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .multi-row input { flex: 1; padding: 10px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; }
+    .multi-row input:focus { border-color: #00d4aa; }
+    .add-btn { padding: 10px 16px; background: #e8fdf8; border: 2px solid #00d4aa; color: #00b894; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 14px; }
+
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NMS3GFQ1M0');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>Discount Calculator</h2>
+  <p>Calculate sale price, savings and discount percentage instantly</p>
+</div>
+<div class="calculator-box">
+
+  <div class="mode-toggle">
+    <button class="mode-btn active" onclick="setMode(0,this)">Simple Discount</button>
+    <button class="mode-btn" onclick="setMode(1,this)">Find Discount %</button>
+    <button class="mode-btn" onclick="setMode(2,this)">Multiple Discounts</button>
+  </div>
+
+  <!-- Mode 0: Simple -->
+  <div class="card active" id="mode0">
+    <div class="two-col">
+      <div class="field">
+        <label>Original Price (₹)</label>
+        <input type="number" id="m0price" placeholder="e.g. 2000" oninput="calcMode0()">
+      </div>
+      <div class="field">
+        <label>Discount (%)</label>
+        <input type="number" id="m0disc" placeholder="e.g. 25" oninput="calcMode0()">
+      </div>
+    </div>
+    <div class="result-cards" id="r0cards">
+      <div class="res-card save">
+        <div class="rl">You Save</div>
+        <div class="rv" id="m0save">₹0</div>
+      </div>
+      <div class="res-card main">
+        <div class="rl">Final Price</div>
+        <div class="rv" id="m0final">₹0</div>
+      </div>
+      <div class="res-card">
+        <div class="rl">Discount Amount</div>
+        <div class="rv" id="m0amount">₹0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mode 1: Find % -->
+  <div class="card" id="mode1">
+    <div class="two-col">
+      <div class="field">
+        <label>Original Price (₹)</label>
+        <input type="number" id="m1orig" placeholder="e.g. 2000" oninput="calcMode1()">
+      </div>
+      <div class="field">
+        <label>Sale Price (₹)</label>
+        <input type="number" id="m1sale" placeholder="e.g. 1500" oninput="calcMode1()">
+      </div>
+    </div>
+    <div class="result-cards" id="r1cards">
+      <div class="res-card main">
+        <div class="rl">Discount %</div>
+        <div class="rv" id="m1pct">0%</div>
+      </div>
+      <div class="res-card save">
+        <div class="rl">Amount Saved</div>
+        <div class="rv" id="m1saved">₹0</div>
+      </div>
+      <div class="res-card">
+        <div class="rl">You Pay</div>
+        <div class="rv" id="m1pay">₹0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mode 2: Multiple -->
+  <div class="card" id="mode2">
+    <div class="field">
+      <label>Original Price (₹)</label>
+      <input type="number" id="m2price" placeholder="e.g. 5000" oninput="calcMode2()">
+    </div>
+    <div class="field">
+      <label>Discounts (apply one after another)</label>
+      <div id="discountRows">
+        <div class="multi-row">
+          <input type="number" placeholder="Discount 1 %" oninput="calcMode2()">
+          <span style="font-size:18px;color:#aaa;">%</span>
+        </div>
+        <div class="multi-row">
+          <input type="number" placeholder="Discount 2 %" oninput="calcMode2()">
+          <span style="font-size:18px;color:#aaa;">%</span>
+        </div>
+      </div>
+      <button class="add-btn" onclick="addDiscountRow()">+ Add another discount</button>
+    </div>
+    <div class="result-cards" id="r2cards">
+      <div class="res-card main">
+        <div class="rl">Final Price</div>
+        <div class="rv" id="m2final">₹0</div>
+      </div>
+      <div class="res-card save">
+        <div class="rl">Total Saved</div>
+        <div class="rv" id="m2saved">₹0</div>
+      </div>
+      <div class="res-card">
+        <div class="rl">Effective Discount</div>
+        <div class="rv" id="m2eff">0%</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+<script>
+  function fmt(n) { return isNaN(n) ? '0' : Math.round(n).toLocaleString('en-IN'); }
+  function fmtD(n) { return isNaN(n) ? '0.00' : n.toFixed(2); }
+
+  function setMode(idx, btn) {
+    document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('mode' + idx).classList.add('active');
+  }
+
+  function calcMode0() {
+    const price = parseFloat(document.getElementById('m0price').value) || 0;
+    const disc = parseFloat(document.getElementById('m0disc').value) || 0;
+    if (!price || !disc) return;
+    const saved = price * disc / 100;
+    const final = price - saved;
+    document.getElementById('m0save').textContent = '₹' + fmt(saved);
+    document.getElementById('m0final').textContent = '₹' + fmt(final);
+    document.getElementById('m0amount').textContent = '₹' + fmt(saved);
+    document.getElementById('r0cards').classList.add('show');
+  }
+
+  function calcMode1() {
+    const orig = parseFloat(document.getElementById('m1orig').value) || 0;
+    const sale = parseFloat(document.getElementById('m1sale').value) || 0;
+    if (!orig || !sale) return;
+    const saved = orig - sale;
+    const pct = (saved / orig) * 100;
+    document.getElementById('m1pct').textContent = fmtD(pct) + '%';
+    document.getElementById('m1saved').textContent = '₹' + fmt(saved);
+    document.getElementById('m1pay').textContent = '₹' + fmt(sale);
+    document.getElementById('r1cards').classList.add('show');
+  }
+
+  function calcMode2() {
+    const price = parseFloat(document.getElementById('m2price').value) || 0;
+    if (!price) return;
+    const inputs = document.querySelectorAll('#discountRows input');
+    let current = price;
+    inputs.forEach(inp => {
+      const d = parseFloat(inp.value) || 0;
+      if (d > 0) current = current * (1 - d / 100);
+    });
+    const saved = price - current;
+    const eff = (saved / price) * 100;
+    document.getElementById('m2final').textContent = '₹' + fmt(current);
+    document.getElementById('m2saved').textContent = '₹' + fmt(saved);
+    document.getElementById('m2eff').textContent = fmtD(eff) + '%';
+    document.getElementById('r2cards').classList.add('show');
+  }
+
+  function addDiscountRow() {
+    const row = document.createElement('div');
+    row.className = 'multi-row';
+    const count = document.querySelectorAll('#discountRows input').length + 1;
+    row.innerHTML = `<input type="number" placeholder="Discount ${count} %" oninput="calcMode2()"><span style="font-size:18px;color:#aaa;">%</span>`;
+    document.getElementById('discountRows').appendChild(row);
+  }
+</script>
+</body>
+</html>

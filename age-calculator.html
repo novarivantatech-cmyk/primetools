@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator - Calculate Exact Age Free - Prime Tools</title>
+  <meta name="description" content="Free Age Calculator India - Calculate your exact age in years, months, days, hours and minutes. Find days until next birthday. Used for passport, Aadhaar, school admission.">
+  <meta name="keywords" content="age calculator India, calculate age from date of birth, exact age calculator, age in years months days, birthday calculator">
+  <link rel="canonical" href="https://primetoolsapp.com/age-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; font-weight: 600; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+    .calculator-box { max-width: 620px; margin: 36px auto; padding: 0 16px 60px; }
+    .card { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; margin-bottom: 20px; }
+    .field { margin-bottom: 20px; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
+    .field input { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; outline: none; transition: border-color 0.2s; }
+    .field input:focus { border-color: #00d4aa; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-btn { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .calc-btn:hover { background: #00b894; }
+    .result-section { display: none; }
+    .result-section.show { display: block; }
+    .age-banner { background: #1a1a2e; color: white; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 20px; }
+    .age-banner .main-age { font-size: 42px; font-weight: 800; color: #00d4aa; }
+    .age-banner .sub-age { font-size: 14px; color: #aaa; margin-top: 8px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+    .stat-card { background: #f8fffe; border: 1.5px solid #e0f7f3; border-radius: 12px; padding: 16px; text-align: center; }
+    .stat-card .sl { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .stat-card .sv { font-size: 22px; font-weight: 800; color: #1a1a2e; }
+    .stat-card .su { font-size: 12px; color: #aaa; }
+    .birthday-box { background: #fffbea; border: 2px solid #ffd54f; border-radius: 12px; padding: 20px; text-align: center; }
+    .birthday-box .bl { font-size: 13px; color: #888; margin-bottom: 6px; }
+    .birthday-box .bv { font-size: 20px; font-weight: 700; color: #e65c00; }
+    .birthday-box .bd { font-size: 13px; color: #888; margin-top: 4px; }
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NMS3GFQ1M0');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>Age Calculator</h2>
+  <p>Calculate your exact age in years, months, days, hours and minutes</p>
+</div>
+<div class="calculator-box">
+  <div class="card">
+    <div class="field">
+      <label>Date of Birth</label>
+      <input type="date" id="dob" max="">
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Age on Date (optional)</label>
+        <input type="date" id="targetDate">
+      </div>
+      <div class="field" style="display:flex;align-items:flex-end;">
+        <button class="calc-btn" onclick="calculate()">Calculate Age</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-section" id="resultSection">
+    <div class="age-banner">
+      <div class="main-age" id="mainAge"></div>
+      <div class="sub-age" id="subAge"></div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="sl">Total Months</div>
+        <div class="sv" id="totalMonths">0</div>
+        <div class="su">months old</div>
+      </div>
+      <div class="stat-card">
+        <div class="sl">Total Weeks</div>
+        <div class="sv" id="totalWeeks">0</div>
+        <div class="su">weeks old</div>
+      </div>
+      <div class="stat-card">
+        <div class="sl">Total Days</div>
+        <div class="sv" id="totalDays">0</div>
+        <div class="su">days lived</div>
+      </div>
+      <div class="stat-card">
+        <div class="sl">Total Hours</div>
+        <div class="sv" id="totalHours">0</div>
+        <div class="su">hours approx</div>
+      </div>
+    </div>
+    <div class="birthday-box">
+      <div class="bl">🎂 Next Birthday</div>
+      <div class="bv" id="nextBirthday"></div>
+      <div class="bd" id="birthdayCountdown"></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+<script>
+  const today = new Date();
+  document.getElementById('dob').max = today.toISOString().split('T')[0];
+  document.getElementById('targetDate').value = today.toISOString().split('T')[0];
+  document.getElementById('targetDate').max = today.toISOString().split('T')[0];
+
+  function fmt(n) { return Math.round(n).toLocaleString('en-IN'); }
+
+  function calculate() {
+    const dob = new Date(document.getElementById('dob').value);
+    const target = new Date(document.getElementById('targetDate').value || today);
+    if (!document.getElementById('dob').value) { alert('Please enter your date of birth'); return; }
+
+    let years = target.getFullYear() - dob.getFullYear();
+    let months = target.getMonth() - dob.getMonth();
+    let days = target.getDate() - dob.getDate();
+
+    if (days < 0) {
+      months--;
+      const prevMonth = new Date(target.getFullYear(), target.getMonth(), 0);
+      days += prevMonth.getDate();
+    }
+    if (months < 0) { years--; months += 12; }
+
+    const diffMs = target - dob;
+    const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const totalWeeks = Math.floor(totalDays / 7);
+    const totalMonths = years * 12 + months;
+    const totalHours = totalDays * 24;
+
+    document.getElementById('mainAge').textContent = `${years} Years`;
+    document.getElementById('subAge').textContent = `${months} months and ${days} days`;
+    document.getElementById('totalMonths').textContent = fmt(totalMonths);
+    document.getElementById('totalWeeks').textContent = fmt(totalWeeks);
+    document.getElementById('totalDays').textContent = fmt(totalDays);
+    document.getElementById('totalHours').textContent = fmt(totalHours);
+
+    // Next birthday
+    let nextBday = new Date(target.getFullYear(), dob.getMonth(), dob.getDate());
+    if (nextBday <= target) nextBday.setFullYear(target.getFullYear() + 1);
+    const daysUntil = Math.ceil((nextBday - target) / (1000 * 60 * 60 * 24));
+    const months_arr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    document.getElementById('nextBirthday').textContent =
+      `${nextBday.getDate()} ${months_arr[nextBday.getMonth()]} ${nextBday.getFullYear()}`;
+    document.getElementById('birthdayCountdown').textContent =
+      daysUntil === 0 ? '🎉 Today is your birthday!' : `${daysUntil} days to go!`;
+
+    document.getElementById('resultSection').classList.add('show');
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Percentage Calculator - Calculate % Instantly Free - Prime Tools</title>
+  <meta name="description" content="Free Percentage Calculator India - Calculate percentage instantly. Find what % of a number is, percentage increase/decrease, and more. Used by students, shopkeepers and businesses.">
+  <meta name="keywords" content="percentage calculator, percent calculator India, calculate percentage, percentage increase decrease, what percent of, percentage formula">
+  <link rel="canonical" href="https://primetoolsapp.com/percentage-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; font-weight: 600; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box { max-width: 700px; margin: 36px auto; padding: 0 16px 60px; }
+
+    /* Type selector tabs */
+    .type-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 24px; }
+    .type-tab {
+      padding: 12px 8px; border: 2px solid #e0e0e0; border-radius: 10px;
+      background: white; font-size: 12px; font-weight: 600; cursor: pointer;
+      color: #888; transition: all 0.2s; text-align: center; line-height: 1.4;
+    }
+    .type-tab:hover { border-color: #00d4aa; color: #00d4aa; }
+    .type-tab.active { border-color: #00d4aa; background: #e8fdf8; color: #00b894; }
+    .type-tab .tab-icon { font-size: 20px; display: block; margin-bottom: 4px; }
+
+    .calc-card { background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; display: none; }
+    .calc-card.active { display: block; }
+
+    .calc-title { font-size: 16px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+    .calc-desc { font-size: 13px; color: #888; margin-bottom: 20px; }
+
+    .input-row { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .input-row label { font-size: 14px; font-weight: 600; color: #555; white-space: nowrap; }
+    .input-row input {
+      flex: 1; min-width: 100px; padding: 12px 14px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 16px; font-weight: 700; outline: none;
+      transition: border-color 0.2s; color: #1a1a2e;
+    }
+    .input-row input:focus { border-color: #00d4aa; }
+    .input-row span { font-size: 16px; font-weight: 700; color: #888; }
+
+    .calc-btn {
+      width: 100%; padding: 14px; background: #00d4aa;
+      color: white; border: none; border-radius: 8px;
+      font-size: 16px; font-weight: 600; cursor: pointer;
+      transition: background 0.2s; margin: 16px 0;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .result-banner {
+      background: #1a1a2e; color: white;
+      border-radius: 12px; padding: 20px 24px;
+      display: none; text-align: center;
+    }
+    .result-banner.show { display: block; }
+    .result-banner .r-label { font-size: 13px; color: #aaa; margin-bottom: 8px; }
+    .result-banner .r-value { font-size: 36px; font-weight: 800; color: #00d4aa; }
+    .result-banner .r-formula { font-size: 12px; color: #666; margin-top: 8px; }
+
+    /* Quick reference table */
+    .quick-ref { background: white; border-radius: 16px; padding: 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; margin-top: 24px; }
+    .quick-ref h3 { font-size: 15px; font-weight: 700; margin-bottom: 16px; color: #1a1a2e; }
+    .ref-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    @media (max-width: 500px) { .ref-grid { grid-template-columns: repeat(2, 1fr); } }
+    .ref-card {
+      background: #f8fffe; border: 1px solid #e0f7f3;
+      border-radius: 8px; padding: 12px; text-align: center; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ref-card:hover { border-color: #00d4aa; background: #e8fdf8; }
+    .ref-card .rc-pct { font-size: 18px; font-weight: 800; color: #00d4aa; }
+    .ref-card .rc-frac { font-size: 12px; color: #888; margin-top: 2px; }
+
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NMS3GFQ1M0');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>Percentage Calculator</h2>
+  <p>Calculate percentages instantly — 6 types of calculations in one place</p>
+</div>
+
+<div class="calculator-box">
+
+  <!-- Type tabs -->
+  <div class="type-tabs">
+    <button class="type-tab active" onclick="showTab(0, this)">
+      <span class="tab-icon">%</span>What is X% of Y?
+    </button>
+    <button class="type-tab" onclick="showTab(1, this)">
+      <span class="tab-icon">🔢</span>X is what % of Y?
+    </button>
+    <button class="type-tab" onclick="showTab(2, this)">
+      <span class="tab-icon">📈</span>% Increase / Decrease
+    </button>
+    <button class="type-tab" onclick="showTab(3, this)">
+      <span class="tab-icon">🔙</span>Original from %
+    </button>
+    <button class="type-tab" onclick="showTab(4, this)">
+      <span class="tab-icon">➕</span>Add % to number
+    </button>
+    <button class="type-tab" onclick="showTab(5, this)">
+      <span class="tab-icon">➖</span>Subtract % from number
+    </button>
+  </div>
+
+  <!-- Calc 0: What is X% of Y -->
+  <div class="calc-card active" id="calc0">
+    <div class="calc-title">What is X% of Y?</div>
+    <div class="calc-desc">Example: What is 18% of ₹5,000? → ₹900</div>
+    <div class="input-row">
+      <label>What is</label>
+      <input type="number" id="c0x" placeholder="18" oninput="calc0()">
+      <span>% of</span>
+      <input type="number" id="c0y" placeholder="5000" oninput="calc0()">
+      <span>?</span>
+    </div>
+    <div class="result-banner" id="r0">
+      <div class="r-label" id="r0label"></div>
+      <div class="r-value" id="r0val"></div>
+      <div class="r-formula" id="r0formula"></div>
+    </div>
+  </div>
+
+  <!-- Calc 1: X is what % of Y -->
+  <div class="calc-card" id="calc1">
+    <div class="calc-title">X is what % of Y?</div>
+    <div class="calc-desc">Example: 450 is what % of 1800? → 25%</div>
+    <div class="input-row">
+      <input type="number" id="c1x" placeholder="450" oninput="calc1()">
+      <span>is what % of</span>
+      <input type="number" id="c1y" placeholder="1800" oninput="calc1()">
+      <span>?</span>
+    </div>
+    <div class="result-banner" id="r1">
+      <div class="r-label" id="r1label"></div>
+      <div class="r-value" id="r1val"></div>
+      <div class="r-formula" id="r1formula"></div>
+    </div>
+  </div>
+
+  <!-- Calc 2: % change -->
+  <div class="calc-card" id="calc2">
+    <div class="calc-title">Percentage Increase / Decrease</div>
+    <div class="calc-desc">Example: Price changed from ₹800 to ₹1,000 — what % change?</div>
+    <div class="input-row">
+      <label>From</label>
+      <input type="number" id="c2from" placeholder="800" oninput="calc2()">
+      <label>To</label>
+      <input type="number" id="c2to" placeholder="1000" oninput="calc2()">
+    </div>
+    <div class="result-banner" id="r2">
+      <div class="r-label" id="r2label"></div>
+      <div class="r-value" id="r2val"></div>
+      <div class="r-formula" id="r2formula"></div>
+    </div>
+  </div>
+
+  <!-- Calc 3: Original value -->
+  <div class="calc-card" id="calc3">
+    <div class="calc-title">Find Original Value before % change</div>
+    <div class="calc-desc">Example: After 20% increase price is ₹1,200 — what was original?</div>
+    <div class="input-row">
+      <label>Final value</label>
+      <input type="number" id="c3val" placeholder="1200" oninput="calc3()">
+      <label>after</label>
+      <input type="number" id="c3pct" placeholder="20" oninput="calc3()">
+      <span>%</span>
+      <select id="c3type" onchange="calc3()" style="padding:10px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;outline:none;">
+        <option value="increase">increase</option>
+        <option value="decrease">decrease</option>
+      </select>
+    </div>
+    <div class="result-banner" id="r3">
+      <div class="r-label" id="r3label"></div>
+      <div class="r-value" id="r3val"></div>
+      <div class="r-formula" id="r3formula"></div>
+    </div>
+  </div>
+
+  <!-- Calc 4: Add % -->
+  <div class="calc-card" id="calc4">
+    <div class="calc-title">Add % to a number</div>
+    <div class="calc-desc">Example: ₹10,000 + 18% GST = ₹11,800</div>
+    <div class="input-row">
+      <input type="number" id="c4val" placeholder="10000" oninput="calc4()">
+      <span>+</span>
+      <input type="number" id="c4pct" placeholder="18" oninput="calc4()">
+      <span>%</span>
+    </div>
+    <div class="result-banner" id="r4">
+      <div class="r-label" id="r4label"></div>
+      <div class="r-value" id="r4val"></div>
+      <div class="r-formula" id="r4formula"></div>
+    </div>
+  </div>
+
+  <!-- Calc 5: Subtract % -->
+  <div class="calc-card" id="calc5">
+    <div class="calc-title">Subtract % from a number</div>
+    <div class="calc-desc">Example: ₹2,000 - 25% discount = ₹1,500</div>
+    <div class="input-row">
+      <input type="number" id="c5val" placeholder="2000" oninput="calc5()">
+      <span>−</span>
+      <input type="number" id="c5pct" placeholder="25" oninput="calc5()">
+      <span>%</span>
+    </div>
+    <div class="result-banner" id="r5">
+      <div class="r-label" id="r5label"></div>
+      <div class="r-value" id="r5val"></div>
+      <div class="r-formula" id="r5formula"></div>
+    </div>
+  </div>
+
+  <!-- Quick reference -->
+  <div class="quick-ref">
+    <h3>Quick Percentage Reference</h3>
+    <div class="ref-grid">
+      <div class="ref-card"><div class="rc-pct">10%</div><div class="rc-frac">= 1/10</div></div>
+      <div class="ref-card"><div class="rc-pct">20%</div><div class="rc-frac">= 1/5</div></div>
+      <div class="ref-card"><div class="rc-pct">25%</div><div class="rc-frac">= 1/4</div></div>
+      <div class="ref-card"><div class="rc-pct">33%</div><div class="rc-frac">≈ 1/3</div></div>
+      <div class="ref-card"><div class="rc-pct">50%</div><div class="rc-frac">= 1/2</div></div>
+      <div class="ref-card"><div class="rc-pct">75%</div><div class="rc-frac">= 3/4</div></div>
+      <div class="ref-card"><div class="rc-pct">5%</div><div class="rc-frac">= 1/20</div></div>
+      <div class="ref-card"><div class="rc-pct">12.5%</div><div class="rc-frac">= 1/8</div></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  function fmt(n) {
+    if (n === undefined || n === null || isNaN(n)) return '—';
+    if (Number.isInteger(n)) return n.toLocaleString('en-IN');
+    return parseFloat(n.toFixed(4)).toLocaleString('en-IN');
+  }
+
+  function showResult(id, label, value, formula) {
+    const el = document.getElementById('r' + id);
+    el.classList.add('show');
+    document.getElementById('r' + id + 'label').textContent = label;
+    document.getElementById('r' + id + 'val').textContent = value;
+    document.getElementById('r' + id + 'formula').textContent = formula;
+  }
+
+  function showTab(idx, btn) {
+    document.querySelectorAll('.type-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.calc-card').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('calc' + idx).classList.add('active');
+  }
+
+  function calc0() {
+    const x = parseFloat(document.getElementById('c0x').value);
+    const y = parseFloat(document.getElementById('c0y').value);
+    if (isNaN(x) || isNaN(y)) return;
+    const result = (x / 100) * y;
+    showResult(0, `${x}% of ${fmt(y)} =`, fmt(result), `Formula: ${x} ÷ 100 × ${fmt(y)} = ${fmt(result)}`);
+  }
+
+  function calc1() {
+    const x = parseFloat(document.getElementById('c1x').value);
+    const y = parseFloat(document.getElementById('c1y').value);
+    if (isNaN(x) || isNaN(y) || y === 0) return;
+    const result = (x / y) * 100;
+    showResult(1, `${fmt(x)} is what % of ${fmt(y)}?`, fmt(result) + '%', `Formula: ${fmt(x)} ÷ ${fmt(y)} × 100 = ${fmt(result)}%`);
+  }
+
+  function calc2() {
+    const from = parseFloat(document.getElementById('c2from').value);
+    const to = parseFloat(document.getElementById('c2to').value);
+    if (isNaN(from) || isNaN(to) || from === 0) return;
+    const change = ((to - from) / from) * 100;
+    const type = change >= 0 ? 'Increase' : 'Decrease';
+    showResult(2, `Percentage ${type}`, Math.abs(change).toFixed(2) + '%',
+      `Formula: (${fmt(to)} − ${fmt(from)}) ÷ ${fmt(from)} × 100 = ${change.toFixed(2)}%`);
+  }
+
+  function calc3() {
+    const val = parseFloat(document.getElementById('c3val').value);
+    const pct = parseFloat(document.getElementById('c3pct').value);
+    const type = document.getElementById('c3type').value;
+    if (isNaN(val) || isNaN(pct)) return;
+    const original = type === 'increase' ? val / (1 + pct / 100) : val / (1 - pct / 100);
+    showResult(3, `Original value before ${pct}% ${type}`, '₹' + fmt(original),
+      `Formula: ${fmt(val)} ÷ ${type === 'increase' ? (1 + pct/100) : (1 - pct/100)} = ₹${fmt(original)}`);
+  }
+
+  function calc4() {
+    const val = parseFloat(document.getElementById('c4val').value);
+    const pct = parseFloat(document.getElementById('c4pct').value);
+    if (isNaN(val) || isNaN(pct)) return;
+    const added = (val * pct) / 100;
+    const result = val + added;
+    showResult(4, `${fmt(val)} + ${pct}% =`, fmt(result),
+      `${pct}% of ${fmt(val)} = ${fmt(added)} → Total = ${fmt(result)}`);
+  }
+
+  function calc5() {
+    const val = parseFloat(document.getElementById('c5val').value);
+    const pct = parseFloat(document.getElementById('c5pct').value);
+    if (isNaN(val) || isNaN(pct)) return;
+    const subtracted = (val * pct) / 100;
+    const result = val - subtracted;
+    showResult(5, `${fmt(val)} − ${pct}% =`, fmt(result),
+      `${pct}% of ${fmt(val)} = ${fmt(subtracted)} → After discount = ${fmt(result)}`);
+  }
+</script>
+</body>
+</html>
