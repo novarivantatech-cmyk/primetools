@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator India - Calculate Body Mass Index Free - Prime Tools</title>
+  <meta name="description" content="Free BMI Calculator India - Calculate your Body Mass Index instantly. Know if you are underweight, normal, overweight or obese as per WHO and Indian standards.">
+  <meta name="keywords" content="BMI calculator India, body mass index calculator, BMI calculator kg cm, healthy weight calculator India, obesity calculator India">
+  <link rel="canonical" href="https://primetoolsapp.com/bmi-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; font-weight: 600; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+    .calculator-box { max-width: 620px; margin: 36px auto; padding: 0 16px 20px; }
+    .card { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; margin-bottom: 20px; }
+    .unit-toggle { display: flex; background: #f0f4f8; border-radius: 8px; padding: 4px; margin-bottom: 24px; gap: 4px; }
+    .unit-btn { flex: 1; padding: 10px; border: none; border-radius: 6px; background: transparent; font-size: 14px; font-weight: 600; cursor: pointer; color: #888; transition: all 0.2s; }
+    .unit-btn.active { background: white; color: #1a1a2e; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    .field { margin-bottom: 20px; }
+    .field label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
+    .field label span { color: #00d4aa; }
+    input[type="range"] { width: 100%; accent-color: #00d4aa; height: 6px; cursor: pointer; }
+    .range-limits { display: flex; justify-content: space-between; font-size: 12px; color: #aaa; margin-top: 4px; }
+    .field input[type="number"] { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; margin-top: 8px; }
+    .field input[type="number"]:focus { border-color: #00d4aa; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-btn { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .calc-btn:hover { background: #00b894; }
+    .result-section { display: none; }
+    .result-section.show { display: block; }
+    .bmi-banner { border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 20px; }
+    .bmi-banner .bmi-value { font-size: 56px; font-weight: 800; margin-bottom: 6px; }
+    .bmi-banner .bmi-cat { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+    .bmi-banner .bmi-sub { font-size: 13px; opacity: 0.8; }
+    .cat-underweight { background: #e3f2fd; color: #1565c0; }
+    .cat-normal { background: #e8fdf8; color: #00695c; }
+    .cat-overweight { background: #fff8e1; color: #e65100; }
+    .cat-obese { background: #fce4ec; color: #c62828; }
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .info-card { background: #f8fffe; border: 1px solid #e0f7f3; border-radius: 10px; padding: 14px; text-align: center; }
+    .info-card .il { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .info-card .iv { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+    .bmi-scale { background: white; border-radius: 12px; padding: 20px; border: 1px solid #e8edf2; }
+    .scale-title { font-size: 14px; font-weight: 600; margin-bottom: 14px; color: #333; }
+    .scale-bar { display: flex; height: 12px; border-radius: 6px; overflow: hidden; margin-bottom: 8px; }
+    .scale-seg { flex: 1; }
+    .scale-labels { display: flex; justify-content: space-between; font-size: 11px; color: #888; margin-bottom: 12px; }
+    .scale-items { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .scale-item { display: flex; align-items: center; gap: 8px; font-size: 13px; color: #555; }
+    .scale-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+    .indicator { width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid #1a1a2e; position: relative; margin-top: 2px; transition: left 0.5s; }
+    .scale-wrap { position: relative; margin-bottom: 4px; }
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; margin-top: 20px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>BMI Calculator</h2>
+  <p>Calculate your Body Mass Index and know your healthy weight range</p>
+</div>
+<div class="calculator-box">
+  <div class="card">
+    <div class="unit-toggle">
+      <button class="unit-btn active" onclick="setUnit('metric', this)">Metric (kg, cm)</button>
+      <button class="unit-btn" onclick="setUnit('imperial', this)">Imperial (lb, ft/in)</button>
+    </div>
+
+    <div id="metricFields">
+      <div class="field">
+        <label>Height (cm) <span id="heightDisplay">170 cm</span></label>
+        <input type="range" id="heightRange" min="100" max="220" value="170" oninput="syncHeight(this.value)">
+        <div class="range-limits"><span>100 cm</span><span>220 cm</span></div>
+        <input type="number" id="heightInput" value="170" placeholder="Height in cm" oninput="syncHeightInput(this.value)">
+      </div>
+      <div class="field">
+        <label>Weight (kg) <span id="weightDisplay">70 kg</span></label>
+        <input type="range" id="weightRange" min="20" max="200" value="70" oninput="syncWeight(this.value)">
+        <div class="range-limits"><span>20 kg</span><span>200 kg</span></div>
+        <input type="number" id="weightInput" value="70" placeholder="Weight in kg" oninput="syncWeightInput(this.value)">
+      </div>
+    </div>
+
+    <div id="imperialFields" style="display:none;">
+      <div class="two-col">
+        <div class="field">
+          <label>Height (ft)</label>
+          <input type="number" id="heightFt" value="5" placeholder="Feet">
+        </div>
+        <div class="field">
+          <label>Height (in)</label>
+          <input type="number" id="heightIn" value="7" placeholder="Inches">
+        </div>
+      </div>
+      <div class="field">
+        <label>Weight (lbs)</label>
+        <input type="number" id="weightLbs" value="154" placeholder="Weight in pounds">
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-bottom:20px;">
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:8px;">Age</label>
+        <input type="number" id="age" value="25" min="2" max="120" placeholder="Age">
+      </div>
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:8px;">Gender</label>
+        <select id="gender" style="width:100%;padding:11px 14px;border:2px solid #e0e0e0;border-radius:8px;font-size:15px;outline:none;background:white;">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate BMI</button>
+  </div>
+
+  <div class="result-section" id="resultSection">
+    <div class="bmi-banner" id="bmiBanner">
+      <div class="bmi-value" id="bmiValue">0</div>
+      <div class="bmi-cat" id="bmiCat">-</div>
+      <div class="bmi-sub" id="bmiSub">-</div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="il">Healthy Weight Range</div>
+        <div class="iv" id="healthyRange">-</div>
+      </div>
+      <div class="info-card">
+        <div class="il">Weight to Lose/Gain</div>
+        <div class="iv" id="weightDiff">-</div>
+      </div>
+    </div>
+
+    <div class="bmi-scale">
+      <div class="scale-title">BMI Scale</div>
+      <div class="scale-wrap">
+        <div class="scale-bar">
+          <div class="scale-seg" style="background:#1565c0;flex:2;"></div>
+          <div class="scale-seg" style="background:#00695c;flex:2.5;"></div>
+          <div class="scale-seg" style="background:#e65100;flex:2.5;"></div>
+          <div class="scale-seg" style="background:#c62828;flex:3;"></div>
+        </div>
+      </div>
+      <div class="scale-labels">
+        <span>16</span><span>18.5</span><span>25</span><span>30</span><span>40</span>
+      </div>
+      <div class="scale-items">
+        <div class="scale-item"><div class="scale-dot" style="background:#1565c0;"></div>Underweight (below 18.5)</div>
+        <div class="scale-item"><div class="scale-dot" style="background:#00695c;"></div>Normal (18.5 - 24.9)</div>
+        <div class="scale-item"><div class="scale-dot" style="background:#e65100;"></div>Overweight (25 - 29.9)</div>
+        <div class="scale-item"><div class="scale-dot" style="background:#c62828;"></div>Obese (30 and above)</div>
+      </div>
+    </div>
+  </div>
+
+  <section style="margin-top:24px;">
+    <h2 style="font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:16px;">About BMI Calculator</h2>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">BMI (Body Mass Index) is a measure of body fat based on height and weight. It is widely used by doctors in India and worldwide to assess whether a person is underweight, normal weight, overweight, or obese. Our BMI Calculator supports both metric (kg, cm) and imperial (lb, ft/in) units.</p>
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">BMI Formula</h3>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">BMI = Weight (kg) / Height (m)^2. Example: Weight = 70 kg, Height = 1.75 m. BMI = 70 / (1.75 x 1.75) = 70 / 3.0625 = 22.9 (Normal weight).</p>
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">BMI Categories for Indians</h3>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">The WHO BMI cutoffs are Underweight: below 18.5, Normal: 18.5-24.9, Overweight: 25-29.9, Obese: 30 and above. However, research suggests Indians face health risks at lower BMI values. Many Indian doctors recommend keeping BMI below 23 for Indians.</p>
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Frequently Asked Questions</h3>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">What is a healthy BMI for Indians?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">For Indians, a BMI between 18.5 and 22.9 is considered healthy. Indians tend to have higher body fat percentage at lower BMI values compared to Western populations, so health risks start at BMI 23 for Indians versus 25 for other populations.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">Is BMI accurate for everyone?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">BMI is a general screening tool and has limitations. It does not distinguish between muscle and fat, so athletes and bodybuilders may show high BMI despite being healthy. It also does not account for age, gender, or body fat distribution. Always consult a doctor for a complete health assessment.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">What is the ideal weight for 5 feet 7 inches height in India?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">For a height of 5 feet 7 inches (170 cm), the ideal weight range for Indians is approximately 53 to 66 kg (BMI 18.5 to 22.9). Use our BMI calculator above to find your personal ideal weight range based on your exact height.</p>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  let unit = 'metric';
+
+  function setUnit(u, btn) {
+    unit = u;
+    document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('metricFields').style.display = u === 'metric' ? 'block' : 'none';
+    document.getElementById('imperialFields').style.display = u === 'imperial' ? 'block' : 'none';
+  }
+
+  function syncHeight(v) { document.getElementById('heightInput').value = v; document.getElementById('heightDisplay').textContent = v + ' cm'; }
+  function syncHeightInput(v) { document.getElementById('heightRange').value = Math.min(v, 220); document.getElementById('heightDisplay').textContent = v + ' cm'; }
+  function syncWeight(v) { document.getElementById('weightInput').value = v; document.getElementById('weightDisplay').textContent = v + ' kg'; }
+  function syncWeightInput(v) { document.getElementById('weightRange').value = Math.min(v, 200); document.getElementById('weightDisplay').textContent = v + ' kg'; }
+
+  function calculate() {
+    let weightKg, heightM;
+
+    if (unit === 'metric') {
+      weightKg = parseFloat(document.getElementById('weightInput').value) || 0;
+      const heightCm = parseFloat(document.getElementById('heightInput').value) || 0;
+      heightM = heightCm / 100;
+    } else {
+      const lbs = parseFloat(document.getElementById('weightLbs').value) || 0;
+      const ft = parseFloat(document.getElementById('heightFt').value) || 0;
+      const inches = parseFloat(document.getElementById('heightIn').value) || 0;
+      weightKg = lbs * 0.453592;
+      heightM = (ft * 12 + inches) * 0.0254;
+    }
+
+    if (!weightKg || !heightM) return;
+
+    const bmi = weightKg / (heightM * heightM);
+    const bmiRound = Math.round(bmi * 10) / 10;
+
+    let cat, colorClass, sub;
+    if (bmi < 18.5) {
+      cat = 'Underweight'; colorClass = 'cat-underweight';
+      sub = 'You may need to gain some weight. Consult a doctor.';
+    } else if (bmi < 25) {
+      cat = 'Normal Weight'; colorClass = 'cat-normal';
+      sub = 'Great! You are at a healthy weight. Keep it up!';
+    } else if (bmi < 30) {
+      cat = 'Overweight'; colorClass = 'cat-overweight';
+      sub = 'Consider healthy diet and regular exercise.';
+    } else {
+      cat = 'Obese'; colorClass = 'cat-obese';
+      sub = 'Please consult a doctor for a health plan.';
+    }
+
+    const minHealthy = 18.5 * heightM * heightM;
+    const maxHealthy = 24.9 * heightM * heightM;
+    const diff = weightKg < minHealthy
+      ? `Gain ${(minHealthy - weightKg).toFixed(1)} kg`
+      : weightKg > maxHealthy
+      ? `Lose ${(weightKg - maxHealthy).toFixed(1)} kg`
+      : 'Perfect weight!';
+
+    document.getElementById('bmiValue').textContent = bmiRound;
+    document.getElementById('bmiCat').textContent = cat;
+    document.getElementById('bmiSub').textContent = sub;
+    document.getElementById('bmiBanner').className = 'bmi-banner ' + colorClass;
+    document.getElementById('healthyRange').textContent = minHealthy.toFixed(1) + ' - ' + maxHealthy.toFixed(1) + ' kg';
+    document.getElementById('weightDiff').textContent = diff;
+    document.getElementById('resultSection').classList.add('show');
+  }
+
+  calculate();
+</script>
+</body>
+</html>
