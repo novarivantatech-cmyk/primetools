@@ -1,0 +1,238 @@
+cat > /mnt/user-data/outputs/gratuity-calculator.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gratuity Calculator India - Calculate Gratuity Amount Free - Prime Tools</title>
+  <meta name="description" content="Free Gratuity Calculator India - Calculate your gratuity amount as per Payment of Gratuity Act 1972. Know how much gratuity you will receive after 5 years of service.">
+  <meta name="keywords" content="gratuity calculator India, gratuity calculation formula, how to calculate gratuity, gratuity amount calculator, payment of gratuity act calculator">
+  <link rel="canonical" href="https://primetoolsapp.com/gratuity-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; font-weight: 600; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+    .calculator-box { max-width: 640px; margin: 36px auto; padding: 0 16px 20px; }
+    .card { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; margin-bottom: 20px; }
+    .field { margin-bottom: 20px; }
+    .field label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
+    .field label span { color: #00d4aa; }
+    input[type="range"] { width: 100%; accent-color: #00d4aa; height: 6px; cursor: pointer; }
+    .range-limits { display: flex; justify-content: space-between; font-size: 12px; color: #aaa; margin-top: 4px; }
+    .field input[type="number"] { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; margin-top: 8px; }
+    .field input[type="number"]:focus { border-color: #00d4aa; }
+    .field select { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; background: white; cursor: pointer; }
+    .field select:focus { border-color: #00d4aa; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .calc-btn { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .calc-btn:hover { background: #00b894; }
+
+    .result-section { display: none; }
+    .result-section.show { display: block; }
+
+    .gratuity-banner { background: #1a1a2e; color: white; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 20px; }
+    .gratuity-banner .gl { font-size: 13px; color: #aaa; margin-bottom: 8px; }
+    .gratuity-banner .gv { font-size: 44px; font-weight: 800; color: #00d4aa; }
+    .gratuity-banner .gs { font-size: 13px; color: #aaa; margin-top: 6px; }
+
+    .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .info-card { background: #f8fffe; border: 1.5px solid #e0f7f3; border-radius: 10px; padding: 14px; text-align: center; }
+    .info-card .il { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .info-card .iv { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+
+    .formula-box { background: #f8fffe; border: 1px solid #e0f7f3; border-radius: 10px; padding: 16px; margin-bottom: 20px; }
+    .formula-box .ft { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 8px; }
+    .formula-box .fc { font-size: 13px; color: #555; line-height: 1.8; }
+    .formula-box code { background: #e8fdf8; padding: 2px 8px; border-radius: 4px; font-family: monospace; color: #00b894; font-size: 13px; }
+
+    .eligibility-box { border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: 14px; }
+    .eligible { background: #e8fdf8; border: 1.5px solid #00d4aa; color: #00695c; }
+    .not-eligible { background: #fff5f5; border: 1.5px solid #ffcccc; color: #c62828; }
+
+    .content-section { max-width: 640px; margin: 0 auto 40px; padding: 0 16px; }
+
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>Gratuity Calculator</h2>
+  <p>Calculate your gratuity amount as per Payment of Gratuity Act 1972</p>
+</div>
+
+<div class="calculator-box">
+  <div class="card">
+
+    <div class="field">
+      <label>Monthly Basic Salary (₹) <span id="salaryDisplay">₹40,000</span></label>
+      <input type="range" id="salaryRange" min="5000" max="500000" step="1000" value="40000" oninput="syncSalary(this.value)">
+      <div class="range-limits"><span>₹5,000</span><span>₹5,00,000</span></div>
+      <input type="number" id="salaryInput" value="40000" placeholder="Monthly Basic + DA" oninput="syncSalaryInput(this.value)">
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:8px;">Years of Service</label>
+        <input type="number" id="years" value="7" min="0" placeholder="Years" oninput="calculate()">
+      </div>
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:8px;">Months (additional)</label>
+        <input type="number" id="months" value="6" min="0" max="11" placeholder="Months" oninput="calculate()">
+      </div>
+    </div>
+
+    <div class="field">
+      <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:8px;">Organisation Type</label>
+      <select id="orgType" onchange="calculate()">
+        <option value="covered">Covered under Gratuity Act (10+ employees)</option>
+        <option value="notcovered">Not covered under Gratuity Act</option>
+      </select>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate Gratuity</button>
+  </div>
+
+  <div class="result-section" id="resultSection">
+
+    <div class="eligibility-box" id="eligibilityBox"></div>
+
+    <div class="gratuity-banner">
+      <div class="gl">Your Gratuity Amount</div>
+      <div class="gv" id="r-gratuity">₹0</div>
+      <div class="gs" id="r-sub"></div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="il">Basic Salary</div>
+        <div class="iv" id="r-basic">₹0</div>
+      </div>
+      <div class="info-card">
+        <div class="il">Years of Service</div>
+        <div class="iv" id="r-years">0</div>
+      </div>
+      <div class="info-card">
+        <div class="il">15 Day Salary</div>
+        <div class="iv" id="r-15day">₹0</div>
+      </div>
+    </div>
+
+    <div class="formula-box">
+      <div class="ft">Formula Used</div>
+      <div class="fc" id="r-formula"></div>
+    </div>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8edf2;">
+    <h2 style="font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:16px;">About Gratuity in India</h2>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">Gratuity is a retirement benefit paid by an employer to an employee as a token of appreciation for the services rendered. It is governed by the Payment of Gratuity Act, 1972 in India. Gratuity is payable to an employee who has completed 5 or more years of continuous service.</p>
+
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Gratuity Formula</h3>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">For organisations covered under Gratuity Act: Gratuity = (Last drawn Basic + DA salary / 26) x 15 x Number of years of service. For organisations not covered: Gratuity = (Last drawn Basic + DA salary / 30) x 15 x Number of years of service.</p>
+
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Key Rules</h3>
+    <ul style="font-size:15px;color:#555;line-height:2;padding-left:20px;margin-bottom:16px;">
+      <li>Minimum 5 years of continuous service required to be eligible</li>
+      <li>Maximum gratuity amount exempt from tax is Rs 20 lakhs</li>
+      <li>If service includes 6 or more months in the last year, it is rounded up to next year</li>
+      <li>Gratuity is payable on resignation, retirement, death, or disability</li>
+      <li>Employer must pay gratuity within 30 days of it becoming due</li>
+    </ul>
+
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Frequently Asked Questions</h3>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">What is the minimum service for gratuity in India?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">An employee must complete a minimum of 5 years of continuous service to be eligible for gratuity. However, in case of death or disability, gratuity is payable even before 5 years of service.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">Is gratuity taxable in India?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">Gratuity received by government employees is fully exempt from income tax. For private sector employees, gratuity up to Rs 20 lakhs is exempt from tax. Amount exceeding Rs 20 lakhs is taxable as per your income tax slab.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">How much gratuity for 10 years of service at Rs 50,000 basic salary?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">Gratuity = (50,000 / 26) x 15 x 10 = 1,923 x 15 x 10 = Rs 2,88,461. Use our calculator above for your exact gratuity amount based on your salary and years of service.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  function fmt(n) { return Math.round(n||0).toLocaleString('en-IN'); }
+
+  function syncSalary(v) {
+    document.getElementById('salaryInput').value = v;
+    document.getElementById('salaryDisplay').textContent = '₹' + fmt(v);
+    calculate();
+  }
+  function syncSalaryInput(v) {
+    document.getElementById('salaryRange').value = Math.min(v, 500000);
+    document.getElementById('salaryDisplay').textContent = '₹' + fmt(v);
+    calculate();
+  }
+
+  function calculate() {
+    const salary = parseFloat(document.getElementById('salaryInput').value) || 0;
+    const years = parseInt(document.getElementById('years').value) || 0;
+    const months = parseInt(document.getElementById('months').value) || 0;
+    const orgType = document.getElementById('orgType').value;
+    if (!salary) return;
+
+    // Round up service years — if months >= 6, count as full year
+    const totalYears = months >= 6 ? years + 1 : years;
+    const isEligible = years >= 5;
+    const divisor = orgType === 'covered' ? 26 : 30;
+    const fifteenDaySalary = (salary / divisor) * 15;
+    const gratuity = isEligible ? fifteenDaySalary * totalYears : 0;
+
+    // Eligibility box
+    const eligBox = document.getElementById('eligibilityBox');
+    if (isEligible) {
+      eligBox.className = 'eligibility-box eligible';
+      eligBox.innerHTML = '✅ <strong>You are eligible for gratuity</strong> — You have completed ' + years + ' years ' + months + ' months of service (minimum 5 years required).';
+    } else {
+      eligBox.className = 'eligibility-box not-eligible';
+      const remaining = 5 - years;
+      eligBox.innerHTML = '⚠️ <strong>Not yet eligible for gratuity</strong> — You need ' + remaining + ' more year(s) of service. Gratuity requires minimum 5 years of continuous service.';
+    }
+
+    document.getElementById('r-gratuity').textContent = '₹' + fmt(gratuity);
+    document.getElementById('r-sub').textContent = isEligible
+      ? 'Based on ' + totalYears + ' years of service at ₹' + fmt(salary) + ' basic salary'
+      : 'Complete 5 years to become eligible';
+    document.getElementById('r-basic').textContent = '₹' + fmt(salary);
+    document.getElementById('r-years').textContent = totalYears + ' years';
+    document.getElementById('r-15day').textContent = '₹' + fmt(fifteenDaySalary);
+    document.getElementById('r-formula').innerHTML =
+      `Gratuity = (Basic Salary / ${divisor}) × 15 × Years of Service<br>
+       = (₹${fmt(salary)} / ${divisor}) × 15 × ${totalYears}<br>
+       = <code>₹${fmt(fifteenDaySalary)}</code> × ${totalYears} = <code>₹${fmt(gratuity)}</code>`;
+
+    document.getElementById('resultSection').classList.add('show');
+  }
+
+  calculate();
+</script>
+</body>
+</html>
+HTMLEOF
+echo "Gratuity Calculator done"
