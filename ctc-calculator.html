@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CTC Calculator - In Hand Salary Calculator India - Prime Tools</title>
+  <meta name="description" content="Free CTC Calculator India - Calculate your in-hand take home salary from CTC. Includes PF, Professional Tax, HRA, allowances and TDS deductions. Know your monthly salary from annual CTC.">
+  <meta name="keywords" content="CTC calculator India, in hand salary calculator, take home salary calculator, salary breakup calculator, CTC to in hand salary, monthly salary from CTC">
+  <link rel="canonical" href="https://primetoolsapp.com/ctc-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; font-weight: 600; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .main-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin: 36px auto; padding: 0 16px; }
+    @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } }
+
+    .card { background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; }
+    .section-label { font-size: 11px; font-weight: 700; color: #00b894; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; margin-top: 20px; }
+    .section-label:first-child { margin-top: 0; }
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 6px; }
+    .field input { width: 100%; padding: 10px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s; }
+    .field input:focus { border-color: #00d4aa; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .calc-btn { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+    .calc-btn:hover { background: #00b894; }
+
+    /* Result side */
+    .result-placeholder { text-align: center; padding: 60px 20px; color: #aaa; }
+    .result-placeholder div { font-size: 48px; margin-bottom: 12px; }
+
+    .result-content { display: none; }
+    .result-content.show { display: block; }
+
+    .takehome-banner { background: #1a1a2e; color: white; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 20px; }
+    .takehome-banner .tl { font-size: 13px; color: #aaa; margin-bottom: 6px; }
+    .takehome-banner .tm { font-size: 36px; font-weight: 800; color: #00d4aa; }
+    .takehome-banner .ty { font-size: 14px; color: #aaa; margin-top: 4px; }
+
+    .breakup-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid #e8fdf8; }
+    .breakup-row { display: flex; justify-content: space-between; padding: 9px 0; border-bottom: 1px solid #f5f5f5; font-size: 13px; }
+    .breakup-row:last-child { border: none; }
+    .breakup-row .bl { color: #666; }
+    .breakup-row .bv { font-weight: 600; color: #1a1a2e; }
+    .breakup-row.total { background: #f8fffe; padding: 10px 12px; border-radius: 8px; margin-top: 4px; }
+    .breakup-row.total .bl { font-weight: 700; color: #1a1a2e; }
+    .breakup-row.total .bv { color: #00d4aa; font-size: 15px; }
+    .breakup-row.deduction .bv { color: #ff6b6b; }
+
+    .bar-wrap { margin: 16px 0; }
+    .bar-track { height: 12px; background: #f0f4f8; border-radius: 6px; overflow: hidden; display: flex; }
+    .bar-take { background: #00d4aa; height: 100%; border-radius: 6px 0 0 6px; transition: width 0.5s; }
+    .bar-ded { background: #ff6b6b; height: 100%; transition: width 0.5s; }
+    .bar-labels { display: flex; justify-content: space-between; font-size: 12px; margin-top: 6px; }
+
+    .content-section { max-width: 1100px; margin: 0 auto 40px; padding: 0 16px; }
+
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>CTC & In-Hand Salary Calculator</h2>
+  <p>Calculate your exact take-home salary from your CTC package</p>
+</div>
+
+<div class="main-layout">
+
+  <!-- LEFT: INPUT -->
+  <div class="card">
+    <div class="section-label">Your CTC Package</div>
+    <div class="field">
+      <label>Annual CTC (₹)</label>
+      <input type="number" id="ctc" value="1200000" placeholder="e.g. 1200000">
+    </div>
+
+    <div class="section-label">Salary Structure</div>
+    <div class="two-col">
+      <div class="field">
+        <label>Basic Salary (%)</label>
+        <input type="number" id="basicPct" value="40" placeholder="40%">
+      </div>
+      <div class="field">
+        <label>HRA (%)</label>
+        <input type="number" id="hraPct" value="20" placeholder="20%">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Special Allowance (%)</label>
+        <input type="number" id="specialPct" value="20" placeholder="20%">
+      </div>
+      <div class="field">
+        <label>Other Allowances (%)</label>
+        <input type="number" id="otherPct" value="10" placeholder="10%">
+      </div>
+    </div>
+
+    <div class="section-label">Deductions</div>
+    <div class="two-col">
+      <div class="field">
+        <label>PF Contribution (%)</label>
+        <input type="number" id="pfPct" value="12" placeholder="12% of Basic">
+      </div>
+      <div class="field">
+        <label>Professional Tax (₹/month)</label>
+        <input type="number" id="profTax" value="200" placeholder="200">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label>Income Tax / TDS (₹/month)</label>
+        <input type="number" id="tds" value="0" placeholder="0">
+      </div>
+      <div class="field">
+        <label>Other Deductions (₹/month)</label>
+        <input type="number" id="otherDed" value="0" placeholder="0">
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate In-Hand Salary</button>
+  </div>
+
+  <!-- RIGHT: RESULT -->
+  <div class="card">
+    <div class="result-placeholder" id="placeholder">
+      <div>💼</div>
+      Enter your CTC and click<br><strong>Calculate</strong> to see your<br>take-home salary
+    </div>
+
+    <div class="result-content" id="resultContent">
+      <div class="takehome-banner">
+        <div class="tl">Monthly In-Hand Salary</div>
+        <div class="tm" id="r-monthly">₹0</div>
+        <div class="ty" id="r-annual">Annual: ₹0</div>
+      </div>
+
+      <div class="breakup-title">Annual Earnings Breakup</div>
+      <div class="breakup-row">
+        <span class="bl">Basic Salary</span>
+        <span class="bv" id="r-basic">₹0</span>
+      </div>
+      <div class="breakup-row">
+        <span class="bl">HRA</span>
+        <span class="bv" id="r-hra">₹0</span>
+      </div>
+      <div class="breakup-row">
+        <span class="bl">Special Allowance</span>
+        <span class="bv" id="r-special">₹0</span>
+      </div>
+      <div class="breakup-row">
+        <span class="bl">Other Allowances</span>
+        <span class="bv" id="r-other">₹0</span>
+      </div>
+      <div class="breakup-row total">
+        <span class="bl">Gross Salary</span>
+        <span class="bv" id="r-gross">₹0</span>
+      </div>
+
+      <div class="breakup-title" style="margin-top:16px;">Annual Deductions</div>
+      <div class="breakup-row">
+        <span class="bl">Employee PF</span>
+        <span class="bv deduction" id="r-pf">₹0</span>
+      </div>
+      <div class="breakup-row">
+        <span class="bl">Professional Tax</span>
+        <span class="bv deduction" id="r-pt">₹0</span>
+      </div>
+      <div class="breakup-row">
+        <span class="bl">Income Tax / TDS</span>
+        <span class="bv deduction" id="r-tds">₹0</span>
+      </div>
+      <div class="breakup-row">
+        <span class="bl">Other Deductions</span>
+        <span class="bv deduction" id="r-otherDed">₹0</span>
+      </div>
+      <div class="breakup-row total">
+        <span class="bl">Total Deductions</span>
+        <span class="bv" style="color:#ff6b6b;" id="r-totalDed">₹0</span>
+      </div>
+
+      <div class="bar-wrap">
+        <div class="bar-track">
+          <div class="bar-take" id="barTake"></div>
+          <div class="bar-ded" id="barDed"></div>
+        </div>
+        <div class="bar-labels">
+          <span style="color:#00d4aa;font-weight:600;" id="takePct">Take Home 0%</span>
+          <span style="color:#ff6b6b;font-weight:600;" id="dedPct">Deductions 0%</span>
+        </div>
+      </div>
+
+      <div class="breakup-row total">
+        <span class="bl">Net Annual Take Home</span>
+        <span class="bv" id="r-net">₹0</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT SECTION -->
+<div class="content-section">
+  <div style="background:white;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8edf2;">
+    <h2 style="font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:16px;">What is CTC and In-Hand Salary?</h2>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">CTC (Cost to Company) is the total amount a company spends on an employee per year including salary, PF contributions, gratuity, insurance, and other benefits. In-hand salary or take-home salary is the actual amount credited to your bank account after all deductions.</p>
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Typical Salary Structure in India</h3>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">A typical Indian salary breakup: Basic Salary (40-50% of CTC), HRA (40-50% of Basic), Conveyance Allowance, Medical Allowance, Special Allowance, and Employer PF. Deductions include Employee PF (12% of Basic), Professional Tax, and TDS.</p>
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Frequently Asked Questions</h3>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">How much in-hand salary for 12 LPA CTC?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">For a 12 LPA CTC, in-hand salary is typically between 75,000 to 85,000 per month depending on your tax slab, PF deduction, and other components. Use our calculator above with your actual salary structure for an accurate figure.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">What is the difference between Gross Salary and Net Salary?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">Gross Salary is your total earnings before any deductions (Basic + HRA + Allowances). Net Salary is the amount after all deductions (PF + Tax + Professional Tax). Net Salary = Gross Salary - Total Deductions.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">How to increase in-hand salary?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">You can increase in-hand salary by optimising your salary structure (requesting higher HRA or allowances), claiming HRA exemption under old tax regime, investing in 80C instruments to reduce TDS, or choosing the new tax regime if it results in lower tax.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  function fmt(n) { return Math.round(n||0).toLocaleString('en-IN'); }
+
+  function calculate() {
+    const ctc = parseFloat(document.getElementById('ctc').value) || 0;
+    const basicPct = parseFloat(document.getElementById('basicPct').value) || 40;
+    const hraPct = parseFloat(document.getElementById('hraPct').value) || 20;
+    const specialPct = parseFloat(document.getElementById('specialPct').value) || 20;
+    const otherPct = parseFloat(document.getElementById('otherPct').value) || 10;
+    const pfPct = parseFloat(document.getElementById('pfPct').value) || 12;
+    const profTax = parseFloat(document.getElementById('profTax').value) || 0;
+    const tds = parseFloat(document.getElementById('tds').value) || 0;
+    const otherDed = parseFloat(document.getElementById('otherDed').value) || 0;
+
+    const basic = ctc * basicPct / 100;
+    const hra = ctc * hraPct / 100;
+    const special = ctc * specialPct / 100;
+    const other = ctc * otherPct / 100;
+    const gross = basic + hra + special + other;
+
+    const empPF = basic * pfPct / 100;
+    const annualPT = profTax * 12;
+    const annualTDS = tds * 12;
+    const annualOtherDed = otherDed * 12;
+    const totalDed = empPF + annualPT + annualTDS + annualOtherDed;
+    const netAnnual = gross - totalDed;
+    const netMonthly = netAnnual / 12;
+    const takePct = Math.round((netAnnual / ctc) * 100);
+    const dedPct = 100 - takePct;
+
+    document.getElementById('r-monthly').textContent = '₹' + fmt(netMonthly);
+    document.getElementById('r-annual').textContent = 'Annual: ₹' + fmt(netAnnual);
+    document.getElementById('r-basic').textContent = '₹' + fmt(basic);
+    document.getElementById('r-hra').textContent = '₹' + fmt(hra);
+    document.getElementById('r-special').textContent = '₹' + fmt(special);
+    document.getElementById('r-other').textContent = '₹' + fmt(other);
+    document.getElementById('r-gross').textContent = '₹' + fmt(gross);
+    document.getElementById('r-pf').textContent = '-₹' + fmt(empPF);
+    document.getElementById('r-pt').textContent = '-₹' + fmt(annualPT);
+    document.getElementById('r-tds').textContent = '-₹' + fmt(annualTDS);
+    document.getElementById('r-otherDed').textContent = '-₹' + fmt(annualOtherDed);
+    document.getElementById('r-totalDed').textContent = '₹' + fmt(totalDed);
+    document.getElementById('r-net').textContent = '₹' + fmt(netAnnual);
+    document.getElementById('barTake').style.width = takePct + '%';
+    document.getElementById('barDed').style.width = dedPct + '%';
+    document.getElementById('takePct').textContent = 'Take Home ' + takePct + '%';
+    document.getElementById('dedPct').textContent = 'Deductions ' + dedPct + '%';
+
+    document.getElementById('placeholder').style.display = 'none';
+    document.getElementById('resultContent').classList.add('show');
+  }
+
+  calculate();
+</script>
+</body>
+</html>
