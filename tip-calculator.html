@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tip Calculator - Split Bill Calculator India - Prime Tools</title>
+  <meta name="description" content="Free Tip Calculator India - Calculate tip amount and split bill between friends. Find tip per person, total bill per person for restaurants, hotels and services.">
+  <meta name="keywords" content="tip calculator India, bill split calculator, restaurant tip calculator, how much tip to give India, split bill calculator friends">
+  <link rel="canonical" href="https://primetoolsapp.com/tip-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; font-weight: 600; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+    .calculator-box { max-width: 580px; margin: 36px auto; padding: 0 16px 20px; }
+    .card { background: white; border-radius: 16px; padding: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; margin-bottom: 20px; }
+
+    .field { margin-bottom: 20px; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
+    .field input { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 18px; font-weight: 700; outline: none; transition: border-color 0.2s; color: #1a1a2e; }
+    .field input:focus { border-color: #00d4aa; }
+
+    /* Tip % buttons */
+    .tip-label { font-size: 13px; font-weight: 600; color: #555; margin-bottom: 10px; }
+    .tip-btns { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 12px; }
+    .tip-btn { padding: 12px 6px; border: 2px solid #e0e0e0; border-radius: 10px; background: white; font-size: 14px; font-weight: 700; cursor: pointer; color: #888; transition: all 0.2s; text-align: center; }
+    .tip-btn:hover { border-color: #00d4aa; color: #00d4aa; }
+    .tip-btn.active { border-color: #00d4aa; background: #e8fdf8; color: #00b894; }
+    .custom-tip { width: 100%; padding: 11px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; }
+    .custom-tip:focus { border-color: #00d4aa; }
+
+    /* People counter */
+    .people-row { display: flex; align-items: center; gap: 12px; }
+    .people-btn { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #00d4aa; background: white; font-size: 20px; font-weight: 700; color: #00d4aa; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
+    .people-btn:hover { background: #00d4aa; color: white; }
+    .people-count { font-size: 28px; font-weight: 800; color: #1a1a2e; min-width: 40px; text-align: center; }
+    .people-label { font-size: 14px; color: #888; }
+
+    /* Results */
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+    .result-card { border-radius: 12px; padding: 20px; text-align: center; }
+    .result-card .rl { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .result-card .rv { font-size: 28px; font-weight: 800; }
+    .result-card .rs { font-size: 12px; margin-top: 4px; }
+    .card-tip { background: #e8fdf8; border: 2px solid #00d4aa; }
+    .card-tip .rl { color: #00b894; }
+    .card-tip .rv { color: #00d4aa; }
+    .card-tip .rs { color: #aaa; }
+    .card-total { background: #1a1a2e; border: 2px solid #1a1a2e; }
+    .card-total .rl { color: #aaa; }
+    .card-total .rv { color: white; }
+    .card-total .rs { color: #aaa; }
+    .card-per-tip { background: #f8fffe; border: 2px solid #e0f7f3; }
+    .card-per-tip .rl { color: #888; }
+    .card-per-tip .rv { color: #00b894; font-size: 24px; }
+    .card-per-tip .rs { color: #aaa; }
+    .card-per-total { background: #fff8e1; border: 2px solid #ffd54f; }
+    .card-per-total .rl { color: #e65100; }
+    .card-per-total .rv { color: #e65100; font-size: 24px; }
+    .card-per-total .rs { color: #aaa; }
+
+    /* Service rating */
+    .rating-row { display: flex; gap: 8px; margin-bottom: 20px; }
+    .rating-btn { flex: 1; padding: 10px 6px; border: 2px solid #e0e0e0; border-radius: 10px; background: white; font-size: 12px; font-weight: 600; cursor: pointer; color: #888; transition: all 0.2s; text-align: center; }
+    .rating-btn .ri { font-size: 18px; display: block; margin-bottom: 4px; }
+    .rating-btn:hover { border-color: #00d4aa; }
+    .rating-btn.active { border-color: #00d4aa; background: #e8fdf8; color: #00b894; }
+
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; margin-top: 20px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>Tip Calculator</h2>
+  <p>Calculate tip amount and split the bill between friends instantly</p>
+</div>
+
+<div class="calculator-box">
+  <div class="card">
+
+    <div class="field">
+      <label>Total Bill Amount (₹)</label>
+      <input type="number" id="billAmount" placeholder="e.g. 2500" value="" oninput="calculate()">
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <div class="tip-label">Select Service Rating & Tip %</div>
+      <div class="rating-row">
+        <button class="rating-btn" onclick="setRating(5, this)"><span class="ri">😞</span>Poor<br>5%</button>
+        <button class="rating-btn" onclick="setRating(10, this)"><span class="ri">😐</span>Fair<br>10%</button>
+        <button class="rating-btn active" onclick="setRating(15, this)"><span class="ri">🙂</span>Good<br>15%</button>
+        <button class="rating-btn" onclick="setRating(20, this)"><span class="ri">😊</span>Great<br>20%</button>
+        <button class="rating-btn" onclick="setRating(25, this)"><span class="ri">🤩</span>Excellent<br>25%</button>
+      </div>
+      <div class="tip-label" style="margin-top:12px;">Or choose tip %</div>
+      <div class="tip-btns">
+        <button class="tip-btn" onclick="setTip(5, this)">5%</button>
+        <button class="tip-btn" onclick="setTip(10, this)">10%</button>
+        <button class="tip-btn active" onclick="setTip(15, this)">15%</button>
+        <button class="tip-btn" onclick="setTip(18, this)">18%</button>
+        <button class="tip-btn" onclick="setTip(20, this)">20%</button>
+      </div>
+      <input type="number" class="custom-tip" id="customTip" placeholder="Or enter custom tip %" value="15" oninput="setCustomTip(this.value)">
+    </div>
+
+    <div style="margin-bottom:20px;">
+      <div class="tip-label">Number of People</div>
+      <div class="people-row">
+        <button class="people-btn" onclick="changePeople(-1)">−</button>
+        <div class="people-count" id="peopleCount">2</div>
+        <button class="people-btn" onclick="changePeople(1)">+</button>
+        <div class="people-label">people splitting the bill</div>
+      </div>
+    </div>
+
+    <div class="result-grid">
+      <div class="result-card card-tip">
+        <div class="rl">Tip Amount</div>
+        <div class="rv" id="r-tip">₹0</div>
+        <div class="rs" id="r-tip-pct">0% tip</div>
+      </div>
+      <div class="result-card card-total">
+        <div class="rl">Total with Tip</div>
+        <div class="rv" id="r-total">₹0</div>
+        <div class="rs">bill + tip</div>
+      </div>
+      <div class="result-card card-per-tip">
+        <div class="rl">Tip per Person</div>
+        <div class="rv" id="r-per-tip">₹0</div>
+        <div class="rs" id="r-per-tip-sub">per person</div>
+      </div>
+      <div class="result-card card-per-total">
+        <div class="rl">Total per Person</div>
+        <div class="rv" id="r-per-total">₹0</div>
+        <div class="rs" id="r-per-total-sub">per person</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div style="background:white;border-radius:16px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8edf2;">
+    <h2 style="font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:16px;">About Tipping in India</h2>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">Tipping is a way to show appreciation for good service at restaurants, hotels, spas, and for delivery personnel. While tipping is not mandatory in India, it is a kind gesture that motivates service staff. Our Tip Calculator makes it easy to calculate the right tip and split it between friends.</p>
+
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">How Much to Tip in India</h3>
+    <ul style="font-size:15px;color:#555;line-height:2;padding-left:20px;margin-bottom:16px;">
+      <li><strong>Restaurants:</strong> 10% to 15% of the bill for good service</li>
+      <li><strong>Fine Dining:</strong> 15% to 20% for excellent service</li>
+      <li><strong>Food Delivery:</strong> Rs 20 to Rs 50 per delivery</li>
+      <li><strong>Hotel Staff:</strong> Rs 50 to Rs 200 per service</li>
+      <li><strong>Cab/Auto:</strong> Round up the fare or Rs 20 to Rs 50 extra</li>
+      <li><strong>Salon/Spa:</strong> 10% of the service bill</li>
+    </ul>
+
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Frequently Asked Questions</h3>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">How to calculate 10% tip on a restaurant bill?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">To calculate 10% tip, simply divide the bill by 10. Example: Bill is Rs 1,500. Tip = Rs 1,500 / 10 = Rs 150. Total = Rs 1,650. For 15% tip, find 10% and add half of that. Rs 150 + Rs 75 = Rs 225 tip.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">Should I tip on the pre-tax or post-tax amount?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">In India, it is common to tip on the total bill amount including GST. However, some people prefer to tip on the food amount before GST. Either way is acceptable — what matters is showing appreciation for good service.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">How to split a restaurant bill equally?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">Use our tip calculator above. Enter the total bill amount, select your tip percentage, and enter the number of people. The calculator will show exactly how much each person needs to pay including the tip.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  let tipPct = 15;
+  let people = 2;
+
+  function fmt(n) {
+    return Math.round(n || 0).toLocaleString('en-IN');
+  }
+
+  function setTip(pct, btn) {
+    tipPct = pct;
+    document.querySelectorAll('.tip-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('customTip').value = pct;
+    calculate();
+  }
+
+  function setRating(pct, btn) {
+    tipPct = pct;
+    document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('customTip').value = pct;
+    document.querySelectorAll('.tip-btn').forEach(b => {
+      b.classList.toggle('active', parseInt(b.textContent) === pct);
+    });
+    calculate();
+  }
+
+  function setCustomTip(val) {
+    tipPct = parseFloat(val) || 0;
+    document.querySelectorAll('.tip-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.rating-btn').forEach(b => b.classList.remove('active'));
+    calculate();
+  }
+
+  function changePeople(delta) {
+    people = Math.max(1, people + delta);
+    document.getElementById('peopleCount').textContent = people;
+    calculate();
+  }
+
+  function calculate() {
+    const bill = parseFloat(document.getElementById('billAmount').value) || 0;
+    const tip = bill * tipPct / 100;
+    const total = bill + tip;
+    const tipPerPerson = tip / people;
+    const totalPerPerson = total / people;
+
+    document.getElementById('r-tip').textContent = '₹' + fmt(tip);
+    document.getElementById('r-tip-pct').textContent = tipPct + '% tip';
+    document.getElementById('r-total').textContent = '₹' + fmt(total);
+    document.getElementById('r-per-tip').textContent = '₹' + fmt(tipPerPerson);
+    document.getElementById('r-per-tip-sub').textContent = 'per person (' + people + ' people)';
+    document.getElementById('r-per-total').textContent = '₹' + fmt(totalPerPerson);
+    document.getElementById('r-per-total-sub').textContent = 'per person (' + people + ' people)';
+  }
+
+  calculate();
+</script>
+</body>
+</html>
