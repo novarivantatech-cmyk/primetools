@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Eligibility Calculator India - Check How Much Loan You Can Get - Prime Tools</title>
+  <meta name="description" content="Free Loan Eligibility Calculator India - Check how much home loan, car loan or personal loan you are eligible for based on your salary. Instant loan eligibility check.">
+  <meta name="keywords" content="loan eligibility calculator India, home loan eligibility calculator, how much loan can I get on my salary, loan amount eligibility, bank loan eligibility India">
+  <link rel="canonical" href="https://primetoolsapp.com/loan-eligibility-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; font-weight: 600; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .main-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin: 36px auto; padding: 0 16px; }
+    @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } }
+
+    .card { background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; }
+
+    .loan-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .loan-tab { padding: 8px 16px; border: 2px solid #e0e0e0; border-radius: 100px; background: white; font-size: 13px; font-weight: 600; cursor: pointer; color: #888; transition: all 0.2s; }
+    .loan-tab:hover { border-color: #00d4aa; color: #00d4aa; }
+    .loan-tab.active { border-color: #00d4aa; background: #e8fdf8; color: #00b894; }
+
+    .section-label { font-size: 11px; font-weight: 700; color: #00b894; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; margin-top: 20px; padding-bottom: 6px; border-bottom: 2px solid #e8fdf8; }
+    .section-label:first-of-type { margin-top: 0; }
+
+    .field { margin-bottom: 16px; }
+    .field label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
+    .field label span { color: #00d4aa; }
+    input[type="range"] { width: 100%; accent-color: #00d4aa; height: 6px; cursor: pointer; }
+    .range-limits { display: flex; justify-content: space-between; font-size: 11px; color: #aaa; margin-top: 3px; }
+    .field input[type="number"], .field select {
+      width: 100%; padding: 10px 14px; border: 2px solid #e0e0e0;
+      border-radius: 8px; font-size: 14px; outline: none;
+      transition: border-color 0.2s; margin-top: 6px; background: white;
+    }
+    .field input[type="number"]:focus, .field select:focus { border-color: #00d4aa; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .calc-btn { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+    .calc-btn:hover { background: #00b894; }
+
+    /* Result side */
+    .placeholder { text-align: center; padding: 60px 20px; color: #aaa; }
+    .placeholder div { font-size: 48px; margin-bottom: 12px; }
+
+    .result-content { display: none; }
+    .result-content.show { display: block; }
+
+    .eligibility-banner { border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 20px; }
+    .banner-eligible { background: #1a1a2e; }
+    .banner-low { background: #fff5f5; border: 2px solid #ffcccc; }
+    .eligibility-banner .el { font-size: 13px; color: #aaa; margin-bottom: 8px; }
+    .eligibility-banner .ev { font-size: 40px; font-weight: 800; color: #00d4aa; }
+    .eligibility-banner .es { font-size: 13px; color: #aaa; margin-top: 6px; }
+
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+    .res-card { background: #f8fffe; border: 1.5px solid #e0f7f3; border-radius: 10px; padding: 14px; text-align: center; }
+    .res-card .rl { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .res-card .rv { font-size: 16px; font-weight: 700; color: #1a1a2e; }
+
+    .bank-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 12px; }
+    .bank-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+    .bank-row:last-child { border: none; }
+    .bank-name { font-size: 13px; font-weight: 600; color: #1a1a2e; }
+    .bank-rate { font-size: 12px; color: #888; }
+    .bank-amount { font-size: 14px; font-weight: 700; color: #00d4aa; }
+
+    .tip-box { background: #fffbea; border: 1px solid #ffd54f; border-radius: 10px; padding: 14px 16px; font-size: 13px; color: #555; line-height: 1.7; margin-top: 16px; }
+
+    .content-section { max-width: 1100px; margin: 0 auto 40px; padding: 0 16px; }
+
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>Loan Eligibility Calculator</h2>
+  <p>Check how much home loan, car loan or personal loan you can get on your salary</p>
+</div>
+
+<div class="main-layout">
+
+  <!-- LEFT: INPUT -->
+  <div class="card">
+
+    <div class="loan-tabs">
+      <button class="loan-tab active" onclick="setLoanType('home', this)">🏠 Home Loan</button>
+      <button class="loan-tab" onclick="setLoanType('car', this)">🚗 Car Loan</button>
+      <button class="loan-tab" onclick="setLoanType('personal', this)">👤 Personal Loan</button>
+    </div>
+
+    <div class="section-label">Your Income Details</div>
+
+    <div class="field">
+      <label>Monthly Net Salary (₹) <span id="salaryDisplay">₹50,000</span></label>
+      <input type="range" id="salaryRange" min="10000" max="500000" step="5000" value="50000" oninput="syncSalary(this.value)">
+      <div class="range-limits"><span>₹10,000</span><span>₹5,00,000</span></div>
+      <input type="number" id="salaryInput" value="50000" oninput="syncSalaryInput(this.value)">
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">Other Monthly Income (₹)</label>
+        <input type="number" id="otherIncome" value="0" placeholder="Rent, business etc." oninput="calculate()">
+      </div>
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">Existing EMIs (₹/month)</label>
+        <input type="number" id="existingEmi" value="0" placeholder="Current EMIs" oninput="calculate()">
+      </div>
+    </div>
+
+    <div class="section-label">Loan Details</div>
+
+    <div class="field">
+      <label>Interest Rate (% p.a.) <span id="rateDisplay">8.5%</span></label>
+      <input type="range" id="rateRange" min="6" max="24" step="0.1" value="8.5" oninput="syncRate(this.value)">
+      <div class="range-limits"><span>6%</span><span>24%</span></div>
+      <input type="number" id="rateInput" value="8.5" step="0.1" oninput="syncRateInput(this.value)">
+    </div>
+
+    <div class="field">
+      <label>Loan Tenure (Years) <span id="tenureDisplay">20 Years</span></label>
+      <input type="range" id="tenureRange" min="1" max="30" step="1" value="20" oninput="syncTenure(this.value)">
+      <div class="range-limits"><span>1 Year</span><span>30 Years</span></div>
+      <input type="number" id="tenureInput" value="20" oninput="syncTenureInput(this.value)">
+    </div>
+
+    <div class="two-col">
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">Age</label>
+        <input type="number" id="age" value="30" min="21" max="65" oninput="calculate()">
+      </div>
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">Employment Type</label>
+        <select id="empType" onchange="calculate()">
+          <option value="salaried">Salaried</option>
+          <option value="selfemployed">Self Employed</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Check Loan Eligibility</button>
+  </div>
+
+  <!-- RIGHT: RESULT -->
+  <div class="card">
+    <div class="placeholder" id="placeholder">
+      <div>🏦</div>
+      Enter your details and click<br><strong>Check Loan Eligibility</strong><br>to see how much loan you can get
+    </div>
+
+    <div class="result-content" id="resultContent">
+      <div class="eligibility-banner banner-eligible" id="eligBanner">
+        <div class="el" id="bannerLabel">Maximum Loan Eligible</div>
+        <div class="ev" id="r-amount">₹0</div>
+        <div class="es" id="r-sub"></div>
+      </div>
+
+      <div class="result-grid">
+        <div class="res-card">
+          <div class="rl">Max Monthly EMI</div>
+          <div class="rv" id="r-emi">₹0</div>
+        </div>
+        <div class="res-card">
+          <div class="rl">EMI to Income Ratio</div>
+          <div class="rv" id="r-ratio">0%</div>
+        </div>
+        <div class="res-card">
+          <div class="rl">Total Interest</div>
+          <div class="rv" id="r-interest">₹0</div>
+        </div>
+        <div class="res-card">
+          <div class="rl">Total Payment</div>
+          <div class="rv" id="r-total">₹0</div>
+        </div>
+      </div>
+
+      <div class="bank-title">Estimated Eligibility by Bank</div>
+      <div id="bankList"></div>
+
+      <div class="tip-box" id="tipBox"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-section">
+  <div style="background:white;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8edf2;">
+    <h2 style="font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:16px;">How is Loan Eligibility Calculated?</h2>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">Banks in India calculate loan eligibility based on your monthly income, existing obligations, age, employment type and credit score. The most common method is the FOIR (Fixed Obligation to Income Ratio) method where banks allow EMI up to 40% to 50% of your net monthly income.</p>
+
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">FOIR Method</h3>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">FOIR (Fixed Obligation to Income Ratio) = (Total EMIs including new loan / Net Monthly Income) x 100. Most banks set FOIR limit at 40% to 50%. So if your salary is Rs 50,000, maximum EMI allowed = Rs 20,000 to Rs 25,000. Based on this EMI, the maximum loan amount is calculated using the EMI formula.</p>
+
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Factors Affecting Loan Eligibility</h3>
+    <ul style="font-size:15px;color:#555;line-height:2;padding-left:20px;margin-bottom:16px;">
+      <li><strong>Credit Score:</strong> Score above 750 gets best rates and higher eligibility</li>
+      <li><strong>Monthly Income:</strong> Higher salary means higher loan eligibility</li>
+      <li><strong>Existing EMIs:</strong> Current loan EMIs reduce your eligibility</li>
+      <li><strong>Age:</strong> Younger applicants get longer tenure and higher eligibility</li>
+      <li><strong>Employment:</strong> Salaried employees at reputed companies get preference</li>
+      <li><strong>Property value:</strong> For home loans, bank lends up to 80% of property value</li>
+    </ul>
+
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Frequently Asked Questions</h3>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">How much home loan can I get on Rs 50,000 salary?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">On a monthly salary of Rs 50,000, you can typically get a home loan of Rs 35 to 40 lakhs at 8.5% interest for 20 years. The exact amount depends on your existing EMIs, credit score, and the bank's policies. Use our calculator above for a precise estimate.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">What is the minimum salary for a home loan in India?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">Most banks require a minimum monthly income of Rs 25,000 to Rs 30,000 for a home loan. However, the loan amount you can get will be limited. PMAY (Pradhan Mantri Awas Yojana) schemes are available for lower income groups with subsidised interest rates.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">How to increase home loan eligibility?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">You can increase your loan eligibility by adding a co-applicant (spouse or parent), closing existing loans to reduce obligations, improving your credit score above 750, choosing a longer loan tenure, or showing additional income sources like rent or business income.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">What is CIBIL score required for home loan?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">Most banks require a minimum CIBIL score of 700 for home loan approval. A score of 750 or above gets you the best interest rates. Scores below 650 may result in loan rejection or very high interest rates.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  let loanType = 'home';
+
+  const loanConfig = {
+    home:     { foir: 0.50, maxTenure: 30, rate: 8.5,  label: 'Home Loan',     banks: [{ name: 'SBI Home Loan', rate: 8.50 }, { name: 'HDFC Home Loan', rate: 8.60 }, { name: 'ICICI Home Loan', rate: 8.75 }, { name: 'Axis Bank Home Loan', rate: 8.75 }, { name: 'Kotak Home Loan', rate: 8.65 }] },
+    car:      { foir: 0.45, maxTenure: 7,  rate: 9.0,  label: 'Car Loan',      banks: [{ name: 'SBI Car Loan', rate: 9.00 }, { name: 'HDFC Car Loan', rate: 9.25 }, { name: 'ICICI Car Loan', rate: 9.10 }, { name: 'Axis Bank Car Loan', rate: 9.50 }, { name: 'Kotak Car Loan', rate: 9.25 }] },
+    personal: { foir: 0.40, maxTenure: 5,  rate: 12.0, label: 'Personal Loan', banks: [{ name: 'SBI Personal Loan', rate: 11.05 }, { name: 'HDFC Personal Loan', rate: 10.75 }, { name: 'ICICI Personal Loan', rate: 10.80 }, { name: 'Axis Bank Personal Loan', rate: 10.99 }, { name: 'Kotak Personal Loan', rate: 10.99 }] }
+  };
+
+  function setLoanType(type, btn) {
+    loanType = type;
+    document.querySelectorAll('.loan-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cfg = loanConfig[type];
+    document.getElementById('rateInput').value = cfg.rate;
+    document.getElementById('rateRange').value = cfg.rate;
+    document.getElementById('rateDisplay').textContent = cfg.rate + '%';
+    const tenure = Math.min(parseInt(document.getElementById('tenureInput').value), cfg.maxTenure);
+    document.getElementById('tenureInput').value = tenure;
+    document.getElementById('tenureRange').value = tenure;
+    document.getElementById('tenureDisplay').textContent = tenure + ' Years';
+    calculate();
+  }
+
+  function fmt(n) { return Math.round(n || 0).toLocaleString('en-IN'); }
+
+  function syncSalary(v) { document.getElementById('salaryInput').value = v; document.getElementById('salaryDisplay').textContent = '₹' + fmt(v); calculate(); }
+  function syncSalaryInput(v) { document.getElementById('salaryRange').value = Math.min(v, 500000); document.getElementById('salaryDisplay').textContent = '₹' + fmt(v); calculate(); }
+  function syncRate(v) { document.getElementById('rateInput').value = v; document.getElementById('rateDisplay').textContent = parseFloat(v).toFixed(1) + '%'; calculate(); }
+  function syncRateInput(v) { document.getElementById('rateRange').value = Math.min(v, 24); document.getElementById('rateDisplay').textContent = parseFloat(v).toFixed(1) + '%'; calculate(); }
+  function syncTenure(v) { document.getElementById('tenureInput').value = v; document.getElementById('tenureDisplay').textContent = v + ' Years'; calculate(); }
+  function syncTenureInput(v) { document.getElementById('tenureRange').value = Math.min(v, 30); document.getElementById('tenureDisplay').textContent = v + ' Years'; calculate(); }
+
+  function calcLoanFromEMI(emi, r, n) {
+    const mr = r / 12 / 100;
+    return emi * (Math.pow(1 + mr, n) - 1) / (mr * Math.pow(1 + mr, n));
+  }
+
+  function calculate() {
+    const salary = parseFloat(document.getElementById('salaryInput').value) || 0;
+    const otherIncome = parseFloat(document.getElementById('otherIncome').value) || 0;
+    const existingEmi = parseFloat(document.getElementById('existingEmi').value) || 0;
+    const rate = parseFloat(document.getElementById('rateInput').value) || 8.5;
+    const years = parseInt(document.getElementById('tenureInput').value) || 20;
+    const cfg = loanConfig[loanType];
+
+    if (!salary) return;
+
+    const totalIncome = salary + otherIncome;
+    const maxEmi = totalIncome * cfg.foir - existingEmi;
+    const n = years * 12;
+    const loanAmount = maxEmi > 0 ? calcLoanFromEMI(maxEmi, rate, n) : 0;
+    const totalPayment = maxEmi * n;
+    const totalInterest = totalPayment - loanAmount;
+    const foirPct = Math.round(((maxEmi + existingEmi) / totalIncome) * 100);
+
+    document.getElementById('r-amount').textContent = '₹' + fmt(loanAmount);
+    document.getElementById('r-sub').textContent = cfg.label + ' at ' + rate + '% for ' + years + ' years';
+    document.getElementById('r-emi').textContent = '₹' + fmt(maxEmi);
+    document.getElementById('r-ratio').textContent = foirPct + '%';
+    document.getElementById('r-interest').textContent = '₹' + fmt(totalInterest);
+    document.getElementById('r-total').textContent = '₹' + fmt(totalPayment);
+
+    // Bank list
+    let bankHTML = '';
+    cfg.banks.forEach(bank => {
+      const bankLoan = calcLoanFromEMI(maxEmi, bank.rate, n);
+      bankHTML += `<div class="bank-row">
+        <div><div class="bank-name">${bank.name}</div><div class="bank-rate">${bank.rate}% p.a.</div></div>
+        <div class="bank-amount">₹${fmt(bankLoan)}</div>
+      </div>`;
+    });
+    document.getElementById('bankList').innerHTML = bankHTML;
+
+    // Tips
+    let tip = '';
+    if (existingEmi > 0) tip = '💡 Your existing EMIs of ₹' + fmt(existingEmi) + '/month are reducing your eligibility. Closing existing loans can significantly increase your loan eligibility.';
+    else if (loanAmount < 1000000) tip = '💡 Add a co-applicant (spouse or parent) to increase your loan eligibility. Joint applications can increase eligibility by up to 50%.';
+    else tip = '💡 Maintain a CIBIL score above 750 to get the best interest rates. A good credit score can save lakhs in interest over the loan tenure.';
+    document.getElementById('tipBox').textContent = tip;
+
+    document.getElementById('placeholder').style.display = 'none';
+    document.getElementById('resultContent').classList.add('show');
+  }
+
+  calculate();
+</script>
+</body>
+</html>
