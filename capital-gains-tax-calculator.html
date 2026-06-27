@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capital Gains Tax Calculator (LTCG/STCG) India - Prime Tools</title>
+  <meta name="description" content="Free Capital Gains Tax Calculator for India. Calculate LTCG and STCG on equity, mutual funds, debt, real estate with indexation, Section 54 exemptions & grandfathering.">
+  <meta name="keywords" content="capital gains tax calculator India, LTCG calculator, STCG calculator, Section 112A, Section 111A, equity LTCG, real estate capital gains, indexation benefit, Section 54 exemption">
+  <meta property="og:title" content="Capital Gains Tax Calculator (LTCG/STCG) India - Prime Tools">
+  <meta property="og:description" content="Calculate Long Term & Short Term Capital Gains Tax on equity, mutual funds, debt, real estate. Includes indexation, Section 54 & grandfathering.">
+  <meta property="og:url" content="https://primetoolsapp.com/capital-gains-tax-calculator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/capital-gains-tax-calculator.html">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 680px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .field { margin-bottom: 20px; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #555; margin-bottom: 8px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 16px; outline: none;
+      transition: border-color 0.2s; background: white;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+    .field input[type="date"] { font-family: 'Segoe UI', sans-serif; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .result-box {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 12px; padding: 28px;
+      margin-top: 24px; display: none;
+    }
+    .result-box.show { display: block; }
+    .result-title {
+      font-size: 13px; color: #888;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 16px; text-align: center;
+    }
+    .result-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 16px;
+    }
+    @media (max-width: 500px) { .result-grid { grid-template-columns: 1fr; } }
+    .result-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      text-align: center;
+    }
+    .result-item .lbl {
+      font-size: 12px; color: #888;
+      margin-bottom: 6px;
+    }
+    .result-item .val {
+      font-size: 22px; font-weight: 700; color: #00d4aa;
+    }
+    .result-item .val.red { color: #ff6b6b; }
+    .result-item .val.green { color: #00d4aa; }
+    .result-note {
+      font-size: 12px; color: #888;
+      text-align: center; margin-top: 12px;
+      line-height: 1.6;
+    }
+    .result-divider {
+      height: 1px; background: rgba(255,255,255,0.1);
+      margin: 16px 0;
+    }
+    .tax-breakdown {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+    }
+    .tax-breakdown h4 {
+      font-size: 13px; color: #888;
+      margin-bottom: 12px; text-align: center;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .bl { color: #aaa; }
+    .breakdown-row .br { color: #fff; font-weight: 600; }
+    .breakdown-row .br.tax { color: #ff6b6b; }
+    .breakdown-row.total { font-size: 15px; padding-top: 12px; margin-top: 4px; border-top: 2px solid rgba(255,255,255,0.15); }
+    .breakdown-row.total .br { color: #00d4aa; font-size: 18px; }
+
+    .exemption-box {
+      background: #f0fdf8; border: 1px solid #b2ead9;
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px; display: none;
+    }
+    .exemption-box.show { display: block; }
+    .exemption-box h4 {
+      font-size: 14px; color: #00a878;
+      margin-bottom: 8px;
+    }
+    .exemption-box p {
+      font-size: 13px; color: #555; line-height: 1.6;
+    }
+
+    .info-badge {
+      display: inline-block; background: #fff3e0;
+      color: #e65100; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+      margin-left: 8px;
+    }
+
+    .grandfathering-note {
+      background: #e8f4fd; border: 1px solid #b2d8f0;
+      border-radius: 8px; padding: 12px 16px;
+      font-size: 13px; color: #0066aa;
+      margin-top: 12px; display: none; line-height: 1.6;
+    }
+    .grandfathering-note.show { display: block; }
+
+    .asset-type-tabs {
+      display: flex; gap: 8px; margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .asset-tab {
+      padding: 10px 18px; border-radius: 8px;
+      border: 2px solid #e0e0e0; background: white;
+      font-size: 13px; font-weight: 600; color: #555;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .asset-tab.active {
+      border-color: #00d4aa; background: #f0fdf8;
+      color: #00a878;
+    }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    .info-section {
+      max-width: 680px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+    .tax-table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0; font-size: 14px;
+    }
+    .tax-table th, .tax-table td {
+      border: 1px solid #e0e0e0; padding: 10px 12px;
+      text-align: left;
+    }
+    .tax-table th {
+      background: #f0f4f8; font-weight: 600; color: #1a1a2e;
+    }
+    .tax-table td { color: #555; }
+  </style>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Capital Gains Tax Calculator</h2>
+  <p>Calculate LTCG & STCG for Equity, Mutual Funds, Debt & Real Estate in India</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="asset-type-tabs" id="assetTabs">
+    <button class="asset-tab active" onclick="setAssetType('equity')">📈 Equity / MF</button>
+    <button class="asset-tab" onclick="setAssetType('debt')">📊 Debt / Other</button>
+    <button class="asset-tab" onclick="setAssetType('realestate')">🏠 Real Estate</button>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Purchase Date</label>
+      <input type="date" id="purchaseDate" onchange="checkHoldingPeriod()">
+    </div>
+    <div class="field">
+      <label>Sale Date</label>
+      <input type="date" id="saleDate" onchange="checkHoldingPeriod()">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Purchase Price (₹)</label>
+    <input type="number" id="purchasePrice" placeholder="e.g. 500000" oninput="checkGrandfathering()">
+  </div>
+
+  <div class="field" id="fmvField" style="display:none;">
+    <label>Fair Market Value as on 31 Jan 2018 (₹) <span class="info-badge">Grandfathering</span></label>
+    <input type="number" id="fmvValue" placeholder="Enter FMV for grandfathering benefit">
+    <div class="grandfathering-note" id="grandfatherNote">
+      <strong>Grandfathering Benefit:</strong> For equity shares/MFs purchased before 31 Jan 2018, cost of acquisition is higher of (a) actual purchase price or (b) FMV as on 31 Jan 2018. This reduces your taxable gains.
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Sale Price (₹)</label>
+    <input type="number" id="salePrice" placeholder="e.g. 800000">
+  </div>
+
+  <div class="field" id="expensesField">
+    <label>Brokerage / Transfer Expenses (₹)</label>
+    <input type="number" id="expenses" placeholder="e.g. 5000" value="0">
+  </div>
+
+  <div class="field" id="improvementField" style="display:none;">
+    <label>Cost of Improvement / Stamp Duty (₹)</label>
+    <input type="number" id="improvementCost" placeholder="e.g. 50000" value="0">
+  </div>
+
+  <div class="field" id="section54Field" style="display:none;">
+    <label>Amount Reinvested u/s 54/54F (₹)</label>
+    <input type="number" id="section54Amount" placeholder="e.g. 600000" value="0">
+    <div class="exemption-box show" style="margin-top:8px;">
+      <p>Section 54: Exemption on sale of residential property if reinvested in another residential property.<br>
+      Section 54F: Exemption on sale of any long-term asset (except residential house) if reinvested in residential property.</p>
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calculateCGT()">Calculate Capital Gains Tax</button>
+
+  <div class="result-box" id="resultBox">
+    <div class="result-title">Capital Gains Summary</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="lbl">Holding Period</div>
+        <div class="val" id="holdingPeriod">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Gain Type</div>
+        <div class="val" id="gainType">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Total Gain</div>
+        <div class="val green" id="totalGain">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Taxable Gain</div>
+        <div class="val" id="taxableGain">-</div>
+      </div>
+    </div>
+    <div class="result-divider"></div>
+    <div class="tax-breakdown">
+      <h4>Tax Calculation</h4>
+      <div class="breakdown-row">
+        <span class="bl">Applicable Rate</span>
+        <span class="br" id="taxRate">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Tax on Gains</span>
+        <span class="br tax" id="taxOnGains">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Health & Education Cess (4%)</span>
+        <span class="br tax" id="cessAmount">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">Total Tax Payable</span>
+        <span class="br" id="totalTax">-</span>
+      </div>
+    </div>
+    <div class="result-note" id="resultNote"></div>
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>How to Use the Capital Gains Tax Calculator</h2>
+  <p>Our Capital Gains Tax Calculator helps you compute tax on profits from selling assets like shares, mutual funds, property, and other investments as per Indian Income Tax Act.</p>
+  
+  <h3>Understanding LTCG vs STCG in India</h3>
+  <table class="tax-table">
+    <tr>
+      <th>Asset Type</th>
+      <th>Short Term</th>
+      <th>Long Term</th>
+      <th>STCG Rate</th>
+      <th>LTCG Rate</th>
+    </tr>
+    <tr>
+      <td>Equity / Equity MF</td>
+      <td>≤ 12 months</td>
+      <td>> 12 months</td>
+      <td>15% (Sec 111A)</td>
+      <td>10% above ₹1L (Sec 112A)</td>
+    </tr>
+    <tr>
+      <td>Debt / Non-Equity MF</td>
+      <td>≤ 36 months</td>
+      <td>> 36 months</td>
+      <td>Slab rate</td>
+      <td>20% with indexation</td>
+    </tr>
+    <tr>
+      <td>Real Estate</td>
+      <td>≤ 24 months</td>
+      <td>> 24 months</td>
+      <td>Slab rate</td>
+      <td>20% with indexation</td>
+    </tr>
+  </table>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>What is the ₹1 lakh exemption for equity LTCG?</p>
+    <p>Long-term capital gains from equity shares and equity-oriented mutual funds up to ₹1 lakh per financial year are exempt from tax. Gains above ₹1 lakh are taxed at 10% without indexation benefit.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is grandfathering in equity LTCG?</p>
+    <p>For equity shares/MFs acquired before 31 January 2018, the cost of acquisition is taken as the higher of (a) actual purchase price or (b) Fair Market Value (FMV) as on 31 Jan 2018. This provision protects investors from taxing notional gains.</p>
+  </div>
+  <div class="faq-box">
+    <p>Can I save tax on capital gains from property?</p>
+    <p>Yes. Under Section 54, you can claim exemption by reinvesting LTCG from residential property into another residential property. Under Section 54EC, you can invest in specified bonds (NHAI, REC) within 6 months to save tax.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is indexation benefit?</p>
+    <p>Indexation adjusts the purchase price for inflation using Cost Inflation Index (CII) published by the government. It reduces taxable gains for long-term assets like debt funds, real estate, and gold.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  let currentAsset = 'equity';
+
+  // CII values for indexation
+  const cii = {
+    2001: 100, 2002: 105, 2003: 109, 2004: 113, 2005: 117,
+    2006: 122, 2007: 129, 2008: 137, 2009: 148, 2010: 167,
+    2011: 184, 2012: 200, 2013: 220, 2014: 240, 2015: 254,
+    2016: 264, 2017: 272, 2018: 280, 2019: 289, 2020: 301,
+    2021: 317, 2022: 331, 2023: 348, 2024: 363, 2025: 380, 2026: 400
+  };
+
+  function setAssetType(type) {
+    currentAsset = type;
+    document.querySelectorAll('.asset-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Show/hide fields based on asset type
+    document.getElementById('fmvField').style.display = (type === 'equity') ? 'block' : 'none';
+    document.getElementById('improvementField').style.display = (type === 'realestate') ? 'block' : 'none';
+    document.getElementById('section54Field').style.display = (type === 'realestate') ? 'block' : 'none';
+    document.getElementById('expensesField').style.display = (type !== 'realestate') ? 'block' : 'none';
+
+    checkGrandfathering();
+    document.getElementById('resultBox').classList.remove('show');
+  }
+
+  function checkHoldingPeriod() {
+    checkGrandfathering();
+  }
+
+  function checkGrandfathering() {
+    const purchaseDate = document.getElementById('purchaseDate').value;
+    const grandfatherNote = document.getElementById('grandfatherNote');
+    const fmvField = document.getElementById('fmvField');
+
+    if (currentAsset === 'equity' && purchaseDate) {
+      const pDate = new Date(purchaseDate);
+      const cutoff = new Date('2018-01-31');
+      if (pDate < cutoff) {
+        grandfatherNote.classList.add('show');
+        fmvField.style.display = 'block';
+      } else {
+        grandfatherNote.classList.remove('show');
+        fmvField.style.display = 'none';
+      }
+    }
+  }
+
+  function getFinancialYear(date) {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = d.getMonth() + 1;
+    return month >= 4 ? year : year - 1;
+  }
+
+  function getCII(fy) {
+    return cii[fy] || cii[2025];
+  }
+
+  function calculateCGT() {
+    const purchaseDate = new Date(document.getElementById('purchaseDate').value);
+    const saleDate = new Date(document.getElementById('saleDate').value);
+    const purchasePrice = parseFloat(document.getElementById('purchasePrice').value) || 0;
+    const salePrice = parseFloat(document.getElementById('salePrice').value) || 0;
+    const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+    const improvementCost = parseFloat(document.getElementById('improvementCost').value) || 0;
+    const section54Amount = parseFloat(document.getElementById('section54Amount').value) || 0;
+    const fmv = parseFloat(document.getElementById('fmvValue').value) || 0;
+
+    if (!purchaseDate || !saleDate || purchasePrice <= 0 || salePrice <= 0) {
+      alert('Please fill in all required fields with valid values.');
+      return;
+    }
+
+    const holdingDays = Math.floor((saleDate - purchaseDate) / (1000 * 60 * 60 * 24));
+    const holdingMonths = Math.floor(holdingDays / 30.44);
+    const holdingYears = (holdingDays / 365.25).toFixed(1);
+
+    let isLongTerm = false;
+    let thresholdMonths = 12;
+
+    if (currentAsset === 'equity') thresholdMonths = 12;
+    else if (currentAsset === 'debt') thresholdMonths = 36;
+    else if (currentAsset === 'realestate') thresholdMonths = 24;
+
+    isLongTerm = holdingMonths > thresholdMonths;
+
+    let costOfAcquisition = purchasePrice;
+    let indexedCost = 0;
+    let totalGain = 0;
+    let taxableGain = 0;
+    let taxRate = '';
+    let taxAmount = 0;
+    let cess = 0;
+    let totalTax = 0;
+    let note = '';
+
+    // Apply grandfathering for equity
+    if (currentAsset === 'equity' && purchaseDate < new Date('2018-01-31') && fmv > 0) {
+      costOfAcquisition = Math.max(purchasePrice, fmv);
+    }
+
+    if (currentAsset === 'realestate') {
+      costOfAcquisition += improvementCost;
+    }
+
+    // Calculate gain
+    if (isLongTerm && (currentAsset === 'debt' || currentAsset === 'realestate')) {
+      // Indexation benefit
+      const purchaseFY = getFinancialYear(purchaseDate);
+      const saleFY = getFinancialDate(saleDate);
+      const ciiPurchase = getCII(purchaseFY);
+      const ciiSale = getCII(saleFY);
+      indexedCost = costOfAcquisition * (ciiSale / ciiPurchase);
+      totalGain = salePrice - indexedCost - (currentAsset === 'realestate' ? 0 : expenses);
+    } else {
+      totalGain = salePrice - costOfAcquisition - expenses;
+    }
+
+    if (currentAsset === 'realestate') {
+      totalGain -= improvementCost;
+    }
+
+    // Apply Section 54 exemption for real estate LTCG
+    if (currentAsset === 'realestate' && isLongTerm && section54Amount > 0) {
+      taxableGain = Math.max(0, totalGain - section54Amount);
+      if (section54Amount >= totalGain) {
+        note = 'Full exemption claimed under Section 54/54F. No tax payable on capital gains.';
+      }
+    } else {
+      taxableGain = Math.max(0, totalGain);
+    }
+
+    // Calculate tax
+    if (currentAsset === 'equity') {
+      if (isLongTerm) {
+        taxRate = '10% (Sec 112A)';
+        const exemptAmount = 100000;
+        if (taxableGain > exemptAmount) {
+          taxAmount = (taxableGain - exemptAmount) * 0.10;
+          note = `₹1,00,000 exemption applied. Taxable gain: ₹${(taxableGain - exemptAmount).toLocaleString('en-IN')}`;
+        } else {
+          taxAmount = 0;
+          note = `Gain of ₹${taxableGain.toLocaleString('en-IN')} is within ₹1,00,000 exemption limit. No LTCG tax.`;
+        }
+      } else {
+        taxRate = '15% (Sec 111A)';
+        taxAmount = taxableGain * 0.15;
+      }
+    } else if (currentAsset === 'debt') {
+      if (isLongTerm) {
+        taxRate = '20% with indexation';
+        taxAmount = taxableGain * 0.20;
+        note = `Indexed cost: ₹${Math.round(indexedCost).toLocaleString('en-IN')}. Original cost: ₹${costOfAcquisition.toLocaleString('en-IN')}`;
+      } else {
+        taxRate = 'As per income tax slab';
+        taxAmount = taxableGain * 0.30; // Assuming 30% slab for demonstration
+        note = 'Taxed at your applicable income tax slab rate.';
+      }
+    } else if (currentAsset === 'realestate') {
+      if (isLongTerm) {
+        taxRate = '20% with indexation';
+        taxAmount = taxableGain * 0.20;
+        if (indexedCost > 0) {
+          note = `Indexed cost: ₹${Math.round(indexedCost).toLocaleString('en-IN')}`;
+        }
+      } else {
+        taxRate = 'As per income tax slab';
+        taxAmount = taxableGain * 0.30;
+        note = 'Taxed at your applicable income tax slab rate.';
+      }
+    }
+
+    cess = taxAmount * 0.04;
+    totalTax = taxAmount + cess;
+
+    // Display results
+    document.getElementById('holdingPeriod').textContent = `${holdingYears} years (${holdingDays} days)`;
+    document.getElementById('gainType').textContent = isLongTerm ? 'Long Term (LTCG)' : 'Short Term (STCG)';
+    document.getElementById('gainType').className = isLongTerm ? 'val green' : 'val red';
+    document.getElementById('totalGain').textContent = '₹' + Math.round(totalGain).toLocaleString('en-IN');
+    document.getElementById('taxableGain').textContent = '₹' + Math.round(taxableGain).toLocaleString('en-IN');
+    document.getElementById('taxRate').textContent = taxRate;
+    document.getElementById('taxOnGains').textContent = '₹' + Math.round(taxAmount).toLocaleString('en-IN');
+    document.getElementById('cessAmount').textContent = '₹' + Math.round(cess).toLocaleString('en-IN');
+    document.getElementById('totalTax').textContent = '₹' + Math.round(totalTax).toLocaleString('en-IN');
+    document.getElementById('resultNote').textContent = note;
+
+    document.getElementById('resultBox').classList.add('show');
+  }
+
+  // Fix: getFinancialDate should be getFinancialYear
+  function getFinancialDate(date) {
+    return getFinancialYear(date);
+  }
+</script>
+
+</body>
+</html>
