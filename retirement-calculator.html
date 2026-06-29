@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retirement Calculator India - Plan Your Retirement Corpus - Prime Tools</title>
+  <meta name="description" content="Free Retirement Calculator India - Calculate how much corpus you need for retirement. Plan monthly savings, estimate retirement fund and check if you are on track for a comfortable retirement.">
+  <meta name="keywords" content="retirement calculator India, retirement planning calculator, retirement corpus calculator, how much to save for retirement India, retirement fund calculator">
+  <link rel="canonical" href="https://primetoolsapp.com/retirement-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; font-weight: 600; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .main-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin: 36px auto; padding: 0 16px; }
+    @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } }
+
+    .card { background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; }
+    .section-label { font-size: 11px; font-weight: 700; color: #00b894; text-transform: uppercase; letter-spacing: 1.5px; margin: 20px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #e8fdf8; }
+    .section-label:first-of-type { margin-top: 0; }
+    .field { margin-bottom: 16px; }
+    .field label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
+    .field label span { color: #00d4aa; }
+    input[type="range"] { width: 100%; accent-color: #00d4aa; height: 6px; cursor: pointer; }
+    .range-limits { display: flex; justify-content: space-between; font-size: 11px; color: #aaa; margin-top: 3px; }
+    .field input[type="number"] { width: 100%; padding: 10px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s; margin-top: 6px; }
+    .field input[type="number"]:focus { border-color: #00d4aa; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .calc-btn { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+    .calc-btn:hover { background: #00b894; }
+
+    /* Result */
+    .corpus-banner { background: #1a1a2e; color: white; border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 16px; }
+    .corpus-banner .cl { font-size: 13px; color: #aaa; margin-bottom: 6px; }
+    .corpus-banner .cv { font-size: 40px; font-weight: 800; color: #00d4aa; }
+    .corpus-banner .cs { font-size: 13px; color: #aaa; margin-top: 4px; }
+
+    .res-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 16px; }
+    .res-card { background: #f8fffe; border: 1.5px solid #e0f7f3; border-radius: 10px; padding: 12px; text-align: center; }
+    .res-card .rl { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .res-card .rv { font-size: 15px; font-weight: 700; color: #1a1a2e; }
+    .res-card.highlight { border-color: #00d4aa; background: #e8fdf8; }
+    .res-card.highlight .rv { color: #00d4aa; font-size: 18px; }
+    .res-card.warn { border-color: #ff6b6b; background: #fff5f5; }
+    .res-card.warn .rv { color: #ff6b6b; }
+
+    .status-box { border-radius: 10px; padding: 14px 16px; margin-bottom: 16px; font-size: 14px; line-height: 1.7; }
+    .status-good { background: #e8fdf8; border: 1.5px solid #00d4aa; color: #00695c; }
+    .status-warn { background: #fffbea; border: 1.5px solid #ffd54f; color: #e65c00; }
+    .status-bad { background: #fff5f5; border: 1.5px solid #ffcccc; color: #c62828; }
+
+    .timeline-wrap { margin-bottom: 16px; }
+    .timeline-title { font-size: 13px; font-weight: 700; color: #333; margin-bottom: 10px; }
+    .timeline-bar-wrap { position: relative; margin-bottom: 6px; }
+    .timeline-track { height: 20px; background: #f0f4f8; border-radius: 6px; overflow: hidden; display: flex; }
+    .timeline-working { height: 100%; background: #00d4aa; transition: width 0.5s; display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; font-weight: 600; }
+    .timeline-retired { height: 100%; background: #ff6b6b; transition: width 0.5s; display: flex; align-items: center; justify-content: center; font-size: 11px; color: white; font-weight: 600; }
+    .timeline-labels { display: flex; justify-content: space-between; font-size: 11px; color: #888; }
+
+    .yr-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .yr-table th { background: #1a1a2e; color: white; padding: 8px 10px; text-align: right; }
+    .yr-table th:first-child { text-align: left; }
+    .yr-table td { padding: 7px 10px; border-bottom: 1px solid #f0f0f0; text-align: right; }
+    .yr-table td:first-child { text-align: left; font-weight: 600; }
+    .yr-table tr.milestone td { background: #e8fdf8; color: #00695c; font-weight: 700; }
+
+    .content-section { max-width: 1100px; margin: 0 auto 40px; padding: 0 16px; }
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>Retirement Calculator</h2>
+  <p>Plan your retirement corpus and find out how much you need to save every month</p>
+</div>
+
+<div class="main-layout">
+
+  <!-- LEFT: INPUT -->
+  <div class="card">
+    <div class="section-label">Your Current Details</div>
+    <div class="two-col">
+      <div class="field">
+        <label>Current Age <span id="ageDisplay">30</span></label>
+        <input type="range" id="ageRange" min="20" max="60" step="1" value="30" oninput="syncAge(this.value)">
+        <div class="range-limits"><span>20</span><span>60</span></div>
+        <input type="number" id="ageInput" value="30" oninput="syncAgeInput(this.value)">
+      </div>
+      <div class="field">
+        <label>Retirement Age <span id="retireDisplay">60</span></label>
+        <input type="range" id="retireRange" min="45" max="70" step="1" value="60" oninput="syncRetire(this.value)">
+        <div class="range-limits"><span>45</span><span>70</span></div>
+        <input type="number" id="retireInput" value="60" oninput="syncRetireInput(this.value)">
+      </div>
+    </div>
+    <div class="field">
+      <label>Life Expectancy <span id="lifeDisplay">80 years</span></label>
+      <input type="range" id="lifeRange" min="65" max="100" step="1" value="80" oninput="syncLife(this.value)">
+      <div class="range-limits"><span>65 yrs</span><span>100 yrs</span></div>
+      <input type="number" id="lifeInput" value="80" oninput="syncLifeInput(this.value)">
+    </div>
+
+    <div class="section-label">Income & Expenses</div>
+    <div class="field">
+      <label>Current Monthly Income (₹) <span id="incomeDisplay">₹80,000</span></label>
+      <input type="range" id="incomeRange" min="10000" max="1000000" step="5000" value="80000" oninput="syncIncome(this.value)">
+      <div class="range-limits"><span>₹10K</span><span>₹10L</span></div>
+      <input type="number" id="incomeInput" value="80000" oninput="syncIncomeInput(this.value)">
+    </div>
+    <div class="field">
+      <label>Monthly Expenses (₹) <span id="expenseDisplay">₹50,000</span></label>
+      <input type="range" id="expenseRange" min="5000" max="500000" step="5000" value="50000" oninput="syncExpense(this.value)">
+      <div class="range-limits"><span>₹5K</span><span>₹5L</span></div>
+      <input type="number" id="expenseInput" value="50000" oninput="syncExpenseInput(this.value)">
+    </div>
+    <div class="field">
+      <label>Current Savings / Investments (₹) <span id="savingsDisplay">₹5,00,000</span></label>
+      <input type="range" id="savingsRange" min="0" max="50000000" step="100000" value="500000" oninput="syncSavings(this.value)">
+      <div class="range-limits"><span>₹0</span><span>₹5 Cr</span></div>
+      <input type="number" id="savingsInput" value="500000" oninput="syncSavingsInput(this.value)">
+    </div>
+
+    <div class="section-label">Return & Inflation Assumptions</div>
+    <div class="two-col">
+      <div class="field">
+        <label>Expected Return (% p.a.) <span id="returnDisplay">10%</span></label>
+        <input type="range" id="returnRange" min="4" max="18" step="0.5" value="10" oninput="syncReturn(this.value)">
+        <div class="range-limits"><span>4%</span><span>18%</span></div>
+        <input type="number" id="returnInput" value="10" step="0.5" oninput="syncReturnInput(this.value)">
+      </div>
+      <div class="field">
+        <label>Inflation Rate (% p.a.) <span id="inflationDisplay">6%</span></label>
+        <input type="range" id="inflationRange" min="2" max="12" step="0.5" value="6" oninput="syncInflation(this.value)">
+        <div class="range-limits"><span>2%</span><span>12%</span></div>
+        <input type="number" id="inflationInput" value="6" step="0.5" oninput="syncInflationInput(this.value)">
+      </div>
+    </div>
+    <div class="field">
+      <label>Post-Retirement Return (% p.a.) <span id="postReturnDisplay">7%</span></label>
+      <input type="range" id="postReturnRange" min="3" max="12" step="0.5" value="7" oninput="syncPostReturn(this.value)">
+      <div class="range-limits"><span>3%</span><span>12%</span></div>
+      <input type="number" id="postReturnInput" value="7" step="0.5" oninput="syncPostReturnInput(this.value)">
+    </div>
+
+    <button class="calc-btn" onclick="calculate()">Calculate Retirement Plan</button>
+  </div>
+
+  <!-- RIGHT: RESULT -->
+  <div class="card" id="resultCard">
+
+    <div class="corpus-banner">
+      <div class="cl">Retirement Corpus Required</div>
+      <div class="cv" id="r-corpus">₹0</div>
+      <div class="cs" id="r-corpus-sub">at age 60 in today's value</div>
+    </div>
+
+    <div class="res-grid">
+      <div class="res-card highlight">
+        <div class="rl">Monthly Savings Needed</div>
+        <div class="rv" id="r-monthly-save">₹0</div>
+      </div>
+      <div class="res-card">
+        <div class="rl">Current Savings Will Grow To</div>
+        <div class="rv" id="r-savings-grow">₹0</div>
+      </div>
+      <div class="res-card">
+        <div class="rl">Additional Corpus Needed</div>
+        <div class="rv" id="r-additional">₹0</div>
+      </div>
+      <div class="res-card">
+        <div class="rl">Monthly Expenses at Retirement</div>
+        <div class="rv" id="r-future-expense">₹0</div>
+      </div>
+    </div>
+
+    <div class="status-box" id="r-status"></div>
+
+    <div class="timeline-wrap">
+      <div class="timeline-title">Your Life Timeline</div>
+      <div class="timeline-track" id="timelineTrack">
+        <div class="timeline-working" id="workingBar">Working</div>
+        <div class="timeline-retired" id="retiredBar">Retired</div>
+      </div>
+      <div class="timeline-labels">
+        <span id="tl-current">Age 30</span>
+        <span id="tl-retire">Retire 60</span>
+        <span id="tl-life">Age 80</span>
+      </div>
+    </div>
+
+    <div class="timeline-title" style="font-size:14px;font-weight:700;color:#333;margin-bottom:10px;">Corpus Growth Projection</div>
+    <table class="yr-table">
+      <thead><tr><th>Age</th><th>Savings (₹)</th><th>Corpus (₹)</th><th>Status</th></tr></thead>
+      <tbody id="projBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-section">
+  <div style="background:white;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8edf2;">
+    <h2 style="font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:16px;">Retirement Planning Guide for India</h2>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">Retirement planning is the process of setting aside money during your working years to support yourself after you stop working. In India, where there is no universal pension for private sector employees, building a personal retirement corpus is essential. Our retirement calculator helps you find out exactly how much you need to save every month to retire comfortably.</p>
+
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Best Retirement Investment Options in India</h3>
+    <ul style="font-size:15px;color:#555;line-height:2;padding-left:20px;margin-bottom:16px;">
+      <li><strong>EPF (Employee Provident Fund):</strong> Mandatory for salaried employees. 12% of basic salary contributed by employee and employer. Current interest rate 8.25% p.a.</li>
+      <li><strong>NPS (National Pension System):</strong> Government backed pension scheme. Equity exposure up to 75%. Tax benefit under 80CCD. Long term returns of 10-12%.</li>
+      <li><strong>PPF (Public Provident Fund):</strong> Safe government scheme with 7.1% tax-free returns. Max Rs 1.5 lakh per year. 15 year lock-in.</li>
+      <li><strong>Mutual Funds (ELSS):</strong> Equity mutual funds historically give 12-15% returns over long term. SIP in index funds is ideal for retirement.</li>
+      <li><strong>Senior Citizen Savings Scheme:</strong> For post-retirement, SCSS offers 8.2% interest. Max Rs 30 lakh investment. Quarterly interest payout.</li>
+    </ul>
+
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">The 4% Rule for Retirement</h3>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">The 4% rule says you can safely withdraw 4% of your retirement corpus every year without running out of money for 30 years. So if you need Rs 1 lakh per month (Rs 12 lakh per year), you need a corpus of Rs 12 lakh / 0.04 = Rs 3 crore. Our calculator uses a more sophisticated approach accounting for Indian inflation rates.</p>
+
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Frequently Asked Questions</h3>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">How much corpus is needed to retire in India?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">A common rule of thumb is to accumulate 25 times your annual expenses as retirement corpus. If your annual expenses at retirement are Rs 12 lakh, you need Rs 3 crore. However, with Indian inflation at 6%, you need to plan for higher corpus. Our calculator gives you a personalised number.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">How much should I save for retirement at age 30?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">At age 30, you should ideally save at least 20-25% of your income for retirement. If you earn Rs 80,000 per month, try to save Rs 16,000 to Rs 20,000 per month in retirement-focused investments. Starting early is the most powerful tool as compounding works best over 30+ years.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">Is Rs 1 crore enough to retire in India?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">Rs 1 crore may not be enough for most urban Indians retiring today. At 7% post-retirement return, Rs 1 crore generates about Rs 58,000 per month. But with 6% inflation, this will lose purchasing power over 20-25 years of retirement. Most urban Indians need Rs 3-5 crore for a comfortable retirement.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">What is the retirement age in India?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">The official retirement age for central government employees in India is 60 years. For private sector employees, there is no mandatory retirement age, but most companies have a retirement age of 58 to 60 years. Many people now plan for early retirement at 45-55 years through FIRE (Financial Independence Retire Early) planning.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  function fmt(n) { return Math.round(n||0).toLocaleString('en-IN'); }
+
+  function syncAge(v) { document.getElementById('ageInput').value=v; document.getElementById('ageDisplay').textContent=v; calculate(); }
+  function syncAgeInput(v) { document.getElementById('ageRange').value=Math.min(v,60); document.getElementById('ageDisplay').textContent=v; calculate(); }
+  function syncRetire(v) { document.getElementById('retireInput').value=v; document.getElementById('retireDisplay').textContent=v; calculate(); }
+  function syncRetireInput(v) { document.getElementById('retireRange').value=Math.min(v,70); document.getElementById('retireDisplay').textContent=v; calculate(); }
+  function syncLife(v) { document.getElementById('lifeInput').value=v; document.getElementById('lifeDisplay').textContent=v+' years'; calculate(); }
+  function syncLifeInput(v) { document.getElementById('lifeRange').value=Math.min(v,100); document.getElementById('lifeDisplay').textContent=v+' years'; calculate(); }
+  function syncIncome(v) { document.getElementById('incomeInput').value=v; document.getElementById('incomeDisplay').textContent='₹'+fmt(v); calculate(); }
+  function syncIncomeInput(v) { document.getElementById('incomeRange').value=Math.min(v,1000000); document.getElementById('incomeDisplay').textContent='₹'+fmt(v); calculate(); }
+  function syncExpense(v) { document.getElementById('expenseInput').value=v; document.getElementById('expenseDisplay').textContent='₹'+fmt(v); calculate(); }
+  function syncExpenseInput(v) { document.getElementById('expenseRange').value=Math.min(v,500000); document.getElementById('expenseDisplay').textContent='₹'+fmt(v); calculate(); }
+  function syncSavings(v) { document.getElementById('savingsInput').value=v; document.getElementById('savingsDisplay').textContent='₹'+fmt(v); calculate(); }
+  function syncSavingsInput(v) { document.getElementById('savingsRange').value=Math.min(v,50000000); document.getElementById('savingsDisplay').textContent='₹'+fmt(v); calculate(); }
+  function syncReturn(v) { document.getElementById('returnInput').value=v; document.getElementById('returnDisplay').textContent=parseFloat(v).toFixed(1)+'%'; calculate(); }
+  function syncReturnInput(v) { document.getElementById('returnRange').value=Math.min(v,18); document.getElementById('returnDisplay').textContent=parseFloat(v).toFixed(1)+'%'; calculate(); }
+  function syncInflation(v) { document.getElementById('inflationInput').value=v; document.getElementById('inflationDisplay').textContent=parseFloat(v).toFixed(1)+'%'; calculate(); }
+  function syncInflationInput(v) { document.getElementById('inflationRange').value=Math.min(v,12); document.getElementById('inflationDisplay').textContent=parseFloat(v).toFixed(1)+'%'; calculate(); }
+  function syncPostReturn(v) { document.getElementById('postReturnInput').value=v; document.getElementById('postReturnDisplay').textContent=parseFloat(v).toFixed(1)+'%'; calculate(); }
+  function syncPostReturnInput(v) { document.getElementById('postReturnRange').value=Math.min(v,12); document.getElementById('postReturnDisplay').textContent=parseFloat(v).toFixed(1)+'%'; calculate(); }
+
+  function calculate() {
+    const currentAge = parseInt(document.getElementById('ageInput').value) || 30;
+    const retireAge  = parseInt(document.getElementById('retireInput').value) || 60;
+    const lifeAge    = parseInt(document.getElementById('lifeInput').value) || 80;
+    const income     = parseFloat(document.getElementById('incomeInput').value) || 0;
+    const expense    = parseFloat(document.getElementById('expenseInput').value) || 0;
+    const savings    = parseFloat(document.getElementById('savingsInput').value) || 0;
+    const retRate    = parseFloat(document.getElementById('returnInput').value) || 10;
+    const inflation  = parseFloat(document.getElementById('inflationInput').value) || 6;
+    const postRate   = parseFloat(document.getElementById('postReturnInput').value) || 7;
+
+    const workYears  = retireAge - currentAge;
+    const retireYears = lifeAge - retireAge;
+
+    if (workYears <= 0 || retireYears <= 0) return;
+
+    // Monthly expenses at retirement (inflation adjusted)
+    const futureExpense = expense * Math.pow(1 + inflation/100, workYears);
+
+    // Corpus needed at retirement using PV of annuity
+    const realRate = (postRate - inflation) / 100;
+    let corpusNeeded;
+    if (Math.abs(realRate) < 0.0001) {
+      corpusNeeded = futureExpense * 12 * retireYears;
+    } else {
+      corpusNeeded = futureExpense * 12 * (1 - Math.pow(1 + realRate, -retireYears)) / realRate;
+    }
+
+    // Current savings grown to retirement
+    const savingsGrown = savings * Math.pow(1 + retRate/100, workYears);
+
+    // Additional corpus needed
+    const additional = Math.max(0, corpusNeeded - savingsGrown);
+
+    // Monthly savings needed (SIP formula)
+    const mr = retRate / 12 / 100;
+    const n = workYears * 12;
+    const monthlySave = additional > 0
+      ? additional * mr / (Math.pow(1 + mr, n) - 1) / (1 + mr)
+      : 0;
+
+    document.getElementById('r-corpus').textContent = '₹' + fmt(corpusNeeded);
+    document.getElementById('r-corpus-sub').textContent = 'Needed at age ' + retireAge + ' to last till age ' + lifeAge;
+    document.getElementById('r-monthly-save').textContent = '₹' + fmt(monthlySave);
+    document.getElementById('r-savings-grow').textContent = '₹' + fmt(savingsGrown);
+    document.getElementById('r-additional').textContent = '₹' + fmt(additional);
+    document.getElementById('r-future-expense').textContent = '₹' + fmt(futureExpense);
+
+    // Status
+    const savingsPct = income > 0 ? Math.round(monthlySave / income * 100) : 0;
+    const statusEl = document.getElementById('r-status');
+    if (monthlySave <= 0) {
+      statusEl.className = 'status-box status-good';
+      statusEl.innerHTML = '✅ <strong>Great news!</strong> Your current savings of ₹' + fmt(savings) + ' are already enough to meet your retirement corpus goal. Keep investing to build an even more comfortable retirement!';
+    } else if (savingsPct <= 25) {
+      statusEl.className = 'status-box status-good';
+      statusEl.innerHTML = '✅ <strong>On track!</strong> You need to save ₹' + fmt(monthlySave) + '/month (' + savingsPct + '% of income). This is achievable. Start a SIP in equity mutual funds today!';
+    } else if (savingsPct <= 40) {
+      statusEl.className = 'status-box status-warn';
+      statusEl.innerHTML = '⚠️ <strong>Needs attention.</strong> You need to save ₹' + fmt(monthlySave) + '/month (' + savingsPct + '% of income). Consider reducing expenses or increasing income to meet this target.';
+    } else {
+      statusEl.className = 'status-box status-bad';
+      statusEl.innerHTML = '❌ <strong>Behind schedule!</strong> You need ₹' + fmt(monthlySave) + '/month (' + savingsPct + '% of income). Consider retiring later, reducing retirement expenses, or starting immediately with maximum savings.';
+    }
+
+    // Timeline
+    const totalLife = lifeAge - currentAge;
+    const workPct = (workYears / totalLife) * 100;
+    const retirePct = (retireYears / totalLife) * 100;
+    document.getElementById('workingBar').style.width = workPct + '%';
+    document.getElementById('retiredBar').style.width = retirePct + '%';
+    document.getElementById('workingBar').textContent = workYears + ' yrs working';
+    document.getElementById('retiredBar').textContent = retireYears + ' yrs retired';
+    document.getElementById('tl-current').textContent = 'Age ' + currentAge;
+    document.getElementById('tl-retire').textContent = 'Retire ' + retireAge;
+    document.getElementById('tl-life').textContent = 'Age ' + lifeAge;
+
+    // Projection table — every 5 years
+    let corpus = savings;
+    let rows = '';
+    for (let age = currentAge; age <= retireAge; age++) {
+      corpus = corpus * (1 + retRate/100) + monthlySave * 12;
+      if ((age - currentAge) % 5 === 0 || age === retireAge) {
+        const isMilestone = age === retireAge;
+        rows += `<tr class="${isMilestone ? 'milestone' : ''}">
+          <td>Age ${age}</td>
+          <td>₹${fmt(monthlySave * 12)}/yr</td>
+          <td>₹${fmt(corpus)}</td>
+          <td>${isMilestone ? '🎯 Retire!' : corpus >= corpusNeeded * (age - currentAge) / workYears ? '✅' : '📈'}</td>
+        </tr>`;
+      }
+    }
+    document.getElementById('projBody').innerHTML = rows;
+  }
+
+  calculate();
+</script>
+</body>
+</html>
+HTMLEOF
+echo "Retirement Calculator done"
