@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Car Loan Calculator India 2026 - EMI, On-Road Cost, Prepayment - Prime Tools</title>
+  <meta name="description" content="Free Car Loan Calculator for India. Calculate EMI, on-road price, road tax, RTO charges, insurance & prepayment savings. Compare new vs used car loans.">
+  <meta name="keywords" content="car loan calculator India, auto loan EMI calculator, car loan interest rate, on road price calculator, car loan prepayment, SBI car loan, HDFC car loan, used car loan">
+  <meta property="og:title" content="Car Loan Calculator India 2026 - EMI, On-Road Cost, Prepayment - Prime Tools">
+  <meta property="og:description" content="Calculate car loan EMI with on-road price, road tax, RTO charges & insurance. Compare new vs used car loans.">
+  <meta property="og:url" content="https://primetoolsapp.com/car-loan-calculator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/car-loan-calculator.html">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 720px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-size: 14px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 16px; padding-bottom: 8px;
+      border-bottom: 2px solid #e0f7f3;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .section-title:first-child { margin-top: 0; }
+
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #555; margin-bottom: 8px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 16px; outline: none;
+      transition: border-color 0.2s; background: white;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    .input-prefix {
+      position: relative;
+    }
+    .input-prefix::before {
+      content: '₹'; position: absolute;
+      left: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 16px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-prefix input { padding-left: 36px; }
+
+    .input-suffix {
+      position: relative;
+    }
+    .input-suffix::after {
+      content: '%'; position: absolute;
+      right: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 14px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-suffix input { padding-right: 36px; }
+
+    .range-wrap {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .range-wrap input[type="range"] {
+      flex: 1; height: 6px;
+      -webkit-appearance: none; appearance: none;
+      background: #e0e0e0; border-radius: 3px; outline: none;
+    }
+    .range-wrap input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #00d4aa; cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,212,170,0.4);
+    }
+    .range-val {
+      min-width: 60px; text-align: right;
+      font-size: 14px; font-weight: 700; color: #00d4aa;
+    }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .car-type-tabs {
+      display: flex; gap: 8px; margin-bottom: 20px;
+    }
+    .car-tab {
+      flex: 1; padding: 12px; border-radius: 8px;
+      border: 2px solid #e0e0e0; background: white;
+      font-size: 14px; font-weight: 600; color: #555;
+      cursor: pointer; transition: all 0.2s; text-align: center;
+    }
+    .car-tab.active {
+      border-color: #00d4aa; background: #f0fdf8;
+      color: #00a878;
+    }
+
+    .result-box {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 12px; padding: 28px;
+      margin-top: 24px; display: none;
+    }
+    .result-box.show { display: block; }
+
+    .result-grid-4 {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 12px; margin-bottom: 20px;
+    }
+    @media (max-width: 700px) { .result-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+
+    .result-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px 12px;
+      text-align: center;
+    }
+    .result-item .lbl {
+      font-size: 11px; color: #888;
+      margin-bottom: 6px; text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .result-item .val {
+      font-size: 20px; font-weight: 700; color: #00d4aa;
+    }
+    .result-item .val.small { font-size: 16px; }
+    .result-item .val.red { color: #ff6b6b; }
+
+    .result-divider {
+      height: 1px; background: rgba(255,255,255,0.1);
+      margin: 16px 0;
+    }
+
+    .breakdown-section {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px;
+    }
+    .breakdown-section h4 {
+      font-size: 12px; color: #888;
+      margin-bottom: 12px; text-align: center;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .bl { color: #aaa; }
+    .breakdown-row .br { color: #fff; font-weight: 600; }
+    .breakdown-row .br.red { color: #ff6b6b; }
+    .breakdown-row.total {
+      font-size: 15px; padding-top: 12px; margin-top: 4px;
+      border-top: 2px solid rgba(255,255,255,0.15);
+    }
+    .breakdown-row.total .br { color: #00d4aa; font-size: 18px; }
+
+    .chart-bar {
+      display: flex; align-items: center; gap: 12px;
+      margin: 8px 0; font-size: 13px;
+    }
+    .chart-bar .bar-label {
+      min-width: 80px; color: #aaa; text-align: right;
+    }
+    .chart-bar .bar-track {
+      flex: 1; height: 24px; background: rgba(255,255,255,0.08);
+      border-radius: 4px; overflow: hidden;
+    }
+    .chart-bar .bar-fill {
+      height: 100%; border-radius: 4px;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-right: 8px; font-size: 11px; font-weight: 700; color: white;
+      transition: width 0.6s ease;
+    }
+    .chart-bar .bar-fill.principal { background: #00d4aa; }
+    .chart-bar .bar-fill.interest { background: #ff6b6b; }
+    .chart-bar .bar-fill.charges { background: #ffd93d; color: #333; }
+
+    .prepay-box {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px; display: none;
+    }
+    .prepay-box.show { display: block; }
+    .prepay-box h4 {
+      font-size: 12px; color: #888;
+      margin-bottom: 12px; text-align: center;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    .toggle-btn {
+      text-align: center; margin-top: 16px;
+    }
+    .toggle-btn button {
+      background: transparent; border: 1px solid #00d4aa;
+      color: #00d4aa; padding: 8px 20px;
+      border-radius: 8px; cursor: pointer;
+      font-size: 13px; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .toggle-btn button:hover { background: #00d4aa; color: white; }
+
+    .amort-table-wrap {
+      display: none; margin-top: 16px;
+      max-height: 300px; overflow-y: auto;
+      border-radius: 8px; background: rgba(255,255,255,0.03);
+    }
+    .amort-table-wrap.show { display: block; }
+
+    .amort-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 12px;
+    }
+    .amort-table th {
+      background: rgba(0,212,170,0.15); color: #00d4aa;
+      padding: 10px 8px; text-align: right; font-weight: 600;
+      position: sticky; top: 0;
+    }
+    .amort-table th:first-child { text-align: left; }
+    .amort-table td {
+      padding: 8px; text-align: right;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: #ccc;
+    }
+    .amort-table td:first-child { text-align: left; color: #fff; font-weight: 600; }
+    .amort-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+    .rate-comparison {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin: 16px 0;
+    }
+    @media (max-width: 600px) { .rate-comparison { grid-template-columns: 1fr; } }
+    .rate-card {
+      background: #f8fffe; border: 1px solid #e0f7f3;
+      border-radius: 10px; padding: 16px; text-align: center;
+    }
+    .rate-card .bank { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+    .rate-card .rate { font-size: 20px; font-weight: 700; color: #00d4aa; }
+    .rate-card .type { font-size: 11px; color: #888; }
+
+    .state-info {
+      font-size: 12px; color: #888;
+      margin-top: 4px; font-style: italic;
+    }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    .info-section {
+      max-width: 720px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+  </style>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Car Loan Calculator</h2>
+  <p>Calculate EMI, on-road price, road tax, RTO charges & prepayment savings</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="car-type-tabs" id="carTypeTabs">
+    <button class="car-tab active" onclick="setCarType('new')">🚗 New Car</button>
+    <button class="car-tab" onclick="setCarType('used')">🚙 Used Car</button>
+  </div>
+
+  <div class="section-title">🚗 Car Details</div>
+
+  <div class="field">
+    <label>Ex-Showroom Price (₹)</label>
+    <div class="input-prefix">
+      <input type="number" id="exShowroom" placeholder="e.g. 800000" value="800000">
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Road Tax & Registration (%)</label>
+      <div class="input-suffix">
+        <input type="number" id="roadTaxPercent" value="10" step="0.1">
+      </div>
+    </div>
+    <div class="field">
+      <label>Insurance (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="insurance" value="35000">
+      </div>
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Accessories / Other (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="accessories" value="10000">
+      </div>
+    </div>
+    <div class="field">
+      <label>Exchange Bonus / Discount (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="discount" value="0">
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🏦 Loan Details</div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Down Payment (%)</label>
+      <div class="range-wrap">
+        <input type="range" id="downPaymentRange" min="10" max="50" value="20" oninput="syncDownPayment('range')">
+        <span class="range-val" id="downPaymentPercent">20%</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Down Payment (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="downPaymentAmount" value="0" oninput="syncDownPayment('amount')">
+      </div>
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Loan Amount (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="loanAmount" value="0" readonly style="background:#f8fffe;">
+      </div>
+    </div>
+    <div class="field">
+      <label>Interest Rate (p.a.)</label>
+      <div class="input-suffix">
+        <input type="number" id="interestRate" step="0.01" value="9.5">
+      </div>
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Tenure (Years)</label>
+      <input type="number" id="tenureYears" min="1" max="7" value="5">
+    </div>
+    <div class="field">
+      <label>Processing Fee (%)</label>
+      <div class="input-suffix">
+        <input type="number" id="processingFee" step="0.01" value="1">
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">💡 Prepayment (Optional)</div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Prepayment Amount (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="prepayAmount" placeholder="e.g. 100000" value="0">
+      </div>
+    </div>
+    <div class="field">
+      <label>After How Many Years?</label>
+      <input type="number" id="prepayYear" min="1" max="7" value="2">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Prepayment Charges (%)</label>
+    <div class="input-suffix">
+      <input type="number" id="prepayCharges" step="0.1" value="2">
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calculateCarLoan()">Calculate Car Loan</button>
+
+  <div class="result-box" id="resultBox">
+
+    <div class="result-grid-4">
+      <div class="result-item">
+        <div class="lbl">On-Road Price</div>
+        <div class="val" id="resOnRoad">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Monthly EMI</div>
+        <div class="val" id="resEMI">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Total Interest</div>
+        <div class="val red" id="resInterest">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Total Cost</div>
+        <div class="val small" id="resTotalCost">-</div>
+      </div>
+    </div>
+
+    <div class="result-divider"></div>
+
+    <div class="breakdown-section">
+      <h4>On-Road Price Breakdown</h4>
+      <div class="chart-bar">
+        <div class="bar-label">Ex-Showroom</div>
+        <div class="bar-track">
+          <div class="bar-fill principal" id="barExShowroom" style="width:0%">0%</div>
+        </div>
+      </div>
+      <div class="chart-bar">
+        <div class="bar-label">Road Tax</div>
+        <div class="bar-track">
+          <div class="bar-fill charges" id="barRoadTax" style="width:0%">0%</div>
+        </div>
+      </div>
+      <div class="chart-bar">
+        <div class="bar-label">Insurance</div>
+        <div class="bar-track">
+          <div class="bar-fill charges" id="barInsurance" style="width:0%">0%</div>
+        </div>
+      </div>
+      <div class="chart-bar">
+        <div class="bar-label">Other</div>
+        <div class="bar-track">
+          <div class="bar-fill charges" id="barOther" style="width:0%">0%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="breakdown-section">
+      <h4>Detailed Summary</h4>
+      <div class="breakdown-row">
+        <span class="bl">Ex-Showroom Price</span>
+        <span class="br" id="sumExShowroom">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Road Tax & Registration</span>
+        <span class="br" id="sumRoadTax">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Insurance</span>
+        <span class="br" id="sumInsurance">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Accessories / Other</span>
+        <span class="br" id="sumAccessories">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Discount / Exchange Bonus</span>
+        <span class="br" id="sumDiscount">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">On-Road Price</span>
+        <span class="br" id="sumOnRoad">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Down Payment</span>
+        <span class="br" id="sumDown">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Loan Amount</span>
+        <span class="br" id="sumLoan">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Processing Fee</span>
+        <span class="br" id="sumFee">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Total Interest Payable</span>
+        <span class="br red" id="sumInterest">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">Total Cost of Car (with Loan)</span>
+        <span class="br" id="sumTotal">-</span>
+      </div>
+    </div>
+
+    <div class="prepay-box" id="prepayBox">
+      <h4>💡 Prepayment Impact</h4>
+      <div class="breakdown-row">
+        <span class="bl">Prepayment Charges</span>
+        <span class="br red" id="prepayChargeAmount">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Interest Saved</span>
+        <span class="br" id="prepaySaved">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Net Savings</span>
+        <span class="br" id="prepayNet">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">New EMI (Same Tenure)</span>
+        <span class="br" id="prepayNewEMI">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">Tenure Reduced (Same EMI)</span>
+        <span class="br" id="prepayNewTenure">-</span>
+      </div>
+    </div>
+
+    <div class="toggle-btn">
+      <button onclick="toggleAmortization()">📊 View Amortization Schedule</button>
+    </div>
+
+    <div class="amort-table-wrap" id="amortTableWrap">
+      <table class="amort-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Principal</th>
+            <th>Interest</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody id="amortBody"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>How to Use the Car Loan Calculator</h2>
+  <p>Our Car Loan Calculator helps you estimate the total cost of buying a car including on-road price, loan EMI, and interest. It also shows prepayment savings.</p>
+  
+  <h3>Current Car Loan Interest Rates (2026)</h3>
+  <div class="rate-comparison">
+    <div class="rate-card">
+      <div class="bank">SBI Car Loan</div>
+      <div class="rate">8.65%</div>
+      <div class="type">New Car</div>
+    </div>
+    <div class="rate-card">
+      <div class="bank">HDFC Bank</div>
+      <div class="rate">9.00%</div>
+      <div class="type">New Car</div>
+    </div>
+    <div class="rate-card">
+      <div class="bank">ICICI Bank</div>
+      <div class="rate">9.50%</div>
+      <div class="type">Used Car</div>
+    </div>
+  </div>
+
+  <h3>Understanding On-Road Price</h3>
+  <p>On-road price = Ex-showroom price + Road tax & registration + Insurance + Accessories - Discounts. Road tax varies by state from 4% to 14%. Our calculator uses a default 10% but you can adjust it.</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>What is the minimum down payment for a car loan?</p>
+    <p>Most banks require 10-20% down payment for new cars and 20-30% for used cars. Some dealers offer zero down payment schemes but these have higher interest rates.</p>
+  </div>
+  <div class="faq-box">
+    <p>Can I get a car loan for a used car?</p>
+    <p>Yes, but interest rates are 2-3% higher than new car loans. Loan tenure is typically shorter (3-5 years vs 7 years). The car's age + loan tenure should not exceed 10 years.</p>
+  </div>
+  <div class="faq-box">
+    <p>Should I prepay my car loan?</p>
+    <p>If you have surplus funds and the prepayment penalty is low (2% or less), prepaying can save significant interest. Use our prepayment calculator to see exact savings.</p>
+  </div>
+  <div class="faq-box">
+    <p>What documents are needed for car loan?</p>
+    <p>ID proof, address proof, income proof (salary slips/ITR), bank statements, and quotation from dealer. Self-employed need additional business proof and 2-year ITR.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  let carType = 'new';
+
+  function setCarType(type) {
+    carType = type;
+    document.querySelectorAll('.car-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Adjust defaults for used car
+    if (type === 'used') {
+      document.getElementById('interestRate').value = 12.5;
+      document.getElementById('tenureYears').value = 4;
+      document.getElementById('downPaymentRange').value = 30;
+      document.getElementById('downPaymentPercent').textContent = '30%';
+      document.getElementById('roadTaxPercent').value = 0;
+      document.getElementById('insurance').value = 15000;
+    } else {
+      document.getElementById('interestRate').value = 9.5;
+      document.getElementById('tenureYears').value = 5;
+      document.getElementById('downPaymentRange').value = 20;
+      document.getElementById('downPaymentPercent').textContent = '20%';
+      document.getElementById('roadTaxPercent').value = 10;
+      document.getElementById('insurance').value = 35000;
+    }
+    updateDownPayment();
+  }
+
+  function updateDownPayment() {
+    const exShowroom = parseFloat(document.getElementById('exShowroom').value) || 0;
+    const roadTaxPercent = parseFloat(document.getElementById('roadTaxPercent').value) || 0;
+    const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+    const accessories = parseFloat(document.getElementById('accessories').value) || 0;
+    const discount = parseFloat(document.getElementById('discount').value) || 0;
+    
+    const onRoad = exShowroom + (exShowroom * roadTaxPercent / 100) + insurance + accessories - discount;
+    const percent = parseFloat(document.getElementById('downPaymentRange').value) || 20;
+    const amount = Math.round(onRoad * percent / 100);
+    
+    document.getElementById('downPaymentAmount').value = amount;
+    document.getElementById('loanAmount').value = Math.round(onRoad - amount);
+  }
+
+  function syncDownPayment(source) {
+    const exShowroom = parseFloat(document.getElementById('exShowroom').value) || 0;
+    const roadTaxPercent = parseFloat(document.getElementById('roadTaxPercent').value) || 0;
+    const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+    const accessories = parseFloat(document.getElementById('accessories').value) || 0;
+    const discount = parseFloat(document.getElementById('discount').value) || 0;
+    const onRoad = exShowroom + (exShowroom * roadTaxPercent / 100) + insurance + accessories - discount;
+
+    if (source === 'range') {
+      const percent = parseFloat(document.getElementById('downPaymentRange').value);
+      document.getElementById('downPaymentPercent').textContent = percent + '%';
+      document.getElementById('downPaymentAmount').value = Math.round(onRoad * percent / 100);
+    } else {
+      const amount = parseFloat(document.getElementById('downPaymentAmount').value) || 0;
+      const percent = Math.min(50, Math.max(10, Math.round(amount / onRoad * 100)));
+      document.getElementById('downPaymentRange').value = percent;
+      document.getElementById('downPaymentPercent').textContent = percent + '%';
+    }
+    document.getElementById('loanAmount').value = Math.round(onRoad - parseFloat(document.getElementById('downPaymentAmount').value));
+  }
+
+  function calculateEMI(principal, annualRate, years) {
+    const monthlyRate = annualRate / 12 / 100;
+    const months = years * 12;
+    if (monthlyRate === 0) return principal / months;
+    return principal * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+  }
+
+  function calculateCarLoan() {
+    const exShowroom = parseFloat(document.getElementById('exShowroom').value) || 0;
+    const roadTaxPercent = parseFloat(document.getElementById('roadTaxPercent').value) || 0;
+    const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+    const accessories = parseFloat(document.getElementById('accessories').value) || 0;
+    const discount = parseFloat(document.getElementById('discount').value) || 0;
+    const downPayment = parseFloat(document.getElementById('downPaymentAmount').value) || 0;
+    const loanAmount = parseFloat(document.getElementById('loanAmount').value) || 0;
+    const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+    const tenureYears = parseInt(document.getElementById('tenureYears').value) || 5;
+    const processingFeePercent = parseFloat(document.getElementById('processingFee').value) || 0;
+    const prepayAmount = parseFloat(document.getElementById('prepayAmount').value) || 0;
+    const prepayYear = parseInt(document.getElementById('prepayYear').value) || 2;
+    const prepayChargesPercent = parseFloat(document.getElementById('prepayCharges').value) || 2;
+
+    if (exShowroom <= 0 || loanAmount <= 0 || interestRate <= 0) {
+      alert('Please enter valid car price and loan details.');
+      return;
+    }
+
+    const onRoad = exShowroom + (exShowroom * roadTaxPercent / 100) + insurance + accessories - discount;
+    const emi = calculateEMI(loanAmount, interestRate, tenureYears);
+    const totalMonths = tenureYears * 12;
+    const totalPayment = emi * totalMonths;
+    const totalInterest = totalPayment - loanAmount;
+    const processingFee = loanAmount * processingFeePercent / 100;
+    const totalCost = onRoad + totalInterest + processingFee;
+
+    // Display main results
+    document.getElementById('resOnRoad').textContent = '₹' + Math.round(onRoad).toLocaleString('en-IN');
+    document.getElementById('resEMI').textContent = '₹' + Math.round(emi).toLocaleString('en-IN');
+    document.getElementById('resInterest').textContent = '₹' + Math.round(totalInterest).toLocaleString('en-IN');
+    document.getElementById('resTotalCost').textContent = '₹' + Math.round(totalCost).toLocaleString('en-IN');
+
+    // Summary
+    const roadTax = exShowroom * roadTaxPercent / 100;
+    document.getElementById('sumExShowroom').textContent = '₹' + exShowroom.toLocaleString('en-IN');
+    document.getElementById('sumRoadTax').textContent = '₹' + Math.round(roadTax).toLocaleString('en-IN');
+    document.getElementById('sumInsurance').textContent = '₹' + insurance.toLocaleString('en-IN');
+    document.getElementById('sumAccessories').textContent = '₹' + accessories.toLocaleString('en-IN');
+    document.getElementById('sumDiscount').textContent = '₹' + discount.toLocaleString('en-IN');
+    document.getElementById('sumOnRoad').textContent = '₹' + Math.round(onRoad).toLocaleString('en-IN');
+    document.getElementById('sumDown').textContent = '₹' + downPayment.toLocaleString('en-IN');
+    document.getElementById('sumLoan').textContent = '₹' + loanAmount.toLocaleString('en-IN');
+    document.getElementById('sumFee').textContent = '₹' + Math.round(processingFee).toLocaleString('en-IN');
+    document.getElementById('sumInterest').textContent = '₹' + Math.round(totalInterest).toLocaleString('en-IN');
+    document.getElementById('sumTotal').textContent = '₹' + Math.round(totalCost).toLocaleString('en-IN');
+
+    // Chart bars
+    const totalForChart = exShowroom + roadTax + insurance + accessories;
+    const ePct = Math.max(5, exShowroom / totalForChart * 100);
+    const rPct = Math.max(3, roadTax / totalForChart * 100);
+    const iPct = Math.max(3, insurance / totalForChart * 100);
+    const aPct = Math.max(3, accessories / totalForChart * 100);
+
+    document.getElementById('barExShowroom').style.width = ePct + '%';
+    document.getElementById('barExShowroom').textContent = Math.round(ePct) + '%';
+    document.getElementById('barRoadTax').style.width = rPct + '%';
+    document.getElementById('barRoadTax').textContent = Math.round(rPct) + '%';
+    document.getElementById('barInsurance').style.width = iPct + '%';
+    document.getElementById('barInsurance').textContent = Math.round(iPct) + '%';
+    document.getElementById('barOther').style.width = aPct + '%';
+    document.getElementById('barOther').textContent = Math.round(aPct) + '%';
+
+    // Prepayment calculation
+    if (prepayAmount > 0 && prepayYear < tenureYears) {
+      const monthlyRate = interestRate / 12 / 100;
+      let balance = loanAmount;
+      
+      for (let m = 1; m <= prepayYear * 12; m++) {
+        const interest = balance * monthlyRate;
+        const principal = emi - interest;
+        balance -= principal;
+      }
+
+      const prepayCharges = prepayAmount * prepayChargesPercent / 100;
+      const newPrincipal = balance - prepayAmount;
+
+      if (newPrincipal > 0) {
+        const remainingMonths = totalMonths - prepayYear * 12;
+        const newEMI = calculateEMI(newPrincipal, interestRate, remainingMonths / 12);
+        const totalPaidNew = newEMI * remainingMonths + emi * prepayYear * 12 + prepayAmount + prepayCharges;
+        const interestSaved = totalPayment - (totalPaidNew - processingFee);
+        const netSavings = interestSaved - prepayCharges;
+
+        let newBalance = newPrincipal;
+        let newTenure = 0;
+        while (newBalance > 0 && newTenure < 600) {
+          const interest = newBalance * monthlyRate;
+          const principal = emi - interest;
+          newBalance -= principal;
+          newTenure++;
+        }
+
+        document.getElementById('prepayBox').classList.add('show');
+        document.getElementById('prepayChargeAmount').textContent = '₹' + Math.round(prepayCharges).toLocaleString('en-IN');
+        document.getElementById('prepaySaved').textContent = '₹' + Math.round(interestSaved).toLocaleString('en-IN');
+        document.getElementById('prepayNet').textContent = '₹' + Math.round(netSavings).toLocaleString('en-IN');
+        document.getElementById('prepayNet').className = 'br ' + (netSavings >= 0 ? '' : 'red');
+        document.getElementById('prepayNewEMI').textContent = '₹' + Math.round(newEMI).toLocaleString('en-IN');
+        document.getElementById('prepayNewTenure').textContent = newTenure + ' months';
+      } else {
+        document.getElementById('prepayBox').classList.remove('show');
+      }
+    } else {
+      document.getElementById('prepayBox').classList.remove('show');
+    }
+
+    // Amortization schedule
+    generateAmortization(loanAmount, interestRate, tenureYears, emi);
+
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('amortTableWrap').classList.remove('show');
+  }
+
+  function generateAmortization(principal, annualRate, years, emi) {
+    const monthlyRate = annualRate / 12 / 100;
+    const tbody = document.getElementById('amortBody');
+    tbody.innerHTML = '';
+
+    let balance = principal;
+    let yearlyPrincipal = 0;
+    let yearlyInterest = 0;
+
+    for (let month = 1; month <= years * 12; month++) {
+      const interest = balance * monthlyRate;
+      const principalPaid = emi - interest;
+      balance -= principalPaid;
+      if (balance < 0) balance = 0;
+
+      yearlyPrincipal += principalPaid;
+      yearlyInterest += interest;
+
+      if (month % 12 === 0 || month === years * 12) {
+        const year = Math.ceil(month / 12);
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>Year ${year}</td>
+          <td>₹${Math.round(yearlyPrincipal).toLocaleString('en-IN')}</td>
+          <td>₹${Math.round(yearlyInterest).toLocaleString('en-IN')}</td>
+          <td>₹${Math.round(balance).toLocaleString('en-IN')}</td>
+        `;
+        tbody.appendChild(row);
+        yearlyPrincipal = 0;
+        yearlyInterest = 0;
+      }
+    }
+  }
+
+  function toggleAmortization() {
+    document.getElementById('amortTableWrap').classList.toggle('show');
+  }
+
+  // Initialize
+  updateDownPayment();
+</script>
+
+</body>
+</html>
