@@ -1,0 +1,350 @@
+
+# Build the complete Professional Tax Calculator in parts to avoid truncation
+part1 = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Tax Calculator India 2026 - State-Wise PT Slabs - Prime Tools</title>
+  <meta name="description" content="Free Professional Tax Calculator for India. Calculate state-wise PT deduction from salary. Covers Maharashtra, Karnataka, Tamil Nadu, West Bengal, Gujarat & all 21 PT-levying states.">
+  <meta name="keywords" content="professional tax calculator India, PT calculator, professional tax Maharashtra, professional tax Karnataka, state wise professional tax, PT slab rates 2026, salary tax deduction">
+  <meta property="og:title" content="Professional Tax Calculator India 2026 - State-Wise PT Slabs - Prime Tools">
+  <meta property="og:description" content="Calculate your monthly & annual Professional Tax for any Indian state. Gender-specific slabs, exemptions & tax savings included.">
+  <meta property="og:url" content="https://primetoolsapp.com/professional-tax-calculator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/professional-tax-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+    .calculator-box { max-width: 720px; margin: 36px auto; background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .section-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #e0f7f3; text-transform: uppercase; letter-spacing: 0.5px; }
+    .section-title:first-child { margin-top: 0; }
+    .field { margin-bottom: 18px; }
+    .field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
+    .field input, .field select { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; outline: none; transition: border-color 0.2s; background: white; }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+    .input-prefix { position: relative; }
+    .input-prefix::before { content: '₹'; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #888; font-size: 16px; font-weight: 600; pointer-events: none; }
+    .input-prefix input { padding-left: 36px; }
+    .gender-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
+    .gender-tab { flex: 1; padding: 14px; border-radius: 10px; border: 2px solid #e0e0e0; background: white; font-size: 14px; font-weight: 600; color: #555; cursor: pointer; transition: all 0.2s; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .gender-tab .emoji { font-size: 24px; }
+    .gender-tab.active { border-color: #00d4aa; background: #f0fdf8; color: #00a878; }
+    .calc-btn { width: 100%; padding: 16px; background: #00d4aa; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+    .calc-btn:hover { background: #00b894; }
+    .result-box { background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 12px; padding: 28px; margin-top: 24px; display: none; }
+    .result-box.show { display: block; }
+    .result-highlight { text-align: center; margin-bottom: 24px; }
+    .result-highlight .lbl { font-size: 13px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+    .result-highlight .val { font-size: 48px; font-weight: 800; color: #00d4aa; }
+    .result-highlight .sub { font-size: 14px; color: #888; margin-top: 4px; }
+    .result-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    @media (max-width: 600px) { .result-grid-3 { grid-template-columns: 1fr; } }
+    .result-item { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 16px 12px; text-align: center; }
+    .result-item .lbl { font-size: 11px; color: #888; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-item .val { font-size: 20px; font-weight: 700; color: #00d4aa; }
+    .result-item .val.red { color: #ff6b6b; }
+    .result-item .val.green { color: #00d4aa; }
+    .result-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 16px 0; }
+    .breakdown-section { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 16px; margin-top: 16px; }
+    .breakdown-section h4 { font-size: 12px; color: #888; margin-bottom: 12px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+    .breakdown-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 14px; }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .bl { color: #aaa; }
+    .breakdown-row .br { color: #fff; font-weight: 600; }
+    .breakdown-row .br.red { color: #ff6b6b; }
+    .breakdown-row .br.green { color: #00d4aa; }
+    .breakdown-row.total { font-size: 15px; padding-top: 12px; margin-top: 4px; border-top: 2px solid rgba(255,255,255,0.15); }
+    .breakdown-row.total .br { color: #00d4aa; font-size: 18px; }
+    .slab-table-wrap { margin-top: 16px; border-radius: 8px; background: rgba(255,255,255,0.03); overflow: hidden; }
+    .slab-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .slab-table th { background: rgba(0,212,170,0.15); color: #00d4aa; padding: 10px 8px; text-align: left; font-weight: 600; }
+    .slab-table th:last-child { text-align: right; }
+    .slab-table td { padding: 10px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
+    .slab-table td:last-child { text-align: right; font-weight: 600; color: #fff; }
+    .slab-table tr.active-slab td { background: rgba(0,212,170,0.1); color: #00d4aa; }
+    .slab-table tr.active-slab td:last-child { color: #00d4aa; font-weight: 700; }
+    .slab-table tr:hover td { background: rgba(255,255,255,0.03); }
+    .exemption-box { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
+    .exemption-box h4 { font-size: 12px; color: #888; margin-bottom: 12px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
+    .exemption-box ul { list-style: none; padding: 0; }
+    .exemption-box li { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; color: #ccc; }
+    .exemption-box li:last-child { border-bottom: none; }
+    .exemption-box li::before { content: '✓ '; color: #00d4aa; font-weight: 700; }
+    .toggle-btn { text-align: center; margin-top: 16px; }
+    .toggle-btn button { background: transparent; border: 1px solid #00d4aa; color: #00d4aa; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+    .toggle-btn button:hover { background: #00d4aa; color: white; }
+    .comparison-wrap { display: none; margin-top: 16px; max-height: 400px; overflow-y: auto; border-radius: 8px; background: rgba(255,255,255,0.03); }
+    .comparison-wrap.show { display: block; }
+    .comparison-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .comparison-table th { background: rgba(0,212,170,0.15); color: #00d4aa; padding: 10px 8px; text-align: left; font-weight: 600; position: sticky; top: 0; }
+    .comparison-table td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
+    .comparison-table tr:hover td { background: rgba(255,255,255,0.03); }
+    .no-pt-badge { display: inline-block; background: #ff6b6b; color: white; padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 700; margin-top: 8px; }
+    .yes-pt-badge { display: inline-block; background: #00d4aa; color: white; padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 700; margin-top: 8px; }
+    .state-info { font-size: 12px; color: #888; margin-top: 4px; font-style: italic; }
+    .rate-comparison { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
+    @media (max-width: 600px) { .rate-comparison { grid-template-columns: 1fr; } }
+    .rate-card { background: #f8fffe; border: 1px solid #e0f7f3; border-radius: 10px; padding: 16px; text-align: center; }
+    .rate-card .name { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+    .rate-card .val { font-size: 20px; font-weight: 700; color: #00d4aa; }
+    .rate-card .desc { font-size: 11px; color: #888; }
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; margin-top: 40px; }
+    .info-section { max-width: 720px; margin: 40px auto; padding: 0 20px; }
+    .info-section h2 { font-size: 22px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; }
+    .info-section h3 { font-size: 18px; font-weight: 700; color: #1a1a2e; margin: 24px 0 12px; }
+    .info-section p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 12px; }
+    .faq-box { border: 1px solid #e0f7f3; border-radius: 10px; padding: 16px; margin-bottom: 10px; }
+    .faq-box p:first-child { font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
+    .faq-box p:last-child { font-size: 14px; color: #555; line-height: 1.7; }
+  </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">&larr; Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Professional Tax Calculator</h2>
+  <p>Calculate state-wise Professional Tax (PT) deduction from your monthly salary</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="section-title">📍 Select State</div>
+  <div class="field">
+    <label>State / Union Territory</label>
+    <select id="stateSelect" onchange="onStateChange()">
+      <option value="">-- Select Your State --</option>
+      <option value="maharashtra">Maharashtra</option>
+      <option value="karnataka">Karnataka</option>
+      <option value="tamilnadu">Tamil Nadu</option>
+      <option value="westbengal">West Bengal</option>
+      <option value="gujarat">Gujarat</option>
+      <option value="andhra">Andhra Pradesh</option>
+      <option value="telangana">Telangana</option>
+      <option value="kerala">Kerala</option>
+      <option value="madhyapradesh">Madhya Pradesh</option>
+      <option value="assam">Assam</option>
+      <option value="bihar">Bihar</option>
+      <option value="jharkhand">Jharkhand</option>
+      <option value="odisha">Odisha</option>
+      <option value="tripura">Tripura</option>
+      <option value="manipur">Manipur</option>
+      <option value="meghalaya">Meghalaya</option>
+      <option value="sikkim">Sikkim</option>
+      <option value="chhattisgarh">Chhattisgarh</option>
+      <option value="mizoram">Mizoram</option>
+      <option value="nagaland">Nagaland</option>
+      <option value="puducherry">Puducherry</option>
+      <option value="delhi">Delhi (No PT)</option>
+      <option value="up">Uttar Pradesh (No PT)</option>
+      <option value="rajasthan">Rajasthan (No PT)</option>
+      <option value="haryana">Haryana (No PT)</option>
+      <option value="punjab">Punjab (No PT)</option>
+      <option value="uttarakhand">Uttarakhand (No PT)</option>
+      <option value="hp">Himachal Pradesh (No PT)</option>
+      <option value="goa">Goa (No PT)</option>
+      <option value="jk">Jammu & Kashmir (No PT)</option>
+    </select>
+    <div class="state-info" id="stateInfo"></div>
+  </div>
+
+  <div class="section-title">👤 Personal Details</div>
+
+  <div class="gender-tabs" id="genderTabs">
+    <button class="gender-tab active" onclick="setGender('male')">
+      <span class="emoji">👨</span>
+      <span>Male</span>
+    </button>
+    <button class="gender-tab" onclick="setGender('female')">
+      <span class="emoji">👩</span>
+      <span>Female</span>
+    </button>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Gross Monthly Salary (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="salary" placeholder="e.g. 50000" value="50000">
+      </div>
+    </div>
+    <div class="field">
+      <label>Age (for senior citizen check)</label>
+      <input type="number" id="age" value="35" min="18" max="100">
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calculatePT()">Calculate Professional Tax</button>
+
+  <div class="result-box" id="resultBox">
+
+    <div class="result-highlight">
+      <div class="lbl">Monthly Professional Tax</div>
+      <div class="val" id="resMonthlyPT">-</div>
+      <div class="sub" id="resStateName">-</div>
+    </div>
+
+    <div class="result-grid-3">
+      <div class="result-item">
+        <div class="lbl">Annual PT</div>
+        <div class="val" id="resAnnualPT">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Income Tax Saving</div>
+        <div class="val green" id="resTaxSaving">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Effective Cost</div>
+        <div class="val" id="resEffective">-</div>
+      </div>
+    </div>
+
+    <div class="result-divider"></div>
+
+    <div class="breakdown-section">
+      <h4>Calculation Breakdown</h4>
+      <div class="breakdown-row">
+        <span class="bl">State</span>
+        <span class="br" id="sumState">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Monthly Salary</span>
+        <span class="br" id="sumSalary">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Applicable Slab</span>
+        <span class="br" id="sumSlab">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">PT Rate</span>
+        <span class="br" id="sumRate">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Special Adjustment</span>
+        <span class="br" id="sumSpecial">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">Monthly PT Deduction</span>
+        <span class="br" id="sumMonthly">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">Annual PT (Capped at ₹2,500)</span>
+        <span class="br" id="sumAnnual">-</span>
+      </div>
+    </div>
+
+    <div class="slab-table-wrap">
+      <table class="slab-table">
+        <thead>
+          <tr>
+            <th>Salary Slab</th>
+            <th style="text-align:right;">PT Amount</th>
+          </tr>
+        </thead>
+        <tbody id="slabBody"></tbody>
+      </table>
+    </div>
+
+    <div class="exemption-box" id="exemptionBox">
+      <h4>Exemptions & Notes</h4>
+      <ul id="exemptionList"></ul>
+    </div>
+
+    <div class="toggle-btn">
+      <button onclick="toggleComparison()">📊 View All States Comparison</button>
+    </div>
+
+    <div class="comparison-wrap" id="comparisonWrap">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>State</th>
+            <th>Frequency</th>
+            <th>Max Monthly</th>
+            <th>Annual Cap</th>
+            <th>Nil Slab</th>
+          </tr>
+        </thead>
+        <tbody id="comparisonBody"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>How to Use the Professional Tax Calculator</h2>
+  <p>Professional Tax (PT) is a state-level tax deducted from your salary every month. Our calculator covers all 21 states and 1 UT that levy PT in India, with gender-specific slabs (e.g., Maharashtra has different rates for men and women).</p>
+
+  <h3>Key Facts About Professional Tax</h3>
+  <div class="rate-comparison">
+    <div class="rate-card">
+      <div class="name">Constitutional Cap</div>
+      <div class="val">₹2,500</div>
+      <div class="desc">Maximum PT per year per person</div>
+    </div>
+    <div class="rate-card">
+      <div class="name">Tax Deduction</div>
+      <div class="val">Sec 16(iii)</div>
+      <div class="desc">Available in both Old & New regime</div>
+    </div>
+    <div class="rate-card">
+      <div class="name">States with PT</div>
+      <div class="val">21 + 1 UT</div>
+      <div class="desc">Maharashtra, Karnataka, TN, WB, etc.</div>
+    </div>
+  </div>
+
+  <h3>States That Do NOT Levy Professional Tax</h3>
+  <p>Delhi, Uttar Pradesh, Rajasthan, Haryana, Punjab, Uttarakhand, Himachal Pradesh, Goa, and Jammu & Kashmir do not levy any professional tax. If you work in these states, no PT will be deducted from your salary.</p>
+
+  <h3>How PT Saves You Income Tax</h3>
+  <p>Professional Tax paid is fully deductible under Section 16(iii) of the Income Tax Act — available under BOTH old and new tax regimes. For someone in the 30% tax bracket, paying ₹2,500 PT annually saves approximately ₹780 in income tax (₹2,500 × 30% × 1.04 cess). Your effective cost is only ₹1,720 per year.</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>Is Professional Tax the same in all states?</p>
+    <p>No. Each state sets its own PT slab rates. The only common rule is the constitutional ceiling of ₹2,500 per year. Maharashtra has gender-specific slabs where women earning up to ₹25,000 are fully exempt.</p>
+  </div>
+  <div class="faq-box">
+    <p>Who is responsible for paying Professional Tax?</p>
+    <p>For salaried employees, the employer deducts PT from monthly salary and deposits it with the state government. Self-employed professionals must register and pay PT directly via PTEC (Professional Tax Enrolment Certificate).</p>
+  </div>
+  <div class="faq-box">
+    <p>Can I claim PT deduction in the new tax regime?</p>
+    <p>Yes! Professional Tax is one of the few deductions available under the new tax regime via Section 16(iii). It is deducted automatically from your salary income in Form 16.</p>
+  </div>
+  <div class="faq-box">
+    <p>What happens if my employer does not deduct PT?</p>
+    <p>The employer faces penalties and interest for non-compliance. The liability is on the employer, not the employee. However, you should verify PT deduction on your salary slip and Form 16.</p>
+  </div>
+  <div class="faq-box">
+    <p>Do remote workers pay PT based on employer location or home location?</p>
+    <p>PT is based on your work location, not your employer's registered location. If you work from home in Maharashtra for a Delhi-based company, Maharashtra PT applies.</p>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Prime Tools — primetoolsapp.com | Free tax & finance calculators for India</p>
+</footer>
