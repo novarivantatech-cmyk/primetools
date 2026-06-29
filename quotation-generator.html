@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quotation Generator India 2026 - GST Business Quote - Prime Tools</title>
+  <meta name="description" content="Free Quotation Generator for Indian businesses. Create professional GST quotations with CGST, SGST, IGST. Add company logo, items, discounts & print.">
+  <meta name="keywords" content="quotation generator India, GST quotation maker, business quote generator, estimate generator, proforma invoice creator, quotation format India">
+  <meta property="og:title" content="Quotation Generator India 2026 - GST Business Quote - Prime Tools">
+  <meta property="og:description" content="Create professional GST quotations for your business. Auto-calculate CGST, SGST, IGST. Print and share with clients.">
+  <meta property="og:url" content="https://primetoolsapp.com/quotation-generator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/quotation-generator.html">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 800px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-size: 14px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 16px; padding-bottom: 8px;
+      border-bottom: 2px solid #e0f7f3;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .section-title:first-child { margin-top: 0; }
+
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #555; margin-bottom: 8px;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 15px; outline: none;
+      transition: border-color 0.2s; background: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: #00d4aa; }
+    .field textarea { min-height: 80px; resize: vertical; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    .field-row-3 {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .field-row-3 { grid-template-columns: 1fr; } }
+
+    .input-prefix {
+      position: relative;
+    }
+    .input-prefix::before {
+      content: '₹'; position: absolute;
+      left: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 16px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-prefix input { padding-left: 36px; }
+
+    .item-row {
+      background: #f8fffe; border: 1px solid #e0f7f3;
+      border-radius: 10px; padding: 16px;
+      margin-bottom: 12px;
+    }
+    .item-row-header {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 12px;
+    }
+    .item-row-header span {
+      font-size: 13px; font-weight: 700; color: #1a1a2e;
+    }
+    .item-remove {
+      background: #ff6b6b; color: white;
+      border: none; border-radius: 6px;
+      padding: 4px 12px; font-size: 12px;
+      cursor: pointer;
+    }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .btn-secondary {
+      padding: 10px 20px; background: #f0f4f8;
+      color: #1a1a2e; border: 2px solid #e0e0e0;
+      border-radius: 8px; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: #00d4aa; color: #00d4aa; }
+
+    .quotation-preview {
+      background: white; border: 2px solid #e0e0e0;
+      border-radius: 12px; padding: 32px;
+      margin-top: 24px; display: none;
+    }
+    .quotation-preview.show { display: block; }
+
+    .quote-header {
+      display: flex; justify-content: space-between;
+      margin-bottom: 24px; padding-bottom: 16px;
+      border-bottom: 2px solid #1a1a2e;
+    }
+    .quote-company h3 {
+      font-size: 20px; color: #1a1a2e; margin-bottom: 4px;
+    }
+    .quote-company p {
+      font-size: 12px; color: #666; line-height: 1.5;
+    }
+    .quote-meta {
+      text-align: right;
+    }
+    .quote-meta .label {
+      font-size: 11px; color: #888; text-transform: uppercase;
+    }
+    .quote-meta .value {
+      font-size: 14px; font-weight: 600; color: #1a1a2e;
+    }
+
+    .quote-to {
+      margin-bottom: 24px;
+    }
+    .quote-to h4 {
+      font-size: 13px; color: #888; margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .quote-to p {
+      font-size: 14px; color: #333; line-height: 1.6;
+    }
+
+    .quote-table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0; font-size: 13px;
+    }
+    .quote-table th {
+      background: #1a1a2e; color: white;
+      padding: 10px; text-align: left; font-weight: 600;
+    }
+    .quote-table td {
+      padding: 10px; border-bottom: 1px solid #e0e0e0;
+      color: #333;
+    }
+    .quote-table td.num { text-align: right; }
+    .quote-table tr:nth-child(even) { background: #f8f9fa; }
+
+    .quote-summary {
+      margin-top: 16px; border-top: 2px solid #1a1a2e;
+      padding-top: 16px;
+    }
+    .summary-row {
+      display: flex; justify-content: space-between;
+      padding: 6px 0; font-size: 13px;
+    }
+    .summary-row .bl { color: #555; }
+    .summary-row .br { color: #1a1a2e; font-weight: 600; }
+    .summary-row.total {
+      font-size: 16px; padding-top: 10px; margin-top: 6px;
+      border-top: 2px solid #e0e0e0;
+    }
+    .summary-row.total .br {
+      font-size: 20px; color: #00d4aa;
+    }
+
+    .quote-terms {
+      margin-top: 24px; padding-top: 16px;
+      border-top: 1px solid #e0e0e0;
+    }
+    .quote-terms h4 {
+      font-size: 13px; color: #888; margin-bottom: 8px;
+    }
+    .quote-terms p {
+      font-size: 12px; color: #666; line-height: 1.6;
+    }
+
+    .quote-actions {
+      display: flex; gap: 12px; margin-top: 24px;
+      justify-content: center;
+    }
+
+    .print-btn {
+      padding: 12px 24px; background: #1a1a2e;
+      color: white; border: none; border-radius: 8px;
+      font-size: 14px; font-weight: 600; cursor: pointer;
+    }
+    .print-btn:hover { background: #00d4aa; }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    .info-section {
+      max-width: 800px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+
+    @media print {
+      header, .calculator-box, .info-section, footer, .quote-actions {
+        display: none !important;
+      }
+      .quotation-preview {
+        display: block !important; border: none;
+        box-shadow: none; margin: 0; padding: 20px;
+      }
+    }
+  </style>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Quotation Generator</h2>
+  <p>Create professional GST quotations for your business clients</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="section-title">🏢 Your Company</div>
+
+  <div class="field">
+    <label>Company Name</label>
+    <input type="text" id="companyName" placeholder="e.g. ABC Enterprises Pvt Ltd" value="">
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>GSTIN</label>
+      <input type="text" id="companyGST" placeholder="e.g. 27AABCU9603R1ZX">
+    </div>
+    <div class="field">
+      <label>Phone / Email</label>
+      <input type="text" id="companyContact" placeholder="e.g. +91 98765 43210">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Company Address</label>
+    <textarea id="companyAddress" placeholder="Full address with PIN code"></textarea>
+  </div>
+
+  <div class="section-title">👤 Client Details</div>
+
+  <div class="field">
+    <label>Client / Company Name</label>
+    <input type="text" id="clientName" placeholder="e.g. XYZ Corporation">
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Client GSTIN (Optional)</label>
+      <input type="text" id="clientGST" placeholder="e.g. 07AAACR4849R1ZM">
+    </div>
+    <div class="field">
+      <label>Quotation Date</label>
+      <input type="date" id="quoteDate" value="">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Quotation Number</label>
+    <input type="text" id="quoteNumber" placeholder="e.g. QT-2026-001">
+  </div>
+
+  <div class="section-title">📋 Items</div>
+
+  <div id="itemsContainer">
+    <div class="item-row" data-index="0">
+      <div class="item-row-header">
+        <span>Item #1</span>
+        <button class="item-remove" onclick="removeItem(0)" style="display:none;">Remove</button>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Description</label>
+          <input type="text" class="item-desc" placeholder="Product or service description">
+        </div>
+        <div class="field">
+          <label>HSN / SAC Code</label>
+          <input type="text" class="item-hsn" placeholder="e.g. 998314">
+        </div>
+      </div>
+      <div class="field-row-3">
+        <div class="field">
+          <label>Qty</label>
+          <input type="number" class="item-qty" value="1" min="1" oninput="calculateQuote()">
+        </div>
+        <div class="field">
+          <label>Rate (₹)</label>
+          <div class="input-prefix">
+            <input type="number" class="item-rate" value="0" oninput="calculateQuote()">
+          </div>
+        </div>
+        <div class="field">
+          <label>GST %</label>
+          <select class="item-gst" onchange="calculateQuote()">
+            <option value="0">0% (Exempt)</option>
+            <option value="5">5%</option>
+            <option value="12">12%</option>
+            <option value="18" selected>18%</option>
+            <option value="28">28%</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-secondary" onclick="addItem()" style="width:100%; margin-bottom:16px;">+ Add Another Item</button>
+
+  <div class="section-title">💰 Additional Details</div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Discount (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="discountAmount" value="0" oninput="calculateQuote()">
+      </div>
+    </div>
+    <div class="field">
+      <label>Round Off (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="roundOff" value="0" oninput="calculateQuote()">
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>IGST (Inter-state) or CGST+SGST (Intra-state)</label>
+    <select id="gstType" onchange="calculateQuote()">
+      <option value="intra">CGST + SGST (Intra-state / Same State)</option>
+      <option value="inter">IGST (Inter-state / Different State)</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label>Terms & Conditions</label>
+    <textarea id="terms" placeholder="Payment terms, delivery timeline, validity, etc.">1. Quotation valid for 30 days from date of issue.
+2. 50% advance payment required.
+3. Delivery within 7-10 business days after confirmation.
+4. GST extra as applicable.
+5. Prices subject to change without notice.</textarea>
+  </div>
+
+  <button class="calc-btn" onclick="generateQuotation()">Generate Quotation</button>
+
+  <div class="quotation-preview" id="quotationPreview">
+
+    <div class="quote-header">
+      <div class="quote-company">
+        <h3 id="previewCompany">Company Name</h3>
+        <p id="previewCompanyDetails">GSTIN: -<br>Address: -<br>Contact: -</p>
+      </div>
+      <div class="quote-meta">
+        <div class="label">Quotation #</div>
+        <div class="value" id="previewQuoteNum">-</div>
+        <div class="label" style="margin-top:8px;">Date</div>
+        <div class="value" id="previewDate">-</div>
+      </div>
+    </div>
+
+    <div class="quote-to">
+      <h4>To</h4>
+      <p id="previewClient">Client Name<br>GSTIN: -</p>
+    </div>
+
+    <table class="quote-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Description</th>
+          <th>HSN</th>
+          <th class="num">Qty</th>
+          <th class="num">Rate</th>
+          <th class="num">Amount</th>
+          <th class="num">GST</th>
+          <th class="num">Total</th>
+        </tr>
+      </thead>
+      <tbody id="previewItems"></tbody>
+    </table>
+
+    <div class="quote-summary">
+      <div class="summary-row">
+        <span class="bl">Subtotal</span>
+        <span class="br" id="previewSubtotal">₹0</span>
+      </div>
+      <div class="summary-row">
+        <span class="bl">Discount</span>
+        <span class="br" id="previewDiscount">-₹0</span>
+      </div>
+      <div class="summary-row" id="cgstRow">
+        <span class="bl">CGST (9%)</span>
+        <span class="br" id="previewCGST">₹0</span>
+      </div>
+      <div class="summary-row" id="sgstRow">
+        <span class="bl">SGST (9%)</span>
+        <span class="br" id="previewSGST">₹0</span>
+      </div>
+      <div class="summary-row" id="igstRow" style="display:none;">
+        <span class="bl">IGST (18%)</span>
+        <span class="br" id="previewIGST">₹0</span>
+      </div>
+      <div class="summary-row">
+        <span class="bl">Round Off</span>
+        <span class="br" id="previewRound">₹0</span>
+      </div>
+      <div class="summary-row total">
+        <span class="bl">Grand Total</span>
+        <span class="br" id="previewTotal">₹0</span>
+      </div>
+    </div>
+
+    <div class="quote-terms">
+      <h4>Terms & Conditions</h4>
+      <p id="previewTerms">-</p>
+    </div>
+
+    <div class="quote-actions">
+      <button class="print-btn" onclick="window.print()">🖨️ Print Quotation</button>
+      <button class="btn-secondary" onclick="editQuotation()">✏️ Edit</button>
+    </div>
+
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>How to Use the Quotation Generator</h2>
+  <p>Our Quotation Generator helps Indian businesses create professional, GST-compliant quotations in seconds. Add your company details, client information, items with rates, and generate a print-ready quotation.</p>
+  
+  <h3>GST in Quotations</h3>
+  <p>For intra-state transactions (same state), CGST (Central) and SGST (State) are applied equally. For inter-state transactions, IGST (Integrated) is applied. Our calculator handles both scenarios automatically.</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>Is a quotation legally binding?</p>
+    <p>No, a quotation is an estimate and not legally binding like an invoice. However, once accepted by the client (through a purchase order), it becomes part of the contract. Always mention validity period and terms.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is HSN code and do I need it?</p>
+    <p>HSN (Harmonized System of Nomenclature) codes are mandatory for GST invoices if your turnover exceeds ₹1.5 crore (₹5 crore for some categories). It's good practice to include them in quotations too.</p>
+  </div>
+  <div class="faq-box">
+    <p>Can I use this for proforma invoices?</p>
+    <p>Yes, the format works for proforma invoices too. Simply change the title from "Quotation" to "Proforma Invoice" in the print settings or by editing the company name field.</p>
+  </div>
+  <div class="faq-box">
+    <p>How do I handle multiple GST rates in one quotation?</p>
+    <p>Our generator supports different GST rates per item. CGST/SGST or IGST is calculated per line item and summed up. This is useful when you sell both goods (18%) and services (12%) together.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  let itemCount = 1;
+
+  // Set today's date
+  document.getElementById('quoteDate').value = new Date().toISOString().split('T')[0];
+
+  function addItem() {
+    const container = document.getElementById('itemsContainer');
+    const index = itemCount;
+    
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'item-row';
+    itemDiv.setAttribute('data-index', index);
+    itemDiv.innerHTML = `
+      <div class="item-row-header">
+        <span>Item #${index + 1}</span>
+        <button class="item-remove" onclick="removeItem(${index})">Remove</button>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Description</label>
+          <input type="text" class="item-desc" placeholder="Product or service description">
+        </div>
+        <div class="field">
+          <label>HSN / SAC Code</label>
+          <input type="text" class="item-hsn" placeholder="e.g. 998314">
+        </div>
+      </div>
+      <div class="field-row-3">
+        <div class="field">
+          <label>Qty</label>
+          <input type="number" class="item-qty" value="1" min="1" oninput="calculateQuote()">
+        </div>
+        <div class="field">
+          <label>Rate (₹)</label>
+          <div class="input-prefix">
+            <input type="number" class="item-rate" value="0" oninput="calculateQuote()">
+          </div>
+        </div>
+        <div class="field">
+          <label>GST %</label>
+          <select class="item-gst" onchange="calculateQuote()">
+            <option value="0">0%</option>
+            <option value="5">5%</option>
+            <option value="12">12%</option>
+            <option value="18" selected>18%</option>
+            <option value="28">28%</option>
+          </select>
+        </div>
+      </div>
+    `;
+    
+    container.appendChild(itemDiv);
+    itemCount++;
+    
+    // Show remove button on first item if more than one
+    if (itemCount > 1) {
+      document.querySelector('.item-remove').style.display = 'inline-block';
+    }
+  }
+
+  function removeItem(index) {
+    const item = document.querySelector(`.item-row[data-index="${index}"]`);
+    if (item) {
+      item.remove();
+      calculateQuote();
+    }
+  }
+
+  function calculateQuote() {
+    // This function can be used for real-time calculations if needed
+    // Currently calculations happen in generateQuotation
+  }
+
+  function generateQuotation() {
+    const companyName = document.getElementById('companyName').value || 'Your Company';
+    const companyGST = document.getElementById('companyGST').value || '-';
+    const companyContact = document.getElementById('companyContact').value || '-';
+    const companyAddress = document.getElementById('companyAddress').value || '-';
+    const clientName = document.getElementById('clientName').value || 'Client Name';
+    const clientGST = document.getElementById('clientGST').value;
+    const quoteDate = document.getElementById('quoteDate').value;
+    const quoteNumber = document.getElementById('quoteNumber').value || '-';
+    const discount = parseFloat(document.getElementById('discountAmount').value) || 0;
+    const roundOff = parseFloat(document.getElementById('roundOff').value) || 0;
+    const gstType = document.getElementById('gstType').value;
+    const terms = document.getElementById('terms').value;
+
+    // Collect items
+    const items = [];
+    let subtotal = 0;
+    let totalGST = 0;
+
+    document.querySelectorAll('.item-row').forEach((row, idx) => {
+      const desc = row.querySelector('.item-desc').value || 'Item ' + (idx + 1);
+      const hsn = row.querySelector('.item-hsn').value || '-';
+      const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+      const rate = parseFloat(row.querySelector('.item-rate').value) || 0;
+      const gstPercent = parseFloat(row.querySelector('.item-gst').value) || 0;
+
+      const amount = qty * rate;
+      const gstAmount = amount * (gstPercent / 100);
+      const total = amount + gstAmount;
+
+      items.push({ desc, hsn, qty, rate, amount, gstPercent, gstAmount, total });
+      subtotal += amount;
+      totalGST += gstAmount;
+    });
+
+    // Apply discount
+    const afterDiscount = Math.max(0, subtotal - discount);
+
+    // Calculate final GST
+    let cgst = 0, sgst = 0, igst = 0;
+    if (gstType === 'intra') {
+      cgst = totalGST / 2;
+      sgst = totalGST / 2;
+    } else {
+      igst = totalGST;
+    }
+
+    const grandTotal = afterDiscount + totalGST + roundOff;
+
+    // Update preview
+    document.getElementById('previewCompany').textContent = companyName;
+    document.getElementById('previewCompanyDetails').innerHTML = 
+      `GSTIN: ${companyGST}<br>Address: ${companyAddress.replace(/\n/g, '<br>')}<br>Contact: ${companyContact}`;
+    
+    document.getElementById('previewQuoteNum').textContent = quoteNumber;
+    document.getElementById('previewDate').textContent = quoteDate ? new Date(quoteDate).toLocaleDateString('en-IN') : '-';
+    
+    let clientHTML = clientName;
+    if (clientGST) clientHTML += `<br>GSTIN: ${clientGST}`;
+    document.getElementById('previewClient').innerHTML = clientHTML;
+
+    // Items table
+    const tbody = document.getElementById('previewItems');
+    tbody.innerHTML = items.map((item, idx) => `
+      <tr>
+        <td>${idx + 1}</td>
+        <td>${item.desc}</td>
+        <td>${item.hsn}</td>
+        <td class="num">${item.qty}</td>
+        <td class="num">₹${item.rate.toLocaleString('en-IN')}</td>
+        <td class="num">₹${item.amount.toLocaleString('en-IN')}</td>
+        <td class="num">${item.gstPercent}%<br>₹${Math.round(item.gstAmount).toLocaleString('en-IN')}</td>
+        <td class="num">₹${Math.round(item.total).toLocaleString('en-IN')}</td>
+      </tr>
+    `).join('');
+
+    // Summary
+    document.getElementById('previewSubtotal').textContent = '₹' + subtotal.toLocaleString('en-IN');
+    document.getElementById('previewDiscount').textContent = '-₹' + discount.toLocaleString('en-IN');
+    
+    if (gstType === 'intra') {
+      document.getElementById('cgstRow').style.display = 'flex';
+      document.getElementById('sgstRow').style.display = 'flex';
+      document.getElementById('igstRow').style.display = 'none';
+      document.getElementById('previewCGST').textContent = '₹' + Math.round(cgst).toLocaleString('en-IN');
+      document.getElementById('previewSGST').textContent = '₹' + Math.round(sgst).toLocaleString('en-IN');
+    } else {
+      document.getElementById('cgstRow').style.display = 'none';
+      document.getElementById('sgstRow').style.display = 'none';
+      document.getElementById('igstRow').style.display = 'flex';
+      document.getElementById('previewIGST').textContent = '₹' + Math.round(igst).toLocaleString('en-IN');
+    }
+
+    document.getElementById('previewRound').textContent = (roundOff >= 0 ? '+' : '') + '₹' + roundOff.toLocaleString('en-IN');
+    document.getElementById('previewTotal').textContent = '₹' + Math.round(grandTotal).toLocaleString('en-IN');
+    document.getElementById('previewTerms').textContent = terms;
+
+    document.getElementById('quotationPreview').classList.add('show');
+    document.getElementById('quotationPreview').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function editQuotation() {
+    document.getElementById('quotationPreview').classList.remove('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+
+</body>
+</html>
