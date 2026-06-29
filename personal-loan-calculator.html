@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Loan Calculator India 2026 - EMI, Interest, Eligibility - Prime Tools</title>
+  <meta name="description" content="Free Personal Loan Calculator for India. Calculate EMI, total interest, processing fees, prepayment savings. Check loan eligibility based on salary. Compare banks.">
+  <meta name="keywords" content="personal loan calculator India, personal loan EMI calculator, loan eligibility calculator, SBI personal loan, HDFC personal loan, ICICI personal loan, prepayment calculator, reducing balance EMI">
+  <meta property="og:title" content="Personal Loan Calculator India 2026 - EMI, Interest, Eligibility - Prime Tools">
+  <meta property="og:description" content="Calculate personal loan EMI with processing fees, prepayment savings & eligibility check. Compare top Indian banks.">
+  <meta property="og:url" content="https://primetoolsapp.com/personal-loan-calculator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/personal-loan-calculator.html">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 720px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-size: 14px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 16px; padding-bottom: 8px;
+      border-bottom: 2px solid #e0f7f3;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .section-title:first-child { margin-top: 0; }
+
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #555; margin-bottom: 8px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 16px; outline: none;
+      transition: border-color 0.2s; background: white;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    .field-row-3 {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) { .field-row-3 { grid-template-columns: 1fr; } }
+
+    .input-prefix {
+      position: relative;
+    }
+    .input-prefix::before {
+      content: '₹'; position: absolute;
+      left: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 16px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-prefix input { padding-left: 36px; }
+
+    .input-suffix {
+      position: relative;
+    }
+    .input-suffix::after {
+      content: '%'; position: absolute;
+      right: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 14px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-suffix input { padding-right: 36px; }
+
+    .range-wrap {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .range-wrap input[type="range"] {
+      flex: 1; height: 6px;
+      -webkit-appearance: none; appearance: none;
+      background: #e0e0e0; border-radius: 3px; outline: none;
+    }
+    .range-wrap input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #00d4aa; cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,212,170,0.4);
+    }
+    .range-val {
+      min-width: 70px; text-align: right;
+      font-size: 14px; font-weight: 700; color: #00d4aa;
+    }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .result-box {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 12px; padding: 28px;
+      margin-top: 24px; display: none;
+    }
+    .result-box.show { display: block; }
+
+    .result-grid-4 {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 12px; margin-bottom: 20px;
+    }
+    @media (max-width: 700px) { .result-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+
+    .result-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px 12px;
+      text-align: center;
+    }
+    .result-item .lbl {
+      font-size: 11px; color: #888;
+      margin-bottom: 6px; text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .result-item .val {
+      font-size: 20px; font-weight: 700; color: #00d4aa;
+    }
+    .result-item .val.small { font-size: 16px; }
+    .result-item .val.red { color: #ff6b6b; }
+
+    .result-divider {
+      height: 1px; background: rgba(255,255,255,0.1);
+      margin: 16px 0;
+    }
+
+    .breakdown-section {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px;
+    }
+    .breakdown-section h4 {
+      font-size: 12px; color: #888;
+      margin-bottom: 12px; text-align: center;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .bl { color: #aaa; }
+    .breakdown-row .br { color: #fff; font-weight: 600; }
+    .breakdown-row .br.red { color: #ff6b6b; }
+    .breakdown-row.total {
+      font-size: 15px; padding-top: 12px; margin-top: 4px;
+      border-top: 2px solid rgba(255,255,255,0.15);
+    }
+    .breakdown-row.total .br { color: #00d4aa; font-size: 18px; }
+
+    .chart-bar {
+      display: flex; align-items: center; gap: 12px;
+      margin: 8px 0; font-size: 13px;
+    }
+    .chart-bar .bar-label {
+      min-width: 80px; color: #aaa; text-align: right;
+    }
+    .chart-bar .bar-track {
+      flex: 1; height: 24px; background: rgba(255,255,255,0.08);
+      border-radius: 4px; overflow: hidden; position: relative;
+    }
+    .chart-bar .bar-fill {
+      height: 100%; border-radius: 4px;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-right: 8px; font-size: 11px; font-weight: 700; color: white;
+      transition: width 0.6s ease;
+    }
+    .chart-bar .bar-fill.principal { background: #00d4aa; }
+    .chart-bar .bar-fill.interest { background: #ff6b6b; }
+    .chart-bar .bar-fill.fee { background: #ffd93d; color: #333; }
+
+    .eligibility-box {
+      background: #f0fdf8; border: 1px solid #b2ead9;
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px; display: none;
+    }
+    .eligibility-box.show { display: block; }
+    .eligibility-box h4 {
+      font-size: 14px; color: #00a878; margin-bottom: 12px;
+    }
+    .eligibility-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 500px) { .eligibility-grid { grid-template-columns: 1fr; } }
+    .eligibility-card {
+      background: white; border-radius: 8px;
+      padding: 14px; text-align: center;
+    }
+    .eligibility-card .lbl {
+      font-size: 11px; color: #888; margin-bottom: 4px;
+    }
+    .eligibility-card .val {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+    }
+    .eligibility-card .val.red { color: #ff6b6b; }
+    .eligibility-card .val.green { color: #00a878; }
+
+    .prepay-box {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px; display: none;
+    }
+    .prepay-box.show { display: block; }
+    .prepay-box h4 {
+      font-size: 12px; color: #888;
+      margin-bottom: 12px; text-align: center;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    .toggle-btn {
+      text-align: center; margin-top: 16px;
+    }
+    .toggle-btn button {
+      background: transparent; border: 1px solid #00d4aa;
+      color: #00d4aa; padding: 8px 20px;
+      border-radius: 8px; cursor: pointer;
+      font-size: 13px; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .toggle-btn button:hover { background: #00d4aa; color: white; }
+
+    .amort-table-wrap {
+      display: none; margin-top: 16px;
+      max-height: 300px; overflow-y: auto;
+      border-radius: 8px; background: rgba(255,255,255,0.03);
+    }
+    .amort-table-wrap.show { display: block; }
+
+    .amort-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 12px;
+    }
+    .amort-table th {
+      background: rgba(0,212,170,0.15); color: #00d4aa;
+      padding: 10px 8px; text-align: right; font-weight: 600;
+      position: sticky; top: 0;
+    }
+    .amort-table th:first-child { text-align: left; }
+    .amort-table td {
+      padding: 8px; text-align: right;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: #ccc;
+    }
+    .amort-table td:first-child { text-align: left; color: #fff; font-weight: 600; }
+    .amort-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+    .rate-comparison {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin: 16px 0;
+    }
+    @media (max-width: 600px) { .rate-comparison { grid-template-columns: 1fr; } }
+    .rate-card {
+      background: #f8fffe; border: 1px solid #e0f7f3;
+      border-radius: 10px; padding: 16px; text-align: center;
+    }
+    .rate-card .bank { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+    .rate-card .rate { font-size: 20px; font-weight: 700; color: #00d4aa; }
+    .rate-card .type { font-size: 11px; color: #888; }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    .info-section {
+      max-width: 720px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+  </style>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Personal Loan Calculator</h2>
+  <p>Calculate EMI, total interest, processing fees, prepayment savings & check eligibility</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="section-title">💰 Loan Details</div>
+
+  <div class="field">
+    <label>Loan Amount (₹)</label>
+    <div class="input-prefix">
+      <input type="number" id="loanAmount" placeholder="e.g. 500000" value="500000">
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Interest Rate (p.a.)</label>
+      <div class="input-suffix">
+        <input type="number" id="interestRate" step="0.01" value="11.5">
+      </div>
+    </div>
+    <div class="field">
+      <label>Tenure (Months)</label>
+      <input type="number" id="tenureMonths" min="6" max="84" value="36">
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Processing Fee (%)</label>
+      <div class="input-suffix">
+        <input type="number" id="processingFee" step="0.01" value="2">
+      </div>
+    </div>
+    <div class="field">
+      <label>Processing Fee (₹) <span style="font-weight:400;color:#888;">or enter amount</span></label>
+      <div class="input-prefix">
+        <input type="number" id="processingFeeAmount" placeholder="Auto-calculated" oninput="syncProcessingFee()">
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">💼 Eligibility Check (Optional)</div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Monthly Net Salary (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="monthlySalary" placeholder="e.g. 50000" value="0">
+      </div>
+    </div>
+    <div class="field">
+      <label>Existing EMIs (₹/month)</label>
+      <div class="input-prefix">
+        <input type="number" id="existingEMIs" placeholder="e.g. 10000" value="0">
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">💡 Prepayment (Optional)</div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Prepayment Amount (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="prepayAmount" placeholder="e.g. 100000" value="0">
+      </div>
+    </div>
+    <div class="field">
+      <label>After How Many Months?</label>
+      <input type="number" id="prepayMonth" min="1" max="84" value="12">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Prepayment Charges (%)</label>
+    <div class="input-suffix">
+      <input type="number" id="prepayCharges" step="0.1" value="3">
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calculatePersonalLoan()">Calculate Personal Loan</button>
+
+  <div class="result-box" id="resultBox">
+
+    <div class="result-grid-4">
+      <div class="result-item">
+        <div class="lbl">Monthly EMI</div>
+        <div class="val" id="resEMI">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Total Interest</div>
+        <div class="val red" id="resInterest">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Total Payment</div>
+        <div class="val" id="resTotal">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Processing Fee</div>
+        <div class="val small" id="resFee">-</div>
+      </div>
+    </div>
+
+    <div class="result-divider"></div>
+
+    <div class="breakdown-section">
+      <h4>Cost Breakdown</h4>
+      <div class="chart-bar">
+        <div class="bar-label">Principal</div>
+        <div class="bar-track">
+          <div class="bar-fill principal" id="barPrincipal" style="width:0%">0%</div>
+        </div>
+      </div>
+      <div class="chart-bar">
+        <div class="bar-label">Interest</div>
+        <div class="bar-track">
+          <div class="bar-fill interest" id="barInterest" style="width:0%">0%</div>
+        </div>
+      </div>
+      <div class="chart-bar">
+        <div class="bar-label">Fee</div>
+        <div class="bar-track">
+          <div class="bar-fill fee" id="barFee" style="width:0%">0%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="breakdown-section">
+      <h4>Detailed Summary</h4>
+      <div class="breakdown-row">
+        <span class="bl">Loan Amount</span>
+        <span class="br" id="sumLoan">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Processing Fee</span>
+        <span class="br" id="sumFee">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Net Disbursed</span>
+        <span class="br" id="sumDisbursed">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Total Interest Payable</span>
+        <span class="br red" id="sumInterest">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Total Amount Repaid</span>
+        <span class="br" id="sumRepaid">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">Total Cost of Loan</span>
+        <span class="br" id="sumTotalCost">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Effective Interest Rate</span>
+        <span class="br" id="sumEffectiveRate">-</span>
+      </div>
+    </div>
+
+    <div class="eligibility-box" id="eligibilityBox">
+      <h4>✅ Eligibility Check</h4>
+      <div class="eligibility-grid">
+        <div class="eligibility-card">
+          <div class="lbl">Max EMI Allowed (50% of income)</div>
+          <div class="val" id="eligMaxEMI">-</div>
+        </div>
+        <div class="eligibility-card">
+          <div class="lbl">Available for New EMI</div>
+          <div class="val" id="eligAvailable">-</div>
+        </div>
+        <div class="eligibility-card">
+          <div class="lbl">Max Loan You Can Get</div>
+          <div class="val" id="eligMaxLoan">-</div>
+        </div>
+        <div class="eligibility-card">
+          <div class="lbl">Status</div>
+          <div class="val" id="eligStatus">-</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prepay-box" id="prepayBox">
+      <h4>💡 Prepayment Impact</h4>
+      <div class="breakdown-row">
+        <span class="bl">Prepayment Charges</span>
+        <span class="br red" id="prepayChargeAmount">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Interest Saved</span>
+        <span class="br" id="prepaySaved">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Net Savings</span>
+        <span class="br" id="prepayNet">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">New EMI (Same Tenure)</span>
+        <span class="br" id="prepayNewEMI">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">Tenure Reduced (Same EMI)</span>
+        <span class="br" id="prepayNewTenure">-</span>
+      </div>
+    </div>
+
+    <div class="toggle-btn">
+      <button onclick="toggleAmortization()">📊 View Amortization Schedule</button>
+    </div>
+
+    <div class="amort-table-wrap" id="amortTableWrap">
+      <table class="amort-table">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>EMI</th>
+            <th>Principal</th>
+            <th>Interest</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody id="amortBody"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>How to Use the Personal Loan Calculator</h2>
+  <p>Our Personal Loan Calculator helps you estimate EMI, total interest, and processing fees for personal loans from Indian banks. It also checks your eligibility based on income and existing EMIs.</p>
+  
+  <h3>Current Personal Loan Interest Rates (2026)</h3>
+  <div class="rate-comparison">
+    <div class="rate-card">
+      <div class="bank">SBI Personal Loan</div>
+      <div class="rate">11.15%</div>
+      <div class="type">Xpress Credit</div>
+    </div>
+    <div class="rate-card">
+      <div class="bank">HDFC Bank</div>
+      <div class="rate">10.50%</div>
+      <div class="type">Personal Loan</div>
+    </div>
+    <div class="rate-card">
+      <div class="bank">ICICI Bank</div>
+      <div class="rate">10.75%</div>
+      <div class="type">Personal Loan</div>
+    </div>
+  </div>
+
+  <h3>Understanding Personal Loan Costs</h3>
+  <p>Personal loans in India typically charge 10-16% interest with processing fees of 0.5-3%. Always compare the effective interest rate which includes processing fees. Prepayment charges (usually 2-5%) apply if you close the loan early.</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>What is the maximum personal loan amount I can get?</p>
+    <p>Most banks offer personal loans up to 10-15 times your monthly net salary, subject to a maximum of ₹20-40 lakhs. Your existing EMIs should not exceed 50% of your monthly income (FOIR ratio).</p>
+  </div>
+  <div class="faq-box">
+    <p>How is personal loan EMI calculated?</p>
+    <p>EMI = [P × R × (1+R)^N] / [(1+R)^N - 1], where P is loan amount, R is monthly interest rate, and N is tenure in months. Personal loans use reducing balance method where interest is calculated on outstanding principal.</p>
+  </div>
+  <div class="faq-box">
+    <p>Can I prepay my personal loan without charges?</p>
+    <p>Most banks charge 2-5% prepayment penalty on the outstanding principal. However, some banks waive this after 12 months. Check your loan agreement. Our calculator shows exact prepayment savings after charges.</p>
+  </div>
+  <div class="faq-box">
+    <p>What documents are needed for personal loan?</p>
+    <p>Typically: ID proof (Aadhaar/PAN), address proof, last 3-6 months salary slips, bank statements, and Form 16/ITR. Self-employed need additional business proof and ITR for 2-3 years.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  function syncProcessingFee() {
+    const feeAmount = parseFloat(document.getElementById('processingFeeAmount').value) || 0;
+    const loanAmount = parseFloat(document.getElementById('loanAmount').value) || 0;
+    if (loanAmount > 0) {
+      document.getElementById('processingFee').value = (feeAmount / loanAmount * 100).toFixed(2);
+    }
+  }
+
+  function calculateEMI(principal, annualRate, months) {
+    const monthlyRate = annualRate / 12 / 100;
+    if (monthlyRate === 0) return principal / months;
+    return principal * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+  }
+
+  function calculatePersonalLoan() {
+    const loanAmount = parseFloat(document.getElementById('loanAmount').value) || 0;
+    const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+    const tenureMonths = parseInt(document.getElementById('tenureMonths').value) || 36;
+    const processingFeePercent = parseFloat(document.getElementById('processingFee').value) || 0;
+    const monthlySalary = parseFloat(document.getElementById('monthlySalary').value) || 0;
+    const existingEMIs = parseFloat(document.getElementById('existingEMIs').value) || 0;
+    const prepayAmount = parseFloat(document.getElementById('prepayAmount').value) || 0;
+    const prepayMonth = parseInt(document.getElementById('prepayMonth').value) || 12;
+    const prepayChargesPercent = parseFloat(document.getElementById('prepayCharges').value) || 3;
+
+    if (loanAmount <= 0 || interestRate <= 0 || tenureMonths <= 0) {
+      alert('Please enter valid loan amount, interest rate and tenure.');
+      return;
+    }
+
+    const emi = calculateEMI(loanAmount, interestRate, tenureMonths);
+    const totalPayment = emi * tenureMonths;
+    const totalInterest = totalPayment - loanAmount;
+    const processingFee = loanAmount * processingFeePercent / 100;
+    const netDisbursed = loanAmount - processingFee;
+    const totalCost = totalPayment + processingFee;
+    const effectiveRate = ((totalCost / loanAmount - 1) / (tenureMonths / 12)) * 100;
+
+    // Display main results
+    document.getElementById('resEMI').textContent = '₹' + Math.round(emi).toLocaleString('en-IN');
+    document.getElementById('resInterest').textContent = '₹' + Math.round(totalInterest).toLocaleString('en-IN');
+    document.getElementById('resTotal').textContent = '₹' + Math.round(totalPayment).toLocaleString('en-IN');
+    document.getElementById('resFee').textContent = '₹' + Math.round(processingFee).toLocaleString('en-IN');
+
+    // Summary
+    document.getElementById('sumLoan').textContent = '₹' + loanAmount.toLocaleString('en-IN');
+    document.getElementById('sumFee').textContent = '₹' + Math.round(processingFee).toLocaleString('en-IN');
+    document.getElementById('sumDisbursed').textContent = '₹' + Math.round(netDisbursed).toLocaleString('en-IN');
+    document.getElementById('sumInterest').textContent = '₹' + Math.round(totalInterest).toLocaleString('en-IN');
+    document.getElementById('sumRepaid').textContent = '₹' + Math.round(totalPayment).toLocaleString('en-IN');
+    document.getElementById('sumTotalCost').textContent = '₹' + Math.round(totalCost).toLocaleString('en-IN');
+    document.getElementById('sumEffectiveRate').textContent = effectiveRate.toFixed(2) + '% p.a.';
+
+    // Chart bars
+    const totalForChart = loanAmount + totalInterest + processingFee;
+    const pPct = Math.max(5, loanAmount / totalForChart * 100);
+    const iPct = Math.max(5, totalInterest / totalForChart * 100);
+    const fPct = Math.max(3, processingFee / totalForChart * 100);
+
+    document.getElementById('barPrincipal').style.width = pPct + '%';
+    document.getElementById('barPrincipal').textContent = Math.round(pPct) + '%';
+    document.getElementById('barInterest').style.width = iPct + '%';
+    document.getElementById('barInterest').textContent = Math.round(iPct) + '%';
+    document.getElementById('barFee').style.width = fPct + '%';
+    document.getElementById('barFee').textContent = Math.round(fPct) + '%';
+
+    // Eligibility check
+    if (monthlySalary > 0) {
+      document.getElementById('eligibilityBox').classList.add('show');
+      const maxEMIAllowed = monthlySalary * 0.50;
+      const availableForEMI = maxEMIAllowed - existingEMIs;
+      const maxLoan = availableForEMI > 0 ? calculateMaxLoan(availableForEMI, interestRate, tenureMonths) : 0;
+      const isEligible = emi <= availableForEMI;
+
+      document.getElementById('eligMaxEMI').textContent = '₹' + Math.round(maxEMIAllowed).toLocaleString('en-IN');
+      document.getElementById('eligAvailable').textContent = '₹' + Math.round(availableForEMI).toLocaleString('en-IN');
+      document.getElementById('eligMaxLoan').textContent = '₹' + Math.round(maxLoan).toLocaleString('en-IN');
+      
+      const statusEl = document.getElementById('eligStatus');
+      if (isEligible) {
+        statusEl.textContent = '✅ Eligible';
+        statusEl.className = 'val green';
+      } else {
+        statusEl.textContent = '❌ Not Eligible';
+        statusEl.className = 'val red';
+      }
+    } else {
+      document.getElementById('eligibilityBox').classList.remove('show');
+    }
+
+    // Prepayment calculation
+    if (prepayAmount > 0 && prepayMonth < tenureMonths) {
+      const monthlyRate = interestRate / 12 / 100;
+      let balance = loanAmount;
+      let interestBefore = 0;
+
+      // Calculate balance at prepay month
+      for (let m = 1; m <= prepayMonth; m++) {
+        const interest = balance * monthlyRate;
+        const principal = emi - interest;
+        balance -= principal;
+        interestBefore += interest;
+      }
+
+      const prepayCharges = prepayAmount * prepayChargesPercent / 100;
+      const newPrincipal = balance - prepayAmount;
+      
+      if (newPrincipal > 0) {
+        const remainingMonths = tenureMonths - prepayMonth;
+        
+        // Same tenure, reduced EMI
+        const newEMI = calculateEMI(newPrincipal, interestRate, remainingMonths);
+        const totalPaidNew = newEMI * remainingMonths + emi * prepayMonth + prepayAmount + prepayCharges;
+        const interestSaved = totalPayment - (totalPaidNew - processingFee);
+        const netSavings = interestSaved - prepayCharges;
+
+        // Same EMI, reduced tenure
+        let newBalance = newPrincipal;
+        let newTenure = 0;
+        while (newBalance > 0 && newTenure < 600) {
+          const interest = newBalance * monthlyRate;
+          const principal = emi - interest;
+          newBalance -= principal;
+          newTenure++;
+        }
+
+        document.getElementById('prepayBox').classList.add('show');
+        document.getElementById('prepayChargeAmount').textContent = '₹' + Math.round(prepayCharges).toLocaleString('en-IN');
+        document.getElementById('prepaySaved').textContent = '₹' + Math.round(interestSaved).toLocaleString('en-IN');
+        document.getElementById('prepayNet').textContent = '₹' + Math.round(netSavings).toLocaleString('en-IN');
+        document.getElementById('prepayNet').className = 'br ' + (netSavings >= 0 ? '' : 'red');
+        document.getElementById('prepayNewEMI').textContent = '₹' + Math.round(newEMI).toLocaleString('en-IN');
+        document.getElementById('prepayNewTenure').textContent = newTenure + ' months';
+      } else {
+        document.getElementById('prepayBox').classList.remove('show');
+      }
+    } else {
+      document.getElementById('prepayBox').classList.remove('show');
+    }
+
+    // Amortization schedule
+    generateAmortization(loanAmount, interestRate, tenureMonths, emi);
+
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('amortTableWrap').classList.remove('show');
+  }
+
+  function calculateMaxLoan(emi, annualRate, months) {
+    const monthlyRate = annualRate / 12 / 100;
+    if (monthlyRate === 0) return emi * months;
+    return emi * (Math.pow(1 + monthlyRate, months) - 1) / (monthlyRate * Math.pow(1 + monthlyRate, months));
+  }
+
+  function generateAmortization(principal, annualRate, months, emi) {
+    const monthlyRate = annualRate / 12 / 100;
+    const tbody = document.getElementById('amortBody');
+    tbody.innerHTML = '';
+
+    let balance = principal;
+    for (let m = 1; m <= months; m++) {
+      const interest = balance * monthlyRate;
+      const principalPaid = emi - interest;
+      balance -= principalPaid;
+      if (balance < 0) balance = 0;
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>Month ${m}</td>
+        <td>₹${Math.round(emi).toLocaleString('en-IN')}</td>
+        <td>₹${Math.round(principalPaid).toLocaleString('en-IN')}</td>
+        <td>₹${Math.round(interest).toLocaleString('en-IN')}</td>
+        <td>₹${Math.round(balance).toLocaleString('en-IN')}</td>
+      `;
+      tbody.appendChild(row);
+    }
+  }
+
+  function toggleAmortization() {
+    document.getElementById('amortTableWrap').classList.toggle('show');
+  }
+</script>
+
+</body>
+</html>
