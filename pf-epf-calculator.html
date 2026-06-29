@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PF EPF Calculator India 2026 - Provident Fund Interest, Pension - Prime Tools</title>
+  <meta name="description" content="Free PF/EPF Calculator for India. Calculate employee & employer contribution, EPS pension, interest earned, retirement corpus. Check EPF withdrawal rules.">
+  <meta name="keywords" content="PF calculator, EPF calculator India, provident fund calculator, EPF interest calculator, EPS pension calculator, EPF contribution, EPF withdrawal, retirement corpus calculator">
+  <meta property="og:title" content="PF EPF Calculator India 2026 - Provident Fund Interest, Pension - Prime Tools">
+  <meta property="og:description" content="Calculate your EPF corpus, monthly pension, and interest. Track employee & employer contributions with EPS split.">
+  <meta property="og:url" content="https://primetoolsapp.com/pf-epf-calculator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/pf-epf-calculator.html">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 720px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-size: 14px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 16px; padding-bottom: 8px;
+      border-bottom: 2px solid #e0f7f3;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .section-title:first-child { margin-top: 0; }
+
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #555; margin-bottom: 8px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 16px; outline: none;
+      transition: border-color 0.2s; background: white;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    .input-prefix {
+      position: relative;
+    }
+    .input-prefix::before {
+      content: '₹'; position: absolute;
+      left: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 16px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-prefix input { padding-left: 36px; }
+
+    .input-suffix {
+      position: relative;
+    }
+    .input-suffix::after {
+      content: '%'; position: absolute;
+      right: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 14px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-suffix input { padding-right: 36px; }
+
+    .range-wrap {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .range-wrap input[type="range"] {
+      flex: 1; height: 6px;
+      -webkit-appearance: none; appearance: none;
+      background: #e0e0e0; border-radius: 3px; outline: none;
+    }
+    .range-wrap input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #00d4aa; cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,212,170,0.4);
+    }
+    .range-val {
+      min-width: 70px; text-align: right;
+      font-size: 14px; font-weight: 700; color: #00d4aa;
+    }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .result-box {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 12px; padding: 28px;
+      margin-top: 24px; display: none;
+    }
+    .result-box.show { display: block; }
+
+    .result-grid-4 {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 12px; margin-bottom: 20px;
+    }
+    @media (max-width: 700px) { .result-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+
+    .result-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px 12px;
+      text-align: center;
+    }
+    .result-item .lbl {
+      font-size: 11px; color: #888;
+      margin-bottom: 6px; text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .result-item .val {
+      font-size: 18px; font-weight: 700; color: #00d4aa;
+    }
+    .result-item .val.small { font-size: 15px; }
+
+    .result-divider {
+      height: 1px; background: rgba(255,255,255,0.1);
+      margin: 16px 0;
+    }
+
+    .breakdown-section {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px;
+    }
+    .breakdown-section h4 {
+      font-size: 12px; color: #888;
+      margin-bottom: 12px; text-align: center;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .bl { color: #aaa; }
+    .breakdown-row .br { color: #fff; font-weight: 600; }
+    .breakdown-row .br.green { color: #00d4aa; }
+    .breakdown-row .br.blue { color: #6bcb77; }
+    .breakdown-row .br.orange { color: #ffd93d; }
+    .breakdown-row.total {
+      font-size: 15px; padding-top: 12px; margin-top: 4px;
+      border-top: 2px solid rgba(255,255,255,0.15);
+    }
+    .breakdown-row.total .br { color: #00d4aa; font-size: 18px; }
+
+    .chart-bar {
+      display: flex; align-items: center; gap: 12px;
+      margin: 8px 0; font-size: 13px;
+    }
+    .chart-bar .bar-label {
+      min-width: 100px; color: #aaa; text-align: right;
+    }
+    .chart-bar .bar-track {
+      flex: 1; height: 24px; background: rgba(255,255,255,0.08);
+      border-radius: 4px; overflow: hidden;
+    }
+    .chart-bar .bar-fill {
+      height: 100%; border-radius: 4px;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-right: 8px; font-size: 11px; font-weight: 700; color: white;
+      transition: width 0.6s ease;
+    }
+    .chart-bar .bar-fill.employee { background: #00d4aa; }
+    .chart-bar .bar-fill.employer { background: #6bcb77; }
+    .chart-bar .bar-fill.interest { background: #ffd93d; color: #333; }
+    .chart-bar .bar-fill.eps { background: #ff6b6b; }
+
+    .pension-box {
+      background: #f0fdf8; border: 1px solid #b2ead9;
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px;
+    }
+    .pension-box h4 {
+      font-size: 14px; color: #00a878; margin-bottom: 12px;
+    }
+    .pension-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 500px) { .pension-grid { grid-template-columns: 1fr; } }
+    .pension-card {
+      background: white; border-radius: 8px;
+      padding: 14px; text-align: center;
+    }
+    .pension-card .lbl {
+      font-size: 11px; color: #888; margin-bottom: 4px;
+    }
+    .pension-card .val {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+    }
+
+    .toggle-btn {
+      text-align: center; margin-top: 16px;
+    }
+    .toggle-btn button {
+      background: transparent; border: 1px solid #00d4aa;
+      color: #00d4aa; padding: 8px 20px;
+      border-radius: 8px; cursor: pointer;
+      font-size: 13px; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .toggle-btn button:hover { background: #00d4aa; color: white; }
+
+    .yearly-table-wrap {
+      display: none; margin-top: 16px;
+      max-height: 300px; overflow-y: auto;
+      border-radius: 8px; background: rgba(255,255,255,0.03);
+    }
+    .yearly-table-wrap.show { display: block; }
+
+    .yearly-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 12px;
+    }
+    .yearly-table th {
+      background: rgba(0,212,170,0.15); color: #00d4aa;
+      padding: 10px 8px; text-align: right; font-weight: 600;
+      position: sticky; top: 0;
+    }
+    .yearly-table th:first-child { text-align: left; }
+    .yearly-table td {
+      padding: 8px; text-align: right;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: #ccc;
+    }
+    .yearly-table td:first-child { text-align: left; color: #fff; font-weight: 600; }
+    .yearly-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+    .info-badge {
+      display: inline-block; background: #e8f4fd;
+      color: #0066aa; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+      margin-left: 8px;
+    }
+
+    .note-box {
+      background: #fff8e1; border: 1px solid #ffd54f;
+      border-radius: 8px; padding: 12px 16px;
+      font-size: 13px; color: #666;
+      margin-bottom: 16px; line-height: 1.6;
+    }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    .info-section {
+      max-width: 720px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+    .rate-table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0; font-size: 13px;
+    }
+    .rate-table th, .rate-table td {
+      border: 1px solid #e0e0e0; padding: 10px 12px;
+      text-align: left;
+    }
+    .rate-table th {
+      background: #f0f4f8; font-weight: 600; color: #1a1a2e;
+    }
+    .rate-table td { color: #555; }
+  </style>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>PF / EPF Calculator</h2>
+  <p>Calculate your Provident Fund corpus, EPS pension, interest & retirement savings</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="note-box">
+    <strong>Current EPF Interest Rate (FY 2025-26): 8.15% p.a.</strong> | EPS contribution is capped at 8.33% of ₹15,000 = ₹1,250/month
+  </div>
+
+  <div class="section-title">💼 Salary Details</div>
+
+  <div class="field">
+    <label>Monthly Basic Salary + DA (₹)</label>
+    <div class="input-prefix">
+      <input type="number" id="monthlyBasic" placeholder="e.g. 25000" value="25000">
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Your Age</label>
+      <input type="number" id="currentAge" min="18" max="60" value="30">
+    </div>
+    <div class="field">
+      <label>Retirement Age</label>
+      <input type="number" id="retireAge" min="50" max="60" value="58">
+    </div>
+  </div>
+
+  <div class="section-title">🏦 Contribution Details</div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Employee Contribution (%)</label>
+      <div class="input-suffix">
+        <input type="number" id="empContribPercent" value="12" step="0.01">
+      </div>
+    </div>
+    <div class="field">
+      <label>Employer Contribution (%)</label>
+      <div class="input-suffix">
+        <input type="number" id="employerContribPercent" value="12" step="0.01">
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Current EPF Balance (₹) <span style="font-weight:400;color:#888;">(if any)</span></label>
+    <div class="input-prefix">
+      <input type="number" id="currentBalance" placeholder="e.g. 200000" value="0">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Expected Annual Salary Hike (%)</label>
+    <div class="input-suffix">
+      <input type="number" id="salaryHike" value="5" step="0.5">
+    </div>
+  </div>
+
+  <div class="section-title">📈 Interest & Pension</div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>EPF Interest Rate (%)</label>
+      <div class="input-suffix">
+        <input type="number" id="epfRate" step="0.01" value="8.15">
+      </div>
+    </div>
+    <div class="field">
+      <label>EPS Pension Rate (%)</label>
+      <div class="input-suffix">
+        <input type="number" id="epsRate" value="8.33" step="0.01" readonly style="background:#f8fffe;">
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Pensionable Salary (Average of last 60 months) (₹)</label>
+    <div class="input-prefix">
+      <input type="number" id="pensionSalary" placeholder="Auto-calculated if empty" value="">
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calculateEPF()">Calculate EPF & Pension</button>
+
+  <div class="result-box" id="resultBox">
+
+    <div class="result-grid-4">
+      <div class="result-item">
+        <div class="lbl">Total EPF Corpus</div>
+        <div class="val" id="resCorpus">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Monthly Pension</div>
+        <div class="val" id="resPension">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Total Contribution</div>
+        <div class="val small" id="resContribution">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Interest Earned</div>
+        <div class="val small" id="resInterest">-</div>
+      </div>
+    </div>
+
+    <div class="result-divider"></div>
+
+    <div class="breakdown-section">
+      <h4>Contribution Breakdown</h4>
+      <div class="chart-bar">
+        <div class="bar-label">Employee PF</div>
+        <div class="bar-track">
+          <div class="bar-fill employee" id="barEmployee" style="width:0%">0%</div>
+        </div>
+      </div>
+      <div class="chart-bar">
+        <div class="bar-label">Employer PF</div>
+        <div class="bar-track">
+          <div class="bar-fill employer" id="barEmployer" style="width:0%">0%</div>
+        </div>
+      </div>
+      <div class="chart-bar">
+        <div class="bar-label">Interest</div>
+        <div class="bar-track">
+          <div class="bar-fill interest" id="barInterest" style="width:0%">0%</div>
+        </div>
+      </div>
+      <div class="chart-bar">
+        <div class="bar-label">EPS (Pension)</div>
+        <div class="bar-track">
+          <div class="bar-fill eps" id="barEPS" style="width:0%">0%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="breakdown-section">
+      <h4>Detailed Summary</h4>
+      <div class="breakdown-row">
+        <span class="bl">Monthly Basic Salary</span>
+        <span class="br" id="sumBasic">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Employee PF Contribution (12%)</span>
+        <span class="br green" id="sumEmpContrib">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Employer PF Contribution (3.67%)</span>
+        <span class="br blue" id="sumEmployerPF">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Employer EPS Contribution (8.33%)</span>
+        <span class="br orange" id="sumEPS">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Total Monthly Contribution</span>
+        <span class="br" id="sumTotalMonthly">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Service Period</span>
+        <span class="br" id="sumService">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Total Employee Contribution</span>
+        <span class="br green" id="sumTotalEmp">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Total Employer PF Contribution</span>
+        <span class="br blue" id="sumTotalEmployer">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Total EPS Contribution</span>
+        <span class="br orange" id="sumTotalEPS">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Total Interest Earned</span>
+        <span class="br" id="sumTotalInterest">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">Total EPF Corpus at Retirement</span>
+        <span class="br" id="sumCorpus">-</span>
+      </div>
+    </div>
+
+    <div class="pension-box">
+      <h4>🎖️ EPS Pension Calculation</h4>
+      <div class="pension-grid">
+        <div class="pension-card">
+          <div class="lbl">Pensionable Service</div>
+          <div class="val" id="penService">-</div>
+        </div>
+        <div class="pension-card">
+          <div class="lbl">Pensionable Salary</div>
+          <div class="val" id="penSalary">-</div>
+        </div>
+        <div class="pension-card">
+          <div class="lbl">Monthly Pension</div>
+          <div class="val" id="penMonthly">-</div>
+        </div>
+        <div class="pension-card">
+          <div class="lbl">Annual Pension</div>
+          <div class="val" id="penAnnual">-</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toggle-btn">
+      <button onclick="toggleTable()">📊 View Year-wise Growth</button>
+    </div>
+
+    <div class="yearly-table-wrap" id="yearlyWrap">
+      <table class="yearly-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Basic Salary</th>
+            <th>Employee PF</th>
+            <th>Employer PF</th>
+            <th>EPS</th>
+            <th>Interest</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody id="yearlyBody"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>How to Use the PF/EPF Calculator</h2>
+  <p>Our EPF Calculator helps you estimate your retirement corpus based on your monthly basic salary, contribution rates, and expected salary growth. It also calculates your monthly EPS pension.</p>
+  
+  <h3>EPF Contribution Breakdown</h3>
+  <table class="rate-table">
+    <tr>
+      <th>Component</th>
+      <th>Employee</th>
+      <th>Employer</th>
+      <th>Total</th>
+    </tr>
+    <tr>
+      <td>EPF (Provident Fund)</td>
+      <td>12% of Basic</td>
+      <td>3.67% of Basic</td>
+      <td>15.67%</td>
+    </tr>
+    <tr>
+      <td>EPS (Pension)</td>
+      <td>—</td>
+      <td>8.33% of Basic (capped at ₹1,250)</td>
+      <td>8.33%</td>
+    </tr>
+    <tr>
+      <td>EDLI (Insurance)</td>
+      <td>—</td>
+      <td>0.50% of Basic</td>
+      <td>0.50%</td>
+    </tr>
+    <tr>
+      <td>Admin Charges</td>
+      <td>—</td>
+      <td>0.50% of Basic</td>
+      <td>0.50%</td>
+    </tr>
+  </table>
+
+  <h3>EPS Pension Formula</h3>
+  <p>Monthly Pension = (Pensionable Salary × Pensionable Service) / 70</p>
+  <p>Pensionable Salary is the average of last 60 months' basic salary (capped at ₹15,000). Minimum pensionable service is 10 years. Maximum pensionable service is 35 years.</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>What is the current EPF interest rate?</p>
+    <p>For FY 2025-26, the EPF interest rate is 8.15% p.a. This is decided by the Central Board of Trustees (CBT) of EPFO and notified by the government.</p>
+  </div>
+  <div class="faq-box">
+    <p>Can I withdraw my EPF before retirement?</p>
+    <p>Yes, partial withdrawals are allowed for specific purposes like medical emergency, education, marriage, home purchase, or unemployment. Full withdrawal is permitted if unemployed for 2+ months. Tax-free if 5+ years of service.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is the difference between EPF and EPS?</p>
+    <p>EPF (Employee Provident Fund) is your retirement savings with full withdrawal option. EPS (Employee Pension Scheme) provides monthly pension after retirement. Employer contributes 8.33% to EPS (capped at ₹1,250/month) and 3.67% to EPF.</p>
+  </div>
+  <div class="faq-box">
+    <p>How is EPF interest calculated?</p>
+    <p>EPF interest is calculated monthly on the opening balance and credited annually. The interest rate is declared by the government each financial year. Our calculator compounds interest annually for simplicity.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  function calculateEPF() {
+    const monthlyBasic = parseFloat(document.getElementById('monthlyBasic').value) || 0;
+    const currentAge = parseInt(document.getElementById('currentAge').value) || 30;
+    const retireAge = parseInt(document.getElementById('retireAge').value) || 58;
+    const empPercent = parseFloat(document.getElementById('empContribPercent').value) || 12;
+    const employerPercent = parseFloat(document.getElementById('employerContribPercent').value) || 12;
+    const currentBalance = parseFloat(document.getElementById('currentBalance').value) || 0;
+    const salaryHike = parseFloat(document.getElementById('salaryHike').value) || 5;
+    const epfRate = parseFloat(document.getElementById('epfRate').value) || 8.15;
+    const pensionSalaryInput = parseFloat(document.getElementById('pensionSalary').value) || 0;
+
+    if (monthlyBasic <= 0 || currentAge >= retireAge) {
+      alert('Please enter valid basic salary and age details.');
+      return;
+    }
+
+    const serviceYears = retireAge - currentAge;
+    const epsCap = 15000;
+    const epsPercent = 8.33;
+
+    // Monthly contributions
+    const empMonthly = monthlyBasic * (empPercent / 100);
+    const employerTotal = monthlyBasic * (employerPercent / 100);
+    const epsMonthly = Math.min(monthlyBasic, epsCap) * (epsPercent / 100);
+    const employerPFMonthly = employerTotal - epsMonthly;
+
+    // Year-wise calculation
+    let totalEmpContrib = 0;
+    let totalEmployerPF = 0;
+    let totalEPS = 0;
+    let totalInterest = 0;
+    let balance = currentBalance;
+    let yearlyBasic = monthlyBasic * 12;
+
+    const tbody = document.getElementById('yearlyBody');
+    tbody.innerHTML = '';
+
+    for (let year = 1; year <= serviceYears; year++) {
+      const yearlyEmp = yearlyBasic * (empPercent / 100);
+      const yearlyEmployerTotal = yearlyBasic * (employerPercent / 100);
+      const yearlyEPS = Math.min(yearlyBasic, epsCap * 12) * (epsPercent / 100);
+      const yearlyEmployerPF = yearlyEmployerTotal - yearlyEPS;
+
+      totalEmpContrib += yearlyEmp;
+      totalEmployerPF += yearlyEmployerPF;
+      totalEPS += yearlyEPS;
+
+      const openingBalance = balance;
+      balance += yearlyEmp + yearlyEmployerPF;
+      const yearlyInterest = balance * (epfRate / 100);
+      balance += yearlyInterest;
+      totalInterest += yearlyInterest;
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>Year ${year}</td>
+        <td>₹${Math.round(yearlyBasic / 12).toLocaleString('en-IN')}</td>
+        <td>₹${Math.round(yearlyEmp).toLocaleString('en-IN')}</td>
+        <td>₹${Math.round(yearlyEmployerPF).toLocaleString('en-IN')}</td>
+        <td>₹${Math.round(yearlyEPS).toLocaleString('en-IN')}</td>
+        <td>₹${Math.round(yearlyInterest).toLocaleString('en-IN')}</td>
+        <td>₹${Math.round(balance).toLocaleString('en-IN')}</td>
+      `;
+      tbody.appendChild(row);
+
+      // Apply salary hike for next year
+      yearlyBasic = yearlyBasic * (1 + salaryHike / 100);
+    }
+
+    // Pension calculation
+    const pensionableSalary = pensionSalaryInput > 0 ? pensionSalaryInput : Math.min(monthlyBasic, epsCap);
+    const pensionableService = Math.min(serviceYears, 35);
+    const monthlyPension = (pensionableSalary * pensionableService) / 70;
+    const annualPension = monthlyPension * 12;
+
+    // Display results
+    const totalContribution = totalEmpContrib + totalEmployerPF;
+    const totalCorpus = balance;
+
+    document.getElementById('resCorpus').textContent = '₹' + Math.round(totalCorpus).toLocaleString('en-IN');
+    document.getElementById('resPension').textContent = '₹' + Math.round(monthlyPension).toLocaleString('en-IN') + '/mo';
+    document.getElementById('resContribution').textContent = '₹' + Math.round(totalContribution).toLocaleString('en-IN');
+    document.getElementById('resInterest').textContent = '₹' + Math.round(totalInterest).toLocaleString('en-IN');
+
+    // Summary
+    document.getElementById('sumBasic').textContent = '₹' + monthlyBasic.toLocaleString('en-IN');
+    document.getElementById('sumEmpContrib').textContent = '₹' + Math.round(empMonthly).toLocaleString('en-IN') + '/mo';
+    document.getElementById('sumEmployerPF').textContent = '₹' + Math.round(employerPFMonthly).toLocaleString('en-IN') + '/mo';
+    document.getElementById('sumEPS').textContent = '₹' + Math.round(epsMonthly).toLocaleString('en-IN') + '/mo';
+    document.getElementById('sumTotalMonthly').textContent = '₹' + Math.round(empMonthly + employerTotal).toLocaleString('en-IN') + '/mo';
+    document.getElementById('sumService').textContent = serviceYears + ' years';
+    document.getElementById('sumTotalEmp').textContent = '₹' + Math.round(totalEmpContrib).toLocaleString('en-IN');
+    document.getElementById('sumTotalEmployer').textContent = '₹' + Math.round(totalEmployerPF).toLocaleString('en-IN');
+    document.getElementById('sumTotalEPS').textContent = '₹' + Math.round(totalEPS).toLocaleString('en-IN');
+    document.getElementById('sumTotalInterest').textContent = '₹' + Math.round(totalInterest).toLocaleString('en-IN');
+    document.getElementById('sumCorpus').textContent = '₹' + Math.round(totalCorpus).toLocaleString('en-IN');
+
+    // Chart bars
+    const totalForChart = totalEmpContrib + totalEmployerPF + totalInterest + totalEPS;
+    const ePct = Math.max(5, totalEmpContrib / totalForChart * 100);
+    const emPct = Math.max(5, totalEmployerPF / totalForChart * 100);
+    const iPct = Math.max(5, totalInterest / totalForChart * 100);
+    const pPct = Math.max(3, totalEPS / totalForChart * 100);
+
+    document.getElementById('barEmployee').style.width = ePct + '%';
+    document.getElementById('barEmployee').textContent = Math.round(ePct) + '%';
+    document.getElementById('barEmployer').style.width = emPct + '%';
+    document.getElementById('barEmployer').textContent = Math.round(emPct) + '%';
+    document.getElementById('barInterest').style.width = iPct + '%';
+    document.getElementById('barInterest').textContent = Math.round(iPct) + '%';
+    document.getElementById('barEPS').style.width = pPct + '%';
+    document.getElementById('barEPS').textContent = Math.round(pPct) + '%';
+
+    // Pension
+    document.getElementById('penService').textContent = pensionableService + ' years';
+    document.getElementById('penSalary').textContent = '₹' + Math.round(pensionableSalary).toLocaleString('en-IN');
+    document.getElementById('penMonthly').textContent = '₹' + Math.round(monthlyPension).toLocaleString('en-IN');
+    document.getElementById('penAnnual').textContent = '₹' + Math.round(annualPension).toLocaleString('en-IN');
+
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('yearlyWrap').classList.remove('show');
+  }
+
+  function toggleTable() {
+    document.getElementById('yearlyWrap').classList.toggle('show');
+  }
+</script>
+
+</body>
+</html>
