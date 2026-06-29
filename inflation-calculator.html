@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inflation Calculator India 2026 - Future Value of Money - Prime Tools</title>
+  <meta name="description" content="Free Inflation Calculator for India. Calculate future value of money, purchasing power erosion, and how much you need to maintain lifestyle. RBI CPI data based.">
+  <meta name="keywords" content="inflation calculator India, future value of money, purchasing power calculator, CPI inflation India, cost of living calculator, inflation adjusted returns">
+  <meta property="og:title" content="Inflation Calculator India 2026 - Future Value of Money - Prime Tools">
+  <meta property="og:description" content="Calculate how inflation erodes your money's value. Plan for future expenses with RBI CPI-based inflation estimates.">
+  <meta property="og:url" content="https://primetoolsapp.com/inflation-calculator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/inflation-calculator.html">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 680px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #555; margin-bottom: 8px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 16px; outline: none;
+      transition: border-color 0.2s; background: white;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    .input-prefix {
+      position: relative;
+    }
+    .input-prefix::before {
+      content: '₹'; position: absolute;
+      left: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 16px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-prefix input { padding-left: 36px; }
+
+    .input-suffix {
+      position: relative;
+    }
+    .input-suffix::after {
+      content: '%'; position: absolute;
+      right: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 14px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-suffix input { padding-right: 36px; }
+
+    .range-wrap {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .range-wrap input[type="range"] {
+      flex: 1; height: 6px;
+      -webkit-appearance: none; appearance: none;
+      background: #e0e0e0; border-radius: 3px; outline: none;
+    }
+    .range-wrap input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #00d4aa; cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,212,170,0.4);
+    }
+    .range-val {
+      min-width: 70px; text-align: right;
+      font-size: 14px; font-weight: 700; color: #00d4aa;
+    }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .result-box {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 12px; padding: 28px;
+      margin-top: 24px; display: none;
+    }
+    .result-box.show { display: block; }
+
+    .result-highlight {
+      text-align: center; margin-bottom: 24px;
+    }
+    .result-highlight .lbl {
+      font-size: 13px; color: #888;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .result-highlight .val {
+      font-size: 36px; font-weight: 800; color: #00d4aa;
+    }
+    .result-highlight .sub {
+      font-size: 14px; color: #888; margin-top: 4px;
+    }
+
+    .result-grid-3 {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 20px;
+    }
+    @media (max-width: 600px) { .result-grid-3 { grid-template-columns: 1fr; } }
+
+    .result-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px 12px;
+      text-align: center;
+    }
+    .result-item .lbl {
+      font-size: 11px; color: #888;
+      margin-bottom: 6px; text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .result-item .val {
+      font-size: 20px; font-weight: 700; color: #00d4aa;
+    }
+    .result-item .val.red { color: #ff6b6b; }
+
+    .result-divider {
+      height: 1px; background: rgba(255,255,255,0.1);
+      margin: 16px 0;
+    }
+
+    .breakdown-section {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px;
+    }
+    .breakdown-section h4 {
+      font-size: 13px; color: #888;
+      margin-bottom: 12px; text-align: center;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .bl { color: #aaa; }
+    .breakdown-row .br { color: #fff; font-weight: 600; }
+    .breakdown-row .br.red { color: #ff6b6b; }
+    .breakdown-row.total {
+      font-size: 15px; padding-top: 12px; margin-top: 4px;
+      border-top: 2px solid rgba(255,255,255,0.15);
+    }
+    .breakdown-row.total .br { color: #00d4aa; font-size: 18px; }
+
+    .scenario-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-top: 16px;
+    }
+    @media (max-width: 500px) { .scenario-grid { grid-template-columns: 1fr; } }
+    .scenario-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      text-align: center;
+    }
+    .scenario-card .lbl {
+      font-size: 12px; color: #888; margin-bottom: 8px;
+    }
+    .scenario-card .val {
+      font-size: 22px; font-weight: 700; color: #00d4aa;
+    }
+    .scenario-card .val.red { color: #ff6b6b; }
+    .scenario-card .note {
+      font-size: 12px; color: #888; margin-top: 6px;
+    }
+
+    .yearly-table-wrap {
+      max-height: 300px; overflow-y: auto;
+      border-radius: 8px; margin-top: 16px;
+      background: rgba(255,255,255,0.03);
+    }
+    .yearly-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 12px;
+    }
+    .yearly-table th {
+      background: rgba(0,212,170,0.15); color: #00d4aa;
+      padding: 10px 8px; text-align: right; font-weight: 600;
+      position: sticky; top: 0;
+    }
+    .yearly-table th:first-child { text-align: left; }
+    .yearly-table td {
+      padding: 8px; text-align: right;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      color: #ccc;
+    }
+    .yearly-table td:first-child { text-align: left; color: #fff; font-weight: 600; }
+    .yearly-table tr:hover td { background: rgba(255,255,255,0.03); }
+
+    .toggle-btn {
+      text-align: center; margin-top: 16px;
+    }
+    .toggle-btn button {
+      background: transparent; border: 1px solid #00d4aa;
+      color: #00d4aa; padding: 8px 20px;
+      border-radius: 8px; cursor: pointer;
+      font-size: 13px; font-weight: 600;
+      transition: all 0.2s;
+    }
+    .toggle-btn button:hover { background: #00d4aa; color: white; }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    .info-section {
+      max-width: 680px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+  </style>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Inflation Calculator</h2>
+  <p>Calculate how inflation erodes your money's purchasing power over time</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="field">
+    <label>Current Amount (₹)</label>
+    <div class="input-prefix">
+      <input type="number" id="currentAmount" placeholder="e.g. 100000" value="100000">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Annual Inflation Rate (%)</label>
+    <div class="range-wrap">
+      <input type="range" id="inflationRange" min="2" max="15" value="6" step="0.5" oninput="syncInflation('range')">
+      <span class="range-val" id="inflationVal">6%</span>
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Inflation Rate (%)</label>
+      <div class="input-suffix">
+        <input type="number" id="inflationRate" step="0.1" value="6" oninput="syncInflation('input')">
+      </div>
+    </div>
+    <div class="field">
+      <label>Time Period (Years)</label>
+      <input type="number" id="timeYears" min="1" max="50" value="10">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Expected Investment Return (%)</label>
+    <div class="input-suffix">
+      <input type="number" id="investReturn" step="0.1" value="10" placeholder="Optional - compare with investment">
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calculateInflation()">Calculate Inflation Impact</button>
+
+  <div class="result-box" id="resultBox">
+
+    <div class="result-highlight">
+      <div class="lbl">Future Value Needed</div>
+      <div class="val" id="futureValueNeeded">-</div>
+      <div class="sub" id="futureSub">to maintain same purchasing power</div>
+    </div>
+
+    <div class="result-grid-3">
+      <div class="result-item">
+        <div class="lbl">Purchasing Power Lost</div>
+        <div class="val red" id="purchasingPowerLost">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Value After Inflation</div>
+        <div class="val" id="valueAfterInflation">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Real Return Rate</div>
+        <div class="val" id="realReturnRate">-</div>
+      </div>
+    </div>
+
+    <div class="result-divider"></div>
+
+    <div class="breakdown-section">
+      <h4>Inflation Impact Breakdown</h4>
+      <div class="breakdown-row">
+        <span class="bl">Current Amount</span>
+        <span class="br" id="sumCurrent">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Inflation Rate</span>
+        <span class="br" id="sumInflation">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Time Period</span>
+        <span class="br" id="sumYears">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Future Value Needed</span>
+        <span class="br" id="sumFutureNeeded">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Purchasing Power Lost</span>
+        <span class="br red" id="sumPowerLost">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Purchasing Power Lost (%)</span>
+        <span class="br red" id="sumPowerLostPct">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">Today's Money = Future Value</span>
+        <span class="br" id="sumEquivalent">-</span>
+      </div>
+    </div>
+
+    <div class="scenario-grid" id="scenarioGrid">
+      <div class="scenario-card">
+        <div class="lbl">If Invested at <span id="scenarioRate">10%</span></div>
+        <div class="val" id="scenarioInvested">-</div>
+        <div class="note" id="scenarioNote">Would grow to this amount</div>
+      </div>
+      <div class="scenario-card">
+        <div class="lbl">Net Gain vs Inflation</div>
+        <div class="val" id="scenarioNet">-</div>
+        <div class="note" id="scenarioNetNote">Real wealth created</div>
+      </div>
+    </div>
+
+    <div class="toggle-btn">
+      <button onclick="toggleTable()">📊 View Year-wise Impact</button>
+    </div>
+
+    <div class="yearly-table-wrap" id="yearlyWrap" style="display:none;">
+      <table class="yearly-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Future Value Needed</th>
+            <th>Same Amount Value</th>
+            <th>Power Lost</th>
+          </tr>
+        </thead>
+        <tbody id="yearlyBody"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>How to Use the Inflation Calculator</h2>
+  <p>Our Inflation Calculator shows how rising prices erode your money's purchasing power. Use it to plan for future expenses, retirement, and investment goals.</p>
+  
+  <h3>Understanding Inflation in India</h3>
+  <p>India's average CPI inflation has been around 5-6% over the last decade. However, specific categories like education (8-10%), healthcare (7-9%), and housing (6-8%) often outpace general inflation. For retirement planning, use 6-7% inflation rate.</p>
+
+  <h3>Real Return vs Nominal Return</h3>
+  <p>If your investment returns 10% but inflation is 6%, your real return is only about 3.77% (not 4%). This is because (1.10/1.06) - 1 = 3.77%. Always evaluate investments on real returns, not nominal.</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>What is the current inflation rate in India?</p>
+    <p>As of 2026, India's CPI inflation is approximately 4.5-5.5%, within RBI's target range of 2-6%. However, for long-term planning, use 6% as a conservative estimate.</p>
+  </div>
+  <div class="faq-box">
+    <p>How much will ₹1 lakh be worth in 10 years?</p>
+    <p>At 6% annual inflation, ₹1 lakh today will have the purchasing power of approximately ₹55,800 in 10 years. You would need ₹1,79,000 in 10 years to buy what ₹1 lakh buys today.</p>
+  </div>
+  <div class="faq-box">
+    <p>What investments beat inflation in India?</p>
+    <p>Equity mutual funds (10-12% historical returns), PPF (7.1%), NPS (9-10%), and real estate have historically beaten inflation. Fixed deposits (5-7%) barely keep pace with inflation.</p>
+  </div>
+  <div class="faq-box">
+    <p>How does inflation affect retirement planning?</p>
+    <p>Inflation is the biggest enemy of retirement savings. If you need ₹50,000/month today, at 6% inflation you will need ₹1,60,000/month in 20 years. Start early and invest in inflation-beating assets.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  function syncInflation(source) {
+    if (source === 'range') {
+      const val = document.getElementById('inflationRange').value;
+      document.getElementById('inflationVal').textContent = val + '%';
+      document.getElementById('inflationRate').value = val;
+    } else {
+      const val = document.getElementById('inflationRate').value;
+      document.getElementById('inflationRange').value = val;
+      document.getElementById('inflationVal').textContent = val + '%';
+    }
+  }
+
+  function calculateInflation() {
+    const currentAmount = parseFloat(document.getElementById('currentAmount').value) || 0;
+    const inflationRate = parseFloat(document.getElementById('inflationRate').value) || 6;
+    const years = parseInt(document.getElementById('timeYears').value) || 10;
+    const investReturn = parseFloat(document.getElementById('investReturn').value) || 0;
+
+    if (currentAmount <= 0 || inflationRate <= 0 || years <= 0) {
+      alert('Please enter valid values for all fields.');
+      return;
+    }
+
+    // Future value needed to maintain purchasing power
+    const futureValueNeeded = currentAmount * Math.pow(1 + inflationRate / 100, years);
+    
+    // What current amount will be worth in future
+    const valueAfterInflation = currentAmount / Math.pow(1 + inflationRate / 100, years);
+    
+    // Purchasing power lost
+    const purchasingPowerLost = currentAmount - valueAfterInflation;
+    const purchasingPowerLostPct = (purchasingPowerLost / currentAmount) * 100;
+
+    // Real return if invested
+    let scenarioInvested = 0;
+    let scenarioNet = 0;
+    let realReturnRate = 0;
+
+    if (investReturn > 0) {
+      scenarioInvested = currentAmount * Math.pow(1 + investReturn / 100, years);
+      scenarioNet = scenarioInvested - futureValueNeeded;
+      realReturnRate = ((1 + investReturn / 100) / (1 + inflationRate / 100) - 1) * 100;
+    }
+
+    // Display results
+    document.getElementById('futureValueNeeded').textContent = '₹' + Math.round(futureValueNeeded).toLocaleString('en-IN');
+    document.getElementById('purchasingPowerLost').textContent = '₹' + Math.round(purchasingPowerLost).toLocaleString('en-IN');
+    document.getElementById('valueAfterInflation').textContent = '₹' + Math.round(valueAfterInflation).toLocaleString('en-IN');
+    document.getElementById('realReturnRate').textContent = realReturnRate.toFixed(2) + '%';
+
+    // Summary
+    document.getElementById('sumCurrent').textContent = '₹' + currentAmount.toLocaleString('en-IN');
+    document.getElementById('sumInflation').textContent = inflationRate + '%';
+    document.getElementById('sumYears').textContent = years + ' years';
+    document.getElementById('sumFutureNeeded').textContent = '₹' + Math.round(futureValueNeeded).toLocaleString('en-IN');
+    document.getElementById('sumPowerLost').textContent = '₹' + Math.round(purchasingPowerLost).toLocaleString('en-IN');
+    document.getElementById('sumPowerLostPct').textContent = purchasingPowerLostPct.toFixed(1) + '%';
+    document.getElementById('sumEquivalent').textContent = '₹' + Math.round(futureValueNeeded).toLocaleString('en-IN') + ' in ' + years + ' years';
+
+    // Scenario
+    if (investReturn > 0) {
+      document.getElementById('scenarioGrid').style.display = 'grid';
+      document.getElementById('scenarioRate').textContent = investReturn + '%';
+      document.getElementById('scenarioInvested').textContent = '₹' + Math.round(scenarioInvested).toLocaleString('en-IN');
+      document.getElementById('scenarioNet').textContent = '₹' + Math.round(scenarioNet).toLocaleString('en-IN');
+      document.getElementById('scenarioNet').className = 'val ' + (scenarioNet >= 0 ? '' : 'red');
+      document.getElementById('scenarioNetNote').textContent = scenarioNet >= 0 ? 'Real wealth created' : 'Real wealth eroded';
+    } else {
+      document.getElementById('scenarioGrid').style.display = 'none';
+    }
+
+    // Year-wise table
+    const tbody = document.getElementById('yearlyBody');
+    tbody.innerHTML = '';
+    for (let y = 1; y <= years; y++) {
+      const fvNeeded = currentAmount * Math.pow(1 + inflationRate / 100, y);
+      const sameValue = currentAmount / Math.pow(1 + inflationRate / 100, y);
+      const powerLost = currentAmount - sameValue;
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>Year ${y}</td>
+        <td>₹${Math.round(fvNeeded).toLocaleString('en-IN')}</td>
+        <td>₹${Math.round(sameValue).toLocaleString('en-IN')}</td>
+        <td>₹${Math.round(powerLost).toLocaleString('en-IN')}</td>
+      `;
+      tbody.appendChild(row);
+    }
+
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('yearlyWrap').style.display = 'none';
+  }
+
+  function toggleTable() {
+    const wrap = document.getElementById('yearlyWrap');
+    wrap.style.display = wrap.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
+
+</body>
+</html>

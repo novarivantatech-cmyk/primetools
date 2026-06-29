@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In-Hand Salary Calculator India 2026 - Take Home Pay - Prime Tools</title>
+  <meta name="description" content="Free In-Hand Salary Calculator for India. Calculate take-home pay after PF, professional tax, income tax (old & new regime), HRA, LTA & all deductions.">
+  <meta name="keywords" content="in hand salary calculator, take home pay calculator India, CTC to in hand salary, salary breakdown India, income tax on salary, new tax regime calculator, old tax regime calculator">
+  <meta property="og:title" content="In-Hand Salary Calculator India 2026 - Take Home Pay - Prime Tools">
+  <meta property="og:description" content="Calculate your exact take-home salary after all deductions. Compare old vs new tax regime. Includes PF, PT, HRA, LTA & more.">
+  <meta property="og:url" content="https://primetoolsapp.com/in-hand-salary-calculator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/in-hand-salary-calculator.html">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 720px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-size: 14px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 16px; padding-bottom: 8px;
+      border-bottom: 2px solid #e0f7f3;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .section-title:first-child { margin-top: 0; }
+
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #555; margin-bottom: 8px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 16px; outline: none;
+      transition: border-color 0.2s; background: white;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    .input-prefix {
+      position: relative;
+    }
+    .input-prefix::before {
+      content: '₹'; position: absolute;
+      left: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 16px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-prefix input { padding-left: 36px; }
+
+    .input-suffix {
+      position: relative;
+    }
+    .input-suffix::after {
+      content: '%'; position: absolute;
+      right: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 14px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-suffix input { padding-right: 36px; }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .regime-tabs {
+      display: flex; gap: 8px; margin-bottom: 20px;
+    }
+    .regime-tab {
+      flex: 1; padding: 12px; border-radius: 8px;
+      border: 2px solid #e0e0e0; background: white;
+      font-size: 14px; font-weight: 600; color: #555;
+      cursor: pointer; transition: all 0.2s; text-align: center;
+    }
+    .regime-tab.active {
+      border-color: #00d4aa; background: #f0fdf8;
+      color: #00a878;
+    }
+
+    .result-box {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 12px; padding: 28px;
+      margin-top: 24px; display: none;
+    }
+    .result-box.show { display: block; }
+
+    .result-highlight {
+      text-align: center; margin-bottom: 24px;
+    }
+    .result-highlight .lbl {
+      font-size: 13px; color: #888;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .result-highlight .val {
+      font-size: 42px; font-weight: 800; color: #00d4aa;
+    }
+    .result-highlight .sub {
+      font-size: 14px; color: #888; margin-top: 4px;
+    }
+
+    .result-grid-2 {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin-bottom: 20px;
+    }
+    @media (max-width: 500px) { .result-grid-2 { grid-template-columns: 1fr; } }
+
+    .regime-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px; padding: 20px;
+      border: 2px solid transparent;
+    }
+    .regime-card.better {
+      border-color: #00d4aa;
+      background: rgba(0,212,170,0.08);
+    }
+    .regime-card .regime-name {
+      font-size: 14px; font-weight: 700; color: #fff;
+      margin-bottom: 12px; text-align: center;
+    }
+    .regime-card .inhand {
+      font-size: 28px; font-weight: 700; color: #00d4aa;
+      text-align: center; margin-bottom: 8px;
+    }
+    .regime-card .inhand.red { color: #ff6b6b; }
+
+    .breakdown-section {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      margin-top: 12px;
+    }
+    .breakdown-section h4 {
+      font-size: 12px; color: #888;
+      margin-bottom: 12px; text-align: center;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between;
+      padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 13px;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .bl { color: #aaa; }
+    .breakdown-row .br { color: #fff; font-weight: 600; }
+    .breakdown-row .br.deduct { color: #ff6b6b; }
+    .breakdown-row.total {
+      font-size: 14px; padding-top: 10px; margin-top: 4px;
+      border-top: 2px solid rgba(255,255,255,0.15);
+    }
+    .breakdown-row.total .br { color: #00d4aa; font-size: 16px; }
+
+    .recommendation {
+      background: #f0fdf8; border: 1px solid #b2ead9;
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px; text-align: center;
+      display: none;
+    }
+    .recommendation.show { display: block; }
+    .recommendation p {
+      font-size: 14px; color: #00a878; font-weight: 600;
+    }
+
+    .chart-bar {
+      display: flex; align-items: center; gap: 10px;
+      margin: 6px 0; font-size: 12px;
+    }
+    .chart-bar .bar-label {
+      min-width: 70px; color: #aaa; text-align: right;
+      font-size: 11px;
+    }
+    .chart-bar .bar-track {
+      flex: 1; height: 20px; background: rgba(255,255,255,0.08);
+      border-radius: 4px; overflow: hidden;
+    }
+    .chart-bar .bar-fill {
+      height: 100%; border-radius: 4px;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-right: 6px; font-size: 10px; font-weight: 700; color: white;
+    }
+    .chart-bar .bar-fill.inhand { background: #00d4aa; }
+    .chart-bar .bar-fill.tax { background: #ff6b6b; }
+    .chart-bar .bar-fill.pf { background: #ffd93d; color: #333; }
+    .chart-bar .bar-fill.other { background: #6bcb77; }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    .info-section {
+      max-width: 720px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+    .tax-table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0; font-size: 13px;
+    }
+    .tax-table th, .tax-table td {
+      border: 1px solid #e0e0e0; padding: 10px 12px;
+      text-align: left;
+    }
+    .tax-table th {
+      background: #f0f4f8; font-weight: 600; color: #1a1a2e;
+    }
+    .tax-table td { color: #555; }
+  </style>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>In-Hand Salary Calculator</h2>
+  <p>Calculate your exact take-home pay after PF, tax & all deductions. Compare old vs new tax regime.</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="section-title">💼 Salary Details</div>
+
+  <div class="field">
+    <label>Annual CTC (₹)</label>
+    <div class="input-prefix">
+      <input type="number" id="annualCTC" placeholder="e.g. 1200000" value="1200000">
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Basic Salary (% of CTC)</label>
+      <div class="input-suffix">
+        <input type="number" id="basicPercent" value="40" step="1">
+      </div>
+    </div>
+    <div class="field">
+      <label>HRA Received (% of Basic)</label>
+      <div class="input-suffix">
+        <input type="number" id="hraPercent" value="50" step="1">
+      </div>
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Monthly Rent Paid (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="monthlyRent" placeholder="e.g. 25000" value="25000">
+      </div>
+    </div>
+    <div class="field">
+      <label>Metro City?</label>
+      <select id="isMetro">
+        <option value="yes">Yes (Delhi, Mumbai, Kolkata, Chennai, Bangalore, Hyderabad, Pune)</option>
+        <option value="no">No (Non-metro)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="section-title">📋 Deductions & Exemptions</div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Section 80C (PF, ELSS, PPF, etc.) (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="sec80C" value="150000" max="150000">
+      </div>
+    </div>
+    <div class="field">
+      <label>Section 80D (Health Insurance) (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="sec80D" value="25000" max="100000">
+      </div>
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Section 24(b) - Home Loan Interest (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="sec24" value="0" max="200000">
+      </div>
+    </div>
+    <div class="field">
+      <label>NPS Contribution u/s 80CCD(1B) (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="sec80CCD" value="0" max="50000">
+      </div>
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>LTA Claimed (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="ltaAmount" value="0">
+      </div>
+    </div>
+    <div class="field">
+      <label>Other Deductions (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="otherDeductions" value="0">
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Professional Tax (Monthly) (₹)</label>
+    <div class="input-prefix">
+      <input type="number" id="professionalTax" value="200">
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calculateSalary()">Calculate In-Hand Salary</button>
+
+  <div class="result-box" id="resultBox">
+
+    <div class="result-highlight">
+      <div class="lbl">Recommended Regime</div>
+      <div class="val" id="recommendedInHand">-</div>
+      <div class="sub" id="recommendedSub">-</div>
+    </div>
+
+    <div class="result-grid-2">
+      <div class="regime-card" id="oldRegimeCard">
+        <div class="regime-name">🏛️ Old Tax Regime</div>
+        <div class="inhand" id="oldInHand">-</div>
+        <div class="breakdown-section">
+          <h4>Monthly Breakdown</h4>
+          <div class="breakdown-row">
+            <span class="bl">Gross Monthly</span>
+            <span class="br" id="oldGross">-</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="bl">PF (Employee)</span>
+            <span class="br deduct" id="oldPF">-</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="bl">Professional Tax</span>
+            <span class="br deduct" id="oldPT">-</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="bl">Income Tax</span>
+            <span class="br deduct" id="oldTax">-</span>
+          </div>
+          <div class="breakdown-row total">
+            <span class="bl">In-Hand Monthly</span>
+            <span class="br" id="oldNetMonthly">-</span>
+          </div>
+          <div class="breakdown-row total">
+            <span class="bl">In-Hand Annual</span>
+            <span class="br" id="oldNetAnnual">-</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="regime-card" id="newRegimeCard">
+        <div class="regime-name">🆕 New Tax Regime</div>
+        <div class="inhand" id="newInHand">-</div>
+        <div class="breakdown-section">
+          <h4>Monthly Breakdown</h4>
+          <div class="breakdown-row">
+            <span class="bl">Gross Monthly</span>
+            <span class="br" id="newGross">-</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="bl">PF (Employee)</span>
+            <span class="br deduct" id="newPF">-</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="bl">Professional Tax</span>
+            <span class="br deduct" id="newPT">-</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="bl">Income Tax</span>
+            <span class="br deduct" id="newTax">-</span>
+          </div>
+          <div class="breakdown-row total">
+            <span class="bl">In-Hand Monthly</span>
+            <span class="br" id="newNetMonthly">-</span>
+          </div>
+          <div class="breakdown-row total">
+            <span class="bl">In-Hand Annual</span>
+            <span class="br" id="newNetAnnual">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="recommendation" id="recommendation">
+      <p id="recommendText">-</p>
+    </div>
+
+    <div class="breakdown-section" style="margin-top:20px;">
+      <h4>Salary Distribution</h4>
+      <div class="chart-bar">
+        <div class="bar-label">In-Hand</div>
+        <div class="bar-track">
+          <div class="bar-fill inhand" id="barInHand" style="width:0%">0%</div>
+        </div>
+      </div>
+      <div class="chart-bar">
+        <div class="bar-label">Income Tax</div>
+        <div class="bar-track">
+          <div class="bar-fill tax" id="barTax" style="width:0%">0%</div>
+        </div>
+      </div>
+      <div class="chart-bar">
+        <div class="bar-label">PF</div>
+        <div class="bar-track">
+          <div class="bar-fill pf" id="barPF" style="width:0%">0%</div>
+        </div>
+      </div>
+      <div class="chart-bar">
+        <div class="bar-label">Other</div>
+        <div class="bar-track">
+          <div class="bar-fill other" id="barOther" style="width:0%">0%</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>How to Use the In-Hand Salary Calculator</h2>
+  <p>Our In-Hand Salary Calculator computes your exact take-home pay after all statutory deductions. It compares both old and new tax regimes to help you choose the most beneficial option.</p>
+  
+  <h3>Old vs New Tax Regime (FY 2026-27)</h3>
+  <table class="tax-table">
+    <tr>
+      <th>Income Slab</th>
+      <th>Old Regime Rate</th>
+      <th>New Regime Rate</th>
+    </tr>
+    <tr><td>Up to ₹2.5L</td><td>Nil</td><td>Nil</td></tr>
+    <tr><td>₹2.5L - ₹3L</td><td>5%</td><td>Nil</td></tr>
+    <tr><td>₹3L - ₹5L</td><td>5%</td><td>5%</td></tr>
+    <tr><td>₹5L - ₹6L</td><td>20%</td><td>5%</td></tr>
+    <tr><td>₹6L - ₹7.5L</td><td>20%</td><td>10%</td></tr>
+    <tr><td>₹7.5L - ₹9L</td><td>20%</td><td>10%</td></tr>
+    <tr><td>₹9L - ₹10L</td><td>20%</td><td>15%</td></tr>
+    <tr><td>₹10L - ₹12L</td><td>30%</td><td>15%</td></tr>
+    <tr><td>₹12L - ₹12.5L</td><td>30%</td><td>20%</td></tr>
+    <tr><td>₹12.5L - ₹15L</td><td>30%</td><td>20%</td></tr>
+    <tr><td>Above ₹15L</td><td>30%</td><td>30%</td></tr>
+  </table>
+  <p><strong>Note:</strong> New regime offers standard deduction of ₹75,000. Old regime allows deductions under 80C, 80D, HRA, LTA, home loan interest etc. The calculator automatically applies these.</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>Which tax regime is better for me?</p>
+    <p>Generally, if you have significant deductions (80C, 80D, HRA, home loan), the old regime is better. If you have minimal deductions, the new regime with lower tax rates and standard deduction of ₹75,000 is more beneficial. Our calculator shows exact comparison.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is HRA exemption calculation?</p>
+    <p>HRA exemption is the minimum of: (a) Actual HRA received, (b) 50% of basic (metro) or 40% (non-metro), (c) Rent paid minus 10% of basic. Our calculator computes this automatically based on your inputs.</p>
+  </div>
+  <div class="faq-box">
+    <p>Is employer PF contribution part of CTC?</p>
+    <p>Yes, employer PF (typically 12% of basic) is included in CTC but not deducted from your salary. Only employee PF (12% of basic) is deducted. Our calculator handles both correctly.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is professional tax?</p>
+    <p>Professional tax is a state-level tax on salaried individuals. It varies by state — Maharashtra charges ₹200/month, while some states like Delhi and Haryana don't charge any. Enter your state's rate.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  function calculateOldRegimeTax(taxableIncome) {
+    let tax = 0;
+    if (taxableIncome <= 250000) tax = 0;
+    else if (taxableIncome <= 500000) tax = (taxableIncome - 250000) * 0.05;
+    else if (taxableIncome <= 1000000) tax = 12500 + (taxableIncome - 500000) * 0.20;
+    else tax = 112500 + (taxableIncome - 1000000) * 0.30;
+
+    // Section 87A rebate
+    if (taxableIncome <= 500000) tax = Math.max(0, tax - 12500);
+
+    // 4% cess
+    return tax * 1.04;
+  }
+
+  function calculateNewRegimeTax(taxableIncome) {
+    let tax = 0;
+    if (taxableIncome <= 300000) tax = 0;
+    else if (taxableIncome <= 600000) tax = (taxableIncome - 300000) * 0.05;
+    else if (taxableIncome <= 900000) tax = 15000 + (taxableIncome - 600000) * 0.10;
+    else if (taxableIncome <= 1200000) tax = 45000 + (taxableIncome - 900000) * 0.15;
+    else if (taxableIncome <= 1500000) tax = 90000 + (taxableIncome - 1200000) * 0.20;
+    else tax = 150000 + (taxableIncome - 1500000) * 0.30;
+
+    // Section 87A rebate
+    if (taxableIncome <= 700000) tax = Math.max(0, tax - 25000);
+
+    // 4% cess
+    return tax * 1.04;
+  }
+
+  function calculateSalary() {
+    const ctc = parseFloat(document.getElementById('annualCTC').value) || 0;
+    const basicPercent = parseFloat(document.getElementById('basicPercent').value) || 40;
+    const hraPercent = parseFloat(document.getElementById('hraPercent').value) || 50;
+    const monthlyRent = parseFloat(document.getElementById('monthlyRent').value) || 0;
+    const isMetro = document.getElementById('isMetro').value === 'yes';
+    const sec80C = Math.min(150000, parseFloat(document.getElementById('sec80C').value) || 0);
+    const sec80D = Math.min(100000, parseFloat(document.getElementById('sec80D').value) || 0);
+    const sec24 = Math.min(200000, parseFloat(document.getElementById('sec24').value) || 0);
+    const sec80CCD = Math.min(50000, parseFloat(document.getElementById('sec80CCD').value) || 0);
+    const lta = parseFloat(document.getElementById('ltaAmount').value) || 0;
+    const otherDed = parseFloat(document.getElementById('otherDeductions').value) || 0;
+    const ptMonthly = parseFloat(document.getElementById('professionalTax').value) || 0;
+
+    if (ctc <= 0) {
+      alert('Please enter a valid annual CTC.');
+      return;
+    }
+
+    const basic = ctc * basicPercent / 100;
+    const hra = basic * hraPercent / 100;
+    const annualRent = monthlyRent * 12;
+    const ptAnnual = ptMonthly * 12;
+
+    // PF calculation (employee + employer both 12% of basic)
+    const pfEmployee = basic * 0.12;
+    const pfEmployer = basic * 0.12;
+
+    // HRA exemption (old regime)
+    const hraExemptOld = Math.min(
+      hra,
+      isMetro ? basic * 0.50 : basic * 0.40,
+      Math.max(0, annualRent - basic * 0.10)
+    );
+
+    // Standard deduction
+    const stdDeductionOld = 50000;
+    const stdDeductionNew = 75000;
+
+    // Old regime taxable income
+    const grossOld = ctc - pfEmployer; // CTC minus employer PF
+    const totalDeductionsOld = stdDeductionOld + hraExemptOld + sec80C + sec80D + sec24 + sec80CCD + lta + otherDed;
+    const taxableOld = Math.max(0, grossOld - totalDeductionsOld);
+    const taxOld = calculateOldRegimeTax(taxableOld);
+
+    // New regime taxable income (no exemptions except standard deduction)
+    const grossNew = ctc - pfEmployer;
+    const taxableNew = Math.max(0, grossNew - stdDeductionNew);
+    const taxNew = calculateNewRegimeTax(taxableNew);
+
+    // Net salary calculations
+    const netAnnualOld = grossOld - pfEmployee - ptAnnual - taxOld;
+    const netAnnualNew = grossNew - pfEmployee - ptAnnual - taxNew;
+    const netMonthlyOld = netAnnualOld / 12;
+    const netMonthlyNew = netAnnualNew / 12;
+
+    // Display results
+    const betterRegime = netAnnualOld >= netAnnualNew ? 'old' : 'new';
+    const diff = Math.abs(netAnnualOld - netAnnualNew);
+
+    document.getElementById('oldRegimeCard').classList.toggle('better', betterRegime === 'old');
+    document.getElementById('newRegimeCard').classList.toggle('better', betterRegime === 'new');
+
+    document.getElementById('recommendedInHand').textContent = '₹' + Math.round(Math.max(netAnnualOld, netAnnualNew) / 12).toLocaleString('en-IN') + '/month';
+    document.getElementById('recommendedSub').textContent = (betterRegime === 'old' ? 'Old Regime' : 'New Regime') + ' saves ₹' + Math.round(diff).toLocaleString('en-IN') + ' annually';
+
+    document.getElementById('oldInHand').textContent = '₹' + Math.round(netMonthlyOld).toLocaleString('en-IN') + '/mo';
+    document.getElementById('oldGross').textContent = '₹' + Math.round(grossOld / 12).toLocaleString('en-IN');
+    document.getElementById('oldPF').textContent = '₹' + Math.round(pfEmployee / 12).toLocaleString('en-IN');
+    document.getElementById('oldPT').textContent = '₹' + ptMonthly.toLocaleString('en-IN');
+    document.getElementById('oldTax').textContent = '₹' + Math.round(taxOld / 12).toLocaleString('en-IN');
+    document.getElementById('oldNetMonthly').textContent = '₹' + Math.round(netMonthlyOld).toLocaleString('en-IN');
+    document.getElementById('oldNetAnnual').textContent = '₹' + Math.round(netAnnualOld).toLocaleString('en-IN');
+
+    document.getElementById('newInHand').textContent = '₹' + Math.round(netMonthlyNew).toLocaleString('en-IN') + '/mo';
+    document.getElementById('newGross').textContent = '₹' + Math.round(grossNew / 12).toLocaleString('en-IN');
+    document.getElementById('newPF').textContent = '₹' + Math.round(pfEmployee / 12).toLocaleString('en-IN');
+    document.getElementById('newPT').textContent = '₹' + ptMonthly.toLocaleString('en-IN');
+    document.getElementById('newTax').textContent = '₹' + Math.round(taxNew / 12).toLocaleString('en-IN');
+    document.getElementById('newNetMonthly').textContent = '₹' + Math.round(netMonthlyNew).toLocaleString('en-IN');
+    document.getElementById('newNetAnnual').textContent = '₹' + Math.round(netAnnualNew).toLocaleString('en-IN');
+
+    document.getElementById('recommendation').classList.add('show');
+    document.getElementById('recommendText').textContent = 
+      betterRegime === 'old' 
+        ? '✅ Old Regime is better for you. You save ₹' + Math.round(diff).toLocaleString('en-IN') + '/year with deductions.'
+        : '✅ New Regime is better for you. You save ₹' + Math.round(diff).toLocaleString('en-IN') + '/year with lower tax rates.';
+
+    // Chart
+    const totalCTC = ctc;
+    const inHandPct = Math.max(netAnnualOld, netAnnualNew) / totalCTC * 100;
+    const taxPct = Math.min(taxOld, taxNew) / totalCTC * 100;
+    const pfPct = (pfEmployee + pfEmployer) / totalCTC * 100;
+    const otherPct = 100 - inHandPct - taxPct - pfPct;
+
+    document.getElementById('barInHand').style.width = Math.max(5, inHandPct) + '%';
+    document.getElementById('barInHand').textContent = Math.round(inHandPct) + '%';
+    document.getElementById('barTax').style.width = Math.max(3, taxPct) + '%';
+    document.getElementById('barTax').textContent = Math.round(taxPct) + '%';
+    document.getElementById('barPF').style.width = Math.max(3, pfPct) + '%';
+    document.getElementById('barPF').textContent = Math.round(pfPct) + '%';
+    document.getElementById('barOther').style.width = Math.max(3, otherPct) + '%';
+    document.getElementById('barOther').textContent = Math.round(otherPct) + '%';
+
+    document.getElementById('resultBox').classList.add('show');
+  }
+</script>
+
+</body>
+</html>
