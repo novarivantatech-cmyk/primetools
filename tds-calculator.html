@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDS Calculator India 2026 - Tax Deducted at Source - Prime Tools</title>
+  <meta name="description" content="Free TDS Calculator for India. Calculate TDS on salary, FD interest, rent, professional fees. Check Section 194A, 194I, 194J rates. Monthly & quarterly TDS estimation.">
+  <meta name="keywords" content="TDS calculator India, tax deducted at source calculator, salary TDS calculator, FD TDS calculator, rent TDS, Section 194A, Section 194I, Section 194J, Form 16 calculator">
+  <meta property="og:title" content="TDS Calculator India 2026 - Tax Deducted at Source - Prime Tools">
+  <meta property="og:description" content="Calculate TDS on salary, FD interest, rent & professional fees. Know your monthly tax deduction with Section-wise rates.">
+  <meta property="og:url" content="https://primetoolsapp.com/tds-calculator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/tds-calculator.html">
+  
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 720px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-size: 14px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 16px; padding-bottom: 8px;
+      border-bottom: 2px solid #e0f7f3;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .section-title:first-child { margin-top: 0; }
+
+    .field { margin-bottom: 18px; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #555; margin-bottom: 8px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 16px; outline: none;
+      transition: border-color 0.2s; background: white;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    .input-prefix {
+      position: relative;
+    }
+    .input-prefix::before {
+      content: '₹'; position: absolute;
+      left: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 16px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-prefix input { padding-left: 36px; }
+
+    .input-suffix {
+      position: relative;
+    }
+    .input-suffix::after {
+      content: '%'; position: absolute;
+      right: 14px; top: 50%; transform: translateY(-50%);
+      color: #888; font-size: 14px; font-weight: 600;
+      pointer-events: none;
+    }
+    .input-suffix input { padding-right: 36px; }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .tds-tabs {
+      display: flex; gap: 8px; margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .tds-tab {
+      padding: 10px 16px; border-radius: 8px;
+      border: 2px solid #e0e0e0; background: white;
+      font-size: 13px; font-weight: 600; color: #555;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .tds-tab.active {
+      border-color: #00d4aa; background: #f0fdf8;
+      color: #00a878;
+    }
+
+    .result-box {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 12px; padding: 28px;
+      margin-top: 24px; display: none;
+    }
+    .result-box.show { display: block; }
+
+    .result-highlight {
+      text-align: center; margin-bottom: 24px;
+    }
+    .result-highlight .lbl {
+      font-size: 13px; color: #888;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .result-highlight .val {
+      font-size: 36px; font-weight: 800; color: #00d4aa;
+    }
+    .result-highlight .sub {
+      font-size: 14px; color: #888; margin-top: 4px;
+    }
+
+    .result-grid-3 {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-bottom: 20px;
+    }
+    @media (max-width: 600px) { .result-grid-3 { grid-template-columns: 1fr; } }
+
+    .result-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px 12px;
+      text-align: center;
+    }
+    .result-item .lbl {
+      font-size: 11px; color: #888;
+      margin-bottom: 6px; text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .result-item .val {
+      font-size: 20px; font-weight: 700; color: #00d4aa;
+    }
+
+    .result-divider {
+      height: 1px; background: rgba(255,255,255,0.1);
+      margin: 16px 0;
+    }
+
+    .breakdown-section {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px;
+    }
+    .breakdown-section h4 {
+      font-size: 12px; color: #888;
+      margin-bottom: 12px; text-align: center;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .bl { color: #aaa; }
+    .breakdown-row .br { color: #fff; font-weight: 600; }
+    .breakdown-row .br.deduct { color: #ff6b6b; }
+    .breakdown-row.total {
+      font-size: 15px; padding-top: 12px; margin-top: 4px;
+      border-top: 2px solid rgba(255,255,255,0.15);
+    }
+    .breakdown-row.total .br { color: #00d4aa; font-size: 18px; }
+
+    .section-info {
+      background: #f0fdf8; border: 1px solid #b2ead9;
+      border-radius: 8px; padding: 12px 16px;
+      font-size: 13px; color: #00a878;
+      margin-bottom: 16px; line-height: 1.6;
+    }
+
+    .rate-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px; margin-top: 12px;
+    }
+    .rate-table th, .rate-table td {
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 10px 12px; text-align: left;
+    }
+    .rate-table th {
+      background: rgba(0,212,170,0.15); color: #00d4aa;
+      font-weight: 600;
+    }
+    .rate-table td { color: #ccc; }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    .info-section {
+      max-width: 720px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+  </style>
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>TDS Calculator</h2>
+  <p>Calculate Tax Deducted at Source on salary, FD interest, rent & professional fees</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="tds-tabs" id="tdsTabs">
+    <button class="tds-tab active" onclick="setTdsType('salary')">💼 Salary TDS</button>
+    <button class="tds-tab" onclick="setTdsType('fd')">🏦 FD Interest</button>
+    <button class="tds-tab" onclick="setTdsType('rent')">🏠 Rent TDS</button>
+    <button class="tds-tab" onclick="setTdsType('professional')">👨‍💼 Professional Fees</button>
+  </div>
+
+  <!-- Salary TDS Section -->
+  <div id="salarySection">
+    <div class="section-info">TDS on salary is deducted monthly based on estimated annual tax liability. Average rate is applied.</div>
+    
+    <div class="field">
+      <label>Annual Gross Salary (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="salaryGross" placeholder="e.g. 1200000" value="1200000">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Section 80C (₹)</label>
+        <div class="input-prefix">
+          <input type="number" id="salary80C" value="150000" max="150000">
+        </div>
+      </div>
+      <div class="field">
+        <label>Section 80D (₹)</label>
+        <div class="input-prefix">
+          <input type="number" id="salary80D" value="25000">
+        </div>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>HRA Exemption (₹)</label>
+        <div class="input-prefix">
+          <input type="number" id="salaryHRA" value="0">
+        </div>
+      </div>
+      <div class="field">
+        <label>Other Deductions (₹)</label>
+        <div class="input-prefix">
+          <input type="number" id="salaryOther" value="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Tax Regime</label>
+      <select id="salaryRegime">
+        <option value="new">New Tax Regime (Default ₹75,000 standard deduction)</option>
+        <option value="old">Old Tax Regime (With all deductions)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- FD Interest Section -->
+  <div id="fdSection" style="display:none;">
+    <div class="section-info">TDS on FD interest is deducted by banks if interest exceeds ₹40,000/year (₹50,000 for senior citizens) under Section 194A.</div>
+    
+    <div class="field">
+      <label>Annual FD Interest (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="fdInterest" placeholder="e.g. 60000" value="60000">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Are you a Senior Citizen?</label>
+        <select id="fdSenior">
+          <option value="no">No (Below 60 years)</option>
+          <option value="yes">Yes (60+ years)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Have you submitted Form 15G/15H?</label>
+        <select id="fdForm15">
+          <option value="no">No</option>
+          <option value="yes">Yes (No TDS if eligible)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rent TDS Section -->
+  <div id="rentSection" style="display:none;">
+    <div class="section-info">TDS on rent is applicable if monthly rent exceeds ₹50,000 (Section 194IB) or annual rent exceeds ₹2.4 lakh (Section 194I).</div>
+    
+    <div class="field">
+      <label>Monthly Rent (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="rentMonthly" placeholder="e.g. 60000" value="60000">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Property Type</label>
+      <select id="rentType">
+        <option value="landbuilding">Land / Building / Furniture</option>
+        <option value="plantmachinery">Plant / Machinery / Equipment</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Are you an Individual/HUF paying rent?</label>
+      <select id="rentPayer">
+        <option value="individual">Yes, Individual/HUF (Section 194IB - 5%)</option>
+        <option value="other">No, Company/Other (Section 194I)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Professional Fees Section -->
+  <div id="professionalSection" style="display:none;">
+    <div class="section-info">TDS on professional fees is deducted under Section 194J at 10% (2% for technical services in some cases).</div>
+    
+    <div class="field">
+      <label>Professional Fees Amount (₹)</label>
+      <div class="input-prefix">
+        <input type="number" id="profAmount" placeholder="e.g. 50000" value="50000">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Nature of Payment</label>
+      <select id="profNature">
+        <option value="professional">Professional Fees (Section 194J - 10%)</option>
+        <option value="technical">Technical Services (Section 194J - 2%)</option>
+        <option value="director">Director's Fees (Section 194J - 10%)</option>
+        <option value="callcenter">Call Center Operations (Section 194J - 2%)</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Have you submitted Form 13 (lower/Nil TDS)?</label>
+      <select id="profForm13">
+        <option value="no">No</option>
+        <option value="yes">Yes (Lower/Nil TDS certificate)</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calculateTDS()">Calculate TDS</button>
+
+  <div class="result-box" id="resultBox">
+
+    <div class="result-highlight">
+      <div class="lbl" id="resTitle">Total TDS to be Deducted</div>
+      <div class="val" id="resTotalTDS">-</div>
+      <div class="sub" id="resSubTitle">-</div>
+    </div>
+
+    <div class="result-grid-3" id="resGrid">
+      <div class="result-item">
+        <div class="lbl" id="lbl1">Annual Taxable</div>
+        <div class="val" id="val1">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl" id="lbl2">TDS Rate</div>
+        <div class="val" id="val2">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl" id="lbl3">Monthly TDS</div>
+        <div class="val" id="val3">-</div>
+      </div>
+    </div>
+
+    <div class="result-divider"></div>
+
+    <div class="breakdown-section" id="breakdownSection">
+      <h4 id="breakdownTitle">TDS Breakdown</h4>
+      <div id="breakdownContent"></div>
+    </div>
+
+    <div class="breakdown-section" id="rateInfoSection" style="margin-top:16px;">
+      <h4>Applicable TDS Rates</h4>
+      <table class="rate-table" id="rateTable">
+        <thead>
+          <tr><th>Section</th><th>Nature</th><th>Rate</th><th>Threshold</th></tr>
+        </thead>
+        <tbody id="rateTableBody"></tbody>
+      </table>
+    </div>
+
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>How to Use the TDS Calculator</h2>
+  <p>Our TDS Calculator helps you estimate tax deducted at source for various payments. Select the appropriate category (Salary, FD, Rent, or Professional Fees) and enter the details to get accurate TDS calculations.</p>
+  
+  <h3>TDS Rates Summary (FY 2026-27)</h3>
+  <p>TDS is deducted at source to ensure tax collection. Different sections apply to different types of payments. Here are the key rates:</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>What is TDS and why is it deducted?</p>
+    <p>TDS (Tax Deducted at Source) is a method of collecting income tax at the source of income. The payer deducts tax before making payment to the receiver. This ensures regular tax collection and reduces tax evasion.</p>
+  </div>
+  <div class="faq-box">
+    <p>When is TDS on salary deducted?</p>
+    <p>Employers deduct TDS from salary every month based on the employee's estimated annual tax liability. The average rate is calculated by dividing total estimated tax by total estimated salary for the year.</p>
+  </div>
+  <div class="faq-box">
+    <p>How can I avoid TDS on FD interest?</p>
+    <p>Submit Form 15G (for non-seniors) or Form 15H (for seniors) if your total income is below the taxable limit. Alternatively, split FDs across banks so interest from each is below the TDS threshold.</p>
+  </div>
+  <div class="faq-box">
+    <p>What happens if TDS is not deducted?</p>
+    <p>If the deductor fails to deduct TDS, they may face penalty equal to the TDS amount. If TDS is deducted but not deposited, interest @ 1.5% per month is charged. Always verify TDS in your Form 26AS.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  let currentTdsType = 'salary';
+
+  function setTdsType(type) {
+    currentTdsType = type;
+    document.querySelectorAll('.tds-tab').forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+
+    document.getElementById('salarySection').style.display = type === 'salary' ? 'block' : 'none';
+    document.getElementById('fdSection').style.display = type === 'fd' ? 'block' : 'none';
+    document.getElementById('rentSection').style.display = type === 'rent' ? 'block' : 'none';
+    document.getElementById('professionalSection').style.display = type === 'professional' ? 'block' : 'none';
+
+    document.getElementById('resultBox').classList.remove('show');
+  }
+
+  function calculateSalaryTDS() {
+    const gross = parseFloat(document.getElementById('salaryGross').value) || 0;
+    const sec80C = Math.min(150000, parseFloat(document.getElementById('salary80C').value) || 0);
+    const sec80D = Math.min(100000, parseFloat(document.getElementById('salary80D').value) || 0);
+    const hra = parseFloat(document.getElementById('salaryHRA').value) || 0;
+    const other = parseFloat(document.getElementById('salaryOther').value) || 0;
+    const regime = document.getElementById('salaryRegime').value;
+
+    let taxable = 0;
+    let tax = 0;
+    let tdsRate = 0;
+    let monthlyTDS = 0;
+
+    if (regime === 'new') {
+      const stdDed = 75000;
+      taxable = Math.max(0, gross - stdDed);
+      // New regime tax calculation
+      if (taxable <= 300000) tax = 0;
+      else if (taxable <= 600000) tax = (taxable - 300000) * 0.05;
+      else if (taxable <= 900000) tax = 15000 + (taxable - 600000) * 0.10;
+      else if (taxable <= 1200000) tax = 45000 + (taxable - 900000) * 0.15;
+      else if (taxable <= 1500000) tax = 90000 + (taxable - 1200000) * 0.20;
+      else tax = 150000 + (taxable - 1500000) * 0.30;
+
+      if (taxable <= 700000) tax = Math.max(0, tax - 25000);
+      tax *= 1.04; // Cess
+    } else {
+      const stdDed = 50000;
+      const totalDed = stdDed + sec80C + sec80D + hra + other;
+      taxable = Math.max(0, gross - totalDed);
+      // Old regime tax calculation
+      if (taxable <= 250000) tax = 0;
+      else if (taxable <= 500000) tax = (taxable - 250000) * 0.05;
+      else if (taxable <= 1000000) tax = 12500 + (taxable - 500000) * 0.20;
+      else tax = 112500 + (taxable - 1000000) * 0.30;
+
+      if (taxable <= 500000) tax = Math.max(0, tax - 12500);
+      tax *= 1.04; // Cess
+    }
+
+    tdsRate = gross > 0 ? (tax / gross * 100) : 0;
+    monthlyTDS = tax / 12;
+
+    return {
+      totalTDS: tax,
+      rate: tdsRate,
+      monthly: monthlyTDS,
+      taxable: taxable,
+      breakdown: [
+        { label: 'Gross Salary', value: gross },
+        { label: 'Standard Deduction', value: regime === 'new' ? 75000 : 50000, deduct: true },
+        { label: 'Section 80C', value: sec80C, deduct: true },
+        { label: 'Section 80D', value: sec80D, deduct: true },
+        { label: 'HRA Exemption', value: hra, deduct: true },
+        { label: 'Other Deductions', value: other, deduct: true },
+        { label: 'Taxable Income', value: taxable },
+        { label: 'Total Tax', value: tax, deduct: true },
+        { label: 'Monthly TDS', value: monthlyTDS }
+      ]
+    };
+  }
+
+  function calculateFDTDS() {
+    const interest = parseFloat(document.getElementById('fdInterest').value) || 0;
+    const isSenior = document.getElementById('fdSenior').value === 'yes';
+    const form15 = document.getElementById('fdForm15').value === 'yes';
+
+    const threshold = isSenior ? 50000 : 40000;
+    let tds = 0;
+    let rate = 0;
+
+    if (form15) {
+      tds = 0;
+      rate = 0;
+    } else if (interest > threshold) {
+      rate = 10;
+      tds = interest * 0.10;
+    }
+
+    return {
+      totalTDS: tds,
+      rate: rate,
+      monthly: tds / 12,
+      taxable: interest,
+      breakdown: [
+        { label: 'Annual Interest', value: interest },
+        { label: 'TDS Threshold', value: threshold },
+        { label: 'TDS Rate', value: rate + '%' },
+        { label: 'TDS Deducted', value: tds, deduct: true },
+        { label: 'Net Interest', value: interest - tds }
+      ]
+    };
+  }
+
+  function calculateRentTDS() {
+    const monthlyRent = parseFloat(document.getElementById('rentMonthly').value) || 0;
+    const rentType = document.getElementById('rentType').value;
+    const payer = document.getElementById('rentPayer').value;
+
+    const annualRent = monthlyRent * 12;
+    let rate = 0;
+    let tds = 0;
+
+    if (payer === 'individual') {
+      // Section 194IB
+      if (monthlyRent > 50000) {
+        rate = 5;
+        tds = annualRent * 0.05;
+      }
+    } else {
+      // Section 194I
+      if (annualRent > 240000) {
+        rate = rentType === 'landbuilding' ? 10 : 2;
+        tds = annualRent * (rate / 100);
+      }
+    }
+
+    return {
+      totalTDS: tds,
+      rate: rate,
+      monthly: tds / 12,
+      taxable: annualRent,
+      breakdown: [
+        { label: 'Monthly Rent', value: monthlyRent },
+        { label: 'Annual Rent', value: annualRent },
+        { label: 'Applicable Section', value: payer === 'individual' ? '194IB' : '194I' },
+        { label: 'TDS Rate', value: rate + '%' },
+        { label: 'Annual TDS', value: tds, deduct: true },
+        { label: 'Monthly TDS', value: tds / 12 }
+      ]
+    };
+  }
+
+  function calculateProfTDS() {
+    const amount = parseFloat(document.getElementById('profAmount').value) || 0;
+    const nature = document.getElementById('profNature').value;
+    const form13 = document.getElementById('profForm13').value === 'yes';
+
+    let rate = 0;
+    let section = '194J';
+
+    if (form13) {
+      rate = 0;
+    } else {
+      switch(nature) {
+        case 'professional': rate = 10; break;
+        case 'technical': rate = 2; break;
+        case 'director': rate = 10; break;
+        case 'callcenter': rate = 2; break;
+      }
+    }
+
+    const tds = amount * (rate / 100);
+
+    return {
+      totalTDS: tds,
+      rate: rate,
+      monthly: tds,
+      taxable: amount,
+      breakdown: [
+        { label: 'Professional Fees', value: amount },
+        { label: 'Nature', value: nature === 'professional' ? 'Professional' : nature === 'technical' ? 'Technical' : nature === 'director' ? 'Director' : 'Call Center' },
+        { label: 'Section', value: section },
+        { label: 'TDS Rate', value: rate + '%' },
+        { label: 'TDS Amount', value: tds, deduct: true },
+        { label: 'Net Payment', value: amount - tds }
+      ]
+    };
+  }
+
+  function calculateTDS() {
+    let result;
+
+    switch(currentTdsType) {
+      case 'salary': result = calculateSalaryTDS(); break;
+      case 'fd': result = calculateFDTDS(); break;
+      case 'rent': result = calculateRentTDS(); break;
+      case 'professional': result = calculateProfTDS(); break;
+    }
+
+    if (!result) return;
+
+    // Display results
+    document.getElementById('resTotalTDS').textContent = '₹' + Math.round(result.totalTDS).toLocaleString('en-IN');
+
+    if (currentTdsType === 'salary') {
+      document.getElementById('resTitle').textContent = 'Annual TDS on Salary';
+      document.getElementById('resSubTitle').textContent = 'Average rate: ' + result.rate.toFixed(2) + '%';
+      document.getElementById('lbl1').textContent = 'Taxable Income';
+      document.getElementById('val1').textContent = '₹' + Math.round(result.taxable).toLocaleString('en-IN');
+      document.getElementById('lbl2').textContent = 'Average TDS Rate';
+      document.getElementById('val2').textContent = result.rate.toFixed(2) + '%';
+      document.getElementById('lbl3').textContent = 'Monthly TDS';
+      document.getElementById('val3').textContent = '₹' + Math.round(result.monthly).toLocaleString('en-IN');
+    } else if (currentTdsType === 'fd') {
+      document.getElementById('resTitle').textContent = 'Annual TDS on FD Interest';
+      document.getElementById('resSubTitle').textContent = result.rate > 0 ? 'Deducted by bank if threshold crossed' : 'No TDS (Form 15G/15H submitted)';
+      document.getElementById('lbl1').textContent = 'Annual Interest';
+      document.getElementById('val1').textContent = '₹' + Math.round(result.taxable).toLocaleString('en-IN');
+      document.getElementById('lbl2').textContent = 'TDS Rate';
+      document.getElementById('val2').textContent = result.rate + '%';
+      document.getElementById('lbl3').textContent = 'TDS Deducted';
+      document.getElementById('val3').textContent = '₹' + Math.round(result.totalTDS).toLocaleString('en-IN');
+    } else if (currentTdsType === 'rent') {
+      document.getElementById('resTitle').textContent = 'Annual TDS on Rent';
+      document.getElementById('resSubTitle').textContent = 'Deducted by tenant/payer';
+      document.getElementById('lbl1').textContent = 'Annual Rent';
+      document.getElementById('val1').textContent = '₹' + Math.round(result.taxable).toLocaleString('en-IN');
+      document.getElementById('lbl2').textContent = 'TDS Rate';
+      document.getElementById('val2').textContent = result.rate + '%';
+      document.getElementById('lbl3').textContent = 'Monthly TDS';
+      document.getElementById('val3').textContent = '₹' + Math.round(result.monthly).toLocaleString('en-IN');
+    } else {
+      document.getElementById('resTitle').textContent = 'TDS on Professional Fees';
+      document.getElementById('resSubTitle').textContent = 'Deducted by payer before payment';
+      document.getElementById('lbl1').textContent = 'Fee Amount';
+      document.getElementById('val1').textContent = '₹' + Math.round(result.taxable).toLocaleString('en-IN');
+      document.getElementById('lbl2').textContent = 'TDS Rate';
+      document.getElementById('val2').textContent = result.rate + '%';
+      document.getElementById('lbl3').textContent = 'TDS Deducted';
+      document.getElementById('val3').textContent = '₹' + Math.round(result.totalTDS).toLocaleString('en-IN');
+    }
+
+    // Build breakdown
+    const breakdownHtml = result.breakdown.map(item => `
+      <div class="breakdown-row">
+        <span class="bl">${item.label}</span>
+        <span class="br ${item.deduct ? 'deduct' : ''}">${typeof item.value === 'number' ? '₹' + Math.round(item.value).toLocaleString('en-IN') : item.value}</span>
+      </div>
+    `).join('');
+    document.getElementById('breakdownContent').innerHTML = breakdownHtml;
+
+    // Rate table
+    const rateData = {
+      salary: [
+        { section: '192', nature: 'Salary', rate: 'Slab Rate', threshold: '₹2.5L/3L' },
+        { section: '192A', nature: 'PF Withdrawal', rate: '10%', threshold: '₹50,000' }
+      ],
+      fd: [
+        { section: '194A', nature: 'FD Interest (Non-Senior)', rate: '10%', threshold: '₹40,000/year' },
+        { section: '194A', nature: 'FD Interest (Senior)', rate: '10%', threshold: '₹50,000/year' }
+      ],
+      rent: [
+        { section: '194I', nature: 'Rent (Land/Building)', rate: '10%', threshold: '₹2.4L/year' },
+        { section: '194I', nature: 'Rent (Plant/Machinery)', rate: '2%', threshold: '₹2.4L/year' },
+        { section: '194IB', nature: 'Rent by Individual/HUF', rate: '5%', threshold: '₹50,000/month' }
+      ],
+      professional: [
+        { section: '194J', nature: 'Professional Fees', rate: '10%', threshold: '₹30,000' },
+        { section: '194J', nature: 'Technical Services', rate: '2%', threshold: '₹30,000' },
+        { section: '194J', nature: 'Director Fees', rate: '10%', threshold: 'No limit' }
+      ]
+    };
+
+    const rateRows = rateData[currentTdsType].map(r => `
+      <tr><td>${r.section}</td><td>${r.nature}</td><td>${r.rate}</td><td>${r.threshold}</td></tr>
+    `).join('');
+    document.getElementById('rateTableBody').innerHTML = rateRows;
+
+    document.getElementById('resultBox').classList.add('show');
+  }
+</script>
+
+</body>
+</html>
