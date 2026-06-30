@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Loan Calculator India - EMI, Eligibility & Prepayment - Prime Tools</title>
+  <meta name="description" content="Free Home Loan Calculator India - Calculate home loan EMI, total interest, prepayment savings and stamp duty. Compare SBI, HDFC, ICICI home loan rates 2026.">
+  <meta name="keywords" content="home loan calculator India, housing loan EMI calculator, home loan EMI 2026, SBI home loan calculator, HDFC home loan calculator, home loan prepayment calculator">
+  <link rel="canonical" href="https://primetoolsapp.com/home-loan-calculator.html">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', sans-serif; background: #f5f7fa; color: #1a1a2e; }
+    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; font-weight: 600; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    /* Tabs */
+    .tab-bar { background: white; border-bottom: 1px solid #e8edf2; display: flex; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .tab-btn { padding: 14px 20px; border: none; background: none; font-size: 14px; font-weight: 600; color: #888; cursor: pointer; border-bottom: 3px solid transparent; transition: all 0.2s; white-space: nowrap; }
+    .tab-btn:hover { color: #1a1a2e; }
+    .tab-btn.active { color: #00d4aa; border-bottom-color: #00d4aa; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .main-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    @media (max-width: 768px) { .main-layout { grid-template-columns: 1fr; } }
+
+    .card { background: white; border-radius: 16px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border: 1px solid #e8edf2; }
+    .section-label { font-size: 11px; font-weight: 700; color: #00b894; text-transform: uppercase; letter-spacing: 1.5px; margin: 20px 0 12px; padding-bottom: 6px; border-bottom: 2px solid #e8fdf8; }
+    .section-label:first-of-type { margin-top: 0; }
+    .field { margin-bottom: 16px; }
+    .field label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
+    .field label span { color: #00d4aa; }
+    input[type="range"] { width: 100%; accent-color: #00d4aa; height: 6px; cursor: pointer; }
+    .range-limits { display: flex; justify-content: space-between; font-size: 11px; color: #aaa; margin-top: 3px; }
+    .field input[type="number"], .field select { width: 100%; padding: 10px 14px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; transition: border-color 0.2s; margin-top: 6px; background: white; }
+    .field input[type="number"]:focus, .field select:focus { border-color: #00d4aa; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .calc-btn { width: 100%; padding: 14px; background: #00d4aa; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
+    .calc-btn:hover { background: #00b894; }
+
+    /* Results */
+    .emi-banner { background: #1a1a2e; color: white; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 16px; }
+    .emi-banner .el { font-size: 13px; color: #aaa; margin-bottom: 6px; }
+    .emi-banner .ev { font-size: 40px; font-weight: 800; color: #00d4aa; }
+    .emi-banner .es { font-size: 13px; color: #aaa; margin-top: 4px; }
+
+    .res-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+    .res-card { background: #f8fffe; border: 1.5px solid #e0f7f3; border-radius: 10px; padding: 12px; text-align: center; }
+    .res-card .rl { font-size: 11px; color: #888; margin-bottom: 4px; text-transform: uppercase; }
+    .res-card .rv { font-size: 14px; font-weight: 700; color: #1a1a2e; }
+
+    .bar-wrap { margin-bottom: 16px; }
+    .bar-labels { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
+    .bar-track { height: 12px; background: #f0f4f8; border-radius: 6px; overflow: hidden; display: flex; }
+    .bar-p { height: 100%; background: #00d4aa; transition: width 0.5s; }
+    .bar-i { height: 100%; background: #ff6b6b; transition: width 0.5s; }
+    .bar-legend { display: flex; gap: 16px; font-size: 12px; margin-top: 6px; }
+    .bl-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+
+    .sched-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin-bottom: 10px; }
+    .sched-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .sched-table th { background: #1a1a2e; color: white; padding: 8px 10px; text-align: right; }
+    .sched-table th:first-child { text-align: left; }
+    .sched-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; text-align: right; }
+    .sched-table td:first-child { text-align: left; font-weight: 600; }
+
+    /* Bank rates */
+    .bank-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f0f0f0; cursor: pointer; }
+    .bank-row:last-child { border: none; }
+    .bank-row:hover { background: #f8fffe; }
+    .bank-name { font-size: 13px; font-weight: 600; }
+    .bank-rate { font-size: 12px; color: #00b894; font-weight: 700; }
+    .bank-emi { font-size: 13px; font-weight: 700; color: #1a1a2e; }
+
+    /* Prepayment */
+    .saving-banner { background: #e8fdf8; border: 2px solid #00d4aa; border-radius: 12px; padding: 20px; text-align: center; margin-bottom: 16px; }
+    .saving-banner .sl { font-size: 13px; color: #555; margin-bottom: 6px; }
+    .saving-banner .sv { font-size: 32px; font-weight: 800; color: #00b894; }
+    .saving-banner .ss { font-size: 13px; color: #888; margin-top: 4px; }
+
+    .content-section { max-width: 1100px; margin: 0 auto 40px; padding: 0 16px; }
+    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; }
+    footer a { color: #aaa; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+<div class="page-title">
+  <h2>Home Loan Calculator</h2>
+  <p>Calculate EMI, compare bank rates, plan prepayment and estimate stamp duty</p>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('emi', this)">🏠 EMI Calculator</button>
+  <button class="tab-btn" onclick="showTab('banks', this)">🏦 Compare Banks</button>
+  <button class="tab-btn" onclick="showTab('prepay', this)">💰 Prepayment</button>
+  <button class="tab-btn" onclick="showTab('stamp', this)">📋 Stamp Duty</button>
+</div>
+
+<!-- TAB 1: EMI -->
+<div class="tab-content active" id="tab-emi">
+  <div class="main-layout">
+    <div class="card">
+      <div class="section-label">Property & Loan Details</div>
+      <div class="field">
+        <label>Property Value (₹) <span id="propDisplay">₹50,00,000</span></label>
+        <input type="range" id="propRange" min="500000" max="50000000" step="100000" value="5000000" oninput="syncProp(this.value)">
+        <div class="range-limits"><span>₹5 Lakh</span><span>₹5 Crore</span></div>
+        <input type="number" id="propInput" value="5000000" oninput="syncPropInput(this.value)">
+      </div>
+      <div class="field">
+        <label>Down Payment (%) <span id="downDisplay">20%</span></label>
+        <input type="range" id="downRange" min="10" max="50" step="1" value="20" oninput="syncDown(this.value)">
+        <div class="range-limits"><span>10%</span><span>50%</span></div>
+        <input type="number" id="downInput" value="20" oninput="syncDownInput(this.value)">
+      </div>
+      <div class="field">
+        <label>Interest Rate (% p.a.) <span id="rateDisplay">8.5%</span></label>
+        <input type="range" id="rateRange" min="6" max="15" step="0.05" value="8.5" oninput="syncRate(this.value)">
+        <div class="range-limits"><span>6%</span><span>15%</span></div>
+        <input type="number" id="rateInput" value="8.5" step="0.05" oninput="syncRateInput(this.value)">
+      </div>
+      <div class="field">
+        <label>Loan Tenure (Years) <span id="tenureDisplay">20 Years</span></label>
+        <input type="range" id="tenureRange" min="5" max="30" step="1" value="20" oninput="syncTenure(this.value)">
+        <div class="range-limits"><span>5 Yrs</span><span>30 Yrs</span></div>
+        <input type="number" id="tenureInput" value="20" oninput="syncTenureInput(this.value)">
+      </div>
+      <button class="calc-btn" onclick="calcEMI()">Calculate Home Loan EMI</button>
+    </div>
+
+    <div class="card" id="emiResult">
+      <div class="emi-banner">
+        <div class="el">Monthly EMI</div>
+        <div class="ev" id="r-emi">₹0</div>
+        <div class="es" id="r-loan-amt">Loan Amount: ₹0</div>
+      </div>
+      <div class="res-grid">
+        <div class="res-card"><div class="rl">Principal</div><div class="rv" id="r-principal">₹0</div></div>
+        <div class="res-card"><div class="rl">Total Interest</div><div class="rv" id="r-interest">₹0</div></div>
+        <div class="res-card"><div class="rl">Total Payment</div><div class="rv" id="r-total">₹0</div></div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-labels">
+          <span id="pPct" style="color:#00d4aa;font-weight:600;">Principal 0%</span>
+          <span id="iPct" style="color:#ff6b6b;font-weight:600;">Interest 0%</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-p" id="barP"></div>
+          <div class="bar-i" id="barI"></div>
+        </div>
+      </div>
+      <div class="sched-title">Yearly Payment Schedule</div>
+      <table class="sched-table">
+        <thead><tr><th>Year</th><th>Principal</th><th>Interest</th><th>Balance</th></tr></thead>
+        <tbody id="schedBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 2: COMPARE BANKS -->
+<div class="tab-content" id="tab-banks">
+  <div class="main-layout">
+    <div class="card">
+      <div class="section-label">Loan Details for Comparison</div>
+      <div class="field">
+        <label>Loan Amount (₹) <span id="b-loanDisplay">₹40,00,000</span></label>
+        <input type="range" id="b-loanRange" min="500000" max="50000000" step="100000" value="4000000" oninput="syncBLoan(this.value)">
+        <div class="range-limits"><span>₹5 Lakh</span><span>₹5 Crore</span></div>
+        <input type="number" id="b-loanInput" value="4000000" oninput="syncBLoanInput(this.value)">
+      </div>
+      <div class="field">
+        <label>Tenure (Years) <span id="b-tenureDisplay">20 Years</span></label>
+        <input type="range" id="b-tenureRange" min="5" max="30" step="1" value="20" oninput="syncBTenure(this.value)">
+        <div class="range-limits"><span>5 Yrs</span><span>30 Yrs</span></div>
+        <input type="number" id="b-tenureInput" value="20" oninput="syncBTenureInput(this.value)">
+      </div>
+      <div style="background:#fffbea;border:1px solid #ffd54f;border-radius:10px;padding:14px;font-size:13px;color:#555;margin-top:16px;">
+        💡 Click any bank row to use that rate in the EMI calculator
+      </div>
+    </div>
+    <div class="card">
+      <div class="sched-title">Home Loan Rates Comparison 2026</div>
+      <div id="bankComparison"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 3: PREPAYMENT -->
+<div class="tab-content" id="tab-prepay">
+  <div class="main-layout">
+    <div class="card">
+      <div class="section-label">Original Loan Details</div>
+      <div class="two-col">
+        <div class="field">
+          <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">Loan Amount (₹)</label>
+          <input type="number" id="pp-loan" value="4000000" oninput="calcPrepay()">
+        </div>
+        <div class="field">
+          <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">Interest Rate (%)</label>
+          <input type="number" id="pp-rate" value="8.5" step="0.1" oninput="calcPrepay()">
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">Tenure (Years)</label>
+          <input type="number" id="pp-tenure" value="20" oninput="calcPrepay()">
+        </div>
+        <div class="field">
+          <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">EMIs Paid So Far</label>
+          <input type="number" id="pp-paid" value="24" oninput="calcPrepay()">
+        </div>
+      </div>
+      <div class="section-label">Prepayment Details</div>
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">Prepayment Amount (₹)</label>
+        <input type="number" id="pp-amount" value="500000" oninput="calcPrepay()">
+      </div>
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">After Prepayment Prefer</label>
+        <select id="pp-prefer" onchange="calcPrepay()">
+          <option value="tenure">Reduce Tenure (keep same EMI)</option>
+          <option value="emi">Reduce EMI (keep same tenure)</option>
+        </select>
+      </div>
+    </div>
+    <div class="card">
+      <div class="saving-banner">
+        <div class="sl">Total Interest Saved by Prepayment</div>
+        <div class="sv" id="pp-saving">₹0</div>
+        <div class="ss" id="pp-saving-sub"></div>
+      </div>
+      <div class="res-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="res-card">
+          <div class="rl">Without Prepayment</div>
+          <div class="rv" id="pp-without">₹0</div>
+        </div>
+        <div class="res-card" style="border-color:#00d4aa;background:#e8fdf8;">
+          <div class="rl">With Prepayment</div>
+          <div class="rv" id="pp-with" style="color:#00b894;">₹0</div>
+        </div>
+      </div>
+      <div id="pp-details" style="font-size:14px;color:#555;line-height:2;margin-top:16px;padding:16px;background:#f8fffe;border-radius:10px;border:1px solid #e0f7f3;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 4: STAMP DUTY -->
+<div class="tab-content" id="tab-stamp">
+  <div class="main-layout">
+    <div class="card">
+      <div class="section-label">Property Details</div>
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">State</label>
+        <select id="sd-state" onchange="calcStamp()">
+          <option value="MH">Maharashtra</option>
+          <option value="DL">Delhi</option>
+          <option value="KA">Karnataka</option>
+          <option value="TN">Tamil Nadu</option>
+          <option value="GJ">Gujarat</option>
+          <option value="RJ">Rajasthan</option>
+          <option value="UP">Uttar Pradesh</option>
+          <option value="WB">West Bengal</option>
+          <option value="AP">Andhra Pradesh</option>
+          <option value="TS">Telangana</option>
+        </select>
+      </div>
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">Property Value (₹)</label>
+        <input type="number" id="sd-value" value="5000000" placeholder="Property market value" oninput="calcStamp()">
+      </div>
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">Buyer Gender</label>
+        <select id="sd-gender" onchange="calcStamp()">
+          <option value="male">Male</option>
+          <option value="female">Female (may get concession)</option>
+          <option value="joint">Joint (Male + Female)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label style="display:block;font-size:13px;font-weight:600;color:#555;margin-bottom:6px;">Property Type</label>
+        <select id="sd-type" onchange="calcStamp()">
+          <option value="residential">Residential</option>
+          <option value="commercial">Commercial</option>
+        </select>
+      </div>
+    </div>
+    <div class="card">
+      <div class="emi-banner">
+        <div class="el">Total Registration Cost</div>
+        <div class="ev" id="sd-total">₹0</div>
+        <div class="es" id="sd-state-name">Maharashtra</div>
+      </div>
+      <div class="res-grid" style="grid-template-columns:1fr 1fr;">
+        <div class="res-card">
+          <div class="rl">Stamp Duty</div>
+          <div class="rv" id="sd-duty">₹0</div>
+        </div>
+        <div class="res-card">
+          <div class="rl">Registration Fee</div>
+          <div class="rv" id="sd-reg">₹0</div>
+        </div>
+      </div>
+      <div id="sd-note" style="font-size:13px;color:#555;line-height:1.8;padding:14px;background:#fffbea;border:1px solid #ffd54f;border-radius:10px;margin-top:12px;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-section" style="margin-top:20px;">
+  <div style="background:white;border-radius:16px;padding:32px;box-shadow:0 2px 12px rgba(0,0,0,0.06);border:1px solid #e8edf2;">
+    <h2 style="font-size:22px;font-weight:700;color:#1a1a2e;margin-bottom:16px;">Home Loan Guide for India 2026</h2>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">A home loan or housing loan is a secured loan given by banks and financial institutions to help you purchase a residential property. In India, home loans are available at interest rates starting from 8.35% per annum. The loan tenure can be up to 30 years and banks typically finance up to 80% of the property value.</p>
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Current Home Loan Rates 2026</h3>
+    <p style="font-size:15px;color:#555;line-height:1.8;margin-bottom:12px;">SBI home loan rate starts at 8.50%, HDFC Bank at 8.60%, ICICI Bank at 8.75%, Axis Bank at 8.75%, and Kotak Mahindra Bank at 8.65%. Women borrowers get a 0.05% concession on home loan rates from most banks.</p>
+    <h3 style="font-size:18px;font-weight:700;color:#1a1a2e;margin:20px 0 10px;">Frequently Asked Questions</h3>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">What is the EMI for Rs 30 lakh home loan for 20 years?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">At 8.5% interest rate for 20 years, the EMI for a Rs 30 lakh home loan is approximately Rs 26,035 per month. Total payment = Rs 62.48 lakh, Total interest = Rs 32.48 lakh. Use our calculator above to calculate for your specific loan amount.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">How much down payment is required for a home loan?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">RBI mandates that banks can lend a maximum of 80% of property value for loans above Rs 30 lakh. So minimum down payment is 20% of property value. For a Rs 50 lakh property, minimum down payment = Rs 10 lakh.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">Is home loan interest tax deductible in India?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">Yes. Under Section 24(b) of Income Tax Act, home loan interest up to Rs 2 lakh per year is deductible for self-occupied property under the old tax regime. Principal repayment up to Rs 1.5 lakh qualifies for Section 80C deduction.</p>
+    </div>
+    <div style="border:1px solid #e0f7f3;border-radius:10px;padding:16px;margin-bottom:10px;">
+      <p style="font-weight:700;color:#1a1a2e;margin-bottom:6px;">Should I prepay my home loan?</p>
+      <p style="font-size:14px;color:#555;line-height:1.7;">Prepaying your home loan in the early years saves maximum interest. Even a single extra EMI per year can reduce your loan tenure by 3 to 4 years. Use our Prepayment Calculator tab above to see exactly how much you save with prepayment.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com</p>
+  <p style="margin-top:8px;font-size:12px;">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms-and-conditions.html">Terms & Conditions</a> |
+    <a href="disclaimer.html">Disclaimer</a>
+  </p>
+</footer>
+
+<script>
+  function fmt(n) { return Math.round(n||0).toLocaleString('en-IN'); }
+  function fmtD(n) { return (n||0).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+
+  function showTab(id, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+  }
+
+  // TAB 1 SYNCS
+  function syncProp(v) { document.getElementById('propInput').value=v; document.getElementById('propDisplay').textContent='₹'+fmt(v); calcEMI(); }
+  function syncPropInput(v) { document.getElementById('propRange').value=Math.min(v,50000000); document.getElementById('propDisplay').textContent='₹'+fmt(v); calcEMI(); }
+  function syncDown(v) { document.getElementById('downInput').value=v; document.getElementById('downDisplay').textContent=v+'%'; calcEMI(); }
+  function syncDownInput(v) { document.getElementById('downRange').value=Math.min(v,50); document.getElementById('downDisplay').textContent=v+'%'; calcEMI(); }
+  function syncRate(v) { document.getElementById('rateInput').value=v; document.getElementById('rateDisplay').textContent=parseFloat(v).toFixed(2)+'%'; calcEMI(); }
+  function syncRateInput(v) { document.getElementById('rateRange').value=Math.min(v,15); document.getElementById('rateDisplay').textContent=parseFloat(v).toFixed(2)+'%'; calcEMI(); }
+  function syncTenure(v) { document.getElementById('tenureInput').value=v; document.getElementById('tenureDisplay').textContent=v+' Years'; calcEMI(); }
+  function syncTenureInput(v) { document.getElementById('tenureRange').value=Math.min(v,30); document.getElementById('tenureDisplay').textContent=v+' Years'; calcEMI(); }
+
+  function calcEMI() {
+    const prop = parseFloat(document.getElementById('propInput').value)||0;
+    const down = parseFloat(document.getElementById('downInput').value)||20;
+    const r = parseFloat(document.getElementById('rateInput').value)||8.5;
+    const years = parseInt(document.getElementById('tenureInput').value)||20;
+    const loan = prop * (1 - down/100);
+    const mr = r/12/100; const n = years*12;
+    const emi = loan * mr * Math.pow(1+mr,n) / (Math.pow(1+mr,n)-1);
+    const total = emi*n; const interest = total-loan;
+    const pPct = Math.round(loan/total*100);
+
+    document.getElementById('r-emi').textContent='₹'+fmt(emi);
+    document.getElementById('r-loan-amt').textContent='Loan Amount: ₹'+fmt(loan)+' | Down: ₹'+fmt(prop*down/100);
+    document.getElementById('r-principal').textContent='₹'+fmt(loan);
+    document.getElementById('r-interest').textContent='₹'+fmt(interest);
+    document.getElementById('r-total').textContent='₹'+fmt(total);
+    document.getElementById('barP').style.width=pPct+'%';
+    document.getElementById('barI').style.width=(100-pPct)+'%';
+    document.getElementById('pPct').textContent='Principal '+pPct+'%';
+    document.getElementById('iPct').textContent='Interest '+(100-pPct)+'%';
+
+    let bal=loan; let rows='';
+    for(let y=1;y<=years;y++){
+      let yP=0,yI=0;
+      for(let m=0;m<12;m++){const i=bal*mr;yI+=i;yP+=emi-i;bal-=emi-i;}
+      if(bal<0)bal=0;
+      rows+=`<tr><td>Year ${y}</td><td>₹${fmt(yP)}</td><td>₹${fmt(yI)}</td><td>₹${fmt(bal)}</td></tr>`;
+    }
+    document.getElementById('schedBody').innerHTML=rows;
+  }
+
+  // TAB 2 SYNCS
+  function syncBLoan(v){document.getElementById('b-loanInput').value=v;document.getElementById('b-loanDisplay').textContent='₹'+fmt(v);calcBanks();}
+  function syncBLoanInput(v){document.getElementById('b-loanRange').value=Math.min(v,50000000);document.getElementById('b-loanDisplay').textContent='₹'+fmt(v);calcBanks();}
+  function syncBTenure(v){document.getElementById('b-tenureInput').value=v;document.getElementById('b-tenureDisplay').textContent=v+' Years';calcBanks();}
+  function syncBTenureInput(v){document.getElementById('b-tenureRange').value=Math.min(v,30);document.getElementById('b-tenureDisplay').textContent=v+' Years';calcBanks();}
+
+  const banks=[
+    {name:'SBI',rate:8.50,type:'Public Sector'},
+    {name:'HDFC Bank',rate:8.60,type:'Private Sector'},
+    {name:'ICICI Bank',rate:8.75,type:'Private Sector'},
+    {name:'Axis Bank',rate:8.75,type:'Private Sector'},
+    {name:'Kotak Mahindra',rate:8.65,type:'Private Sector'},
+    {name:'Bank of Baroda',rate:8.40,type:'Public Sector'},
+    {name:'Punjab National Bank',rate:8.45,type:'Public Sector'},
+    {name:'LIC Housing Finance',rate:8.50,type:'HFC'},
+    {name:'Bajaj Housing Finance',rate:8.48,type:'HFC'},
+    {name:'Tata Capital',rate:8.75,type:'NBFC'},
+  ];
+
+  function calcBanks(){
+    const loan=parseFloat(document.getElementById('b-loanInput').value)||4000000;
+    const years=parseInt(document.getElementById('b-tenureInput').value)||20;
+    const n=years*12;
+    let html='';
+    banks.forEach(b=>{
+      const mr=b.rate/12/100;
+      const emi=loan*mr*Math.pow(1+mr,n)/(Math.pow(1+mr,n)-1);
+      const total=emi*n; const interest=total-loan;
+      html+=`<div class="bank-row" onclick="applyBankRate(${b.rate})">
+        <div><div class="bank-name">${b.name}</div><div class="bank-rate">${b.rate}% p.a. · ${b.type}</div></div>
+        <div style="text-align:right;"><div class="bank-emi">₹${fmt(emi)}/mo</div><div style="font-size:11px;color:#aaa;">Interest: ₹${fmt(interest)}</div></div>
+      </div>`;
+    });
+    document.getElementById('bankComparison').innerHTML=html;
+  }
+
+  function applyBankRate(rate){
+    document.getElementById('rateInput').value=rate;
+    document.getElementById('rateRange').value=rate;
+    document.getElementById('rateDisplay').textContent=rate+'%';
+    showTab('emi',document.querySelectorAll('.tab-btn')[0]);
+    calcEMI();
+  }
+
+  // TAB 3: PREPAYMENT
+  function calcPrepay(){
+    const loan=parseFloat(document.getElementById('pp-loan').value)||4000000;
+    const rate=parseFloat(document.getElementById('pp-rate').value)||8.5;
+    const years=parseInt(document.getElementById('pp-tenure').value)||20;
+    const paid=parseInt(document.getElementById('pp-paid').value)||0;
+    const prepay=parseFloat(document.getElementById('pp-amount').value)||0;
+    const prefer=document.getElementById('pp-prefer').value;
+    const mr=rate/12/100; const n=years*12;
+    const emi=loan*mr*Math.pow(1+mr,n)/(Math.pow(1+mr,n)-1);
+
+    // Outstanding balance after 'paid' EMIs
+    let bal=loan;
+    for(let i=0;i<paid;i++){bal=bal*(1+mr)-emi;}
+    const remaining=n-paid;
+    const withoutInterest=emi*remaining-(bal-0);
+
+    const newBal=Math.max(0,bal-prepay);
+    let withInterest=0;
+    if(prefer==='tenure'){
+      // Same EMI, find new tenure
+      if(newBal>0){
+        const newN=Math.ceil(Math.log(emi/(emi-newBal*mr))/Math.log(1+mr));
+        withInterest=emi*newN-newBal;
+        const saved=remaining-newN;
+        document.getElementById('pp-details').innerHTML=`<strong>Tenure Reduced by:</strong> ${Math.floor(saved/12)} years ${saved%12} months<br><strong>New Remaining EMIs:</strong> ${newN}<br><strong>Same EMI:</strong> ₹${fmt(emi)}/month`;
+      }
+    } else {
+      // Same tenure, reduce EMI
+      const newEMI=newBal*mr*Math.pow(1+mr,remaining)/(Math.pow(1+mr,remaining)-1);
+      withInterest=newEMI*remaining-newBal;
+      document.getElementById('pp-details').innerHTML=`<strong>New Reduced EMI:</strong> ₹${fmt(newEMI)}/month<br><strong>EMI Reduced by:</strong> ₹${fmt(emi-newEMI)}/month<br><strong>Same Tenure:</strong> ${remaining} EMIs remaining`;
+    }
+
+    const saving=withoutInterest-withInterest;
+    document.getElementById('pp-saving').textContent='₹'+fmt(saving);
+    document.getElementById('pp-saving-sub').textContent='You save ₹'+fmt(saving)+' in interest by prepaying ₹'+fmt(prepay);
+    document.getElementById('pp-without').textContent='₹'+fmt(withoutInterest);
+    document.getElementById('pp-with').textContent='₹'+fmt(withInterest);
+  }
+
+  // TAB 4: STAMP DUTY
+  const stampData={
+    MH:{name:'Maharashtra',male:6,female:5,joint:6,reg:1,note:'Stamp duty in Maharashtra is 6% for male buyers and 5% for female buyers. Registration fee is 1% of property value (max Rs 30,000 for most properties). Maharashtra also charges a Metro Cess of 1%.'},
+    DL:{name:'Delhi',male:6,female:4,joint:5,reg:1,note:'Delhi stamp duty is 6% for male buyers, 4% for female buyers, and 5% for joint registration. Registration fee is 1% of property value.'},
+    KA:{name:'Karnataka',male:5,female:5,joint:5,reg:1,note:'Karnataka charges a flat 5% stamp duty for all buyers. Registration fee is 1%. Bengaluru BBMP areas have additional surcharges.'},
+    TN:{name:'Tamil Nadu',male:7,female:7,joint:7,reg:4,note:'Tamil Nadu has one of the highest stamp duty rates at 7%. Registration fee is 4% of property value. Total cost is 11% of property value.'},
+    GJ:{name:'Gujarat',male:4.9,female:4.9,joint:4.9,reg:1,note:'Gujarat charges stamp duty of 4.9% for all buyers. Registration fee is 1%. No gender-based concession is available in Gujarat.'},
+    RJ:{name:'Rajasthan',male:6,female:5,joint:6,reg:1,note:'Rajasthan stamp duty is 6% for male and 5% for female buyers. Registration fee is 1% of property value.'},
+    UP:{name:'Uttar Pradesh',male:7,female:6,joint:7,reg:1,note:'UP has 7% stamp duty for male buyers and 6% for female buyers. Registration fee is 1%. Stamp duty has been reduced in some urban areas to boost housing.'},
+    WB:{name:'West Bengal',male:6,female:6,joint:6,reg:1,note:'West Bengal charges 6% stamp duty and 1% registration fee. Additional cess and charges may apply in Kolkata Municipal Corporation area.'},
+    AP:{name:'Andhra Pradesh',male:5,female:5,joint:5,reg:0.5,note:'Andhra Pradesh charges 5% stamp duty for all buyers. Registration fee is 0.5%. Transfer duty of 1.5% is also applicable.'},
+    TS:{name:'Telangana',male:6,female:6,joint:6,reg:0.5,note:'Telangana charges 6% stamp duty and 0.5% registration fee. Transfer duty of 1.5% is also applicable making total cost around 8%.'},
+  };
+
+  function calcStamp(){
+    const state=document.getElementById('sd-state').value;
+    const value=parseFloat(document.getElementById('sd-value').value)||0;
+    const gender=document.getElementById('sd-gender').value;
+    const data=stampData[state];
+    const dutyPct=data[gender];
+    const duty=value*dutyPct/100;
+    const reg=value*data.reg/100;
+    const total=duty+reg;
+    document.getElementById('sd-total').textContent='₹'+fmt(total);
+    document.getElementById('sd-state-name').textContent=data.name+' | Stamp Duty: '+dutyPct+'% + Reg: '+data.reg+'%';
+    document.getElementById('sd-duty').textContent='₹'+fmt(duty);
+    document.getElementById('sd-reg').textContent='₹'+fmt(reg);
+    document.getElementById('sd-note').textContent=data.note;
+  }
+
+  // INIT
+  calcEMI();
+  calcBanks();
+  calcPrepay();
+  calcStamp();
+</script>
+</body>
+</html>
