@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase Order Generator India - GST PO Maker - Prime Tools</title>
+  <meta name="description" content="Free Purchase Order Generator for India. Create professional GST-compliant purchase orders with auto-calculated totals, taxes, and terms. Download as PDF or print instantly.">
+  <meta name="keywords" content="purchase order generator India, GST purchase order, PO maker, purchase order template, free PO generator, business purchase order">
+  <meta property="og:title" content="Purchase Order Generator India - GST PO Maker - Prime Tools">
+  <meta property="og:description" content="Create professional GST-compliant purchase orders. Auto-calculate totals, taxes & download as PDF. Free tool for Indian businesses.">
+  <meta property="og:url" content="https://primetoolsapp.com/purchase-order-generator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/purchase-order-generator.html">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 900px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-size: 15px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px; padding-bottom: 8px;
+      border-bottom: 2px solid #e8edf2;
+    }
+    .section-title:first-child { margin-top: 0; }
+
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block; font-size: 12px; font-weight: 600;
+      color: #555; margin-bottom: 6px;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 12px 14px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 14px; outline: none;
+      transition: border-color 0.2s; background: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: #00d4aa; }
+    .field textarea { resize: vertical; min-height: 60px; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .field-row.three-col { grid-template-columns: 1fr 1fr 1fr; }
+    @media (max-width: 600px) {
+      .field-row, .field-row.three-col { grid-template-columns: 1fr; }
+    }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+    .calc-btn.secondary {
+      background: #1a1a2e; margin-top: 12px;
+    }
+    .calc-btn.secondary:hover { background: #00d4aa; }
+
+    .btn-row {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .btn-row .calc-btn { flex: 1; min-width: 160px; }
+
+    /* Items Table */
+    .items-table-wrap { overflow-x: auto; margin-bottom: 16px; }
+    .items-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px;
+    }
+    .items-table th, .items-table td {
+      padding: 10px 8px; text-align: left;
+      border-bottom: 1px solid #e8edf2;
+    }
+    .items-table th {
+      background: #f8f9fa; font-weight: 600;
+      color: #555; font-size: 11px; text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .items-table td input {
+      width: 100%; padding: 8px 10px;
+      border: 1px solid #e0e0e0; border-radius: 6px;
+      font-size: 13px; outline: none;
+    }
+    .items-table td input:focus { border-color: #00d4aa; }
+    .items-table td.num { text-align: right; }
+    .items-table td.num input { text-align: right; }
+    .items-table .action-btn {
+      background: #ff6b6b; color: white; border: none;
+      border-radius: 6px; padding: 6px 10px;
+      font-size: 12px; cursor: pointer;
+    }
+    .items-table .action-btn:hover { background: #e74c3c; }
+    .items-table .sno { width: 40px; text-align: center; color: #888; }
+    .items-table .desc-col { min-width: 180px; }
+    .items-table .qty-col { width: 80px; }
+    .items-table .rate-col { width: 110px; }
+    .items-table .disc-col { width: 80px; }
+    .items-table .tax-col { width: 90px; }
+    .items-table .amt-col { width: 120px; text-align: right; font-weight: 600; }
+
+    .add-item-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #f0fdf8; color: #00a878;
+      border: 1.5px dashed #b2ead9; border-radius: 8px;
+      padding: 10px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .add-item-btn:hover {
+      background: #e8fdf8; border-color: #00d4aa;
+    }
+
+    /* Totals Box */
+    .totals-box {
+      background: #f8f9fa; border-radius: 10px;
+      padding: 20px; margin-top: 20px;
+    }
+    .totals-row {
+      display: flex; justify-content: space-between;
+      padding: 6px 0; font-size: 14px;
+    }
+    .totals-row .tl { color: #666; }
+    .totals-row .tr { color: #1a1a2e; font-weight: 600; }
+    .totals-row.grand {
+      font-size: 18px; font-weight: 800;
+      color: #1a1a2e; padding-top: 10px;
+      margin-top: 8px; border-top: 2px solid #e0e0e0;
+    }
+    .totals-row.grand .tr { color: #00d4aa; }
+
+    /* Preview */
+    .preview-box {
+      display: none; margin-top: 24px;
+      border: 2px solid #e8edf2; border-radius: 12px;
+      overflow: hidden;
+    }
+    .preview-box.show { display: block; }
+    .preview-header {
+      background: #1a1a2e; color: white;
+      padding: 12px 20px; font-size: 14px; font-weight: 600;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .preview-header button {
+      background: #00d4aa; color: white; border: none;
+      border-radius: 6px; padding: 6px 14px;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+    }
+    .preview-header button:hover { background: #00b894; }
+
+    /* A4 PO Preview */
+    .po-preview {
+      background: white; padding: 40px;
+      font-size: 13px; color: #333;
+      max-width: 100%; overflow-x: auto;
+    }
+    .po-header {
+      display: flex; justify-content: space-between;
+      margin-bottom: 24px; padding-bottom: 16px;
+      border-bottom: 3px solid #1a1a2e;
+    }
+    .po-header .po-title {
+      font-size: 28px; font-weight: 800; color: #1a1a2e;
+    }
+    .po-header .po-subtitle {
+      font-size: 12px; color: #888; margin-top: 4px;
+    }
+    .po-header .po-meta {
+      text-align: right; font-size: 12px; color: #555;
+    }
+    .po-header .po-meta strong { color: #1a1a2e; }
+
+    .po-party-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 40px; margin-bottom: 24px;
+    }
+    @media (max-width: 600px) { .po-party-row { grid-template-columns: 1fr; } }
+    .po-party-box h4 {
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: 1px; color: #888;
+      margin-bottom: 8px;
+    }
+    .po-party-box p {
+      font-size: 13px; color: #333; line-height: 1.6;
+    }
+    .po-party-box p strong { color: #1a1a2e; }
+
+    .po-items-table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0; font-size: 12px;
+    }
+    .po-items-table th, .po-items-table td {
+      border: 1px solid #ddd; padding: 8px 10px;
+      text-align: left;
+    }
+    .po-items-table th {
+      background: #f0f4f8; font-weight: 600;
+      color: #1a1a2e;
+    }
+    .po-items-table td.num { text-align: right; }
+    .po-items-table .total-row td {
+      font-weight: 700; background: #f8f9fa;
+    }
+    .po-items-table .grand-total td {
+      font-weight: 800; background: #1a1a2e; color: white;
+      font-size: 14px;
+    }
+
+    .po-terms {
+      margin-top: 24px; padding-top: 16px;
+      border-top: 1px solid #e0e0e0;
+    }
+    .po-terms h4 {
+      font-size: 12px; text-transform: uppercase;
+      letter-spacing: 1px; color: #888; margin-bottom: 8px;
+    }
+    .po-terms p {
+      font-size: 12px; color: #555; line-height: 1.7;
+    }
+
+    .po-footer {
+      margin-top: 32px; padding-top: 16px;
+      border-top: 1px solid #e0e0e0;
+      display: flex; justify-content: space-between;
+      font-size: 12px; color: #888;
+    }
+
+    .info-section {
+      max-width: 900px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    @media print {
+      header, .page-title, .calculator-box, .info-section, footer { display: none !important; }
+      .preview-box { display: block !important; border: none !important; }
+      .po-preview { padding: 20px !important; }
+    }
+  </style>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Purchase Order Generator</h2>
+  <p>Create professional, GST-compliant purchase orders for your business in seconds</p>
+</div>
+
+<div class="calculator-box">
+
+  <!-- PO Header Info -->
+  <div class="section-title">📋 Purchase Order Details</div>
+  <div class="field-row three-col">
+    <div class="field">
+      <label>PO Number</label>
+      <input type="text" id="poNumber" placeholder="e.g. PO-2026-001" value="PO-2026-001">
+    </div>
+    <div class="field">
+      <label>PO Date</label>
+      <input type="date" id="poDate" value="">
+    </div>
+    <div class="field">
+      <label>Expected Delivery Date</label>
+      <input type="date" id="deliveryDate" value="">
+    </div>
+  </div>
+
+  <!-- Buyer Info -->
+  <div class="section-title">🏢 Buyer (Your Company)</div>
+  <div class="field">
+    <label>Company Name</label>
+    <input type="text" id="buyerName" placeholder="e.g. ABC Enterprises Pvt Ltd" value="ABC Enterprises Pvt Ltd">
+  </div>
+  <div class="field-row">
+    <div class="field">
+      <label>GSTIN</label>
+      <input type="text" id="buyerGstin" placeholder="e.g. 27AABCU9603R1ZX" value="27AABCU9603R1ZX">
+    </div>
+    <div class="field">
+      <label>PAN</label>
+      <input type="text" id="buyerPan" placeholder="e.g. AABCU9603R" value="AABCU9603R">
+    </div>
+  </div>
+  <div class="field">
+    <label>Address</label>
+    <textarea id="buyerAddress" placeholder="Full address with city, state, PIN">123, Business Park, Andheri East, Mumbai, Maharashtra - 400069</textarea>
+  </div>
+
+  <!-- Seller Info -->
+  <div class="section-title">🏭 Seller / Vendor</div>
+  <div class="field">
+    <label>Vendor Name</label>
+    <input type="text" id="sellerName" placeholder="e.g. XYZ Suppliers" value="XYZ Suppliers">
+  </div>
+  <div class="field-row">
+    <div class="field">
+      <label>Vendor GSTIN</label>
+      <input type="text" id="sellerGstin" placeholder="e.g. 07AADCB2230M1Z2" value="07AADCB2230M1Z2">
+    </div>
+    <div class="field">
+      <label>Vendor PAN</label>
+      <input type="text" id="sellerPan" placeholder="e.g. AADCB2230M" value="AADCB2230M">
+    </div>
+  </div>
+  <div class="field">
+    <label>Vendor Address</label>
+    <textarea id="sellerAddress" placeholder="Full address with city, state, PIN">456, Industrial Area, Phase II, Delhi - 110020</textarea>
+  </div>
+
+  <!-- Items -->
+  <div class="section-title">📦 Line Items</div>
+  <div class="items-table-wrap">
+    <table class="items-table" id="itemsTable">
+      <thead>
+        <tr>
+          <th class="sno">#</th>
+          <th class="desc-col">Description</th>
+          <th class="qty-col">Qty</th>
+          <th class="rate-col">Rate (Rs.)</th>
+          <th class="disc-col">Disc %</th>
+          <th class="tax-col">GST %</th>
+          <th class="amt-col">Amount (Rs.)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="itemsBody"></tbody>
+    </table>
+  </div>
+  <button class="add-item-btn" onclick="addItem()">+ Add Item</button>
+
+  <!-- Totals -->
+  <div class="totals-box">
+    <div class="totals-row">
+      <span class="tl">Subtotal</span>
+      <span class="tr" id="subtotal">Rs. 0</span>
+    </div>
+    <div class="totals-row">
+      <span class="tl">Total Discount</span>
+      <span class="tr" id="totalDiscount" style="color:#e65c00;">- Rs. 0</span>
+    </div>
+    <div class="totals-row">
+      <span class="tl">Taxable Value</span>
+      <span class="tr" id="taxableValue">Rs. 0</span>
+    </div>
+    <div class="totals-row">
+      <span class="tl">CGST</span>
+      <span class="tr" id="cgstTotal">Rs. 0</span>
+    </div>
+    <div class="totals-row">
+      <span class="tl">SGST</span>
+      <span class="tr" id="sgstTotal">Rs. 0</span>
+    </div>
+    <div class="totals-row grand">
+      <span class="tl">Grand Total</span>
+      <span class="tr" id="grandTotal">Rs. 0</span>
+    </div>
+  </div>
+
+  <!-- Terms -->
+  <div class="section-title">📝 Terms & Conditions</div>
+  <div class="field">
+    <label>Payment Terms</label>
+    <input type="text" id="paymentTerms" value="Net 30 days from date of invoice" placeholder="e.g. Net 30 days">
+  </div>
+  <div class="field">
+    <label>Delivery Terms</label>
+    <input type="text" id="deliveryTerms" value="Deliver to buyer address. Freight paid by seller." placeholder="Delivery instructions">
+  </div>
+  <div class="field">
+    <label>Additional Terms</label>
+    <textarea id="additionalTerms" placeholder="Any other terms...">Goods to be inspected before acceptance. Rejected goods to be returned at seller's cost.</textarea>
+  </div>
+
+  <!-- Buttons -->
+  <div class="btn-row" style="margin-top:24px;">
+    <button class="calc-btn" onclick="generatePreview()">👁 Preview Purchase Order</button>
+    <button class="calc-btn secondary" onclick="window.print()">🖨 Print / Save PDF</button>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview-box" id="previewBox">
+    <div class="preview-header">
+      <span>Purchase Order Preview</span>
+      <button onclick="window.print()">Print / Save PDF</button>
+    </div>
+    <div class="po-preview" id="poPreview"></div>
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>What is a Purchase Order (PO)?</h2>
+  <p>A <strong>Purchase Order (PO)</strong> is a legally binding commercial document issued by a buyer to a seller, indicating types, quantities, and agreed prices for products or services. It serves as an official offer to purchase and becomes a contract once accepted by the seller. In India, GST-compliant purchase orders are essential for B2B transactions to ensure proper input tax credit (ITC) claims.</p>
+
+  <h3>Key Elements of a Purchase Order</h3>
+  <div class="faq-box">
+    <p>PO Number & Date</p>
+    <p>Every purchase order must have a unique PO number for tracking and accounting purposes. The date indicates when the order was issued and helps determine payment due dates and delivery timelines.</p>
+  </div>
+  <div class="faq-box">
+    <p>Buyer & Seller Details</p>
+    <p>Complete legal names, registered addresses, GSTIN, and PAN of both parties. GSTIN is mandatory for claiming input tax credit under GST law in India.</p>
+  </div>
+  <div class="faq-box">
+    <p>Line Items with HSN Codes</p>
+    <p>Each item should have a description, quantity, unit rate, applicable discount, GST rate, and HSN/SAC code. Accurate HSN codes ensure correct GST classification and compliance.</p>
+  </div>
+  <div class="faq-box">
+    <p>Terms & Conditions</p>
+    <p>Payment terms (Net 30, Net 60), delivery terms, inspection clauses, penalty for delay, and return policy. These protect both buyer and seller in case of disputes.</p>
+  </div>
+
+  <h3>GST on Purchase Orders in India</h3>
+  <p>For B2B transactions in India, GST is charged on the purchase order and the buyer can claim Input Tax Credit (ITC):</p>
+  <div class="faq-box">
+    <p>Intra-State (Within Same State)</p>
+    <p>CGST + SGST/UTGST is applied. For example, if both buyer and seller are in Maharashtra, 9% CGST + 9% SGST = 18% total GST.</p>
+  </div>
+  <div class="faq-box">
+    <p>Inter-State (Different States)</p>
+    <p>IGST is applied at the full rate. For example, if buyer is in Maharashtra and seller is in Delhi, 18% IGST applies.</p>
+  </div>
+  <div class="faq-box">
+    <p>Input Tax Credit (ITC)</p>
+    <p>The buyer can claim ITC on the GST paid, provided the seller has filed their GSTR-1 and the transaction reflects in the buyer's GSTR-2B. Always verify the seller's GSTIN before placing orders.</p>
+  </div>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>Is a purchase order legally binding in India?</p>
+    <p>Yes, a purchase order is a legally binding contract once the seller accepts it. It serves as evidence of the agreed terms, quantities, and prices. In case of disputes, the PO is admissible in court along with other correspondence.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is the difference between a PO and an invoice?</p>
+    <p>A Purchase Order is issued by the <strong>buyer</strong> to request goods/services. An Invoice is issued by the <strong>seller</strong> to demand payment after delivery. The PO comes first; the invoice comes after the transaction is executed.</p>
+  </div>
+  <div class="faq-box">
+    <p>Do I need GST on a purchase order?</p>
+    <p>Yes, for B2B transactions, GST must be shown on the purchase order to ensure the buyer can claim input tax credit. The PO should clearly mention the GST rate (CGST/SGST or IGST) and the seller's GSTIN.</p>
+  </div>
+  <div class="faq-box">
+    <p>Can I modify a purchase order after sending it?</p>
+    <p>Yes, but it requires a formal amendment or a new PO. The seller must accept the amended terms. It is best practice to issue a "PO Amendment" document referencing the original PO number to maintain a clear audit trail.</p>
+  </div>
+  <div class="faq-box">
+    <p>What happens if the seller does not accept the PO?</p>
+    <p>If the seller rejects the PO or proposes changes, there is no contract. The buyer may negotiate and issue a revised PO. Until acceptance, neither party is legally bound by the PO terms.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  var itemCount = 0;
+
+  function setTodayDate() {
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var dd = String(today.getDate()).padStart(2, '0');
+    var dateStr = yyyy + '-' + mm + '-' + dd;
+    document.getElementById('poDate').value = dateStr;
+
+    var nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+    var dw = String(nextWeek.getDate()).padStart(2, '0');
+    var mw = String(nextWeek.getMonth() + 1).padStart(2, '0');
+    var yw = nextWeek.getFullYear();
+    document.getElementById('deliveryDate').value = yw + '-' + mw + '-' + dw;
+  }
+
+  function formatINR(num) {
+    return 'Rs. ' + Math.round(num).toLocaleString('en-IN');
+  }
+
+  function addItem() {
+    itemCount++;
+    var tbody = document.getElementById('itemsBody');
+    var tr = document.createElement('tr');
+    tr.id = 'itemRow' + itemCount;
+    tr.innerHTML =
+      '<td class="sno">' + itemCount + '</td>' +
+      '<td class="desc-col"><input type="text" id="desc' + itemCount + '" placeholder="Item description" value="Product ' + itemCount + '"></td>' +
+      '<td class="qty-col num"><input type="number" id="qty' + itemCount + '" value="1" min="1" onchange="calculateTotals()"></td>' +
+      '<td class="rate-col num"><input type="number" id="rate' + itemCount + '" value="1000" min="0" onchange="calculateTotals()"></td>' +
+      '<td class="disc-col num"><input type="number" id="disc' + itemCount + '" value="0" min="0" max="100" onchange="calculateTotals()"></td>' +
+      '<td class="tax-col num"><input type="number" id="gst' + itemCount + '" value="18" min="0" onchange="calculateTotals()"></td>' +
+      '<td class="amt-col" id="amt' + itemCount + '">Rs. 0</td>' +
+      '<td><button class="action-btn" onclick="removeItem(' + itemCount + ')">✕</button></td>';
+    tbody.appendChild(tr);
+    calculateTotals();
+  }
+
+  function removeItem(id) {
+    var row = document.getElementById('itemRow' + id);
+    if (row) row.remove();
+    // Renumber
+    var rows = document.querySelectorAll('#itemsBody tr');
+    rows.forEach(function(r, idx) {
+      r.querySelector('.sno').textContent = idx + 1;
+    });
+    calculateTotals();
+  }
+
+  function calculateTotals() {
+    var subtotal = 0;
+    var totalDiscount = 0;
+    var taxableValue = 0;
+    var cgstTotal = 0;
+    var sgstTotal = 0;
+
+    var rows = document.querySelectorAll('#itemsBody tr');
+    rows.forEach(function(row) {
+      var id = row.id.replace('itemRow', '');
+      var qty = parseFloat(document.getElementById('qty' + id).value) || 0;
+      var rate = parseFloat(document.getElementById('rate' + id).value) || 0;
+      var disc = parseFloat(document.getElementById('disc' + id).value) || 0;
+      var gst = parseFloat(document.getElementById('gst' + id).value) || 0;
+
+      var gross = qty * rate;
+      var discountAmt = gross * (disc / 100);
+      var net = gross - discountAmt;
+      var gstAmt = net * (gst / 100);
+      var total = net + gstAmt;
+
+      subtotal += gross;
+      totalDiscount += discountAmt;
+      taxableValue += net;
+      cgstTotal += gstAmt / 2;
+      sgstTotal += gstAmt / 2;
+
+      document.getElementById('amt' + id).textContent = formatINR(total);
+    });
+
+    var grandTotal = taxableValue + cgstTotal + sgstTotal;
+
+    document.getElementById('subtotal').textContent = formatINR(subtotal);
+    document.getElementById('totalDiscount').textContent = '- ' + formatINR(totalDiscount);
+    document.getElementById('taxableValue').textContent = formatINR(taxableValue);
+    document.getElementById('cgstTotal').textContent = formatINR(cgstTotal);
+    document.getElementById('sgstTotal').textContent = formatINR(sgstTotal);
+    document.getElementById('grandTotal').textContent = formatINR(grandTotal);
+  }
+
+  function generatePreview() {
+    var poNumber = document.getElementById('poNumber').value;
+    var poDate = document.getElementById('poDate').value;
+    var deliveryDate = document.getElementById('deliveryDate').value;
+    var buyerName = document.getElementById('buyerName').value;
+    var buyerGstin = document.getElementById('buyerGstin').value;
+    var buyerPan = document.getElementById('buyerPan').value;
+    var buyerAddress = document.getElementById('buyerAddress').value;
+    var sellerName = document.getElementById('sellerName').value;
+    var sellerGstin = document.getElementById('sellerGstin').value;
+    var sellerPan = document.getElementById('sellerPan').value;
+    var sellerAddress = document.getElementById('sellerAddress').value;
+    var paymentTerms = document.getElementById('paymentTerms').value;
+    var deliveryTerms = document.getElementById('deliveryTerms').value;
+    var additionalTerms = document.getElementById('additionalTerms').value;
+
+    var subtotal = document.getElementById('subtotal').textContent;
+    var totalDiscount = document.getElementById('totalDiscount').textContent;
+    var taxableValue = document.getElementById('taxableValue').textContent;
+    var cgstTotal = document.getElementById('cgstTotal').textContent;
+    var sgstTotal = document.getElementById('sgstTotal').textContent;
+    var grandTotal = document.getElementById('grandTotal').textContent;
+
+    // Build items table for preview
+    var itemsHtml = '';
+    var rows = document.querySelectorAll('#itemsBody tr');
+    rows.forEach(function(row, idx) {
+      var id = row.id.replace('itemRow', '');
+      var desc = document.getElementById('desc' + id).value;
+      var qty = document.getElementById('qty' + id).value;
+      var rate = document.getElementById('rate' + id).value;
+      var disc = document.getElementById('disc' + id).value;
+      var gst = document.getElementById('gst' + id).value;
+      var amt = document.getElementById('amt' + id).textContent;
+
+      var gross = (parseFloat(qty) * parseFloat(rate)).toLocaleString('en-IN');
+      var discAmt = (parseFloat(qty) * parseFloat(rate) * (parseFloat(disc) / 100)).toLocaleString('en-IN');
+
+      itemsHtml +=
+        '<tr>' +
+        '<td>' + (idx + 1) + '</td>' +
+        '<td>' + desc + '</td>' +
+        '<td class="num">' + qty + '</td>' +
+        '<td class="num">Rs. ' + parseFloat(rate).toLocaleString('en-IN') + '</td>' +
+        '<td class="num">' + disc + '%</td>' +
+        '<td class="num">' + gst + '%</td>' +
+        '<td class="num">' + amt + '</td>' +
+        '</tr>';
+    });
+
+    var previewHtml =
+      '<div class="po-header">' +
+      '<div>' +
+      '<div class="po-title">PURCHASE ORDER</div>' +
+      '<div class="po-subtitle">Official Purchase Document</div>' +
+      '</div>' +
+      '<div class="po-meta">' +
+      '<p><strong>PO Number:</strong> ' + poNumber + '</p>' +
+      '<p><strong>PO Date:</strong> ' + poDate + '</p>' +
+      '<p><strong>Delivery Date:</strong> ' + deliveryDate + '</p>' +
+      '</div>' +
+      '</div>' +
+
+      '<div class="po-party-row">' +
+      '<div class="po-party-box">' +
+      '<h4>Buyer</h4>' +
+      '<p><strong>' + buyerName + '</strong></p>' +
+      '<p>' + buyerAddress.replace(/\n/g, '<br>') + '</p>' +
+      '<p style="margin-top:8px;"><strong>GSTIN:</strong> ' + buyerGstin + '</p>' +
+      '<p><strong>PAN:</strong> ' + buyerPan + '</p>' +
+      '</div>' +
+      '<div class="po-party-box">' +
+      '<h4>Seller / Vendor</h4>' +
+      '<p><strong>' + sellerName + '</strong></p>' +
+      '<p>' + sellerAddress.replace(/\n/g, '<br>') + '</p>' +
+      '<p style="margin-top:8px;"><strong>GSTIN:</strong> ' + sellerGstin + '</p>' +
+      '<p><strong>PAN:</strong> ' + sellerPan + '</p>' +
+      '</div>' +
+      '</div>' +
+
+      '<table class="po-items-table">' +
+      '<thead>' +
+      '<tr>' +
+      '<th>#</th>' +
+      '<th>Description</th>' +
+      '<th class="num">Qty</th>' +
+      '<th class="num">Rate</th>' +
+      '<th class="num">Disc</th>' +
+      '<th class="num">GST</th>' +
+      '<th class="num">Amount</th>' +
+      '</tr>' +
+      '</thead>' +
+      '<tbody>' + itemsHtml + '</tbody>' +
+      '<tbody>' +
+      '<tr class="total-row">' +
+      '<td colspan="6" style="text-align:right;">Subtotal</td>' +
+      '<td class="num">' + subtotal + '</td>' +
+      '</tr>' +
+      '<tr class="total-row">' +
+      '<td colspan="6" style="text-align:right;">Total Discount</td>' +
+      '<td class="num" style="color:#e65c00;">' + totalDiscount + '</td>' +
+      '</tr>' +
+      '<tr class="total-row">' +
+      '<td colspan="6" style="text-align:right;">Taxable Value</td>' +
+      '<td class="num">' + taxableValue + '</td>' +
+      '</tr>' +
+      '<tr class="total-row">' +
+      '<td colspan="6" style="text-align:right;">CGST</td>' +
+      '<td class="num">' + cgstTotal + '</td>' +
+      '</tr>' +
+      '<tr class="total-row">' +
+      '<td colspan="6" style="text-align:right;">SGST</td>' +
+      '<td class="num">' + sgstTotal + '</td>' +
+      '</tr>' +
+      '<tr class="grand-total">' +
+      '<td colspan="6" style="text-align:right;">GRAND TOTAL</td>' +
+      '<td class="num">' + grandTotal + '</td>' +
+      '</tr>' +
+      '</tbody>' +
+      '</table>' +
+
+      '<div class="po-terms">' +
+      '<h4>Terms & Conditions</h4>' +
+      '<p><strong>Payment Terms:</strong> ' + paymentTerms + '</p>' +
+      '<p><strong>Delivery Terms:</strong> ' + deliveryTerms + '</p>' +
+      '<p><strong>Additional Terms:</strong> ' + additionalTerms + '</p>' +
+      '</div>' +
+
+      '<div class="po-footer">' +
+      '<p>This is a computer-generated purchase order and does not require a signature.</p>' +
+      '<p>Generated via Prime Tools — primetoolsapp.com</p>' +
+      '</div>';
+
+    document.getElementById('poPreview').innerHTML = previewHtml;
+    document.getElementById('previewBox').classList.add('show');
+    document.getElementById('previewBox').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Init
+  window.addEventListener('load', function() {
+    setTodayDate();
+    addItem();
+    addItem();
+    calculateTotals();
+  });
+</script>
+
+</body>
+</html>
