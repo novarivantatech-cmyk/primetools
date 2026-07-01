@@ -108,6 +108,9 @@
       font-size: 13px; font-weight: 600; color: #555;
       cursor: pointer; transition: all 0.2s;
     }
+    .receipt-tab:hover {
+      border-color: #00d4aa; color: #00a878;
+    }
     .receipt-tab.active {
       border-color: #00d4aa; background: #f0fdf8;
       color: #00a878;
@@ -402,9 +405,9 @@
   <!-- Receipt Type -->
   <div class="section-title">📋 Receipt Type</div>
   <div class="receipt-tabs" id="receiptTabs">
-    <button class="receipt-tab active" onclick="setReceiptType('payment')">💳 Payment Receipt</button>
-    <button class="receipt-tab" onclick="setReceiptType('rent')">🏠 Rent Receipt</button>
-    <button class="receipt-tab" onclick="setReceiptType('donation')">🤝 Donation Receipt</button>
+    <button class="receipt-tab active" data-type="payment" onclick="setReceiptType(this, 'payment')">💳 Payment Receipt</button>
+    <button class="receipt-tab" data-type="rent" onclick="setReceiptType(this, 'rent')">🏠 Rent Receipt</button>
+    <button class="receipt-tab" data-type="donation" onclick="setReceiptType(this, 'donation')">🤝 Donation Receipt</button>
   </div>
 
   <!-- Receipt Details -->
@@ -692,13 +695,16 @@
     return result;
   }
 
-  function setReceiptType(type) {
+  function setReceiptType(clickedBtn, type) {
     currentType = type;
+
+    // Remove active from all tabs
     var tabs = document.querySelectorAll('.receipt-tab');
     for (var i = 0; i < tabs.length; i++) {
       tabs[i].classList.remove('active');
     }
-    event.target.classList.add('active');
+    // Add active to clicked tab
+    clickedBtn.classList.add('active');
 
     var rentFields = document.getElementById('rentFields');
     var donationFields = document.getElementById('donationFields');
@@ -717,6 +723,13 @@
       donationFields.style.display = 'none';
       itemsSectionTitle.textContent = '📦 Items / Services';
     }
+
+    // Clear items and re-add with defaults for new type
+    document.getElementById('itemsBody').innerHTML = '';
+    itemCount = 0;
+    addItem();
+    if (type === 'payment') addItem();
+    calculateTotals();
   }
 
   function addItem() {
@@ -976,12 +989,10 @@
   }
 
   function printReceipt() {
-    // If preview not generated yet, generate it first
     var previewBox = document.getElementById('previewBox');
     if (!previewBox.classList.contains('show')) {
       generatePreview();
     }
-    // Small delay to ensure DOM is updated
     setTimeout(function() {
       window.print();
     }, 100);
