@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loan Comparison Calculator India - Compare EMI, Interest & Total Cost - Prime Tools</title>
+  <meta name="description" content="Free Loan Comparison Calculator for India. Compare up to 3 loans side by side — EMI, total interest, processing fees, total cost, APR. Home loan, personal loan, car loan comparison made easy.">
+  <meta name="keywords" content="loan comparison calculator India, compare home loans, EMI comparison, personal loan comparison, car loan comparison, loan APR calculator, best loan calculator India">
+  <meta property="og:title" content="Loan Comparison Calculator India - Compare EMI, Interest & Total Cost - Prime Tools">
+  <meta property="og:description" content="Compare up to 3 loans side by side. EMI, total interest, processing fees, APR. Free tool for Indian borrowers.">
+  <meta property="og:url" content="https://primetoolsapp.com/loan-comparison-calculator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/loan-comparison-calculator.html">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 1000px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .loan-tabs {
+      display: flex; gap: 8px; margin-bottom: 24px;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .loan-tab {
+      padding: 10px 20px; border-radius: 8px;
+      border: 2px solid #e0e0e0; background: white;
+      font-size: 13px; font-weight: 600; color: #555;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .loan-tab.active {
+      border-color: #00d4aa; background: #f0fdf8;
+      color: #00a878;
+    }
+
+    .loans-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px; margin-bottom: 24px;
+    }
+    @media (max-width: 900px) { .loans-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .loans-grid { grid-template-columns: 1fr; } }
+
+    .loan-card {
+      background: #fafbfc; border: 2px solid #e8edf2;
+      border-radius: 14px; padding: 24px;
+      transition: all 0.25s;
+    }
+    .loan-card:hover {
+      border-color: #00d4aa;
+      box-shadow: 0 4px 16px rgba(0,212,170,0.1);
+    }
+    .loan-card.best {
+      border-color: #00d4aa;
+      background: #f8fffe;
+      box-shadow: 0 4px 20px rgba(0,212,170,0.15);
+    }
+    .loan-card.best::before {
+      content: "★ BEST DEAL";
+      display: block; font-size: 11px; font-weight: 700;
+      color: #00d4aa; letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .loan-card h3 {
+      font-size: 16px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px; padding-bottom: 12px;
+      border-bottom: 1px solid #e8edf2;
+    }
+
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block; font-size: 12px; font-weight: 600;
+      color: #555; margin-bottom: 6px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 12px 14px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 15px; outline: none;
+      transition: border-color 0.2s; background: white;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .result-box {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 12px; padding: 28px;
+      margin-top: 24px; display: none;
+    }
+    .result-box.show { display: block; }
+    .result-title {
+      font-size: 13px; color: #888;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 20px; text-align: center;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    @media (max-width: 900px) { .comparison-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .comparison-grid { grid-template-columns: 1fr; } }
+
+    .comparison-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px; padding: 20px;
+      text-align: center;
+    }
+    .comparison-card.best-card {
+      background: rgba(0,212,170,0.1);
+      border: 1px solid rgba(0,212,170,0.3);
+    }
+    .comparison-card h4 {
+      font-size: 14px; color: #888;
+      margin-bottom: 12px;
+    }
+    .comparison-card .val {
+      font-size: 24px; font-weight: 700; color: #fff;
+      margin-bottom: 4px;
+    }
+    .comparison-card .val.green { color: #00d4aa; }
+    .comparison-card .val.red { color: #ff6b6b; }
+    .comparison-card .lbl {
+      font-size: 11px; color: #888;
+    }
+
+    .comparison-table {
+      width: 100%; border-collapse: collapse;
+      margin-top: 20px; font-size: 14px;
+    }
+    .comparison-table th, .comparison-table td {
+      padding: 12px 16px; text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .comparison-table th {
+      color: #888; font-weight: 600; font-size: 12px;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .comparison-table td {
+      color: #fff; font-weight: 600;
+    }
+    .comparison-table td.best-val {
+      color: #00d4aa;
+    }
+    .comparison-table tr.highlight {
+      background: rgba(0,212,170,0.05);
+    }
+
+    .result-divider {
+      height: 1px; background: rgba(255,255,255,0.1);
+      margin: 20px 0;
+    }
+
+    .savings-box {
+      background: rgba(0,212,170,0.08);
+      border: 1px solid rgba(0,212,170,0.2);
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px; text-align: center;
+    }
+    .savings-box p {
+      font-size: 14px; color: #aaa;
+    }
+    .savings-box .savings-amount {
+      font-size: 28px; font-weight: 800; color: #00d4aa;
+      margin: 8px 0;
+    }
+
+    .result-note {
+      font-size: 12px; color: #888;
+      text-align: center; margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    .info-badge {
+      display: inline-block; background: #fff3e0;
+      color: #e65100; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+      margin-left: 8px;
+    }
+
+    .info-section {
+      max-width: 1000px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+
+    .highlight-box {
+      background: #f0fdf8; border: 1px solid #b2ead9;
+      border-radius: 10px; padding: 16px;
+      margin: 16px 0;
+    }
+    .highlight-box h4 {
+      font-size: 14px; color: #00a878;
+      margin-bottom: 8px;
+    }
+    .highlight-box p {
+      font-size: 13px; color: #555; line-height: 1.6;
+    }
+
+    .emi-formula {
+      background: #f0f4f8; border-radius: 10px;
+      padding: 16px; font-family: 'Courier New', monospace;
+      font-size: 14px; color: #1a1a2e;
+      margin: 12px 0; overflow-x: auto;
+    }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+  </style>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Loan Comparison Calculator</h2>
+  <p>Compare up to 3 loans side by side — EMI, total interest, processing fees, APR & total cost of borrowing</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="loans-grid">
+    <!-- Loan 1 -->
+    <div class="loan-card" id="loanCard1">
+      <h3>🏦 Loan Option 1</h3>
+      <div class="field">
+        <label>Loan Name</label>
+        <input type="text" id="name1" placeholder="e.g. SBI Home Loan" value="Bank A Home Loan">
+      </div>
+      <div class="field">
+        <label>Loan Amount (₹)</label>
+        <input type="number" id="amount1" placeholder="e.g. 5000000" value="5000000">
+      </div>
+      <div class="field">
+        <label>Interest Rate (% per annum)</label>
+        <input type="number" id="rate1" placeholder="e.g. 8.5" value="8.5" step="0.01">
+      </div>
+      <div class="field">
+        <label>Tenure (Years)</label>
+        <input type="number" id="tenure1" placeholder="e.g. 20" value="20">
+      </div>
+      <div class="field">
+        <label>Processing Fee (₹)</label>
+        <input type="number" id="fee1" placeholder="e.g. 10000" value="10000">
+      </div>
+    </div>
+
+    <!-- Loan 2 -->
+    <div class="loan-card" id="loanCard2">
+      <h3>🏦 Loan Option 2</h3>
+      <div class="field">
+        <label>Loan Name</label>
+        <input type="text" id="name2" placeholder="e.g. HDFC Home Loan" value="Bank B Home Loan">
+      </div>
+      <div class="field">
+        <label>Loan Amount (₹)</label>
+        <input type="number" id="amount2" placeholder="e.g. 5000000" value="5000000">
+      </div>
+      <div class="field">
+        <label>Interest Rate (% per annum)</label>
+        <input type="number" id="rate2" placeholder="e.g. 8.75" value="8.75" step="0.01">
+      </div>
+      <div class="field">
+        <label>Tenure (Years)</label>
+        <input type="number" id="tenure2" placeholder="e.g. 20" value="20">
+      </div>
+      <div class="field">
+        <label>Processing Fee (₹)</label>
+        <input type="number" id="fee2" placeholder="e.g. 5000" value="5000">
+      </div>
+    </div>
+
+    <!-- Loan 3 -->
+    <div class="loan-card" id="loanCard3">
+      <h3>🏦 Loan Option 3</h3>
+      <div class="field">
+        <label>Loan Name</label>
+        <input type="text" id="name3" placeholder="e.g. ICICI Home Loan" value="Bank C Home Loan">
+      </div>
+      <div class="field">
+        <label>Loan Amount (₹)</label>
+        <input type="number" id="amount3" placeholder="e.g. 5000000" value="5000000">
+      </div>
+      <div class="field">
+        <label>Interest Rate (% per annum)</label>
+        <input type="number" id="rate3" placeholder="e.g. 8.4" value="8.4" step="0.01">
+      </div>
+      <div class="field">
+        <label>Tenure (Years)</label>
+        <input type="number" id="tenure3" placeholder="e.g. 20" value="20">
+      </div>
+      <div class="field">
+        <label>Processing Fee (₹)</label>
+        <input type="number" id="fee3" placeholder="e.g. 15000" value="15000">
+      </div>
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="compareLoans()">Compare Loans</button>
+
+  <div class="result-box" id="resultBox">
+    <div class="result-title">Loan Comparison Summary</div>
+
+    <div class="comparison-grid" id="comparisonGrid"></div>
+
+    <div class="result-divider"></div>
+
+    <table class="comparison-table" id="comparisonTable">
+      <thead>
+        <tr>
+          <th style="text-align:left;">Parameter</th>
+          <th id="th1">Loan 1</th>
+          <th id="th2">Loan 2</th>
+          <th id="th3">Loan 3</th>
+        </tr>
+      </thead>
+      <tbody id="comparisonBody"></tbody>
+    </table>
+
+    <div class="savings-box" id="savingsBox" style="display:none;">
+      <p>You save with the best option</p>
+      <div class="savings-amount" id="savingsAmount">-</div>
+      <p id="savingsDetail">-</p>
+    </div>
+
+    <div class="result-note" id="resultNote"></div>
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>How to Compare Loans in India</h2>
+  <p>Choosing the right loan can save you lakhs of rupees over the tenure. While the interest rate is important, it is not the only factor. Our Loan Comparison Calculator helps you evaluate loans holistically by considering EMI, total interest, processing fees, and the true cost of borrowing (APR).</p>
+
+  <h3>What is EMI and How is it Calculated?</h3>
+  <p>EMI (Equated Monthly Installment) is the fixed amount you pay every month to repay your loan. It consists of both principal and interest components.</p>
+  <div class="emi-formula">
+    EMI = [P × R × (1+R)^N] / [(1+R)^N – 1]
+  </div>
+  <p>Where <strong>P</strong> = Principal loan amount, <strong>R</strong> = Monthly interest rate (annual rate ÷ 12 ÷ 100), and <strong>N</strong> = Loan tenure in months.</p>
+
+  <h3>Key Metrics to Compare</h3>
+  <div class="highlight-box">
+    <h4>📊 Monthly EMI</h4>
+    <p>The amount you pay every month. A lower EMI improves your monthly cash flow but may come with a longer tenure or higher total interest.</p>
+  </div>
+  <div class="highlight-box">
+    <h4>💰 Total Interest Payable</h4>
+    <p>The total interest you pay over the entire loan tenure. Even a 0.25% difference in rate can save or cost you lakhs on a long-term home loan.</p>
+  </div>
+  <div class="highlight-box">
+    <h4>🧾 Processing Fee & Charges</h4>
+    <p>One-time charges like processing fees, documentation charges, and legal fees add to your upfront cost. Always factor these in.</p>
+  </div>
+  <div class="highlight-box">
+    <h4>📈 Effective APR (Annual Percentage Rate)</h4>
+    <p>APR includes the interest rate plus all fees, giving you the true annual cost of borrowing. It is the most accurate way to compare loans.</p>
+  </div>
+
+  <h3>How to Use This Calculator</h3>
+  <p>1. Enter details for up to 3 loan offers (you can compare 2 or 3).<br>
+  2. Fill in loan amount, interest rate, tenure, and processing fee for each.<br>
+  3. Click "Compare Loans" to see a side-by-side breakdown.<br>
+  4. The calculator highlights the best deal and shows your potential savings.</p>
+
+  <h3>Loan Comparison Tips for Indian Borrowers</h3>
+  <div class="faq-box">
+    <p>Don't just look at the interest rate</p>
+    <p>Some lenders advertise low rates but charge high processing fees, prepayment penalties, or hidden charges. Always compare the total cost of borrowing (APR), not just the headline rate.</p>
+  </div>
+  <div class="faq-box">
+    <p>Consider floating vs fixed interest rates</p>
+    <p>Floating rates change with RBI repo rate changes and are usually 1-2% lower than fixed rates. Fixed rates offer certainty but cost more. For long-term home loans, floating rates are generally preferred in India.</p>
+  </div>
+  <div class="faq-box">
+    <p>Check prepayment and foreclosure terms</p>
+    <p>Some banks charge 2-4% on prepayment for fixed-rate loans. RBI has barred prepayment charges on floating-rate home loans for individuals, but always verify with your lender.</p>
+  </div>
+  <div class="faq-box">
+    <p>Factor in tax benefits</p>
+    <p>Home loan borrowers in India can claim tax deductions under Section 80C (principal up to ₹1.5L) and Section 24(b) (interest up to ₹2L for self-occupied property). These benefits effectively reduce your net interest cost.</p>
+  </div>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>What is the best way to compare home loans in India?</p>
+    <p>Compare loans on total cost (EMI × tenure + fees), not just interest rate. Use our calculator to see the APR, which includes all costs. Also consider prepayment flexibility, customer service, and loan-to-value (LTV) ratio offered.</p>
+  </div>
+  <div class="faq-box">
+    <p>How much difference does 0.5% make on a home loan?</p>
+    <p>On a ₹50 lakh loan for 20 years, a 0.5% rate difference (e.g., 8.5% vs 9%) can save you approximately ₹3.5 lakh in total interest and reduce your EMI by about ₹1,600 per month.</p>
+  </div>
+  <div class="faq-box">
+    <p>Should I choose a lower EMI or lower total interest?</p>
+    <p>It depends on your cash flow. If you can afford a higher EMI, choose a shorter tenure to save on total interest. If monthly budget is tight, a longer tenure with lower EMI may be better, but you'll pay more interest overall.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is APR and why is it better than interest rate?</p>
+    <p>APR (Annual Percentage Rate) is the true annual cost of borrowing, including interest and all fees. Two loans with the same interest rate can have very different APRs if one has high processing fees. Always compare APR for an apples-to-apples comparison.</p>
+  </div>
+  <div class="faq-box">
+    <p>Can I negotiate the interest rate with my bank?</p>
+    <p>Yes, especially if you have a good credit score (750+), stable income, and an existing relationship with the bank. You can also use competing offers from other banks as leverage to negotiate a better rate or reduced processing fee.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  function formatINR(num) {
+    return '₹' + Math.round(num).toLocaleString('en-IN');
+  }
+
+  function calculateEMI(principal, annualRate, years) {
+    const r = annualRate / 100 / 12;
+    const n = years * 12;
+    if (r === 0) return principal / n;
+    const emi = (principal * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    return emi;
+  }
+
+  function calculateAPR(principal, annualRate, years, fee) {
+    const emi = calculateEMI(principal, annualRate, years);
+    const n = years * 12;
+    const totalPayment = emi * n;
+    const totalCost = totalPayment + fee;
+    // Approximate APR using iterative method (Newton-Raphson)
+    let apr = annualRate;
+    const netPrincipal = principal - fee;
+    for (let i = 0; i < 50; i++) {
+      const f_val = netPrincipal * apr / 1200 * Math.pow(1 + apr / 1200, n) / (Math.pow(1 + apr / 1200, n) - 1) - emi;
+      const f_deriv = netPrincipal / 1200 * (Math.pow(1 + apr / 1200, n) * (1 - n * apr / 1200 / (Math.pow(1 + apr / 1200, n) - 1))) / (Math.pow(1 + apr / 1200, n) - 1);
+      if (Math.abs(f_deriv) < 1e-10) break;
+      apr = apr - f_val / f_deriv * 1200;
+      if (apr < 0) apr = annualRate;
+    }
+    return Math.max(annualRate, apr);
+  }
+
+  function compareLoans() {
+    const loans = [];
+    for (let i = 1; i <= 3; i++) {
+      const name = document.getElementById('name' + i).value || 'Loan ' + i;
+      const amount = parseFloat(document.getElementById('amount' + i).value) || 0;
+      const rate = parseFloat(document.getElementById('rate' + i).value) || 0;
+      const tenure = parseFloat(document.getElementById('tenure' + i).value) || 0;
+      const fee = parseFloat(document.getElementById('fee' + i).value) || 0;
+
+      if (amount <= 0 || rate <= 0 || tenure <= 0) {
+        alert('Please fill in all required fields for Loan ' + i + ' with valid values.');
+        return;
+      }
+
+      const emi = calculateEMI(amount, rate, tenure);
+      const n = tenure * 12;
+      const totalPayment = emi * n;
+      const totalInterest = totalPayment - amount;
+      const totalCost = totalPayment + fee;
+      const apr = calculateAPR(amount, rate, tenure, fee);
+
+      loans.push({
+        id: i,
+        name: name,
+        amount: amount,
+        rate: rate,
+        tenure: tenure,
+        fee: fee,
+        emi: emi,
+        totalInterest: totalInterest,
+        totalPayment: totalPayment,
+        totalCost: totalCost,
+        apr: apr
+      });
+    }
+
+    // Determine best loan (lowest total cost)
+    const bestLoan = loans.reduce((best, current) => current.totalCost < best.totalCost ? current : best);
+
+    // Update loan cards styling
+    for (let i = 1; i <= 3; i++) {
+      const card = document.getElementById('loanCard' + i);
+      if (i === bestLoan.id) {
+        card.classList.add('best');
+      } else {
+        card.classList.remove('best');
+      }
+    }
+
+    // Build comparison cards
+    const grid = document.getElementById('comparisonGrid');
+    grid.innerHTML = '';
+    loans.forEach(loan => {
+      const isBest = loan.id === bestLoan.id;
+      const card = document.createElement('div');
+      card.className = 'comparison-card' + (isBest ? ' best-card' : '');
+      card.innerHTML = `
+        <h4>${loan.name} ${isBest ? '<span style="color:#00d4aa;">★ BEST</span>' : ''}</h4>
+        <div class="val ${isBest ? 'green' : ''}">${formatINR(loan.emi)}</div>
+        <div class="lbl">Monthly EMI</div>
+        <div style="margin-top:12px;">
+          <div class="val" style="font-size:16px;">${formatINR(loan.totalInterest)}</div>
+          <div class="lbl">Total Interest</div>
+        </div>
+        <div style="margin-top:8px;">
+          <div class="val" style="font-size:16px;">${formatINR(loan.totalCost)}</div>
+          <div class="lbl">Total Cost</div>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+
+    // Update table headers
+    document.getElementById('th1').textContent = loans[0].name;
+    document.getElementById('th2').textContent = loans[1].name;
+    document.getElementById('th3').textContent = loans[2].name;
+
+    // Build comparison table
+    const tbody = document.getElementById('comparisonBody');
+    tbody.innerHTML = '';
+
+    const rows = [
+      { label: 'Loan Amount', key: 'amount', format: formatINR },
+      { label: 'Interest Rate', key: 'rate', format: v => v.toFixed(2) + '%' },
+      { label: 'Tenure', key: 'tenure', format: v => v + ' years' },
+      { label: 'Processing Fee', key: 'fee', format: formatINR },
+      { label: 'Monthly EMI', key: 'emi', format: formatINR },
+      { label: 'Total Interest', key: 'totalInterest', format: formatINR },
+      { label: 'Total Payment', key: 'totalPayment', format: formatINR },
+      { label: 'Total Cost (with fees)', key: 'totalCost', format: formatINR },
+      { label: 'Effective APR', key: 'apr', format: v => v.toFixed(2) + '%' }
+    ];
+
+    rows.forEach((row, idx) => {
+      const tr = document.createElement('tr');
+      if (idx === 7 || idx === 8) tr.classList.add('highlight');
+
+      let html = `<td style="text-align:left;color:#aaa;">${row.label}</td>`;
+      loans.forEach(loan => {
+        const isBest = loan.id === bestLoan.id;
+        const val = row.format(loan[row.key]);
+        html += `<td class="${isBest ? 'best-val' : ''}">${val}</td>`;
+      });
+      tr.innerHTML = html;
+      tbody.appendChild(tr);
+    });
+
+    // Savings box
+    const savingsBox = document.getElementById('savingsBox');
+    const savingsAmount = document.getElementById('savingsAmount');
+    const savingsDetail = document.getElementById('savingsDetail');
+
+    const otherLoans = loans.filter(l => l.id !== bestLoan.id);
+    const maxSaving = Math.max(...otherLoans.map(l => l.totalCost - bestLoan.totalCost));
+    const worstLoan = otherLoans.find(l => l.totalCost - bestLoan.totalCost === maxSaving);
+
+    savingsBox.style.display = 'block';
+    savingsAmount.textContent = formatINR(maxSaving);
+    savingsDetail.textContent = `by choosing ${bestLoan.name} over ${worstLoan.name}`;
+
+    // Result note
+    const note = document.getElementById('resultNote');
+    note.innerHTML = `<strong>${bestLoan.name}</strong> is the most cost-effective option with an effective APR of <strong>${bestLoan.apr.toFixed(2)}%</strong>. `;
+    note.innerHTML += `You pay <strong>${formatINR(bestLoan.totalCost)}</strong> in total, saving <strong>${formatINR(maxSaving)}</strong> compared to the most expensive option.`;
+
+    document.getElementById('resultBox').classList.add('show');
+  }
+
+  // Auto-calculate on load
+  window.addEventListener('load', function() {
+    compareLoans();
+  });
+
+  // Recalculate on Enter key
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') compareLoans();
+    });
+  });
+</script>
+
+</body>
+</html>
