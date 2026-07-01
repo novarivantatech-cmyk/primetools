@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Receipt Generator India - Payment Receipt Maker - Prime Tools</title>
+  <meta name="description" content="Free Receipt Generator for India. Create professional payment receipts, rent receipts, and donation receipts with auto-calculated totals, GST, and digital signature. Download as PDF or print instantly.">
+  <meta name="keywords" content="receipt generator India, payment receipt maker, rent receipt generator, donation receipt, cash receipt, professional receipt template, free receipt tool India">
+  <meta property="og:title" content="Receipt Generator India - Payment Receipt Maker - Prime Tools">
+  <meta property="og:description" content="Create professional payment receipts, rent receipts & donation receipts. Auto-calculate totals, add GST & download as PDF. Free tool for Indian businesses.">
+  <meta property="og:url" content="https://primetoolsapp.com/receipt-generator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/receipt-generator.html">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 900px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .section-title {
+      font-size: 15px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px; padding-bottom: 8px;
+      border-bottom: 2px solid #e8edf2;
+    }
+    .section-title:first-child { margin-top: 0; }
+
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block; font-size: 12px; font-weight: 600;
+      color: #555; margin-bottom: 6px;
+    }
+    .field input, .field select, .field textarea {
+      width: 100%; padding: 12px 14px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 14px; outline: none;
+      transition: border-color 0.2s; background: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: #00d4aa; }
+    .field textarea { resize: vertical; min-height: 60px; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .field-row.three-col { grid-template-columns: 1fr 1fr 1fr; }
+    @media (max-width: 600px) {
+      .field-row, .field-row.three-col { grid-template-columns: 1fr; }
+    }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+    .calc-btn.secondary {
+      background: #1a1a2e; margin-top: 12px;
+    }
+    .calc-btn.secondary:hover { background: #00d4aa; }
+
+    .btn-row {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .btn-row .calc-btn { flex: 1; min-width: 160px; }
+
+    /* Receipt Type Tabs */
+    .receipt-tabs {
+      display: flex; gap: 8px; margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .receipt-tab {
+      padding: 10px 18px; border-radius: 8px;
+      border: 2px solid #e0e0e0; background: white;
+      font-size: 13px; font-weight: 600; color: #555;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .receipt-tab.active {
+      border-color: #00d4aa; background: #f0fdf8;
+      color: #00a878;
+    }
+
+    /* Items Table */
+    .items-table-wrap { overflow-x: auto; margin-bottom: 16px; }
+    .items-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px;
+    }
+    .items-table th, .items-table td {
+      padding: 10px 8px; text-align: left;
+      border-bottom: 1px solid #e8edf2;
+    }
+    .items-table th {
+      background: #f8f9fa; font-weight: 600;
+      color: #555; font-size: 11px; text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .items-table td input {
+      width: 100%; padding: 8px 10px;
+      border: 1px solid #e0e0e0; border-radius: 6px;
+      font-size: 13px; outline: none;
+    }
+    .items-table td input:focus { border-color: #00d4aa; }
+    .items-table td.num { text-align: right; }
+    .items-table td.num input { text-align: right; }
+    .items-table .action-btn {
+      background: #ff6b6b; color: white; border: none;
+      border-radius: 6px; padding: 6px 10px;
+      font-size: 12px; cursor: pointer;
+    }
+    .items-table .action-btn:hover { background: #e74c3c; }
+    .items-table .sno { width: 40px; text-align: center; color: #888; }
+    .items-table .desc-col { min-width: 180px; }
+    .items-table .qty-col { width: 80px; }
+    .items-table .rate-col { width: 110px; }
+    .items-table .tax-col { width: 90px; }
+    .items-table .amt-col { width: 120px; text-align: right; font-weight: 600; }
+
+    .add-item-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #f0fdf8; color: #00a878;
+      border: 1.5px dashed #b2ead9; border-radius: 8px;
+      padding: 10px 18px; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .add-item-btn:hover {
+      background: #e8fdf8; border-color: #00d4aa;
+    }
+
+    /* Totals Box */
+    .totals-box {
+      background: #f8f9fa; border-radius: 10px;
+      padding: 20px; margin-top: 20px;
+    }
+    .totals-row {
+      display: flex; justify-content: space-between;
+      padding: 6px 0; font-size: 14px;
+    }
+    .totals-row .tl { color: #666; }
+    .totals-row .tr { color: #1a1a2e; font-weight: 600; }
+    .totals-row.grand {
+      font-size: 18px; font-weight: 800;
+      color: #1a1a2e; padding-top: 10px;
+      margin-top: 8px; border-top: 2px solid #e0e0e0;
+    }
+    .totals-row.grand .tr { color: #00d4aa; }
+
+    /* Amount in Words */
+    .amount-words {
+      background: #fff3e0; border-radius: 8px;
+      padding: 12px 16px; margin-top: 12px;
+      font-size: 13px; color: #e65100; font-weight: 600;
+    }
+
+    /* Preview */
+    .preview-box {
+      display: none; margin-top: 24px;
+      border: 2px solid #e8edf2; border-radius: 12px;
+      overflow: hidden;
+    }
+    .preview-box.show { display: block; }
+    .preview-header {
+      background: #1a1a2e; color: white;
+      padding: 12px 20px; font-size: 14px; font-weight: 600;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .preview-header button {
+      background: #00d4aa; color: white; border: none;
+      border-radius: 6px; padding: 6px 14px;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+    }
+    .preview-header button:hover { background: #00b894; }
+
+    /* Receipt Preview */
+    .receipt-preview {
+      background: white; padding: 40px;
+      font-size: 13px; color: #333;
+      max-width: 100%; overflow-x: auto;
+    }
+    .rp-header {
+      text-align: center; margin-bottom: 24px;
+      padding-bottom: 16px; border-bottom: 3px solid #1a1a2e;
+    }
+    .rp-header .rp-title {
+      font-size: 32px; font-weight: 800; color: #1a1a2e;
+      letter-spacing: 2px;
+    }
+    .rp-header .rp-subtitle {
+      font-size: 12px; color: #888; margin-top: 4px;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .rp-header .rp-type {
+      display: inline-block; background: #00d4aa; color: white;
+      padding: 4px 16px; border-radius: 100px;
+      font-size: 11px; font-weight: 700; margin-top: 8px;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    .rp-meta-row {
+      display: flex; justify-content: space-between;
+      margin-bottom: 20px; font-size: 12px; color: #555;
+    }
+    .rp-meta-row strong { color: #1a1a2e; }
+
+    .rp-party-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 40px; margin-bottom: 24px;
+    }
+    @media (max-width: 600px) { .rp-party-row { grid-template-columns: 1fr; } }
+    .rp-party-box h4 {
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: 1px; color: #888;
+      margin-bottom: 8px;
+    }
+    .rp-party-box p {
+      font-size: 13px; color: #333; line-height: 1.6;
+    }
+    .rp-party-box p strong { color: #1a1a2e; }
+
+    .rp-items-table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0; font-size: 12px;
+    }
+    .rp-items-table th, .rp-items-table td {
+      border: 1px solid #ddd; padding: 8px 10px;
+      text-align: left;
+    }
+    .rp-items-table th {
+      background: #f0f4f8; font-weight: 600;
+      color: #1a1a2e;
+    }
+    .rp-items-table td.num { text-align: right; }
+    .rp-items-table .total-row td {
+      font-weight: 700; background: #f8f9fa;
+    }
+    .rp-items-table .grand-total td {
+      font-weight: 800; background: #1a1a2e; color: white;
+      font-size: 14px;
+    }
+
+    .rp-amount-words {
+      background: #f0fdf8; border: 1px solid #b2ead9;
+      border-radius: 8px; padding: 12px 16px;
+      margin: 16px 0; font-size: 13px;
+    }
+    .rp-amount-words strong { color: #00a878; }
+
+    .rp-payment-details {
+      margin: 16px 0; padding: 12px 0;
+      border-top: 1px solid #e0e0e0;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .rp-payment-details h4 {
+      font-size: 11px; text-transform: uppercase;
+      letter-spacing: 1px; color: #888; margin-bottom: 8px;
+    }
+    .rp-payment-details p {
+      font-size: 12px; color: #555; line-height: 1.7;
+    }
+
+    .rp-footer {
+      margin-top: 32px;
+      display: flex; justify-content: space-between;
+      align-items: flex-end;
+    }
+    .rp-footer .rp-stamp {
+      width: 100px; height: 100px;
+      border: 2px dashed #ccc; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: #aaa; text-align: center;
+      transform: rotate(-15deg);
+    }
+    .rp-footer .rp-signature {
+      text-align: right;
+    }
+    .rp-footer .rp-signature-line {
+      width: 160px; border-bottom: 1px solid #333;
+      margin-bottom: 4px; padding-bottom: 24px;
+    }
+    .rp-footer .rp-signature p {
+      font-size: 12px; color: #555;
+    }
+    .rp-footer .rp-signature p strong {
+      font-size: 13px; color: #1a1a2e;
+    }
+
+    .rp-note {
+      margin-top: 20px; padding-top: 12px;
+      border-top: 1px solid #e0e0e0;
+      font-size: 11px; color: #888; text-align: center;
+    }
+
+    .info-section {
+      max-width: 900px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    @media print {
+      header, .page-title, .calculator-box, .info-section, footer { display: none !important; }
+      .preview-box { display: block !important; border: none !important; }
+      .receipt-preview { padding: 20px !important; }
+    }
+  </style>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Receipt Generator</h2>
+  <p>Create professional payment receipts, rent receipts & donation receipts for your business in seconds</p>
+</div>
+
+<div class="calculator-box">
+
+  <!-- Receipt Type -->
+  <div class="section-title">📋 Receipt Type</div>
+  <div class="receipt-tabs" id="receiptTabs">
+    <button class="receipt-tab active" onclick="setReceiptType('payment')">💳 Payment Receipt</button>
+    <button class="receipt-tab" onclick="setReceiptType('rent')">🏠 Rent Receipt</button>
+    <button class="receipt-tab" onclick="setReceiptType('donation')">🤝 Donation Receipt</button>
+  </div>
+
+  <!-- Receipt Details -->
+  <div class="section-title">📝 Receipt Details</div>
+  <div class="field-row three-col">
+    <div class="field">
+      <label>Receipt Number</label>
+      <input type="text" id="receiptNumber" placeholder="e.g. REC-2026-001" value="REC-2026-001">
+    </div>
+    <div class="field">
+      <label>Receipt Date</label>
+      <input type="date" id="receiptDate" value="">
+    </div>
+    <div class="field">
+      <label>Payment Mode</label>
+      <select id="paymentMode">
+        <option value="Cash">Cash</option>
+        <option value="UPI">UPI</option>
+        <option value="Bank Transfer / NEFT / RTGS">Bank Transfer / NEFT / RTGS</option>
+        <option value="Cheque">Cheque</option>
+        <option value="Credit Card">Credit Card</option>
+        <option value="Debit Card">Debit Card</option>
+        <option value="Demand Draft">Demand Draft</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Payer Info -->
+  <div class="section-title">👤 Received From (Payer)</div>
+  <div class="field">
+    <label>Name</label>
+    <input type="text" id="payerName" placeholder="e.g. Rajesh Kumar" value="Rajesh Kumar">
+  </div>
+  <div class="field-row">
+    <div class="field">
+      <label>Address</label>
+      <textarea id="payerAddress" placeholder="Full address">45, Green Park Colony, Hyderabad, Telangana - 500001</textarea>
+    </div>
+    <div class="field">
+      <label>Contact / Email</label>
+      <input type="text" id="payerContact" placeholder="Phone or email" value="rajesh@email.com">
+    </div>
+  </div>
+
+  <!-- Receiver Info -->
+  <div class="section-title">🏢 Received By (Receiver)</div>
+  <div class="field">
+    <label>Company / Person Name</label>
+    <input type="text" id="receiverName" placeholder="e.g. ABC Enterprises" value="ABC Enterprises Pvt Ltd">
+  </div>
+  <div class="field-row">
+    <div class="field">
+      <label>GSTIN (if applicable)</label>
+      <input type="text" id="receiverGstin" placeholder="e.g. 27AABCU9603R1ZX" value="27AABCU9603R1ZX">
+    </div>
+    <div class="field">
+      <label>PAN</label>
+      <input type="text" id="receiverPan" placeholder="e.g. AABCU9603R" value="AABCU9603R">
+    </div>
+  </div>
+  <div class="field">
+    <label>Address</label>
+    <textarea id="receiverAddress" placeholder="Full address">123, Business Park, Andheri East, Mumbai, Maharashtra - 400069</textarea>
+  </div>
+
+  <!-- Rent-specific fields -->
+  <div id="rentFields" style="display:none;">
+    <div class="section-title">🏠 Rent Details</div>
+    <div class="field-row three-col">
+      <div class="field">
+        <label>Property Address</label>
+        <input type="text" id="propertyAddress" placeholder="Rented property address" value="Flat 302, Sunshine Apartments, Pune">
+      </div>
+      <div class="field">
+        <label>Month / Period</label>
+        <input type="text" id="rentPeriod" placeholder="e.g. June 2026" value="June 2026">
+      </div>
+      <div class="field">
+        <label>Landlord PAN</label>
+        <input type="text" id="landlordPan" placeholder="Landlord PAN for HRA claim" value="AABCU9603R">
+      </div>
+    </div>
+  </div>
+
+  <!-- Donation-specific fields -->
+  <div id="donationFields" style="display:none;">
+    <div class="section-title">🤝 Donation Details</div>
+    <div class="field-row">
+      <div class="field">
+        <label>Donor PAN (for 80G benefit)</label>
+        <input type="text" id="donorPan" placeholder="Donor PAN" value="ABCDE1234F">
+      </div>
+      <div class="field">
+        <label>Registration Number (80G)</label>
+        <input type="text" id="registration80g" placeholder="e.g. DIT(E)/PN/2024-25/1234" value="DIT(E)/PN/2026-27/1234">
+      </div>
+    </div>
+    <div class="field">
+      <label>Purpose of Donation</label>
+      <input type="text" id="donationPurpose" placeholder="e.g. Education for underprivileged children" value="Education for underprivileged children">
+    </div>
+  </div>
+
+  <!-- Items / Description -->
+  <div class="section-title" id="itemsSectionTitle">📦 Items / Services</div>
+  <div class="items-table-wrap">
+    <table class="items-table" id="itemsTable">
+      <thead>
+        <tr>
+          <th class="sno">#</th>
+          <th class="desc-col">Description</th>
+          <th class="qty-col">Qty</th>
+          <th class="rate-col">Rate (Rs.)</th>
+          <th class="tax-col">GST %</th>
+          <th class="amt-col">Amount (Rs.)</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="itemsBody"></tbody>
+    </table>
+  </div>
+  <button class="add-item-btn" onclick="addItem()">+ Add Item</button>
+
+  <!-- Totals -->
+  <div class="totals-box">
+    <div class="totals-row">
+      <span class="tl">Subtotal</span>
+      <span class="tr" id="subtotal">Rs. 0</span>
+    </div>
+    <div class="totals-row">
+      <span class="tl">CGST</span>
+      <span class="tr" id="cgstTotal">Rs. 0</span>
+    </div>
+    <div class="totals-row">
+      <span class="tl">SGST</span>
+      <span class="tr" id="sgstTotal">Rs. 0</span>
+    </div>
+    <div class="totals-row grand">
+      <span class="tl">Total Amount Received</span>
+      <span class="tr" id="grandTotal">Rs. 0</span>
+    </div>
+    <div class="amount-words" id="amountWords">
+      Amount in Words: Zero Rupees Only
+    </div>
+  </div>
+
+  <!-- Payment Reference -->
+  <div class="section-title">💳 Payment Reference</div>
+  <div class="field-row three-col">
+    <div class="field">
+      <label>Transaction / Cheque / UTR Number</label>
+      <input type="text" id="transactionId" placeholder="e.g. UPI/123456789012" value="UPI/987654321098">
+    </div>
+    <div class="field">
+      <label>Bank Name (if applicable)</label>
+      <input type="text" id="bankName" placeholder="e.g. HDFC Bank" value="HDFC Bank">
+    </div>
+    <div class="field">
+      <label>Date of Payment</label>
+      <input type="date" id="paymentDate" value="">
+    </div>
+  </div>
+
+  <!-- Notes -->
+  <div class="section-title">📝 Additional Notes</div>
+  <div class="field">
+    <textarea id="additionalNotes" placeholder="Any additional notes or terms...">This receipt is issued as confirmation of payment received. Goods/services to be delivered as per agreed terms.</textarea>
+  </div>
+
+  <!-- Buttons -->
+  <div class="btn-row" style="margin-top:24px;">
+    <button class="calc-btn" onclick="generatePreview()">👁 Preview Receipt</button>
+    <button class="calc-btn secondary" onclick="window.print()">🖨 Print / Save PDF</button>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview-box" id="previewBox">
+    <div class="preview-header">
+      <span>Receipt Preview</span>
+      <button onclick="window.print()">Print / Save PDF</button>
+    </div>
+    <div class="receipt-preview" id="receiptPreview"></div>
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>What is a Payment Receipt?</h2>
+  <p>A <strong>payment receipt</strong> is a formal document issued by a seller or service provider to a buyer or client, acknowledging that a payment has been received. It serves as proof of payment and is essential for accounting, tax filing, and dispute resolution. In India, receipts are crucial for GST compliance, HRA claims, and income tax deductions under Section 80G for donations.</p>
+
+  <h3>Types of Receipts</h3>
+  <div class="faq-box">
+    <p>Payment Receipt</p>
+    <p>Issued when a customer pays for goods or services. Includes details of items purchased, amount paid, payment mode, and transaction reference. Essential for both B2B and B2C transactions in India.</p>
+  </div>
+  <div class="faq-box">
+    <p>Rent Receipt</p>
+    <p>Issued by a landlord to a tenant acknowledging rent payment. Required for salaried employees to claim House Rent Allowance (HRA) exemption under Section 10(13A). Must include landlord's PAN if annual rent exceeds Rs. 1,00,000.</p>
+  </div>
+  <div class="faq-box">
+    <p>Donation Receipt</p>
+    <p>Issued by registered charitable organizations to donors. Required to claim tax deduction under Section 80G of the Income Tax Act. Must include the organization's 80G registration number and the donor's PAN.</p>
+  </div>
+
+  <h3>Legal Requirements for Receipts in India</h3>
+  <div class="faq-box">
+    <p>GST-Compliant Receipts</p>
+    <p>For transactions above Rs. 200, a GST-registered business must issue a receipt or tax invoice containing: seller's GSTIN, buyer's details (if registered), HSN/SAC codes, taxable value, and GST breakup (CGST/SGST or IGST).</p>
+  </div>
+  <div class="faq-box">
+    <p>Rent Receipts for HRA</p>
+    <p>To claim HRA exemption, employees must submit rent receipts to their employer. If annual rent exceeds Rs. 1,00,000, the landlord's PAN is mandatory. The receipt should clearly state the rental period, property address, and amount.</p>
+  </div>
+  <div class="faq-box">
+    <p>Donation Receipts for 80G</p>
+    <p>Only donations to organizations with valid 80G registration are eligible for tax deduction. The receipt must contain: donor's name and PAN, donation amount, date, purpose, and the organization's 80G registration number and validity period.</p>
+  </div>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>Is a receipt legally binding?</p>
+    <p>Yes, a receipt serves as legal proof of payment. In case of disputes, it can be used as evidence in court. However, for large transactions, it is advisable to also have a formal contract or invoice.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is the difference between a receipt and an invoice?</p>
+    <p>An <strong>invoice</strong> is a request for payment issued by the seller <em>before</em> payment is made. A <strong>receipt</strong> is proof of payment issued <em>after</em> the payment is received. The invoice says "you owe this"; the receipt says "you paid this."</p>
+  </div>
+  <div class="faq-box">
+    <p>Do I need GST on a receipt?</p>
+    <p>If you are a GST-registered business and the transaction value exceeds Rs. 200, you should issue a GST-compliant receipt (or tax invoice) showing CGST and SGST (intra-state) or IGST (inter-state).</p>
+  </div>
+  <div class="faq-box">
+    <p>Can I claim HRA without rent receipts?</p>
+    <p>No. Rent receipts are mandatory to claim HRA exemption. If your employer does not require them, you must still maintain them for your records. The Income Tax Department may ask for them during scrutiny.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is the 80G deduction limit for donations?</p>
+    <p>For donations to eligible charitable institutions, you can claim 50% or 100% deduction depending on the organization, subject to 10% of adjusted gross total income. Always verify the organization's 80G registration status on the Income Tax portal before donating.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  var itemCount = 0;
+  var currentType = 'payment';
+
+  function setTodayDate() {
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var dd = String(today.getDate()).padStart(2, '0');
+    var dateStr = yyyy + '-' + mm + '-' + dd;
+    document.getElementById('receiptDate').value = dateStr;
+    document.getElementById('paymentDate').value = dateStr;
+  }
+
+  function formatINR(num) {
+    return 'Rs. ' + Math.round(num).toLocaleString('en-IN');
+  }
+
+  function numberToWords(num) {
+    var a = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+    var b = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+
+    function inWords(n) {
+      if (n < 20) return a[n];
+      if (n < 100) return b[Math.floor(n / 10)] + (n % 10 !== 0 ? ' ' + a[n % 10] : '');
+      if (n < 1000) return a[Math.floor(n / 100)] + ' Hundred' + (n % 100 !== 0 ? ' and ' + inWords(n % 100) : '');
+      if (n < 100000) return inWords(Math.floor(n / 1000)) + ' Thousand' + (n % 1000 !== 0 ? ' ' + inWords(n % 1000) : '');
+      if (n < 10000000) return inWords(Math.floor(n / 100000)) + ' Lakh' + (n % 100000 !== 0 ? ' ' + inWords(n % 100000) : '');
+      return inWords(Math.floor(n / 10000000)) + ' Crore' + (n % 10000000 !== 0 ? ' ' + inWords(n % 10000000) : '');
+    }
+
+    if (num === 0) return 'Zero Rupees Only';
+    var rupees = Math.floor(num);
+    var paise = Math.round((num - rupees) * 100);
+    var result = inWords(rupees) + ' Rupees';
+    if (paise > 0) result += ' and ' + inWords(paise) + ' Paise';
+    result += ' Only';
+    return result;
+  }
+
+  function setReceiptType(type) {
+    currentType = type;
+    document.querySelectorAll('.receipt-tab').forEach(function(t) { t.classList.remove('active'); });
+    event.target.classList.add('active');
+
+    var rentFields = document.getElementById('rentFields');
+    var donationFields = document.getElementById('donationFields');
+    var itemsSectionTitle = document.getElementById('itemsSectionTitle');
+
+    if (type === 'rent') {
+      rentFields.style.display = 'block';
+      donationFields.style.display = 'none';
+      itemsSectionTitle.textContent = '🏠 Rent Details';
+    } else if (type === 'donation') {
+      rentFields.style.display = 'none';
+      donationFields.style.display = 'block';
+      itemsSectionTitle.textContent = '🤝 Donation Details';
+    } else {
+      rentFields.style.display = 'none';
+      donationFields.style.display = 'none';
+      itemsSectionTitle.textContent = '📦 Items / Services';
+    }
+  }
+
+  function addItem() {
+    itemCount++;
+    var tbody = document.getElementById('itemsBody');
+    var tr = document.createElement('tr');
+    tr.id = 'itemRow' + itemCount;
+
+    var defaultDesc = currentType === 'rent' ? 'Rent for the month' : (currentType === 'donation' ? 'Donation' : 'Product ' + itemCount);
+    var defaultRate = currentType === 'rent' ? '25000' : (currentType === 'donation' ? '5000' : '1000');
+    var defaultGst = currentType === 'rent' ? '0' : (currentType === 'donation' ? '0' : '18');
+
+    tr.innerHTML =
+      '<td class="sno">' + itemCount + '</td>' +
+      '<td class="desc-col"><input type="text" id="desc' + itemCount + '" placeholder="Description" value="' + defaultDesc + '"></td>' +
+      '<td class="qty-col num"><input type="number" id="qty' + itemCount + '" value="1" min="1" onchange="calculateTotals()"></td>' +
+      '<td class="rate-col num"><input type="number" id="rate' + itemCount + '" value="' + defaultRate + '" min="0" onchange="calculateTotals()"></td>' +
+      '<td class="tax-col num"><input type="number" id="gst' + itemCount + '" value="' + defaultGst + '" min="0" onchange="calculateTotals()"></td>' +
+      '<td class="amt-col" id="amt' + itemCount + '">Rs. 0</td>' +
+      '<td><button class="action-btn" onclick="removeItem(' + itemCount + ')">✕</button></td>';
+    tbody.appendChild(tr);
+    calculateTotals();
+  }
+
+  function removeItem(id) {
+    var row = document.getElementById('itemRow' + id);
+    if (row) row.remove();
+    var rows = document.querySelectorAll('#itemsBody tr');
+    rows.forEach(function(r, idx) {
+      r.querySelector('.sno').textContent = idx + 1;
+    });
+    calculateTotals();
+  }
+
+  function calculateTotals() {
+    var subtotal = 0;
+    var cgstTotal = 0;
+    var sgstTotal = 0;
+
+    var rows = document.querySelectorAll('#itemsBody tr');
+    rows.forEach(function(row) {
+      var id = row.id.replace('itemRow', '');
+      var qty = parseFloat(document.getElementById('qty' + id).value) || 0;
+      var rate = parseFloat(document.getElementById('rate' + id).value) || 0;
+      var gst = parseFloat(document.getElementById('gst' + id).value) || 0;
+
+      var gross = qty * rate;
+      var gstAmt = gross * (gst / 100);
+      var total = gross + gstAmt;
+
+      subtotal += gross;
+      cgstTotal += gstAmt / 2;
+      sgstTotal += gstAmt / 2;
+
+      document.getElementById('amt' + id).textContent = formatINR(total);
+    });
+
+    var grandTotal = subtotal + cgstTotal + sgstTotal;
+
+    document.getElementById('subtotal').textContent = formatINR(subtotal);
+    document.getElementById('cgstTotal').textContent = formatINR(cgstTotal);
+    document.getElementById('sgstTotal').textContent = formatINR(sgstTotal);
+    document.getElementById('grandTotal').textContent = formatINR(grandTotal);
+    document.getElementById('amountWords').textContent = 'Amount in Words: ' + numberToWords(grandTotal);
+  }
+
+  function generatePreview() {
+    var receiptNumber = document.getElementById('receiptNumber').value;
+    var receiptDate = document.getElementById('receiptDate').value;
+    var paymentMode = document.getElementById('paymentMode').value;
+    var payerName = document.getElementById('payerName').value;
+    var payerAddress = document.getElementById('payerAddress').value;
+    var payerContact = document.getElementById('payerContact').value;
+    var receiverName = document.getElementById('receiverName').value;
+    var receiverGstin = document.getElementById('receiverGstin').value;
+    var receiverPan = document.getElementById('receiverPan').value;
+    var receiverAddress = document.getElementById('receiverAddress').value;
+    var transactionId = document.getElementById('transactionId').value;
+    var bankName = document.getElementById('bankName').value;
+    var paymentDate = document.getElementById('paymentDate').value;
+    var additionalNotes = document.getElementById('additionalNotes').value;
+
+    var subtotal = document.getElementById('subtotal').textContent;
+    var cgstTotal = document.getElementById('cgstTotal').textContent;
+    var sgstTotal = document.getElementById('sgstTotal').textContent;
+    var grandTotal = document.getElementById('grandTotal').textContent;
+    var amountWords = document.getElementById('amountWords').textContent;
+
+    var typeLabel = currentType === 'rent' ? 'Rent Receipt' : (currentType === 'donation' ? 'Donation Receipt' : 'Payment Receipt');
+    var typeBadge = currentType === 'rent' ? 'RENT RECEIPT' : (currentType === 'donation' ? 'DONATION RECEIPT' : 'PAYMENT RECEIPT');
+
+    // Build items table for preview
+    var itemsHtml = '';
+    var rows = document.querySelectorAll('#itemsBody tr');
+    rows.forEach(function(row, idx) {
+      var id = row.id.replace('itemRow', '');
+      var desc = document.getElementById('desc' + id).value;
+      var qty = document.getElementById('qty' + id).value;
+      var rate = document.getElementById('rate' + id).value;
+      var gst = document.getElementById('gst' + id).value;
+      var amt = document.getElementById('amt' + id).textContent;
+
+      itemsHtml +=
+        '<tr>' +
+        '<td>' + (idx + 1) + '</td>' +
+        '<td>' + desc + '</td>' +
+        '<td class="num">' + qty + '</td>' +
+        '<td class="num">Rs. ' + parseFloat(rate).toLocaleString('en-IN') + '</td>' +
+        '<td class="num">' + gst + '%</td>' +
+        '<td class="num">' + amt + '</td>' +
+        '</tr>';
+    });
+
+    // Rent-specific extra info
+    var rentExtra = '';
+    if (currentType === 'rent') {
+      var propertyAddress = document.getElementById('propertyAddress').value;
+      var rentPeriod = document.getElementById('rentPeriod').value;
+      var landlordPan = document.getElementById('landlordPan').value;
+      rentExtra =
+        '<div style="margin:12px 0;padding:12px;background:#f8f9fa;border-radius:8px;">' +
+        '<p><strong>Property:</strong> ' + propertyAddress + '</p>' +
+        '<p><strong>Rent Period:</strong> ' + rentPeriod + '</p>' +
+        '<p><strong>Landlord PAN:</strong> ' + landlordPan + '</p>' +
+        '</div>';
+    }
+
+    // Donation-specific extra info
+    var donationExtra = '';
+    if (currentType === 'donation') {
+      var donorPan = document.getElementById('donorPan').value;
+      var reg80g = document.getElementById('registration80g').value;
+      var purpose = document.getElementById('donationPurpose').value;
+      donationExtra =
+        '<div style="margin:12px 0;padding:12px;background:#f8f9fa;border-radius:8px;">' +
+        '<p><strong>Donor PAN:</strong> ' + donorPan + '</p>' +
+        '<p><strong>80G Registration:</strong> ' + reg80g + '</p>' +
+        '<p><strong>Purpose:</strong> ' + purpose + '</p>' +
+        '</div>';
+    }
+
+    var previewHtml =
+      '<div class="rp-header">' +
+      '<div class="rp-title">RECEIPT</div>' +
+      '<div class="rp-subtitle">Official Payment Acknowledgement</div>' +
+      '<div class="rp-type">' + typeBadge + '</div>' +
+      '</div>' +
+
+      '<div class="rp-meta-row">' +
+      '<div>' +
+      '<p><strong>Receipt No:</strong> ' + receiptNumber + '</p>' +
+      '<p><strong>Date:</strong> ' + receiptDate + '</p>' +
+      '</div>' +
+      '<div style="text-align:right;">' +
+      '<p><strong>Payment Mode:</strong> ' + paymentMode + '</p>' +
+      '<p><strong>Payment Date:</strong> ' + paymentDate + '</p>' +
+      '</div>' +
+      '</div>' +
+
+      '<div class="rp-party-row">' +
+      '<div class="rp-party-box">' +
+      '<h4>Received From</h4>' +
+      '<p><strong>' + payerName + '</strong></p>' +
+      '<p>' + payerAddress.replace(/
+/g, '<br>') + '</p>' +
+      '<p style="margin-top:6px;"><strong>Contact:</strong> ' + payerContact + '</p>' +
+      '</div>' +
+      '<div class="rp-party-box">' +
+      '<h4>Received By</h4>' +
+      '<p><strong>' + receiverName + '</strong></p>' +
+      '<p>' + receiverAddress.replace(/
+/g, '<br>') + '</p>' +
+      '<p style="margin-top:6px;"><strong>GSTIN:</strong> ' + receiverGstin + '</p>' +
+      '<p><strong>PAN:</strong> ' + receiverPan + '</p>' +
+      '</div>' +
+      '</div>' +
+
+      rentExtra +
+      donationExtra +
+
+      '<table class="rp-items-table">' +
+      '<thead>' +
+      '<tr>' +
+      '<th>#</th>' +
+      '<th>Description</th>' +
+      '<th class="num">Qty</th>' +
+      '<th class="num">Rate</th>' +
+      '<th class="num">GST</th>' +
+      '<th class="num">Amount</th>' +
+      '</tr>' +
+      '</thead>' +
+      '<tbody>' + itemsHtml + '</tbody>' +
+      '<tbody>' +
+      '<tr class="total-row">' +
+      '<td colspan="5" style="text-align:right;">Subtotal</td>' +
+      '<td class="num">' + subtotal + '</td>' +
+      '</tr>' +
+      '<tr class="total-row">' +
+      '<td colspan="5" style="text-align:right;">CGST</td>' +
+      '<td class="num">' + cgstTotal + '</td>' +
+      '</tr>' +
+      '<tr class="total-row">' +
+      '<td colspan="5" style="text-align:right;">SGST</td>' +
+      '<td class="num">' + sgstTotal + '</td>' +
+      '</tr>' +
+      '<tr class="grand-total">' +
+      '<td colspan="5" style="text-align:right;">TOTAL AMOUNT RECEIVED</td>' +
+      '<td class="num">' + grandTotal + '</td>' +
+      '</tr>' +
+      '</tbody>' +
+      '</table>' +
+
+      '<div class="rp-amount-words">' +
+      '<strong>' + amountWords + '</strong>' +
+      '</div>' +
+
+      '<div class="rp-payment-details">' +
+      '<h4>Payment Reference</h4>' +
+      '<p><strong>Transaction ID / Cheque No:</strong> ' + transactionId + '</p>' +
+      '<p><strong>Bank:</strong> ' + bankName + '</p>' +
+      '<p><strong>Payment Mode:</strong> ' + paymentMode + '</p>' +
+      '</div>' +
+
+      '<div style="margin:12px 0;padding:12px;background:#f8f9fa;border-radius:8px;font-size:12px;color:#555;">' +
+      '<strong>Notes:</strong> ' + additionalNotes +
+      '</div>' +
+
+      '<div class="rp-footer">' +
+      '<div class="rp-stamp">Official<br>Stamp</div>' +
+      '<div class="rp-signature">' +
+      '<div class="rp-signature-line"></div>' +
+      '<p><strong>Authorized Signatory</strong></p>' +
+      '<p>' + receiverName + '</p>' +
+      '</div>' +
+      '</div>' +
+
+      '<div class="rp-note">' +
+      'This is a computer-generated receipt and does not require a physical signature. Generated via Prime Tools — primetoolsapp.com' +
+      '</div>';
+
+    document.getElementById('receiptPreview').innerHTML = previewHtml;
+    document.getElementById('previewBox').classList.add('show');
+    document.getElementById('previewBox').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Init
+  window.addEventListener('load', function() {
+    setTodayDate();
+    addItem();
+    if (currentType === 'payment') addItem();
+    calculateTotals();
+  });
+</script>
+
+</body>
+</html>
