@@ -405,9 +405,9 @@
   <!-- Receipt Type -->
   <div class="section-title">📋 Receipt Type</div>
   <div class="receipt-tabs" id="receiptTabs">
-    <button class="receipt-tab active" data-type="payment" onclick="setReceiptType(this, 'payment')">💳 Payment Receipt</button>
-    <button class="receipt-tab" data-type="rent" onclick="setReceiptType(this, 'rent')">🏠 Rent Receipt</button>
-    <button class="receipt-tab" data-type="donation" onclick="setReceiptType(this, 'donation')">🤝 Donation Receipt</button>
+    <button class="receipt-tab active" id="tab-payment" onclick="switchType('payment')">💳 Payment Receipt</button>
+    <button class="receipt-tab" id="tab-rent" onclick="switchType('rent')">🏠 Rent Receipt</button>
+    <button class="receipt-tab" id="tab-donation" onclick="switchType('donation')">🤝 Donation Receipt</button>
   </div>
 
   <!-- Receipt Details -->
@@ -656,7 +656,6 @@
 <script>
   var itemCount = 0;
   var currentType = 'payment';
-  var receiptPreviewHTML = '';
 
   function setTodayDate() {
     var today = new Date();
@@ -695,17 +694,18 @@
     return result;
   }
 
-  function setReceiptType(clickedBtn, type) {
+  function switchType(type) {
     currentType = type;
 
     // Remove active from all tabs
-    var tabs = document.querySelectorAll('.receipt-tab');
-    for (var i = 0; i < tabs.length; i++) {
-      tabs[i].classList.remove('active');
-    }
-    // Add active to clicked tab
-    clickedBtn.classList.add('active');
+    document.getElementById('tab-payment').classList.remove('active');
+    document.getElementById('tab-rent').classList.remove('active');
+    document.getElementById('tab-donation').classList.remove('active');
 
+    // Add active to selected tab
+    document.getElementById('tab-' + type).classList.add('active');
+
+    // Show/hide type-specific fields
     var rentFields = document.getElementById('rentFields');
     var donationFields = document.getElementById('donationFields');
     var itemsSectionTitle = document.getElementById('itemsSectionTitle');
@@ -884,7 +884,7 @@
         '</div>';
     }
 
-    receiptPreviewHTML =
+    var previewHtml =
       '<div class="rp-header">' +
       '<div class="rp-title">RECEIPT</div>' +
       '<div class="rp-subtitle">Official Payment Acknowledgement</div>' +
@@ -983,7 +983,7 @@
       'This is a computer-generated receipt and does not require a physical signature. Generated via Prime Tools — primetoolsapp.com' +
       '</div>';
 
-    document.getElementById('receiptPreview').innerHTML = receiptPreviewHTML;
+    document.getElementById('receiptPreview').innerHTML = previewHtml;
     document.getElementById('previewBox').classList.add('show');
     document.getElementById('previewBox').scrollIntoView({ behavior: 'smooth' });
   }
