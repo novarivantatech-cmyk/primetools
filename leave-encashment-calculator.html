@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leave Encashment Calculator India - Tax Exempt & Taxable Amount - Prime Tools</title>
+  <meta name="description" content="Free Leave Encashment Calculator for India. Calculate tax-exempt and taxable leave encashment amount as per Section 10(10AA) of Income Tax Act. For government and private employees.">
+  <meta name="keywords" content="leave encashment calculator India, Section 10(10AA), leave encashment tax, gratuity leave, earned leave encashment, tax exempt leave encashment, private employee leave encashment">
+  <meta property="og:title" content="Leave Encashment Calculator India - Tax Exempt & Taxable Amount - Prime Tools">
+  <meta property="og:description" content="Calculate tax-exempt and taxable leave encashment as per Section 10(10AA). Free tool for government and private sector employees in India.">
+  <meta property="og:url" content="https://primetoolsapp.com/leave-encashment-calculator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/leave-encashment-calculator.html">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 720px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .field { margin-bottom: 20px; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #555; margin-bottom: 8px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 16px; outline: none;
+      transition: border-color 0.2s; background: white;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .result-box {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 12px; padding: 28px;
+      margin-top: 24px; display: none;
+    }
+    .result-box.show { display: block; }
+    .result-title {
+      font-size: 13px; color: #888;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 16px; text-align: center;
+    }
+    .result-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 16px;
+    }
+    @media (max-width: 500px) { .result-grid { grid-template-columns: 1fr; } }
+    .result-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      text-align: center;
+    }
+    .result-item .lbl {
+      font-size: 12px; color: #888;
+      margin-bottom: 6px;
+    }
+    .result-item .val {
+      font-size: 22px; font-weight: 700; color: #fff;
+    }
+    .result-item .val.green { color: #00d4aa; }
+    .result-item .val.red { color: #ff6b6b; }
+    .result-item .val.blue { color: #4fc3f7; }
+    .result-divider {
+      height: 1px; background: rgba(255,255,255,0.1);
+      margin: 16px 0;
+    }
+    .tax-breakdown {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+    }
+    .tax-breakdown h4 {
+      font-size: 13px; color: #888;
+      margin-bottom: 12px; text-align: center;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .bl { color: #aaa; }
+    .breakdown-row .br { color: #fff; font-weight: 600; }
+    .breakdown-row .br.green { color: #00d4aa; }
+    .breakdown-row .br.red { color: #ff6b6b; }
+    .breakdown-row.total { font-size: 15px; padding-top: 12px; margin-top: 4px; border-top: 2px solid rgba(255,255,255,0.15); }
+    .breakdown-row.total .br { color: #00d4aa; font-size: 18px; }
+
+    .result-note {
+      font-size: 12px; color: #888;
+      text-align: center; margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    .info-badge {
+      display: inline-block; background: #fff3e0;
+      color: #e65100; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+      margin-left: 8px;
+    }
+    .govt-badge {
+      display: inline-block; background: #e8f4fd;
+      color: #0066aa; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+      margin-left: 8px;
+    }
+
+    .exemption-box {
+      background: #f0fdf8; border: 1px solid #b2ead9;
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px; display: none;
+    }
+    .exemption-box.show { display: block; }
+    .exemption-box h4 {
+      font-size: 14px; color: #00a878;
+      margin-bottom: 8px;
+    }
+    .exemption-box p {
+      font-size: 13px; color: #555; line-height: 1.6;
+    }
+
+    .info-section {
+      max-width: 720px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+
+    .tax-table {
+      width: 100%; border-collapse: collapse;
+      margin: 16px 0; font-size: 14px;
+    }
+    .tax-table th, .tax-table td {
+      border: 1px solid #e0e0e0; padding: 10px 12px;
+      text-align: left;
+    }
+    .tax-table th {
+      background: #f0f4f8; font-weight: 600; color: #1a1a2e;
+    }
+    .tax-table td { color: #555; }
+
+    .highlight-box {
+      background: #f0fdf8; border: 1px solid #b2ead9;
+      border-radius: 10px; padding: 16px;
+      margin: 16px 0;
+    }
+    .highlight-box h4 {
+      font-size: 14px; color: #00a878;
+      margin-bottom: 8px;
+    }
+    .highlight-box p {
+      font-size: 13px; color: #555; line-height: 1.6;
+    }
+
+    .formula-box {
+      background: #f0f4f8; border-radius: 10px;
+      padding: 16px; font-family: 'Courier New', monospace;
+      font-size: 14px; color: #1a1a2e;
+      margin: 12px 0; overflow-x: auto;
+    }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+  </style>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>Leave Encashment Calculator</h2>
+  <p>Calculate tax-exempt and taxable leave encashment as per Section 10(10AA) of the Income Tax Act, 1961</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="field">
+    <label>Employee Type</label>
+    <select id="employeeType" onchange="toggleGovtFields()">
+      <option value="private">Private Sector Employee</option>
+      <option value="central">Central Government Employee</option>
+      <option value="state">State Government Employee</option>
+    </select>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Basic Salary + DA (Last 10 months average) (₹)</label>
+      <input type="number" id="avgSalary" placeholder="e.g. 60000" value="60000">
+    </div>
+    <div class="field">
+      <label>Total Earned Leave at Credit (Days)</label>
+      <input type="number" id="totalLeave" placeholder="e.g. 300" value="300">
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Leave Encashed Now (Days)</label>
+      <input type="number" id="encashedLeave" placeholder="e.g. 150" value="150">
+    </div>
+    <div class="field">
+      <label>Leave Encashed in Previous Years (Days)</label>
+      <input type="number" id="previousEncashed" placeholder="e.g. 0" value="0">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Number of Completed Years of Service</label>
+    <input type="number" id="yearsOfService" placeholder="e.g. 20" value="20">
+  </div>
+
+  <div class="exemption-box show" id="exemptionInfo">
+    <h4>📌 Tax Exemption Rules</h4>
+    <p><strong>Government Employees:</strong> Full amount of leave encashment received at retirement is fully exempt from tax under Section 10(10AA)(i).</p>
+    <p style="margin-top:8px;"><strong>Private Sector Employees:</strong> Least of the following is exempt under Section 10(10AA)(ii):</p>
+    <p style="margin-top:4px;">• Actual amount received<br>
+    • ₹25,00,000 (maximum limit as per Budget 2023)<br>
+    • 10 months' salary (based on last 10 months average)<br>
+    • Cash equivalent of unavailed leave — max 30 days per year of service</p>
+  </div>
+
+  <button class="calc-btn" onclick="calculateLeaveEncashment()">Calculate Leave Encashment</button>
+
+  <div class="result-box" id="resultBox">
+    <div class="result-title">Leave Encashment Summary</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="lbl">Total Leave Encashment</div>
+        <div class="val blue" id="totalEncashment">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Tax Exempt Amount</div>
+        <div class="val green" id="exemptAmount">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Taxable Amount</div>
+        <div class="val red" id="taxableAmount">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Effective Tax Rate Impact</div>
+        <div class="val" id="taxImpact">-</div>
+      </div>
+    </div>
+    <div class="result-divider"></div>
+    <div class="tax-breakdown">
+      <h4>Exemption Calculation Breakdown</h4>
+      <div class="breakdown-row">
+        <span class="bl">Actual Amount Received</span>
+        <span class="br" id="actualAmount">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">10 Months' Salary</span>
+        <span class="br" id="tenMonthsSalary">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Statutory Limit (Max)</span>
+        <span class="br" id="statutoryLimit">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Cash Equivalent of Unavailed Leave</span>
+        <span class="br" id="cashEquivalent">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">Least of Above (Exempt Amount)</span>
+        <span class="br green" id="exemptAmountDetail">-</span>
+      </div>
+    </div>
+    <div class="result-note" id="resultNote"></div>
+  </div>
+
+</div>
+
+<section class="info-section">
+  <h2>What is Leave Encashment?</h2>
+  <p><strong>Leave encashment</strong> is the amount an employee receives from their employer in exchange for the accumulated but unavailed leave days at the time of retirement, resignation, or during service (as per company policy). In India, earned leave is a statutory right under the Factories Act, 1948 and various state-specific Shops & Establishments Acts. Most companies allow employees to accumulate a certain number of leave days, which can be encashed either periodically or at the time of separation.</p>
+
+  <h3>How is Leave Encashment Calculated?</h3>
+  <p>The basic formula for calculating leave encashment is:</p>
+  <div class="formula-box">
+    Leave Encashment = (Basic Salary + Dearness Allowance) / 30 × Number of Leave Days Encashed
+  </div>
+  <p>Where <strong>Basic Salary + DA</strong> is typically averaged over the last 10 months preceding retirement/resignation, and the <strong>number of leave days</strong> is the actual earned leave being encashed.</p>
+
+  <h3>Tax Exemption Under Section 10(10AA)</h3>
+  <p>The Income Tax Act, 1961 provides tax exemption on leave encashment under Section 10(10AA), but the rules differ for government and private sector employees:</p>
+
+  <table class="tax-table">
+    <tr>
+      <th>Employee Type</th>
+      <th>Tax Treatment</th>
+      <th>Exemption Limit</th>
+    </tr>
+    <tr>
+      <td>Central/State Government</td>
+      <td>Fully exempt at retirement</td>
+      <td>No limit (entire amount tax-free)</td>
+    </tr>
+    <tr>
+      <td>Private Sector — At Retirement</td>
+      <td>Least of 4 conditions exempt</td>
+      <td>Up to ₹25,00,000 (Budget 2023)</td>
+    </tr>
+    <tr>
+      <td>Private Sector — During Service</td>
+      <td>Fully taxable</td>
+      <td>No exemption available</td>
+    </tr>
+  </table>
+
+  <h3>4 Conditions for Private Sector Exemption</h3>
+  <p>For private sector employees at retirement, the exempt amount is the <strong>least</strong> of the following:</p>
+  <div class="highlight-box">
+    <h4>1. Actual Amount Received</h4>
+    <p>The total leave encashment amount actually paid by the employer.</p>
+  </div>
+  <div class="highlight-box">
+    <h4>2. Statutory Limit</h4>
+    <p>₹25,00,000 (increased from ₹3,00,000 in Budget 2023). This is the maximum exemption limit for the entire lifetime. If you have claimed exemption in previous years, that amount is deducted from this limit.</p>
+  </div>
+  <div class="highlight-box">
+    <h4>3. 10 Months' Salary</h4>
+    <p>Average basic salary + dearness allowance of the last 10 months immediately preceding retirement, multiplied by 10.</p>
+  </div>
+  <div class="highlight-box">
+    <h4>4. Cash Equivalent of Unavailed Leave</h4>
+    <p>Number of unavailed leave days (capped at 30 days per completed year of service) × (Average monthly salary / 30). Any leave encashed in previous years is deducted from this.</p>
+  </div>
+
+  <h3>Important Notes for Private Employees</h3>
+  <div class="faq-box">
+    <p>Lifetime limit of ₹25 lakh</p>
+    <p>The ₹25,00,000 exemption is a lifetime aggregate. If you encashed leave earlier and claimed exemption, that amount reduces your available limit. For example, if you claimed ₹5 lakh earlier, your remaining limit is ₹20 lakh.</p>
+  </div>
+  <div class="faq-box">
+    <p>No exemption if encashed during service</p>
+    <p>Leave encashment received while still in service is fully taxable as "Income from Salary." No exemption under Section 10(10AA) applies. However, you can claim standard deduction under Section 16(ia).</p>
+  </div>
+  <div class="faq-box">
+    <p>Leave calculation: 30 days per year cap</p>
+    <p>The cash equivalent calculation caps leave at 30 days per completed year of service. If your company allows 40 days per year, only 30 days per year count for the exemption calculation. The remaining 10 days per year are taxable.</p>
+  </div>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>Is leave encashment taxable for government employees?</p>
+    <p>No. For Central and State Government employees, leave encashment received at the time of retirement (superannuation, voluntary retirement, or termination) is fully exempt from income tax under Section 10(10AA)(i). There is no monetary limit.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is the leave encashment limit for private employees?</p>
+    <p>As per Budget 2023, the maximum tax exemption limit for private sector employees under Section 10(10AA)(ii) is ₹25,00,000. This is a lifetime aggregate limit across all employers and all instances of leave encashment.</p>
+  </div>
+  <div class="faq-box">
+    <p>Can I claim leave encashment exemption every year?</p>
+    <p>No. The exemption is primarily available at the time of retirement. If you encash leave during active service, the amount is fully taxable. At retirement, the exemption is subject to the lifetime limit and the "least of 4 conditions" rule.</p>
+  </div>
+  <div class="faq-box">
+    <p>How is "salary" defined for leave encashment calculation?</p>
+    <p>For leave encashment purposes, "salary" means basic salary plus dearness allowance (if terms of employment so provide). It does NOT include HRA, conveyance allowance, special allowance, or other perquisites. The average is taken over the last 10 months preceding retirement.</p>
+  </div>
+  <div class="faq-box">
+    <p>What happens if I resign instead of retiring?</p>
+    <p>For private sector employees, leave encashment at resignation is treated the same as at retirement for tax purposes — the same exemption rules apply under Section 10(10AA)(ii). However, some companies may have different policies on whether leave encashment is paid at resignation.</p>
+  </div>
+  <div class="faq-box">
+    <p>Is leave encashment shown in Form 16?</p>
+    <p>Yes. Leave encashment is reported under "Salary" in Part B of Form 16. The exempt amount is shown under "Allowances to the extent exempt under Section 10" and the taxable portion is included in gross salary. Ensure your employer correctly computes the exemption as per Section 10(10AA).</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  function formatINR(num) {
+    return '₹' + Math.round(num).toLocaleString('en-IN');
+  }
+
+  function toggleGovtFields() {
+    const type = document.getElementById('employeeType').value;
+    const infoBox = document.getElementById('exemptionInfo');
+
+    if (type === 'central' || type === 'state') {
+      infoBox.innerHTML = '<h4>📌 Tax Exemption Rules</h4><p><strong>Government Employees:</strong> Full amount of leave encashment received at retirement is fully exempt from tax under Section 10(10AA)(i). No monetary limit applies. Simply enter your details and the calculator will show the full amount as tax-exempt.</p>';
+    } else {
+      infoBox.innerHTML = '<h4>📌 Tax Exemption Rules</h4><p><strong>Government Employees:</strong> Full amount of leave encashment received at retirement is fully exempt from tax under Section 10(10AA)(i).</p><p style="margin-top:8px;"><strong>Private Sector Employees:</strong> Least of the following is exempt under Section 10(10AA)(ii):</p><p style="margin-top:4px;">• Actual amount received<br>• ₹25,00,000 (maximum limit as per Budget 2023)<br>• 10 months' salary (based on last 10 months average)<br>• Cash equivalent of unavailed leave — max 30 days per year of service</p>';
+    }
+  }
+
+  function calculateLeaveEncashment() {
+    const employeeType = document.getElementById('employeeType').value;
+    const avgSalary = parseFloat(document.getElementById('avgSalary').value) || 0;
+    const totalLeave = parseFloat(document.getElementById('totalLeave').value) || 0;
+    const encashedLeave = parseFloat(document.getElementById('encashedLeave').value) || 0;
+    const previousEncashed = parseFloat(document.getElementById('previousEncashed').value) || 0;
+    const yearsOfService = parseFloat(document.getElementById('yearsOfService').value) || 0;
+
+    if (avgSalary <= 0 || encashedLeave <= 0 || yearsOfService <= 0) {
+      alert('Please fill in all required fields with valid values.');
+      return;
+    }
+
+    // Calculate total leave encashment amount
+    const totalEncashment = (avgSalary / 30) * encashedLeave;
+
+    let exemptAmount = 0;
+    let taxableAmount = 0;
+    let tenMonthsSalary = 0;
+    let statutoryLimit = 2500000;
+    let cashEquivalent = 0;
+    let note = '';
+
+    if (employeeType === 'central' || employeeType === 'state') {
+      // Government employees: fully exempt
+      exemptAmount = totalEncashment;
+      taxableAmount = 0;
+      tenMonthsSalary = avgSalary * 10;
+      statutoryLimit = Infinity;
+      cashEquivalent = totalEncashment;
+      note = 'As a Government employee, your entire leave encashment amount is fully exempt from tax under Section 10(10AA)(i). No tax is payable on this amount.';
+    } else {
+      // Private employees: least of 4 conditions
+      tenMonthsSalary = avgSalary * 10;
+
+      // Cash equivalent = unavailed leave (capped at 30 days/year) × salary per day
+      const maxLeaveDays = yearsOfService * 30;
+      const eligibleLeaveDays = Math.min(totalLeave - previousEncashed, maxLeaveDays);
+      cashEquivalent = (avgSalary / 30) * eligibleLeaveDays;
+
+      // Adjust statutory limit for previous exemptions
+      const remainingLimit = Math.max(0, statutoryLimit - (previousEncashed > 0 ? (avgSalary / 30) * previousEncashed : 0));
+      // Actually, previous encashed amount's exemption value should be tracked, not just days
+      // For simplicity, we assume previous encashed days were also at same salary rate
+      const previousExemption = Math.min((avgSalary / 30) * previousEncashed, statutoryLimit);
+      const adjustedLimit = Math.max(0, statutoryLimit - previousExemption);
+
+      exemptAmount = Math.min(totalEncashment, tenMonthsSalary, adjustedLimit, cashEquivalent);
+      exemptAmount = Math.max(0, exemptAmount);
+      taxableAmount = Math.max(0, totalEncashment - exemptAmount);
+
+      note = `For private sector employees, the exempt amount is the least of: (a) actual amount received, (b) ₹${formatINR(adjustedLimit)} remaining statutory limit, (c) 10 months' salary, and (d) cash equivalent of unavailed leave (capped at 30 days/year).`;
+
+      if (taxableAmount > 0) {
+        note += ` The remaining ₹${formatINR(taxableAmount)} will be taxed as "Income from Salary" at your applicable slab rate.`;
+      }
+    }
+
+    // Display results
+    document.getElementById('totalEncashment').textContent = formatINR(totalEncashment);
+    document.getElementById('exemptAmount').textContent = formatINR(exemptAmount);
+    document.getElementById('taxableAmount').textContent = formatINR(taxableAmount);
+
+    const taxImpact = taxableAmount > 0 ? 'Taxable as Salary Income' : 'Fully Tax Free';
+    document.getElementById('taxImpact').textContent = taxImpact;
+    document.getElementById('taxImpact').className = taxableAmount > 0 ? 'val red' : 'val green';
+
+    document.getElementById('actualAmount').textContent = formatINR(totalEncashment);
+    document.getElementById('tenMonthsSalary').textContent = formatINR(tenMonthsSalary);
+    document.getElementById('statutoryLimit').textContent = (employeeType === 'central' || employeeType === 'state') ? 'No Limit (Govt)' : formatINR(2500000);
+    document.getElementById('cashEquivalent').textContent = formatINR(cashEquivalent);
+    document.getElementById('exemptAmountDetail').textContent = formatINR(exemptAmount);
+
+    document.getElementById('resultNote').textContent = note;
+    document.getElementById('resultBox').classList.add('show');
+  }
+
+  // Auto-calculate on load
+  window.addEventListener('load', function() {
+    calculateLeaveEncashment();
+  });
+
+  // Recalculate on Enter key
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') calculateLeaveEncashment();
+    });
+  });
+</script>
+
+</body>
+</html>
