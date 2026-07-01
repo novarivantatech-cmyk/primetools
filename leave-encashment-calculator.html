@@ -312,7 +312,7 @@
         <div class="val red" id="taxableAmount">-</div>
       </div>
       <div class="result-item">
-        <div class="lbl">Effective Tax Rate Impact</div>
+        <div class="lbl">Effective Tax Status</div>
         <div class="val" id="taxImpact">-</div>
       </div>
     </div>
@@ -448,27 +448,27 @@
 
 <script>
   function formatINR(num) {
-    return '₹' + Math.round(num).toLocaleString('en-IN');
+    return 'Rs. ' + Math.round(num).toLocaleString('en-IN');
   }
 
   function toggleGovtFields() {
-    const type = document.getElementById('employeeType').value;
-    const infoBox = document.getElementById('exemptionInfo');
+    var type = document.getElementById('employeeType').value;
+    var infoBox = document.getElementById('exemptionInfo');
 
     if (type === 'central' || type === 'state') {
       infoBox.innerHTML = '<h4>📌 Tax Exemption Rules</h4><p><strong>Government Employees:</strong> Full amount of leave encashment received at retirement is fully exempt from tax under Section 10(10AA)(i). No monetary limit applies. Simply enter your details and the calculator will show the full amount as tax-exempt.</p>';
     } else {
-      infoBox.innerHTML = '<h4>📌 Tax Exemption Rules</h4><p><strong>Government Employees:</strong> Full amount of leave encashment received at retirement is fully exempt from tax under Section 10(10AA)(i).</p><p style="margin-top:8px;"><strong>Private Sector Employees:</strong> Least of the following is exempt under Section 10(10AA)(ii):</p><p style="margin-top:4px;">• Actual amount received<br>• ₹25,00,000 (maximum limit as per Budget 2023)<br>• 10 months' salary (based on last 10 months average)<br>• Cash equivalent of unavailed leave — max 30 days per year of service</p>';
+      infoBox.innerHTML = '<h4>📌 Tax Exemption Rules</h4><p><strong>Government Employees:</strong> Full amount of leave encashment received at retirement is fully exempt from tax under Section 10(10AA)(i).</p><p style="margin-top:8px;"><strong>Private Sector Employees:</strong> Least of the following is exempt under Section 10(10AA)(ii):</p><p style="margin-top:4px;">• Actual amount received<br>• Rs. 25,00,000 (maximum limit as per Budget 2023)<br>• 10 months salary (based on last 10 months average)<br>• Cash equivalent of unavailed leave — max 30 days per year of service</p>';
     }
   }
 
   function calculateLeaveEncashment() {
-    const employeeType = document.getElementById('employeeType').value;
-    const avgSalary = parseFloat(document.getElementById('avgSalary').value) || 0;
-    const totalLeave = parseFloat(document.getElementById('totalLeave').value) || 0;
-    const encashedLeave = parseFloat(document.getElementById('encashedLeave').value) || 0;
-    const previousEncashed = parseFloat(document.getElementById('previousEncashed').value) || 0;
-    const yearsOfService = parseFloat(document.getElementById('yearsOfService').value) || 0;
+    var employeeType = document.getElementById('employeeType').value;
+    var avgSalary = parseFloat(document.getElementById('avgSalary').value) || 0;
+    var totalLeave = parseFloat(document.getElementById('totalLeave').value) || 0;
+    var encashedLeave = parseFloat(document.getElementById('encashedLeave').value) || 0;
+    var previousEncashed = parseFloat(document.getElementById('previousEncashed').value) || 0;
+    var yearsOfService = parseFloat(document.getElementById('yearsOfService').value) || 0;
 
     if (avgSalary <= 0 || encashedLeave <= 0 || yearsOfService <= 0) {
       alert('Please fill in all required fields with valid values.');
@@ -476,47 +476,44 @@
     }
 
     // Calculate total leave encashment amount
-    const totalEncashment = (avgSalary / 30) * encashedLeave;
+    var totalEncashment = (avgSalary / 30) * encashedLeave;
 
-    let exemptAmount = 0;
-    let taxableAmount = 0;
-    let tenMonthsSalary = 0;
-    let statutoryLimit = 2500000;
-    let cashEquivalent = 0;
-    let note = '';
+    var exemptAmount = 0;
+    var taxableAmount = 0;
+    var tenMonthsSalary = 0;
+    var statutoryLimit = 2500000;
+    var cashEquivalent = 0;
+    var note = '';
 
     if (employeeType === 'central' || employeeType === 'state') {
       // Government employees: fully exempt
       exemptAmount = totalEncashment;
       taxableAmount = 0;
       tenMonthsSalary = avgSalary * 10;
-      statutoryLimit = Infinity;
       cashEquivalent = totalEncashment;
       note = 'As a Government employee, your entire leave encashment amount is fully exempt from tax under Section 10(10AA)(i). No tax is payable on this amount.';
     } else {
       // Private employees: least of 4 conditions
       tenMonthsSalary = avgSalary * 10;
 
-      // Cash equivalent = unavailed leave (capped at 30 days/year) × salary per day
-      const maxLeaveDays = yearsOfService * 30;
-      const eligibleLeaveDays = Math.min(totalLeave - previousEncashed, maxLeaveDays);
+      // Cash equivalent = unavailed leave (capped at 30 days/year) * salary per day
+      var maxLeaveDays = yearsOfService * 30;
+      var eligibleLeaveDays = Math.min(totalLeave - previousEncashed, maxLeaveDays);
+      if (eligibleLeaveDays < 0) eligibleLeaveDays = 0;
       cashEquivalent = (avgSalary / 30) * eligibleLeaveDays;
 
       // Adjust statutory limit for previous exemptions
-      const remainingLimit = Math.max(0, statutoryLimit - (previousEncashed > 0 ? (avgSalary / 30) * previousEncashed : 0));
-      // Actually, previous encashed amount's exemption value should be tracked, not just days
-      // For simplicity, we assume previous encashed days were also at same salary rate
-      const previousExemption = Math.min((avgSalary / 30) * previousEncashed, statutoryLimit);
-      const adjustedLimit = Math.max(0, statutoryLimit - previousExemption);
+      var previousExemption = Math.min((avgSalary / 30) * previousEncashed, statutoryLimit);
+      var adjustedLimit = Math.max(0, statutoryLimit - previousExemption);
 
       exemptAmount = Math.min(totalEncashment, tenMonthsSalary, adjustedLimit, cashEquivalent);
       exemptAmount = Math.max(0, exemptAmount);
       taxableAmount = Math.max(0, totalEncashment - exemptAmount);
 
-      note = `For private sector employees, the exempt amount is the least of: (a) actual amount received, (b) ₹${formatINR(adjustedLimit)} remaining statutory limit, (c) 10 months' salary, and (d) cash equivalent of unavailed leave (capped at 30 days/year).`;
+      note = 'For private sector employees, the exempt amount is the least of: (a) actual amount received, (b) Rs. ' + formatINR(adjustedLimit) + ' remaining statutory limit, (c) 10 months salary, and (d) cash equivalent of unavailed leave (capped at 30 days/year).';
 
       if (taxableAmount > 0) {
-        note += ` The remaining ₹${formatINR(taxableAmount)} will be taxed as "Income from Salary" at your applicable slab rate.`;
+        note = note + ' The remaining ' + formatINR(taxableAmount) + ' will be taxed as "Income from Salary" at your applicable slab rate.';
       }
     }
 
@@ -525,9 +522,10 @@
     document.getElementById('exemptAmount').textContent = formatINR(exemptAmount);
     document.getElementById('taxableAmount').textContent = formatINR(taxableAmount);
 
-    const taxImpact = taxableAmount > 0 ? 'Taxable as Salary Income' : 'Fully Tax Free';
-    document.getElementById('taxImpact').textContent = taxImpact;
-    document.getElementById('taxImpact').className = taxableAmount > 0 ? 'val red' : 'val green';
+    var taxImpactText = taxableAmount > 0 ? 'Taxable as Salary Income' : 'Fully Tax Free';
+    var taxImpactEl = document.getElementById('taxImpact');
+    taxImpactEl.textContent = taxImpactText;
+    taxImpactEl.className = taxableAmount > 0 ? 'val red' : 'val green';
 
     document.getElementById('actualAmount').textContent = formatINR(totalEncashment);
     document.getElementById('tenMonthsSalary').textContent = formatINR(tenMonthsSalary);
@@ -545,7 +543,7 @@
   });
 
   // Recalculate on Enter key
-  document.querySelectorAll('input').forEach(input => {
+  document.querySelectorAll('input').forEach(function(input) {
     input.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') calculateLeaveEncashment();
     });
