@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NMS3GFQ1M0');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWP Calculator - Systematic Withdrawal Plan India - Prime Tools</title>
+  <meta name="description" content="Free SWP Calculator for India. Calculate your Systematic Withdrawal Plan returns, monthly income, remaining corpus & total withdrawals from mutual fund investments. Plan your retirement income.">
+  <meta name="keywords" content="SWP calculator India, systematic withdrawal plan calculator, mutual fund SWP, retirement income calculator, monthly withdrawal calculator, SWP returns">
+  <meta property="og:title" content="SWP Calculator - Systematic Withdrawal Plan India - Prime Tools">
+  <meta property="og:description" content="Calculate SWP returns, monthly income & remaining corpus from mutual fund investments. Free tool for Indian investors.">
+  <meta property="og:url" content="https://primetoolsapp.com/swp-calculator.html">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://primetoolsapp.com/swp-calculator.html">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #f0f4f8; color: #333; }
+
+    header {
+      background: #1a1a2e; color: white;
+      padding: 16px 32px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
+    header h1 { font-size: 20px; color: #00d4aa; }
+
+    .page-title {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white; text-align: center; padding: 36px 20px;
+    }
+    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
+    .page-title p { color: #aaa; font-size: 14px; }
+
+    .calculator-box {
+      max-width: 720px; margin: 36px auto;
+      background: white; border-radius: 16px;
+      padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    .field { margin-bottom: 20px; }
+    .field label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: #555; margin-bottom: 8px;
+    }
+    .field input, .field select {
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 8px;
+      font-size: 16px; outline: none;
+      transition: border-color 0.2s; background: white;
+    }
+    .field input:focus, .field select:focus { border-color: #00d4aa; }
+
+    .field-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    .calc-btn {
+      width: 100%; padding: 16px;
+      background: #00d4aa; color: white;
+      border: none; border-radius: 10px;
+      font-size: 16px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      margin-top: 8px;
+    }
+    .calc-btn:hover { background: #00b894; }
+
+    .result-box {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 12px; padding: 28px;
+      margin-top: 24px; display: none;
+    }
+    .result-box.show { display: block; }
+    .result-title {
+      font-size: 13px; color: #888;
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 16px; text-align: center;
+    }
+    .result-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 16px;
+    }
+    @media (max-width: 500px) { .result-grid { grid-template-columns: 1fr; } }
+    .result-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+      text-align: center;
+    }
+    .result-item .lbl {
+      font-size: 12px; color: #888;
+      margin-bottom: 6px;
+    }
+    .result-item .val {
+      font-size: 22px; font-weight: 700; color: #00d4aa;
+    }
+    .result-item .val.red { color: #ff6b6b; }
+    .result-item .val.green { color: #00d4aa; }
+    .result-item .val.blue { color: #4fc3f7; }
+    .result-divider {
+      height: 1px; background: rgba(255,255,255,0.1);
+      margin: 16px 0;
+    }
+    .tax-breakdown {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px; padding: 16px;
+    }
+    .tax-breakdown h4 {
+      font-size: 13px; color: #888;
+      margin-bottom: 12px; text-align: center;
+    }
+    .breakdown-row {
+      display: flex; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 14px;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .bl { color: #aaa; }
+    .breakdown-row .br { color: #fff; font-weight: 600; }
+    .breakdown-row .br.tax { color: #ff6b6b; }
+    .breakdown-row.total { font-size: 15px; padding-top: 12px; margin-top: 4px; border-top: 2px solid rgba(255,255,255,0.15); }
+    .breakdown-row.total .br { color: #00d4aa; font-size: 18px; }
+
+    .result-note {
+      font-size: 12px; color: #888;
+      text-align: center; margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    .info-badge {
+      display: inline-block; background: #fff3e0;
+      color: #e65100; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+      margin-left: 8px;
+    }
+
+    .info-section {
+      max-width: 720px; margin: 40px auto;
+      padding: 0 20px; font-family: 'Segoe UI', sans-serif;
+    }
+    .info-section h2 {
+      font-size: 22px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .info-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin: 24px 0 12px;
+    }
+    .info-section p {
+      font-size: 15px; color: #555; line-height: 1.8;
+      margin-bottom: 12px;
+    }
+    .faq-box {
+      border: 1px solid #e0f7f3; border-radius: 10px;
+      padding: 16px; margin-bottom: 10px;
+    }
+    .faq-box p:first-child {
+      font-weight: 700; color: #1a1a2e; margin-bottom: 6px;
+    }
+    .faq-box p:last-child {
+      font-size: 14px; color: #555; line-height: 1.7;
+    }
+
+    /* Schedule Table */
+    .schedule-section {
+      max-width: 720px; margin: 24px auto 40px;
+      padding: 0 20px; display: none;
+    }
+    .schedule-section.show { display: block; }
+    .schedule-section h3 {
+      font-size: 18px; font-weight: 700; color: #1a1a2e;
+      margin-bottom: 12px;
+    }
+    .schedule-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px; background: white;
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .schedule-table th, .schedule-table td {
+      padding: 10px 12px; text-align: right;
+      border-bottom: 1px solid #eee;
+    }
+    .schedule-table th {
+      background: #1a1a2e; color: white;
+      font-weight: 600; text-align: right;
+    }
+    .schedule-table th:first-child, .schedule-table td:first-child {
+      text-align: left;
+    }
+    .schedule-table tr:nth-child(even) { background: #f8f9fa; }
+    .schedule-table tr:hover { background: #e8fdf8; }
+    .schedule-table td { color: #444; }
+
+    .toggle-schedule {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #f0f9ff; color: #0088cc;
+      border: 1px solid #b2d8f0; border-radius: 8px;
+      padding: 8px 16px; font-size: 13px; font-weight: 600;
+      cursor: pointer; margin-top: 12px; transition: all 0.2s;
+    }
+    .toggle-schedule:hover { background: #e8f4fd; }
+
+    .chart-container {
+      max-width: 720px; margin: 24px auto;
+      padding: 0 20px; display: none;
+    }
+    .chart-container.show { display: block; }
+    .chart-box {
+      background: white; border-radius: 12px;
+      padding: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .highlight-box {
+      background: #f0fdf8; border: 1px solid #b2ead9;
+      border-radius: 10px; padding: 16px;
+      margin-top: 16px;
+    }
+    .highlight-box h4 {
+      font-size: 14px; color: #00a878;
+      margin-bottom: 8px;
+    }
+    .highlight-box p {
+      font-size: 13px; color: #555; line-height: 1.6;
+    }
+
+    footer {
+      text-align: center; padding: 24px;
+      background: #1a1a2e; color: #aaa;
+      font-size: 13px; margin-top: 40px;
+    }
+
+    .swr-badge {
+      display: inline-block; background: #e8f4fd;
+      color: #0066aa; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 100px;
+      margin-left: 8px;
+    }
+  </style>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back to Home</a>
+  <h1>Prime Tools</h1>
+</header>
+
+<div class="page-title">
+  <h2>SWP Calculator</h2>
+  <p>Systematic Withdrawal Plan — Calculate monthly income, remaining corpus & total returns from your mutual fund investment</p>
+</div>
+
+<div class="calculator-box">
+
+  <div class="field-row">
+    <div class="field">
+      <label>Total Investment (₹)</label>
+      <input type="number" id="investmentAmount" placeholder="e.g. 1000000" value="1000000">
+    </div>
+    <div class="field">
+      <label>Monthly Withdrawal (₹)</label>
+      <input type="number" id="monthlyWithdrawal" placeholder="e.g. 10000" value="10000">
+    </div>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <label>Expected Annual Return (%)</label>
+      <input type="number" id="annualReturn" placeholder="e.g. 12" value="12" step="0.1">
+    </div>
+    <div class="field">
+      <label>SWP Duration (Years)</label>
+      <input type="number" id="swpDuration" placeholder="e.g. 10" value="10">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Withdrawal Frequency</label>
+    <select id="withdrawalFrequency">
+      <option value="12">Monthly (12 times/year)</option>
+      <option value="4">Quarterly (4 times/year)</option>
+      <option value="2">Half-Yearly (2 times/year)</option>
+      <option value="1">Yearly (1 time/year)</option>
+    </select>
+  </div>
+
+  <button class="calc-btn" onclick="calculateSWP()">Calculate SWP Returns</button>
+
+  <div class="result-box" id="resultBox">
+    <div class="result-title">SWP Summary</div>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="lbl">Total Investment</div>
+        <div class="val" id="totalInvestment">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Total Withdrawn</div>
+        <div class="val red" id="totalWithdrawn">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Total Returns Earned</div>
+        <div class="val green" id="totalReturns">-</div>
+      </div>
+      <div class="result-item">
+        <div class="lbl">Final Corpus</div>
+        <div class="val blue" id="finalCorpus">-</div>
+      </div>
+    </div>
+    <div class="result-divider"></div>
+    <div class="tax-breakdown">
+      <h4>Withdrawal Breakdown</h4>
+      <div class="breakdown-row">
+        <span class="bl">Number of Withdrawals</span>
+        <span class="br" id="numWithdrawals">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Withdrawal per Installment</span>
+        <span class="br" id="perInstallment">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Total Amount Withdrawn</span>
+        <span class="br tax" id="totalWithdrawnDetail">-</span>
+      </div>
+      <div class="breakdown-row">
+        <span class="bl">Returns Generated</span>
+        <span class="br" id="returnsGenerated">-</span>
+      </div>
+      <div class="breakdown-row total">
+        <span class="bl">Remaining Corpus</span>
+        <span class="br" id="remainingCorpus">-</span>
+      </div>
+    </div>
+    <div class="result-note" id="resultNote"></div>
+    <button class="toggle-schedule" onclick="toggleSchedule()" id="scheduleBtn">📋 View Year-wise Schedule</button>
+  </div>
+
+</div>
+
+<!-- Year-wise Schedule -->
+<div class="schedule-section" id="scheduleSection">
+  <h3>Year-wise SWP Schedule</h3>
+  <table class="schedule-table" id="scheduleTable">
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Opening Balance (₹)</th>
+        <th>Returns Earned (₹)</th>
+        <th>Withdrawn (₹)</th>
+        <th>Closing Balance (₹)</th>
+      </tr>
+    </thead>
+    <tbody id="scheduleBody"></tbody>
+  </table>
+</div>
+
+<!-- Chart Section -->
+<div class="chart-container" id="chartSection">
+  <div class="chart-box">
+    <h3 style="font-size:16px;color:#1a1a2e;margin-bottom:12px;">Corpus Growth vs Withdrawal Over Time</h3>
+    <canvas id="swpChart" width="680" height="300"></canvas>
+  </div>
+</div>
+
+<section class="info-section">
+  <h2>What is a Systematic Withdrawal Plan (SWP)?</h2>
+  <p>A <strong>Systematic Withdrawal Plan (SWP)</strong> is a facility offered by mutual funds that allows investors to withdraw a fixed amount at regular intervals from their lump sum investment. Unlike SIP where you invest regularly, in SWP you withdraw regularly while the remaining corpus continues to earn returns. It is an excellent tool for generating a steady post-retirement income or regular cash flow from your investments.</p>
+
+  <h3>How Does the SWP Calculator Work?</h3>
+  <p>The SWP calculator uses the following formula to compute your returns:</p>
+  <div class="highlight-box">
+    <p><strong>Final Value = PMT × [(1 + r/n)^(nt) – 1] / (r/n)</strong></p>
+    <p style="margin-top:8px;">Where:<br>
+    <strong>PMT</strong> = Withdrawal amount per period<br>
+    <strong>r</strong> = Expected annual rate of return<br>
+    <strong>n</strong> = Number of compounding periods per year<br>
+    <strong>t</strong> = Investment period in years</p>
+  </div>
+  <p>Each period, returns are calculated on the remaining balance, the withdrawal amount is deducted, and the new balance carries forward. This creates a month-by-month (or quarter-by-quarter) schedule showing exactly how your corpus depletes or grows over time.</p>
+
+  <h3>Key Benefits of SWP</h3>
+  <div class="faq-box">
+    <p>Regular Income Stream</p>
+    <p>SWP provides a predictable and steady cash flow, making it ideal for retirees, senior citizens, or anyone needing regular income from their investments without redeeming the entire corpus at once.</p>
+  </div>
+  <div class="faq-box">
+    <p>Capital Appreciation Potential</p>
+    <p>Since only a portion is withdrawn periodically, the remaining investment stays in the market and continues to generate returns, potentially growing your wealth over time.</p>
+  </div>
+  <div class="faq-box">
+    <p>Tax Efficiency</p>
+    <p>SWP withdrawals are treated as partial redemptions. Only the capital gains portion is taxable, while the principal amount returned is tax-free. This can be more tax-efficient than other income sources.</p>
+  </div>
+  <div class="faq-box">
+    <p>Flexibility</p>
+    <p>You can customize the withdrawal amount, frequency (monthly, quarterly, half-yearly, yearly), and duration based on your financial needs and goals.</p>
+  </div>
+
+  <h3>SWP Taxation in India (2026)</h3>
+  <p>Each SWP withdrawal is treated as a partial redemption of mutual fund units. Tax is applicable only on the capital gains portion:</p>
+  <div class="faq-box">
+    <p>Equity / Equity-Oriented Funds</p>
+    <p><strong>STCG (≤ 12 months):</strong> 20% + surcharge & cess<br>
+    <strong>LTCG (> 12 months):</strong> 12.5% on gains above ₹1.25 lakh per year + surcharge & cess</p>
+  </div>
+  <div class="faq-box">
+    <p>Debt Funds (invested after April 1, 2023)</p>
+    <p>Gains are taxed at your applicable income tax slab rate. No indexation benefit is available.</p>
+  </div>
+  <p>Under the FIFO (First In First Out) method, the oldest units are redeemed first, which can help maximize tax-free principal return in the early years of your SWP.</p>
+
+  <h3>Frequently Asked Questions</h3>
+  <div class="faq-box">
+    <p>Who should use an SWP?</p>
+    <p>SWP is ideal for retirees, senior citizens, freelancers, or anyone who has accumulated a lump sum corpus and wants to generate regular income without depleting their entire investment. It is also useful for those who want to supplement their pension or salary with additional monthly income.</p>
+  </div>
+  <div class="faq-box">
+    <p>What is a safe withdrawal rate?</p>
+    <p>A safe withdrawal rate is the percentage of your corpus you can withdraw annually without risking early depletion. For Indian investors, a rate between 4% to 6% per year is generally considered sustainable for long-term retirement planning, depending on expected returns and inflation.</p>
+  </div>
+  <div class="faq-box">
+    <p>Can I change my SWP amount or stop it?</p>
+    <p>Yes, most mutual fund houses allow you to modify, pause, or stop your SWP at any time. You can increase or decrease the withdrawal amount, change the frequency, or even switch to a different scheme, subject to the AMC's terms and conditions.</p>
+  </div>
+  <div class="faq-box">
+    <p>What happens if my corpus runs out before the planned duration?</p>
+    <p>If the withdrawal amount exceeds the returns generated, your corpus will deplete over time. Our calculator shows you exactly when this might happen. You can adjust the withdrawal amount or expected return to ensure your corpus lasts your desired duration.</p>
+  </div>
+  <div class="faq-box">
+    <p>Is SWP better than FD for regular income?</p>
+    <p>SWP from mutual funds can potentially offer higher returns than fixed deposits over the long term. However, mutual fund returns are market-linked and not guaranteed. FDs offer fixed, predictable returns but typically at lower rates. SWP also offers better tax efficiency for equity funds compared to FD interest taxation.</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Prime Tools — primetoolsapp.com | Free tools for everyone</p>
+</footer>
+
+<script>
+  let scheduleData = [];
+  let chartInstance = null;
+
+  function formatINR(num) {
+    return '₹' + Math.round(num).toLocaleString('en-IN');
+  }
+
+  function calculateSWP() {
+    const investment = parseFloat(document.getElementById('investmentAmount').value) || 0;
+    const monthlyWithdrawal = parseFloat(document.getElementById('monthlyWithdrawal').value) || 0;
+    const annualReturn = parseFloat(document.getElementById('annualReturn').value) || 0;
+    const duration = parseFloat(document.getElementById('swpDuration').value) || 0;
+    const frequency = parseInt(document.getElementById('withdrawalFrequency').value) || 12;
+
+    if (investment <= 0 || monthlyWithdrawal <= 0 || annualReturn < 0 || duration <= 0) {
+      alert('Please fill in all required fields with valid values.');
+      return;
+    }
+
+    const periodicRate = annualReturn / 100 / frequency;
+    const totalPeriods = Math.floor(duration * frequency);
+    const withdrawalPerPeriod = monthlyWithdrawal;
+
+    let balance = investment;
+    let totalWithdrawn = 0;
+    let totalReturns = 0;
+    scheduleData = [];
+
+    // Year-wise tracking
+    let yearOpening = investment;
+    let yearReturns = 0;
+    let yearWithdrawn = 0;
+
+    for (let i = 1; i <= totalPeriods; i++) {
+      const interest = balance * periodicRate;
+      balance += interest;
+      totalReturns += interest;
+      yearReturns += interest;
+
+      balance -= withdrawalPerPeriod;
+      totalWithdrawn += withdrawalPerPeriod;
+      yearWithdrawn += withdrawalPerPeriod;
+
+      // Year-end tracking
+      if (i % frequency === 0 || i === totalPeriods) {
+        const yearNum = Math.ceil(i / frequency);
+        scheduleData.push({
+          year: yearNum,
+          opening: yearOpening,
+          returns: yearReturns,
+          withdrawn: yearWithdrawn,
+          closing: Math.max(0, balance)
+        });
+        yearOpening = Math.max(0, balance);
+        yearReturns = 0;
+        yearWithdrawn = 0;
+      }
+
+      if (balance <= 0) {
+        balance = 0;
+        break;
+      }
+    }
+
+    const finalCorpus = Math.max(0, balance);
+
+    // Display results
+    document.getElementById('totalInvestment').textContent = formatINR(investment);
+    document.getElementById('totalWithdrawn').textContent = formatINR(totalWithdrawn);
+    document.getElementById('totalReturns').textContent = formatINR(totalReturns);
+    document.getElementById('finalCorpus').textContent = formatINR(finalCorpus);
+
+    document.getElementById('numWithdrawals').textContent = totalPeriods + ' withdrawals';
+    document.getElementById('perInstallment').textContent = formatINR(withdrawalPerPeriod);
+    document.getElementById('totalWithdrawnDetail').textContent = formatINR(totalWithdrawn);
+    document.getElementById('returnsGenerated').textContent = formatINR(totalReturns);
+    document.getElementById('remainingCorpus').textContent = formatINR(finalCorpus);
+
+    // Note
+    const withdrawalRate = (monthlyWithdrawal * 12 / investment * 100).toFixed(1);
+    let note = '';
+    if (finalCorpus > investment) {
+      note = `Your corpus grew despite withdrawals! Annual withdrawal rate: ${withdrawalRate}%. Great strategy.`;
+    } else if (finalCorpus > 0) {
+      note = `Your corpus will last the full ${duration} years. Annual withdrawal rate: ${withdrawalRate}%. Final balance: ${formatINR(finalCorpus)}.`;
+    } else {
+      note = `⚠️ Your corpus will be exhausted before ${duration} years. Consider reducing monthly withdrawal or increasing investment.`;
+    }
+    document.getElementById('resultNote').textContent = note;
+
+    document.getElementById('resultBox').classList.add('show');
+
+    // Build schedule table
+    buildScheduleTable();
+
+    // Draw chart
+    drawChart(investment, scheduleData);
+
+    // Show schedule button
+    document.getElementById('scheduleBtn').style.display = 'inline-flex';
+  }
+
+  function buildScheduleTable() {
+    const tbody = document.getElementById('scheduleBody');
+    tbody.innerHTML = '';
+
+    scheduleData.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>Year ${row.year}</td>
+        <td>${formatINR(row.opening)}</td>
+        <td style="color:#00a878;font-weight:600;">+${formatINR(row.returns)}</td>
+        <td style="color:#e65c00;font-weight:600;">-${formatINR(row.withdrawn)}</td>
+        <td style="font-weight:700;">${formatINR(row.closing)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function toggleSchedule() {
+    const section = document.getElementById('scheduleSection');
+    const chart = document.getElementById('chartSection');
+    const btn = document.getElementById('scheduleBtn');
+
+    if (section.classList.contains('show')) {
+      section.classList.remove('show');
+      chart.classList.remove('show');
+      btn.innerHTML = '📋 View Year-wise Schedule';
+    } else {
+      section.classList.add('show');
+      chart.classList.add('show');
+      btn.innerHTML = '🔼 Hide Year-wise Schedule';
+      // Redraw chart to ensure correct sizing
+      if (scheduleData.length > 0) {
+        const investment = parseFloat(document.getElementById('investmentAmount').value) || 0;
+        drawChart(investment, scheduleData);
+      }
+    }
+  }
+
+  function drawChart(investment, data) {
+    const canvas = document.getElementById('swpChart');
+    const ctx = canvas.getContext('2d');
+    const dpr = window.devicePixelRatio || 1;
+
+    // Set canvas size for retina
+    const rect = canvas.getBoundingClientRect();
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+
+    const w = rect.width;
+    const h = rect.height;
+    const padding = { top: 20, right: 20, bottom: 40, left: 70 };
+    const chartW = w - padding.left - padding.right;
+    const chartH = h - padding.top - padding.bottom;
+
+    ctx.clearRect(0, 0, w, h);
+
+    const years = data.map(d => 'Y' + d.year);
+    const balances = data.map(d => d.closing);
+    const maxVal = Math.max(investment, ...balances) * 1.1;
+
+    // Grid lines
+    ctx.strokeStyle = '#eee';
+    ctx.lineWidth = 1;
+    for (let i = 0; i <= 5; i++) {
+      const y = padding.top + chartH - (i / 5) * chartH;
+      ctx.beginPath();
+      ctx.moveTo(padding.left, y);
+      ctx.lineTo(padding.left + chartW, y);
+      ctx.stroke();
+
+      // Y-axis labels
+      ctx.fillStyle = '#888';
+      ctx.font = '11px Segoe UI';
+      ctx.textAlign = 'right';
+      const val = (maxVal * i / 5);
+      ctx.fillText('₹' + (val / 100000).toFixed(1) + 'L', padding.left - 8, y + 4);
+    }
+
+    // X-axis labels
+    const stepX = chartW / (years.length - 1 || 1);
+    years.forEach((yr, i) => {
+      const x = padding.left + i * stepX;
+      ctx.fillStyle = '#888';
+      ctx.font = '11px Segoe UI';
+      ctx.textAlign = 'center';
+      ctx.fillText(yr, x, padding.top + chartH + 18);
+    });
+
+    // Draw corpus line (closing balance)
+    ctx.strokeStyle = '#00d4aa';
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    data.forEach((d, i) => {
+      const x = padding.left + i * stepX;
+      const y = padding.top + chartH - (d.closing / maxVal) * chartH;
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    // Draw corpus area fill
+    ctx.fillStyle = 'rgba(0, 212, 170, 0.1)';
+    ctx.beginPath();
+    ctx.moveTo(padding.left, padding.top + chartH);
+    data.forEach((d, i) => {
+      const x = padding.left + i * stepX;
+      const y = padding.top + chartH - (d.closing / maxVal) * chartH;
+      ctx.lineTo(x, y);
+    });
+    ctx.lineTo(padding.left + (data.length - 1) * stepX, padding.top + chartH);
+    ctx.closePath();
+    ctx.fill();
+
+    // Draw dots
+    data.forEach((d, i) => {
+      const x = padding.left + i * stepX;
+      const y = padding.top + chartH - (d.closing / maxVal) * chartH;
+      ctx.fillStyle = '#00d4aa';
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    });
+
+    // Draw initial investment line (dashed)
+    const initY = padding.top + chartH - (investment / maxVal) * chartH;
+    ctx.strokeStyle = '#ff6b6b';
+    ctx.lineWidth = 2;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ctx.moveTo(padding.left, initY);
+    ctx.lineTo(padding.left + chartW, initY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Legend
+    ctx.fillStyle = '#00d4aa';
+    ctx.fillRect(padding.left, h - 14, 12, 3);
+    ctx.fillStyle = '#555';
+    ctx.font = '11px Segoe UI';
+    ctx.textAlign = 'left';
+    ctx.fillText('Closing Balance', padding.left + 18, h - 10);
+
+    ctx.fillStyle = '#ff6b6b';
+    ctx.fillRect(padding.left + 130, h - 14, 12, 3);
+    ctx.fillStyle = '#555';
+    ctx.fillText('Initial Investment', padding.left + 148, h - 10);
+  }
+
+  // Auto-calculate on load with defaults
+  window.addEventListener('load', function() {
+    calculateSWP();
+  });
+
+  // Recalculate on Enter key
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') calculateSWP();
+    });
+  });
+</script>
+
+</body>
+</html>
