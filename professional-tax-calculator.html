@@ -1,348 +1,1072 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NMS3GFQ1M0"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-NMS3GFQ1M0');
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Professional Tax Calculator India 2026 - State-Wise PT Slabs - Prime Tools</title>
-  <meta name="description" content="Free Professional Tax Calculator for India. Calculate state-wise PT deduction from salary. Covers Maharashtra, Karnataka, Tamil Nadu, West Bengal, Gujarat & all 21 PT-levying states.">
-  <meta name="keywords" content="professional tax calculator India, PT calculator, professional tax Maharashtra, professional tax Karnataka, state wise professional tax, PT slab rates 2026, salary tax deduction">
-  <meta property="og:title" content="Professional Tax Calculator India 2026 - State-Wise PT Slabs - Prime Tools">
-  <meta property="og:description" content="Calculate your monthly & annual Professional Tax for any Indian state. Gender-specific slabs, exemptions & tax savings included.">
-  <meta property="og:url" content="https://primetoolsapp.com/professional-tax-calculator.html">
-  <meta property="og:type" content="website">
-  <link rel="canonical" href="https://primetoolsapp.com/professional-tax-calculator.html">
+  <title>Professional Tax Calculator - India</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', sans-serif; background: #f0f4f8; color: #333; }
-    header { background: #1a1a2e; color: white; padding: 16px 32px; display: flex; align-items: center; gap: 16px; }
-    header a { color: #00d4aa; text-decoration: none; font-size: 14px; }
-    header h1 { font-size: 20px; color: #00d4aa; }
-    .page-title { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; text-align: center; padding: 36px 20px; }
-    .page-title h2 { font-size: 28px; margin-bottom: 8px; }
-    .page-title p { color: #aaa; font-size: 14px; }
-    .calculator-box { max-width: 720px; margin: 36px auto; background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-    .section-title { font-size: 14px; font-weight: 700; color: #1a1a2e; margin: 24px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #e0f7f3; text-transform: uppercase; letter-spacing: 0.5px; }
-    .section-title:first-child { margin-top: 0; }
-    .field { margin-bottom: 18px; }
-    .field label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 8px; }
-    .field input, .field select { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px; outline: none; transition: border-color 0.2s; background: white; }
-    .field input:focus, .field select:focus { border-color: #00d4aa; }
-    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
-    .input-prefix { position: relative; }
-    .input-prefix::before { content: '₹'; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #888; font-size: 16px; font-weight: 600; pointer-events: none; }
-    .input-prefix input { padding-left: 36px; }
-    .gender-tabs { display: flex; gap: 8px; margin-bottom: 20px; }
-    .gender-tab { flex: 1; padding: 14px; border-radius: 10px; border: 2px solid #e0e0e0; background: white; font-size: 14px; font-weight: 600; color: #555; cursor: pointer; transition: all 0.2s; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .gender-tab .emoji { font-size: 24px; }
-    .gender-tab.active { border-color: #00d4aa; background: #f0fdf8; color: #00a878; }
-    .calc-btn { width: 100%; padding: 16px; background: #00d4aa; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.2s; margin-top: 8px; }
-    .calc-btn:hover { background: #00b894; }
-    .result-box { background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 12px; padding: 28px; margin-top: 24px; display: none; }
-    .result-box.show { display: block; }
-    .result-highlight { text-align: center; margin-bottom: 24px; }
-    .result-highlight .lbl { font-size: 13px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-    .result-highlight .val { font-size: 48px; font-weight: 800; color: #00d4aa; }
-    .result-highlight .sub { font-size: 14px; color: #888; margin-top: 4px; }
-    .result-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
-    @media (max-width: 600px) { .result-grid-3 { grid-template-columns: 1fr; } }
-    .result-item { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 16px 12px; text-align: center; }
-    .result-item .lbl { font-size: 11px; color: #888; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .result-item .val { font-size: 20px; font-weight: 700; color: #00d4aa; }
-    .result-item .val.red { color: #ff6b6b; }
-    .result-item .val.green { color: #00d4aa; }
-    .result-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 16px 0; }
-    .breakdown-section { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 16px; margin-top: 16px; }
-    .breakdown-section h4 { font-size: 12px; color: #888; margin-bottom: 12px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
-    .breakdown-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 14px; }
-    .breakdown-row:last-child { border-bottom: none; }
-    .breakdown-row .bl { color: #aaa; }
-    .breakdown-row .br { color: #fff; font-weight: 600; }
-    .breakdown-row .br.red { color: #ff6b6b; }
-    .breakdown-row .br.green { color: #00d4aa; }
-    .breakdown-row.total { font-size: 15px; padding-top: 12px; margin-top: 4px; border-top: 2px solid rgba(255,255,255,0.15); }
-    .breakdown-row.total .br { color: #00d4aa; font-size: 18px; }
-    .slab-table-wrap { margin-top: 16px; border-radius: 8px; background: rgba(255,255,255,0.03); overflow: hidden; }
-    .slab-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-    .slab-table th { background: rgba(0,212,170,0.15); color: #00d4aa; padding: 10px 8px; text-align: left; font-weight: 600; }
-    .slab-table th:last-child { text-align: right; }
-    .slab-table td { padding: 10px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
-    .slab-table td:last-child { text-align: right; font-weight: 600; color: #fff; }
-    .slab-table tr.active-slab td { background: rgba(0,212,170,0.1); color: #00d4aa; }
-    .slab-table tr.active-slab td:last-child { color: #00d4aa; font-weight: 700; }
-    .slab-table tr:hover td { background: rgba(255,255,255,0.03); }
-    .exemption-box { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 16px; margin-top: 16px; display: none; }
-    .exemption-box h4 { font-size: 12px; color: #888; margin-bottom: 12px; text-align: center; text-transform: uppercase; letter-spacing: 1px; }
-    .exemption-box ul { list-style: none; padding: 0; }
-    .exemption-box li { padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; color: #ccc; }
-    .exemption-box li:last-child { border-bottom: none; }
-    .exemption-box li::before { content: '✓ '; color: #00d4aa; font-weight: 700; }
-    .toggle-btn { text-align: center; margin-top: 16px; }
-    .toggle-btn button { background: transparent; border: 1px solid #00d4aa; color: #00d4aa; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
-    .toggle-btn button:hover { background: #00d4aa; color: white; }
-    .comparison-wrap { display: none; margin-top: 16px; max-height: 400px; overflow-y: auto; border-radius: 8px; background: rgba(255,255,255,0.03); }
-    .comparison-wrap.show { display: block; }
-    .comparison-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    .comparison-table th { background: rgba(0,212,170,0.15); color: #00d4aa; padding: 10px 8px; text-align: left; font-weight: 600; position: sticky; top: 0; }
-    .comparison-table td { padding: 8px; border-bottom: 1px solid rgba(255,255,255,0.05); color: #ccc; }
-    .comparison-table tr:hover td { background: rgba(255,255,255,0.03); }
-    .no-pt-badge { display: inline-block; background: #ff6b6b; color: white; padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 700; margin-top: 8px; }
-    .yes-pt-badge { display: inline-block; background: #00d4aa; color: white; padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 700; margin-top: 8px; }
-    .state-info { font-size: 12px; color: #888; margin-top: 4px; font-style: italic; }
-    .rate-comparison { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0; }
-    @media (max-width: 600px) { .rate-comparison { grid-template-columns: 1fr; } }
-    .rate-card { background: #f8fffe; border: 1px solid #e0f7f3; border-radius: 10px; padding: 16px; text-align: center; }
-    .rate-card .name { font-size: 13px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
-    .rate-card .val { font-size: 20px; font-weight: 700; color: #00d4aa; }
-    .rate-card .desc { font-size: 11px; color: #888; }
-    footer { text-align: center; padding: 24px; background: #1a1a2e; color: #aaa; font-size: 13px; margin-top: 40px; }
-    .info-section { max-width: 720px; margin: 40px auto; padding: 0 20px; }
-    .info-section h2 { font-size: 22px; font-weight: 700; color: #1a1a2e; margin-bottom: 16px; }
-    .info-section h3 { font-size: 18px; font-weight: 700; color: #1a1a2e; margin: 24px 0 12px; }
-    .info-section p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 12px; }
-    .faq-box { border: 1px solid #e0f7f3; border-radius: 10px; padding: 16px; margin-bottom: 10px; }
-    .faq-box p:first-child { font-weight: 700; color: #1a1a2e; margin-bottom: 6px; }
-    .faq-box p:last-child { font-size: 14px; color: #555; line-height: 1.7; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      color: #e0e0e0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      color: #00d4aa;
+      font-size: 2.2rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px rgba(0,212,170,0.3);
+    }
+    .subtitle {
+      text-align: center;
+      color: #8892b0;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 20px;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ccd6f6;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      background: rgba(0,0,0,0.2);
+      color: #e0e0e0;
+      font-size: 1rem;
+      transition: all 0.3s;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #00d4aa;
+      box-shadow: 0 0 10px rgba(0,212,170,0.2);
+    }
+    .gender-tabs {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .gender-tab {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      background: rgba(0,0,0,0.2);
+      color: #8892b0;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+    .gender-tab:hover { border-color: #00d4aa; }
+    .gender-tab.active {
+      background: rgba(0,212,170,0.15);
+      border-color: #00d4aa;
+      color: #00d4aa;
+    }
+    .btn-calc {
+      width: 100%;
+      padding: 16px;
+      margin-top: 20px;
+      background: linear-gradient(135deg, #00d4aa, #00a878);
+      border: none;
+      border-radius: 12px;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .btn-calc:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(0,212,170,0.3);
+    }
+    #stateInfo {
+      margin-top: 10px;
+      font-size: 0.85rem;
+      min-height: 20px;
+    }
+    #resultBox {
+      display: none;
+    }
+    #resultBox.show { display: block; }
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .result-card {
+      background: rgba(0,0,0,0.2);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .result-card .label {
+      font-size: 0.8rem;
+      color: #8892b0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    .result-card .value {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #00d4aa;
+    }
+    .summary-card {
+      background: rgba(0,0,0,0.15);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 15px;
+    }
+    .summary-card h3 {
+      color: #00d4aa;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-row .key { color: #8892b0; }
+    .summary-row .val { color: #ccd6f6; font-weight: 500; }
+    .slab-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    .slab-table th {
+      background: rgba(0,212,170,0.1);
+      color: #00d4aa;
+      padding: 12px;
+      text-align: left;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+    .slab-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .slab-table tr.active-slab {
+      background: rgba(0,212,170,0.1);
+    }
+    .slab-table tr.active-slab td {
+      color: #00d4aa;
+      font-weight: 600;
+    }
+    #exemptionBox {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      background: rgba(255,193,7,0.1);
+      border-left: 4px solid #ffc107;
+      border-radius: 8px;
+    }
+    #exemptionBox h4 {
+      color: #ffc107;
+      margin-bottom: 10px;
+    }
+    #exemptionList { list-style: none; }
+    #exemptionList li {
+      padding: 5px 0;
+      color: #e0c87a;
+      font-size: 0.9rem;
+    }
+    #exemptionList li::before {
+      content: "✓ ";
+      color: #00d4aa;
+      font-weight: bold;
+    }
+    .compare-btn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 15px;
+      background: transparent;
+      border: 2px solid rgba(0,212,170,0.3);
+      border-radius: 12px;
+      color: #00d4aa;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .compare-btn:hover {
+      background: rgba(0,212,170,0.1);
+      border-color: #00d4aa;
+    }
+    #comparisonWrap {
+      display: none;
+      margin-top: 20px;
+      overflow-x: auto;
+    }
+    #comparisonWrap.show { display: block; }
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .compare-table th {
+      background: rgba(0,212,170,0.15);
+      color: #00d4aa;
+      padding: 12px;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .compare-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      white-space: nowrap;
+    }
+    .compare-table tr:hover {
+      background: rgba(255,255,255,0.02);
+    }
+    .no-pt-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(0,212,170,0.15);
+      color: #00d4aa;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 1.5rem; }
+      .card { padding: 15px; }
+      .result-card .value { font-size: 1.3rem; }
+    }
   </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9463360133738403" crossorigin="anonymous"></script>
 </head>
 <body>
+  <div class="container">
+    <h1>Professional Tax Calculator</h1>
+    <p class="subtitle">Calculate your Professional Tax liability across all Indian states</p>
 
-<header>
-  <a href="index.html">&larr; Back to Home</a>
-  <h1>Prime Tools</h1>
-</header>
+    <!-- Input Card -->
+    <div class="card">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="stateSelect">Select State / UT</label>
+          <select id="stateSelect" onchange="onStateChange()">
+            <option value="">-- Select State --</option>
+            <option value="maharashtra">Maharashtra</option>
+            <option value="karnataka">Karnataka</option>
+            <option value="tamilnadu">Tamil Nadu</option>
+            <option value="westbengal">West Bengal</option>
+            <option value="gujarat">Gujarat</option>
+            <option value="andhra">Andhra Pradesh</option>
+            <option value="telangana">Telangana</option>
+            <option value="kerala">Kerala</option>
+            <option value="madhyapradesh">Madhya Pradesh</option>
+            <option value="assam">Assam</option>
+            <option value="bihar">Bihar</option>
+            <option value="jharkhand">Jharkhand</option>
+            <option value="odisha">Odisha</option>
+            <option value="tripura">Tripura</option>
+            <option value="manipur">Manipur</option>
+            <option value="meghalaya">Meghalaya</option>
+            <option value="sikkim">Sikkim</option>
+            <option value="chhattisgarh">Chhattisgarh</option>
+            <option value="mizoram">Mizoram</option>
+            <option value="nagaland">Nagaland</option>
+            <option value="puducherry">Puducherry</option>
+            <option value="delhi">Delhi</option>
+            <option value="up">Uttar Pradesh</option>
+            <option value="rajasthan">Rajasthan</option>
+            <option value="haryana">Haryana</option>
+            <option value="punjab">Punjab</option>
+            <option value="uttarakhand">Uttarakhand</option>
+            <option value="hp">Himachal Pradesh</option>
+            <option value="goa">Goa</option>
+            <option value="jk">Jammu & Kashmir</option>
+          </select>
+          <div id="stateInfo"></div>
+        </div>
 
-<div class="page-title">
-  <h2>Professional Tax Calculator</h2>
-  <p>Calculate state-wise Professional Tax (PT) deduction from your monthly salary</p>
-</div>
+        <div class="form-group">
+          <label>Gender</label>
+          <div class="gender-tabs">
+            <div class="gender-tab active" onclick="setGender('male')">Male</div>
+            <div class="gender-tab" onclick="setGender('female')">Female</div>
+          </div>
+        </div>
 
-<div class="calculator-box">
+        <div class="form-group">
+          <label for="salary">Monthly Salary (Rs.)</label>
+          <input type="number" id="salary" placeholder="e.g. 50000" min="0">
+        </div>
 
-  <div class="section-title">📍 Select State</div>
-  <div class="field">
-    <label>State / Union Territory</label>
-    <select id="stateSelect" onchange="onStateChange()">
-      <option value="">-- Select Your State --</option>
-      <option value="maharashtra">Maharashtra</option>
-      <option value="karnataka">Karnataka</option>
-      <option value="tamilnadu">Tamil Nadu</option>
-      <option value="westbengal">West Bengal</option>
-      <option value="gujarat">Gujarat</option>
-      <option value="andhra">Andhra Pradesh</option>
-      <option value="telangana">Telangana</option>
-      <option value="kerala">Kerala</option>
-      <option value="madhyapradesh">Madhya Pradesh</option>
-      <option value="assam">Assam</option>
-      <option value="bihar">Bihar</option>
-      <option value="jharkhand">Jharkhand</option>
-      <option value="odisha">Odisha</option>
-      <option value="tripura">Tripura</option>
-      <option value="manipur">Manipur</option>
-      <option value="meghalaya">Meghalaya</option>
-      <option value="sikkim">Sikkim</option>
-      <option value="chhattisgarh">Chhattisgarh</option>
-      <option value="mizoram">Mizoram</option>
-      <option value="nagaland">Nagaland</option>
-      <option value="puducherry">Puducherry</option>
-      <option value="delhi">Delhi (No PT)</option>
-      <option value="up">Uttar Pradesh (No PT)</option>
-      <option value="rajasthan">Rajasthan (No PT)</option>
-      <option value="haryana">Haryana (No PT)</option>
-      <option value="punjab">Punjab (No PT)</option>
-      <option value="uttarakhand">Uttarakhand (No PT)</option>
-      <option value="hp">Himachal Pradesh (No PT)</option>
-      <option value="goa">Goa (No PT)</option>
-      <option value="jk">Jammu & Kashmir (No PT)</option>
-    </select>
-    <div class="state-info" id="stateInfo"></div>
-  </div>
-
-  <div class="section-title">👤 Personal Details</div>
-
-  <div class="gender-tabs" id="genderTabs">
-    <button class="gender-tab active" onclick="setGender('male')">
-      <span class="emoji">👨</span>
-      <span>Male</span>
-    </button>
-    <button class="gender-tab" onclick="setGender('female')">
-      <span class="emoji">👩</span>
-      <span>Female</span>
-    </button>
-  </div>
-
-  <div class="field-row">
-    <div class="field">
-      <label>Gross Monthly Salary (₹)</label>
-      <div class="input-prefix">
-        <input type="number" id="salary" placeholder="e.g. 50000" value="50000">
+        <div class="form-group">
+          <label for="age">Age (years)</label>
+          <input type="number" id="age" placeholder="e.g. 35" min="0">
+        </div>
       </div>
-    </div>
-    <div class="field">
-      <label>Age (for senior citizen check)</label>
-      <input type="number" id="age" value="35" min="18" max="100">
-    </div>
-  </div>
 
-  <button class="calc-btn" onclick="calculatePT()">Calculate Professional Tax</button>
-
-  <div class="result-box" id="resultBox">
-
-    <div class="result-highlight">
-      <div class="lbl">Monthly Professional Tax</div>
-      <div class="val" id="resMonthlyPT">-</div>
-      <div class="sub" id="resStateName">-</div>
+      <button class="btn-calc" onclick="calculatePT()">Calculate Professional Tax</button>
     </div>
 
-    <div class="result-grid-3">
-      <div class="result-item">
-        <div class="lbl">Annual PT</div>
-        <div class="val" id="resAnnualPT">-</div>
+    <!-- Results Card -->
+    <div class="card" id="resultBox">
+      <div class="result-grid">
+        <div class="result-card">
+          <div class="label">Monthly PT</div>
+          <div class="value" id="resMonthlyPT">Rs.0</div>
+        </div>
+        <div class="result-card">
+          <div class="label">Annual PT</div>
+          <div class="value" id="resAnnualPT">Rs.0</div>
+        </div>
+        <div class="result-card">
+          <div class="label">Tax Saving (31.2%)</div>
+          <div class="value" id="resTaxSaving">Rs.0</div>
+        </div>
+        <div class="result-card">
+          <div class="label">Effective Cost</div>
+          <div class="value" id="resEffective">Rs.0</div>
+        </div>
       </div>
-      <div class="result-item">
-        <div class="lbl">Income Tax Saving</div>
-        <div class="val green" id="resTaxSaving">-</div>
-      </div>
-      <div class="result-item">
-        <div class="lbl">Effective Cost</div>
-        <div class="val" id="resEffective">-</div>
-      </div>
-    </div>
 
-    <div class="result-divider"></div>
+      <div class="summary-card">
+        <h3 id="resStateName">State Details</h3>
+        <div class="summary-row">
+          <span class="key">State</span>
+          <span class="val" id="sumState">-</span>
+        </div>
+        <div class="summary-row">
+          <span class="key">Salary Entered</span>
+          <span class="val" id="sumSalary">-</span>
+        </div>
+        <div class="summary-row">
+          <span class="key">Applicable Slab</span>
+          <span class="val" id="sumSlab">-</span>
+        </div>
+        <div class="summary-row">
+          <span class="key">Monthly Rate</span>
+          <span class="val" id="sumRate">-</span>
+        </div>
+        <div class="summary-row">
+          <span class="key">Special Note</span>
+          <span class="val" id="sumSpecial">-</span>
+        </div>
+        <div class="summary-row">
+          <span class="key">Monthly PT</span>
+          <span class="val" id="sumMonthly">-</span>
+        </div>
+        <div class="summary-row">
+          <span class="key">Annual PT</span>
+          <span class="val" id="sumAnnual">-</span>
+        </div>
+      </div>
 
-    <div class="breakdown-section">
-      <h4>Calculation Breakdown</h4>
-      <div class="breakdown-row">
-        <span class="bl">State</span>
-        <span class="br" id="sumState">-</span>
-      </div>
-      <div class="breakdown-row">
-        <span class="bl">Monthly Salary</span>
-        <span class="br" id="sumSalary">-</span>
-      </div>
-      <div class="breakdown-row">
-        <span class="bl">Applicable Slab</span>
-        <span class="br" id="sumSlab">-</span>
-      </div>
-      <div class="breakdown-row">
-        <span class="bl">PT Rate</span>
-        <span class="br" id="sumRate">-</span>
-      </div>
-      <div class="breakdown-row">
-        <span class="bl">Special Adjustment</span>
-        <span class="br" id="sumSpecial">-</span>
-      </div>
-      <div class="breakdown-row total">
-        <span class="bl">Monthly PT Deduction</span>
-        <span class="br" id="sumMonthly">-</span>
-      </div>
-      <div class="breakdown-row total">
-        <span class="bl">Annual PT (Capped at ₹2,500)</span>
-        <span class="br" id="sumAnnual">-</span>
-      </div>
-    </div>
-
-    <div class="slab-table-wrap">
       <table class="slab-table">
         <thead>
           <tr>
-            <th>Salary Slab</th>
+            <th>Income Slab</th>
             <th style="text-align:right;">PT Amount</th>
           </tr>
         </thead>
         <tbody id="slabBody"></tbody>
       </table>
+
+      <div id="exemptionBox">
+        <h4>Key Exemptions & Notes</h4>
+        <ul id="exemptionList"></ul>
+      </div>
     </div>
 
-    <div class="exemption-box" id="exemptionBox">
-      <h4>Exemptions & Notes</h4>
-      <ul id="exemptionList"></ul>
+    <!-- Comparison Section -->
+    <div class="card">
+      <button class="compare-btn" onclick="toggleComparison()">
+        📊 Compare All States
+      </button>
+      <div id="comparisonWrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>Frequency</th>
+              <th>Max Monthly</th>
+              <th>Annual Cap</th>
+              <th>Nil Upto</th>
+            </tr>
+          </thead>
+          <tbody id="comparisonBody"></tbody>
+        </table>
+      </div>
     </div>
 
-    <div class="toggle-btn">
-      <button onclick="toggleComparison()">📊 View All States Comparison</button>
-    </div>
-
-    <div class="comparison-wrap" id="comparisonWrap">
-      <table class="comparison-table">
-        <thead>
-          <tr>
-            <th>State</th>
-            <th>Frequency</th>
-            <th>Max Monthly</th>
-            <th>Annual Cap</th>
-            <th>Nil Slab</th>
-          </tr>
-        </thead>
-        <tbody id="comparisonBody"></tbody>
-      </table>
-    </div>
-
+    <p style="text-align:center; color:#8892b0; font-size:0.8rem; margin-top:20px;">
+      Disclaimer: Tax rates are indicative. Please verify with official state government notifications.
+    </p>
   </div>
 
-</div>
+<script>
+  let currentGender = 'male';
 
-<section class="info-section">
-  <h2>How to Use the Professional Tax Calculator</h2>
-  <p>Professional Tax (PT) is a state-level tax deducted from your salary every month. Our calculator covers all 21 states and 1 UT that levy PT in India, with gender-specific slabs (e.g., Maharashtra has different rates for men and women).</p>
+  const ptData = {
+    maharashtra: {
+      name: "Maharashtra",
+      freq: "Monthly",
+      special: "Rs.300 in March (instead of Rs.200)",
+      slabs: {
+        male: [
+          { min: 0, max: 7500, amount: 0, label: "Up to Rs.7,500" },
+          { min: 7501, max: 10000, amount: 175, label: "Rs.7,501 - Rs.10,000" },
+          { min: 10001, max: Infinity, amount: 200, label: "Above Rs.10,000" }
+        ],
+        female: [
+          { min: 0, max: 25000, amount: 0, label: "Up to Rs.25,000" },
+          { min: 25001, max: Infinity, amount: 200, label: "Above Rs.25,000" }
+        ]
+      },
+      exemptions: ["Women earning up to Rs.25,000/month are FULLY exempt (vs Rs.7,500 for men)", "Rs.300 deducted in March instead of Rs.200 to reach Rs.2,500 annual cap", "Annual cap: Rs.2,500"]
+    },
+    karnataka: {
+      name: "Karnataka",
+      freq: "Monthly",
+      special: "Rs.300 in February (instead of Rs.200)",
+      slabs: {
+        male: [
+          { min: 0, max: 25000, amount: 0, label: "Up to Rs.25,000" },
+          { min: 25001, max: Infinity, amount: 200, label: "Above Rs.25,000" }
+        ],
+        female: [
+          { min: 0, max: 25000, amount: 0, label: "Up to Rs.25,000" },
+          { min: 25001, max: Infinity, amount: 200, label: "Above Rs.25,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.25,000/month for all genders", "Rs.300 in February to reach Rs.2,500 annual cap", "Simple 2-tier slab"]
+    },
+    tamilnadu: {
+      name: "Tamil Nadu",
+      freq: "Half-Yearly",
+      special: "Based on 6-month income",
+      slabs: {
+        male: [
+          { min: 0, max: 21000, amount: 0, label: "Up to Rs.21,000 (HY)" },
+          { min: 21001, max: 30000, amount: 135, label: "Rs.21,001 - Rs.30,000" },
+          { min: 30001, max: 45000, amount: 315, label: "Rs.30,001 - Rs.45,000" },
+          { min: 45001, max: 60000, amount: 690, label: "Rs.45,001 - Rs.60,000" },
+          { min: 60001, max: 75000, amount: 1025, label: "Rs.60,001 - Rs.75,000" },
+          { min: 75001, max: Infinity, amount: 1250, label: "Above Rs.75,000" }
+        ],
+        female: [
+          { min: 0, max: 21000, amount: 0, label: "Up to Rs.21,000 (HY)" },
+          { min: 21001, max: 30000, amount: 135, label: "Rs.21,001 - Rs.30,000" },
+          { min: 30001, max: 45000, amount: 315, label: "Rs.30,001 - Rs.45,000" },
+          { min: 45001, max: 60000, amount: 690, label: "Rs.45,001 - Rs.60,000" },
+          { min: 60001, max: 75000, amount: 1025, label: "Rs.60,001 - Rs.75,000" },
+          { min: 75001, max: Infinity, amount: 1250, label: "Above Rs.75,000" }
+        ]
+      },
+      exemptions: ["Half-yearly calculation (Apr-Sep and Oct-Mar)", "Nil up to Rs.21,000 half-yearly income (~Rs.3,500/month)", "Max Rs.1,250 per half-year = Rs.2,500/year"]
+    },
+    westbengal: {
+      name: "West Bengal",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 10000, amount: 0, label: "Up to Rs.10,000" },
+          { min: 10001, max: 15000, amount: 110, label: "Rs.10,001 - Rs.15,000" },
+          { min: 15001, max: 25000, amount: 130, label: "Rs.15,001 - Rs.25,000" },
+          { min: 25001, max: 40000, amount: 150, label: "Rs.25,001 - Rs.40,000" },
+          { min: 40001, max: Infinity, amount: 200, label: "Above Rs.40,000" }
+        ],
+        female: [
+          { min: 0, max: 10000, amount: 0, label: "Up to Rs.10,000" },
+          { min: 10001, max: 15000, amount: 110, label: "Rs.10,001 - Rs.15,000" },
+          { min: 15001, max: 25000, amount: 130, label: "Rs.15,001 - Rs.25,000" },
+          { min: 25001, max: 40000, amount: 150, label: "Rs.25,001 - Rs.40,000" },
+          { min: 40001, max: Infinity, amount: 200, label: "Above Rs.40,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.10,000/month", "5-tier graduated slab system", "Annual cap: Rs.2,400"]
+    },
+    gujarat: {
+      name: "Gujarat",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 5999, amount: 0, label: "Up to Rs.5,999" },
+          { min: 6000, max: 8999, amount: 80, label: "Rs.6,000 - Rs.8,999" },
+          { min: 9000, max: 11999, amount: 150, label: "Rs.9,000 - Rs.11,999" },
+          { min: 12000, max: Infinity, amount: 200, label: "Above Rs.12,000" }
+        ],
+        female: [
+          { min: 0, max: 5999, amount: 0, label: "Up to Rs.5,999" },
+          { min: 6000, max: 8999, amount: 80, label: "Rs.6,000 - Rs.8,999" },
+          { min: 9000, max: 11999, amount: 150, label: "Rs.9,000 - Rs.11,999" },
+          { min: 12000, max: Infinity, amount: 200, label: "Above Rs.12,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.5,999/month", "4-tier slab system", "Annual cap: Rs.2,400"]
+    },
+    andhra: {
+      name: "Andhra Pradesh",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 15000, amount: 0, label: "Up to Rs.15,000" },
+          { min: 15001, max: 20000, amount: 150, label: "Rs.15,001 - Rs.20,000" },
+          { min: 20001, max: Infinity, amount: 200, label: "Above Rs.20,000" }
+        ],
+        female: [
+          { min: 0, max: 15000, amount: 0, label: "Up to Rs.15,000" },
+          { min: 15001, max: 20000, amount: 150, label: "Rs.15,001 - Rs.20,000" },
+          { min: 20001, max: Infinity, amount: 200, label: "Above Rs.20,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.15,000/month", "3-tier slab", "Annual cap: Rs.2,400"]
+    },
+    telangana: {
+      name: "Telangana",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 15000, amount: 0, label: "Up to Rs.15,000" },
+          { min: 15001, max: 20000, amount: 150, label: "Rs.15,001 - Rs.20,000" },
+          { min: 20001, max: Infinity, amount: 200, label: "Above Rs.20,000" }
+        ],
+        female: [
+          { min: 0, max: 15000, amount: 0, label: "Up to Rs.15,000" },
+          { min: 15001, max: 20000, amount: 150, label: "Rs.15,001 - Rs.20,000" },
+          { min: 20001, max: Infinity, amount: 200, label: "Above Rs.20,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.15,000/month", "Same slab as Andhra Pradesh", "Annual cap: Rs.2,400"]
+    },
+    kerala: {
+      name: "Kerala",
+      freq: "Half-Yearly",
+      special: "Based on 6-month income",
+      slabs: {
+        male: [
+          { min: 0, max: 11999, amount: 0, label: "Up to Rs.11,999 (HY)" },
+          { min: 12000, max: 17999, amount: 120, label: "Rs.12,000 - Rs.17,999" },
+          { min: 18000, max: 29999, amount: 180, label: "Rs.18,000 - Rs.29,999" },
+          { min: 30000, max: 44999, amount: 300, label: "Rs.30,000 - Rs.44,999" },
+          { min: 45000, max: 59999, amount: 450, label: "Rs.45,000 - Rs.59,999" },
+          { min: 60000, max: 74999, amount: 600, label: "Rs.60,000 - Rs.74,999" },
+          { min: 75000, max: 99999, amount: 750, label: "Rs.75,000 - Rs.99,999" },
+          { min: 100000, max: 124999, amount: 1000, label: "Rs.1,00,000 - Rs.1,24,999" },
+          { min: 125000, max: Infinity, amount: 1250, label: "Above Rs.1,25,000" }
+        ],
+        female: [
+          { min: 0, max: 11999, amount: 0, label: "Up to Rs.11,999 (HY)" },
+          { min: 12000, max: 17999, amount: 120, label: "Rs.12,000 - Rs.17,999" },
+          { min: 18000, max: 29999, amount: 180, label: "Rs.18,000 - Rs.29,999" },
+          { min: 30000, max: 44999, amount: 300, label: "Rs.30,000 - Rs.44,999" },
+          { min: 45000, max: 59999, amount: 450, label: "Rs.45,000 - Rs.59,999" },
+          { min: 60000, max: 74999, amount: 600, label: "Rs.60,000 - Rs.74,999" },
+          { min: 75000, max: 99999, amount: 750, label: "Rs.75,000 - Rs.99,999" },
+          { min: 100000, max: 124999, amount: 1000, label: "Rs.1,00,000 - Rs.1,24,999" },
+          { min: 125000, max: Infinity, amount: 1250, label: "Above Rs.1,25,000" }
+        ]
+      },
+      exemptions: ["Half-yearly payment (Apr-Sep and Oct-Mar)", "Nil up to Rs.11,999 half-yearly (~Rs.2,000/month)", "9-tier graduated slab"]
+    },
+    madhyapradesh: {
+      name: "Madhya Pradesh",
+      freq: "Monthly",
+      special: "Rs.212 in last month (instead of Rs.208)",
+      slabs: {
+        male: [
+          { min: 0, max: 18750, amount: 0, label: "Up to Rs.18,750" },
+          { min: 18751, max: 25000, amount: 125, label: "Rs.18,751 - Rs.25,000" },
+          { min: 25001, max: Infinity, amount: 208, label: "Above Rs.25,000" }
+        ],
+        female: [
+          { min: 0, max: 18750, amount: 0, label: "Up to Rs.18,750" },
+          { min: 18751, max: 25000, amount: 125, label: "Rs.18,751 - Rs.25,000" },
+          { min: 25001, max: Infinity, amount: 208, label: "Above Rs.25,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.18,750/month", "Rs.208 x 11 months + Rs.212 last month = Rs.2,500/year", "3-tier slab"]
+    },
+    assam: {
+      name: "Assam",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 10000, amount: 0, label: "Up to Rs.10,000" },
+          { min: 10001, max: 15000, amount: 150, label: "Rs.10,001 - Rs.15,000" },
+          { min: 15001, max: 25000, amount: 180, label: "Rs.15,001 - Rs.25,000" },
+          { min: 25001, max: Infinity, amount: 208, label: "Above Rs.25,000" }
+        ],
+        female: [
+          { min: 0, max: 10000, amount: 0, label: "Up to Rs.10,000" },
+          { min: 10001, max: 15000, amount: 150, label: "Rs.10,001 - Rs.15,000" },
+          { min: 15001, max: 25000, amount: 180, label: "Rs.15,001 - Rs.25,000" },
+          { min: 25001, max: Infinity, amount: 208, label: "Above Rs.25,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.10,000/month", "4-tier slab", "Annual cap: Rs.2,400"]
+    },
+    bihar: {
+      name: "Bihar",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 25000, amount: 0, label: "Up to Rs.25,000" },
+          { min: 25001, max: 41666, amount: 83, label: "Rs.25,001 - Rs.41,666" },
+          { min: 41667, max: Infinity, amount: 208, label: "Above Rs.41,666" }
+        ],
+        female: [
+          { min: 0, max: 25000, amount: 0, label: "Up to Rs.25,000" },
+          { min: 25001, max: 41666, amount: 83, label: "Rs.25,001 - Rs.41,666" },
+          { min: 41667, max: Infinity, amount: 208, label: "Above Rs.41,666" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.25,000/month", "3-tier slab", "Annual cap: Rs.2,500"]
+    },
+    jharkhand: {
+      name: "Jharkhand",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 25000, amount: 0, label: "Up to Rs.25,000" },
+          { min: 25001, max: 41666, amount: 83, label: "Rs.25,001 - Rs.41,666" },
+          { min: 41667, max: 66666, amount: 125, label: "Rs.41,667 - Rs.66,666" },
+          { min: 66667, max: 83333, amount: 167, label: "Rs.66,667 - Rs.83,333" },
+          { min: 83334, max: Infinity, amount: 208, label: "Above Rs.83,333" }
+        ],
+        female: [
+          { min: 0, max: 25000, amount: 0, label: "Up to Rs.25,000" },
+          { min: 25001, max: 41666, amount: 83, label: "Rs.25,001 - Rs.41,666" },
+          { min: 41667, max: 66666, amount: 125, label: "Rs.41,667 - Rs.66,666" },
+          { min: 66667, max: 83333, amount: 167, label: "Rs.66,667 - Rs.83,333" },
+          { min: 83334, max: Infinity, amount: 208, label: "Above Rs.83,333" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.25,000/month", "5-tier graduated slab", "Annual cap: Rs.2,500"]
+    },
+    odisha: {
+      name: "Odisha",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 13304, amount: 0, label: "Up to Rs.13,304" },
+          { min: 13305, max: 25000, amount: 125, label: "Rs.13,305 - Rs.25,000" },
+          { min: 25001, max: Infinity, amount: 200, label: "Above Rs.25,000" }
+        ],
+        female: [
+          { min: 0, max: 13304, amount: 0, label: "Up to Rs.13,304" },
+          { min: 13305, max: 25000, amount: 125, label: "Rs.13,305 - Rs.25,000" },
+          { min: 25001, max: Infinity, amount: 200, label: "Above Rs.25,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.13,304/month", "3-tier slab", "Annual cap: Rs.2,400"]
+    },
+    tripura: {
+      name: "Tripura",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 7500, amount: 0, label: "Up to Rs.7,500" },
+          { min: 7501, max: 15000, amount: 150, label: "Rs.7,501 - Rs.15,000" },
+          { min: 15001, max: Infinity, amount: 208, label: "Above Rs.15,000" }
+        ],
+        female: [
+          { min: 0, max: 7500, amount: 0, label: "Up to Rs.7,500" },
+          { min: 7501, max: 15000, amount: 150, label: "Rs.7,501 - Rs.15,000" },
+          { min: 15001, max: Infinity, amount: 208, label: "Above Rs.15,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.7,500/month", "3-tier slab", "Annual cap: Rs.2,496"]
+    },
+    manipur: {
+      name: "Manipur",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 50000, amount: 0, label: "Up to Rs.50,000" },
+          { min: 50001, max: 75000, amount: 1200, label: "Rs.50,001 - Rs.75,000" },
+          { min: 75001, max: 100000, amount: 2000, label: "Rs.75,001 - Rs.1,00,000" },
+          { min: 100001, max: 125000, amount: 2400, label: "Rs.1,00,001 - Rs.1,25,000" },
+          { min: 125001, max: Infinity, amount: 2500, label: "Above Rs.1,25,000" }
+        ],
+        female: [
+          { min: 0, max: 50000, amount: 0, label: "Up to Rs.50,000" },
+          { min: 50001, max: 75000, amount: 1200, label: "Rs.50,001 - Rs.75,000" },
+          { min: 75001, max: 100000, amount: 2000, label: "Rs.75,001 - Rs.1,00,000" },
+          { min: 100001, max: 125000, amount: 2400, label: "Rs.1,00,001 - Rs.1,25,000" },
+          { min: 125001, max: Infinity, amount: 2500, label: "Above Rs.1,25,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.50,000/month -- highest exemption threshold", "5-tier slab with high amounts", "Annual cap: Rs.2,500"]
+    },
+    meghalaya: {
+      name: "Meghalaya",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 4166, amount: 0, label: "Up to Rs.4,166" },
+          { min: 4167, max: 6250, amount: 16, label: "Rs.4,167 - Rs.6,250" },
+          { min: 6251, max: 8333, amount: 25, label: "Rs.6,251 - Rs.8,333" },
+          { min: 8334, max: 12500, amount: 41, label: "Rs.8,334 - Rs.12,500" },
+          { min: 12501, max: 16666, amount: 62, label: "Rs.12,501 - Rs.16,666" },
+          { min: 16667, max: 20833, amount: 83, label: "Rs.16,667 - Rs.20,833" },
+          { min: 20834, max: 25000, amount: 104, label: "Rs.20,834 - Rs.25,000" },
+          { min: 25001, max: 29166, amount: 125, label: "Rs.25,001 - Rs.29,166" },
+          { min: 29167, max: 33333, amount: 150, label: "Rs.29,167 - Rs.33,333" },
+          { min: 33334, max: 41666, amount: 175, label: "Rs.33,334 - Rs.41,666" },
+          { min: 41667, max: Infinity, amount: 208, label: "Above Rs.41,666" }
+        ],
+        female: [
+          { min: 0, max: 4166, amount: 0, label: "Up to Rs.4,166" },
+          { min: 4167, max: 6250, amount: 16, label: "Rs.4,167 - Rs.6,250" },
+          { min: 6251, max: 8333, amount: 25, label: "Rs.6,251 - Rs.8,333" },
+          { min: 8334, max: 12500, amount: 41, label: "Rs.8,334 - Rs.12,500" },
+          { min: 12501, max: 16666, amount: 62, label: "Rs.12,501 - Rs.16,666" },
+          { min: 16667, max: 20833, amount: 83, label: "Rs.16,667 - Rs.20,833" },
+          { min: 20834, max: 25000, amount: 104, label: "Rs.20,834 - Rs.25,000" },
+          { min: 25001, max: 29166, amount: 125, label: "Rs.25,001 - Rs.29,166" },
+          { min: 29167, max: 33333, amount: 150, label: "Rs.29,167 - Rs.33,333" },
+          { min: 33334, max: 41666, amount: 175, label: "Rs.33,334 - Rs.41,666" },
+          { min: 41667, max: Infinity, amount: 208, label: "Above Rs.41,666" }
+        ]
+      },
+      exemptions: ["Graduated 11-tier slab system", "Lowest starting rate: Rs.16/month", "Annual cap: Rs.2,400"]
+    },
+    sikkim: {
+      name: "Sikkim",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 20000, amount: 0, label: "Up to Rs.20,000" },
+          { min: 20001, max: 30000, amount: 125, label: "Rs.20,001 - Rs.30,000" },
+          { min: 30001, max: 40000, amount: 150, label: "Rs.30,001 - Rs.40,000" },
+          { min: 40001, max: Infinity, amount: 200, label: "Above Rs.40,000" }
+        ],
+        female: [
+          { min: 0, max: 20000, amount: 0, label: "Up to Rs.20,000" },
+          { min: 20001, max: 30000, amount: 125, label: "Rs.20,001 - Rs.30,000" },
+          { min: 30001, max: 40000, amount: 150, label: "Rs.30,001 - Rs.40,000" },
+          { min: 40001, max: Infinity, amount: 200, label: "Above Rs.40,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.20,000/month", "4-tier slab", "Annual cap: Rs.2,400"]
+    },
+    chhattisgarh: {
+      name: "Chhattisgarh",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 12500, amount: 0, label: "Up to Rs.12,500" },
+          { min: 12501, max: 16666, amount: 150, label: "Rs.12,501 - Rs.16,666" },
+          { min: 16667, max: 20833, amount: 180, label: "Rs.16,667 - Rs.20,833" },
+          { min: 20834, max: 25000, amount: 190, label: "Rs.20,834 - Rs.25,000" },
+          { min: 25001, max: Infinity, amount: 200, label: "Above Rs.25,000" }
+        ],
+        female: [
+          { min: 0, max: 12500, amount: 0, label: "Up to Rs.12,500" },
+          { min: 12501, max: 16666, amount: 150, label: "Rs.12,501 - Rs.16,666" },
+          { min: 16667, max: 20833, amount: 180, label: "Rs.16,667 - Rs.20,833" },
+          { min: 20834, max: 25000, amount: 190, label: "Rs.20,834 - Rs.25,000" },
+          { min: 25001, max: Infinity, amount: 200, label: "Above Rs.25,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.12,500/month", "5-tier slab", "Annual cap: Rs.2,400"]
+    },
+    mizoram: {
+      name: "Mizoram",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 5000, amount: 0, label: "Up to Rs.5,000" },
+          { min: 5001, max: 8000, amount: 50, label: "Rs.5,001 - Rs.8,000" },
+          { min: 8001, max: 10000, amount: 75, label: "Rs.8,001 - Rs.10,000" },
+          { min: 10001, max: 12000, amount: 100, label: "Rs.10,001 - Rs.12,000" },
+          { min: 12001, max: 15000, amount: 125, label: "Rs.12,001 - Rs.15,000" },
+          { min: 15001, max: Infinity, amount: 150, label: "Above Rs.15,000" }
+        ],
+        female: [
+          { min: 0, max: 5000, amount: 0, label: "Up to Rs.5,000" },
+          { min: 5001, max: 8000, amount: 50, label: "Rs.5,001 - Rs.8,000" },
+          { min: 8001, max: 10000, amount: 75, label: "Rs.8,001 - Rs.10,000" },
+          { min: 10001, max: 12000, amount: 100, label: "Rs.10,001 - Rs.12,000" },
+          { min: 12001, max: 15000, amount: 125, label: "Rs.12,001 - Rs.15,000" },
+          { min: 15001, max: Infinity, amount: 150, label: "Above Rs.15,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.5,000/month", "6-tier slab", "Max Rs.150/month (Rs.1,800/year)"]
+    },
+    nagaland: {
+      name: "Nagaland",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 4000, amount: 0, label: "Up to Rs.4,000" },
+          { min: 4001, max: 5000, amount: 35, label: "Rs.4,001 - Rs.5,000" },
+          { min: 5001, max: 7000, amount: 50, label: "Rs.5,001 - Rs.7,000" },
+          { min: 7001, max: 9000, amount: 75, label: "Rs.7,001 - Rs.9,000" },
+          { min: 9001, max: 12000, amount: 100, label: "Rs.9,001 - Rs.12,000" },
+          { min: 12001, max: Infinity, amount: 150, label: "Above Rs.12,000" }
+        ],
+        female: [
+          { min: 0, max: 4000, amount: 0, label: "Up to Rs.4,000" },
+          { min: 4001, max: 5000, amount: 35, label: "Rs.4,001 - Rs.5,000" },
+          { min: 5001, max: 7000, amount: 50, label: "Rs.5,001 - Rs.7,000" },
+          { min: 7001, max: 9000, amount: 75, label: "Rs.7,001 - Rs.9,000" },
+          { min: 9001, max: 12000, amount: 100, label: "Rs.9,001 - Rs.12,000" },
+          { min: 12001, max: Infinity, amount: 150, label: "Above Rs.12,000" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.4,000/month", "6-tier slab", "Max Rs.150/month (Rs.1,800/year)"]
+    },
+    puducherry: {
+      name: "Puducherry",
+      freq: "Monthly",
+      special: "None",
+      slabs: {
+        male: [
+          { min: 0, max: 9999, amount: 0, label: "Up to Rs.9,999" },
+          { min: 10000, max: 12499, amount: 50, label: "Rs.10,000 - Rs.12,499" },
+          { min: 12500, max: 16666, amount: 75, label: "Rs.12,500 - Rs.16,666" },
+          { min: 16667, max: 20833, amount: 100, label: "Rs.16,667 - Rs.20,833" },
+          { min: 20834, max: 25000, amount: 125, label: "Rs.20,834 - Rs.25,000" },
+          { min: 25001, max: 29166, amount: 150, label: "Rs.25,001 - Rs.29,166" },
+          { min: 29167, max: 33333, amount: 175, label: "Rs.29,167 - Rs.33,333" },
+          { min: 33334, max: Infinity, amount: 200, label: "Above Rs.33,333" }
+        ],
+        female: [
+          { min: 0, max: 9999, amount: 0, label: "Up to Rs.9,999" },
+          { min: 10000, max: 12499, amount: 50, label: "Rs.10,000 - Rs.12,499" },
+          { min: 12500, max: 16666, amount: 75, label: "Rs.12,500 - Rs.16,666" },
+          { min: 16667, max: 20833, amount: 100, label: "Rs.16,667 - Rs.20,833" },
+          { min: 20834, max: 25000, amount: 125, label: "Rs.20,834 - Rs.25,000" },
+          { min: 25001, max: 29166, amount: 150, label: "Rs.25,001 - Rs.29,166" },
+          { min: 29167, max: 33333, amount: 175, label: "Rs.29,167 - Rs.33,333" },
+          { min: 33334, max: Infinity, amount: 200, label: "Above Rs.33,333" }
+        ]
+      },
+      exemptions: ["Nil up to Rs.9,999/month", "8-tier graduated slab", "Only Union Territory that levies PT", "Annual cap: Rs.2,400"]
+    },
+    delhi: { name: "Delhi", noPT: true },
+    up: { name: "Uttar Pradesh", noPT: true },
+    rajasthan: { name: "Rajasthan", noPT: true },
+    haryana: { name: "Haryana", noPT: true },
+    punjab: { name: "Punjab", noPT: true },
+    uttarakhand: { name: "Uttarakhand", noPT: true },
+    hp: { name: "Himachal Pradesh", noPT: true },
+    goa: { name: "Goa", noPT: true },
+    jk: { name: "Jammu & Kashmir", noPT: true }
+  };
 
-  <h3>Key Facts About Professional Tax</h3>
-  <div class="rate-comparison">
-    <div class="rate-card">
-      <div class="name">Constitutional Cap</div>
-      <div class="val">₹2,500</div>
-      <div class="desc">Maximum PT per year per person</div>
-    </div>
-    <div class="rate-card">
-      <div class="name">Tax Deduction</div>
-      <div class="val">Sec 16(iii)</div>
-      <div class="desc">Available in both Old & New regime</div>
-    </div>
-    <div class="rate-card">
-      <div class="name">States with PT</div>
-      <div class="val">21 + 1 UT</div>
-      <div class="desc">Maharashtra, Karnataka, TN, WB, etc.</div>
-    </div>
-  </div>
+  function setGender(gender) {
+    currentGender = gender;
+    document.querySelectorAll('.gender-tab').forEach(t => t.classList.remove('active'));
+    event.target.closest('.gender-tab').classList.add('active');
+  }
 
-  <h3>States That Do NOT Levy Professional Tax</h3>
-  <p>Delhi, Uttar Pradesh, Rajasthan, Haryana, Punjab, Uttarakhand, Himachal Pradesh, Goa, and Jammu & Kashmir do not levy any professional tax. If you work in these states, no PT will be deducted from your salary.</p>
+  function onStateChange() {
+    const state = document.getElementById('stateSelect').value;
+    const info = document.getElementById('stateInfo');
+    if (!state) { info.textContent = ''; return; }
+    const data = ptData[state];
+    if (data.noPT) {
+      info.textContent = data.name + ' does NOT levy Professional Tax. No deduction from salary.';
+      info.style.color = '#ff6b6b';
+    } else {
+      info.textContent = data.name + ' levies PT ' + data.freq.toLowerCase() + '. Max annual cap: Rs.2,500.';
+      info.style.color = '#00a878';
+    }
+  }
 
-  <h3>How PT Saves You Income Tax</h3>
-  <p>Professional Tax paid is fully deductible under Section 16(iii) of the Income Tax Act — available under BOTH old and new tax regimes. For someone in the 30% tax bracket, paying ₹2,500 PT annually saves approximately ₹780 in income tax (₹2,500 × 30% × 1.04 cess). Your effective cost is only ₹1,720 per year.</p>
+  function calculatePT() {
+    const stateKey = document.getElementById('stateSelect').value;
+    const salary = parseFloat(document.getElementById('salary').value) || 0;
+    const age = parseInt(document.getElementById('age').value) || 0;
 
-  <h3>Frequently Asked Questions</h3>
-  <div class="faq-box">
-    <p>Is Professional Tax the same in all states?</p>
-    <p>No. Each state sets its own PT slab rates. The only common rule is the constitutional ceiling of ₹2,500 per year. Maharashtra has gender-specific slabs where women earning up to ₹25,000 are fully exempt.</p>
-  </div>
-  <div class="faq-box">
-    <p>Who is responsible for paying Professional Tax?</p>
-    <p>For salaried employees, the employer deducts PT from monthly salary and deposits it with the state government. Self-employed professionals must register and pay PT directly via PTEC (Professional Tax Enrolment Certificate).</p>
-  </div>
-  <div class="faq-box">
-    <p>Can I claim PT deduction in the new tax regime?</p>
-    <p>Yes! Professional Tax is one of the few deduction0s available under the new tax regime via Section 16(iii). It is deducted automatically from your salary income in Form 16.</p>
-  </div>
-  <div class="faq-box">
-    <p>What happens if my employer does not deduct PT?</p>
-    <p>The employer faces penalties and interest for non-compliance. The liability is on the employer, not the employee. However, you should verify PT deduction on your salary slip and Form 16.</p>
-  </div>
-  <div class="faq-box">
-    <p>Do remote workers pay PT based on employer location or home location?</p>
-    <p>PT is based on your work location, not your employer's registered location. If you work from home in Maharashtra for a Delhi-based company, Maharashtra PT applies.</p>
-  </div>
-</section>
+    if (!stateKey) { alert('Please select your state.'); return; }
+    if (salary <= 0) { alert('Please enter a valid monthly salary.'); return; }
 
-<footer>
-  <p>&copy; 2026 Prime Tools — primetoolsapp.com | Free tax & finance calculators for India</p>
-</footer>
+    const data = ptData[stateKey];
+
+    if (data.noPT) {
+      showNoPT(data, salary);
+      return;
+    }
+
+    if (age >= 65) {
+      showSeniorExempt(data, salary);
+      return;
+    }
+
+    const slabs = data.slabs[currentGender];
+    let applicableSlab = slabs.find(s => salary >= s.min && salary <= s.max);
+    if (!applicableSlab) applicableSlab = slabs[slabs.length - 1];
+
+    const monthlyPT = applicableSlab.amount;
+    let annualPT;
+    if (data.freq === 'Half-Yearly') {
+      annualPT = monthlyPT * 2;
+    } else if (stateKey === 'maharashtra') {
+      annualPT = (monthlyPT * 11) + 300;
+    } else if (stateKey === 'karnataka') {
+      annualPT = (monthlyPT * 11) + 300;
+    } else if (stateKey === 'madhyapradesh') {
+      annualPT = (monthlyPT * 11) + 212;
+    } else {
+      annualPT = monthlyPT * 12;
+    }
+
+    annualPT = Math.min(annualPT, 2500);
+    const taxSaving = Math.round(annualPT * 0.312);
+    const effectiveCost = annualPT - taxSaving;
+
+    document.getElementById('resMonthlyPT').textContent = 'Rs.' + monthlyPT.toLocaleString('en-IN');
+    document.getElementById('resMonthlyPT').style.color = monthlyPT > 0 ? '#00d4aa' : '#ff6b6b';
+    document.getElementById('resStateName').textContent = data.name + ' -- ' + data.freq + ' PT';
+    document.getElementById('resAnnualPT').textContent = 'Rs.' + annualPT.toLocaleString('en-IN');
+    document.getElementById('resTaxSaving').textContent = 'Rs.' + taxSaving.toLocaleString('en-IN');
+    document.getElementById('resEffective').textContent = 'Rs.' + effectiveCost.toLocaleString('en-IN');
+
+    document.getElementById('sumState').textContent = data.name;
+    document.getElementById('sumSalary').textContent = 'Rs.' + salary.toLocaleString('en-IN') + '/month';
+    document.getElementById('sumSlab').textContent = applicableSlab.label;
+    document.getElementById('sumRate').textContent = 'Rs.' + monthlyPT + '/month';
+    document.getElementById('sumSpecial').textContent = data.special;
+    document.getElementById('sumMonthly').textContent = 'Rs.' + monthlyPT.toLocaleString('en-IN');
+    document.getElementById('sumAnnual').textContent = 'Rs.' + annualPT.toLocaleString('en-IN');
+
+    const tbody = document.getElementById('slabBody');
+    tbody.innerHTML = '';
+    slabs.forEach(slab => {
+      const row = document.createElement('tr');
+      if (slab === applicableSlab) row.classList.add('active-slab');
+      row.innerHTML = '<td>' + slab.label + '</td><td style="text-align:right;">Rs.' + slab.amount + '</td>';
+      tbody.appendChild(row);
+    });
+
+    document.getElementById('exemptionBox').style.display = 'block';
+    document.getElementById('exemptionList').innerHTML = data.exemptions.map(e => '<li>' + e + '</li>').join('');
+    document.getElementById('resultBox').classList.add('show');
+    document.getElementById('comparisonWrap').classList.remove('show');
+  }
+
+  function showNoPT(data, salary) {
+    document.getElementById('resMonthlyPT').textContent = 'Rs.0';
+    document.getElementById('resMonthlyPT').style.color = '#00d4aa';
+    document.getElementById('resStateName').textContent = data.name + ' -- No PT Levied';
+    document.getElementById('resAnnualPT').textContent = 'Rs.0';
+    document.getElementById('resTaxSaving').textContent = 'Rs.0';
+    document.getElementById('resEffective').textContent = 'Rs.0';
+    document.getElementById('sumState').textContent = data.name;
+    document.getElementById('sumSalary').textContent = 'Rs.' + salary.toLocaleString('en-IN');
+    document.getElementById('sumSlab').textContent = 'N/A';
+    document.getElementById('sumRate').textContent = 'No PT';
+    document.getElementById('sumSpecial').textContent = '-';
+    document.getElementById('sumMonthly').textContent = 'Rs.0';
+    document.getElementById('sumAnnual').textContent = 'Rs.0';
+    document.getElementById('slabBody').innerHTML = '';
+    document.getElementById('exemptionBox').style.display = 'none';
+    document.getElementById('resultBox').classList.add('show');
+  }
+
+  function showSeniorExempt(data, salary) {
+    document.getElementById('resMonthlyPT').textContent = 'Rs.0';
+    document.getElementById('resMonthlyPT').style.color = '#00d4aa';
+    document.getElementById('resStateName').textContent = data.name + ' -- Senior Citizen Exempt';
+    document.getElementById('resAnnualPT').textContent = 'Rs.0';
+    document.getElementById('resTaxSaving').textContent = 'Rs.0';
+    document.getElementById('resEffective').textContent = 'Rs.0';
+    document.getElementById('sumState').textContent = data.name;
+    document.getElementById('sumSalary').textContent = 'Rs.' + salary.toLocaleString('en-IN');
+    document.getElementById('sumSlab').textContent = 'Senior Citizen (Age 65+)';
+    document.getElementById('sumRate').textContent = 'Exempt';
+    document.getElementById('sumSpecial').textContent = '-';
+    document.getElementById('sumMonthly').textContent = 'Rs.0';
+    document.getElementById('sumAnnual').textContent = 'Rs.0';
+    document.getElementById('slabBody').innerHTML = '';
+    document.getElementById('exemptionBox').style.display = 'block';
+    document.getElementById('exemptionList').innerHTML = '<li>Senior citizens (65+) are exempt from Professional Tax in all states</li>';
+    document.getElementById('resultBox').classList.add('show');
+  }
+
+  function toggleComparison() {
+    const wrap = document.getElementById('comparisonWrap');
+    const isShow = wrap.classList.toggle('show');
+    if (isShow && document.getElementById('comparisonBody').children.length === 0) {
+      const tbody = document.getElementById('comparisonBody');
+      const states = [
+        { name: 'Maharashtra', freq: 'Monthly', max: 'Rs.200', cap: 'Rs.2,500', nil: 'Rs.7,500 (M) / Rs.25,000 (F)' },
+        { name: 'Karnataka', freq: 'Monthly', max: 'Rs.200', cap: 'Rs.2,500', nil: 'Rs.25,000' },
+        { name: 'Tamil Nadu', freq: 'Half-Yearly', max: 'Rs.1,250', cap: 'Rs.2,500', nil: 'Rs.21,000 (HY)' },
+        { name: 'West Bengal', freq: 'Monthly', max: 'Rs.200', cap: 'Rs.2,400', nil: 'Rs.10,000' },
+        { name: 'Gujarat', freq: 'Monthly', max: 'Rs.200', cap: 'Rs.2,400', nil: 'Rs.5,999' },
+        { name: 'Andhra Pradesh', freq: 'Monthly', max: 'Rs.200', cap: 'Rs.2,400', nil: 'Rs.15,000' },
+        { name: 'Telangana', freq: 'Monthly', max: 'Rs.200', cap: 'Rs.2,400', nil: 'Rs.15,000' },
+        { name: 'Kerala', freq: 'Half-Yearly', max: 'Rs.1,250', cap: 'Rs.2,500', nil: 'Rs.11,999 (HY)' },
+        { name: 'Madhya Pradesh', freq: 'Monthly', max: 'Rs.208', cap: 'Rs.2,500', nil: 'Rs.18,750' },
+        { name: 'Assam', freq: 'Monthly', max: 'Rs.208', cap: 'Rs.2,400', nil: 'Rs.10,000' },
+        { name: 'Bihar', freq: 'Monthly', max: 'Rs.208', cap: 'Rs.2,500', nil: 'Rs.25,000' },
+        { name: 'Jharkhand', freq: 'Monthly', max: 'Rs.208', cap: 'Rs.2,500', nil: 'Rs.25,000' },
+        { name: 'Odisha', freq: 'Monthly', max: 'Rs.200', cap: 'Rs.2,400', nil: 'Rs.13,304' },
+        { name: 'Tripura', freq: 'Monthly', max: 'Rs.208', cap: 'Rs.2,496', nil: 'Rs.7,500' },
+        { name: 'Manipur', freq: 'Monthly', max: 'Rs.2,500', cap: 'Rs.2,500', nil: 'Rs.50,000' },
+        { name: 'Meghalaya', freq: 'Monthly', max: 'Rs.208', cap: 'Rs.2,400', nil: 'Rs.4,166' },
+        { name: 'Sikkim', freq: 'Monthly', max: 'Rs.200', cap: 'Rs.2,400', nil: 'Rs.20,000' },
+        { name: 'Chhattisgarh', freq: 'Monthly', max: 'Rs.200', cap: 'Rs.2,400', nil: 'Rs.12,500' },
+        { name: 'Mizoram', freq: 'Monthly', max: 'Rs.150', cap: 'Rs.1,800', nil: 'Rs.5,000' },
+        { name: 'Nagaland', freq: 'Monthly', max: 'Rs.150', cap: 'Rs.1,800', nil: 'Rs.4,000' },
+        { name: 'Puducherry', freq: 'Monthly', max: 'Rs.200', cap: 'Rs.2,400', nil: 'Rs.9,999' }
+      ];
+      states.forEach(s => {
+        const row = document.createElement('tr');
+        row.innerHTML = '<td>' + s.name + '</td><td>' + s.freq + '</td><td>' + s.max + '</td><td>' + s.cap + '</td><td>' + s.nil + '</td>';
+        tbody.appendChild(row);
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
