@@ -14,7 +14,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Receipt Generator India - Payment Receipt Maker - Prime Tools</title>
-  <meta name="description" content="Free Receipt Generator for India. Create professional payment receipts, rent receipts, and donation receipts with auto-calculated totals, GST, and digital signature. Download as PDF or print instantly.">
+  <meta name="description" content="Free Receipt Generator for India. Create professional payment receipts, rent receipts, and donation receipts with auto-calculated totals, taxes, and digital signature. Download as PDF or print instantly.">
   <meta name="keywords" content="receipt generator India, payment receipt maker, rent receipt generator, donation receipt, cash receipt, professional receipt template, free receipt tool India">
   <meta property="og:title" content="Receipt Generator India - Payment Receipt Maker - Prime Tools">
   <meta property="og:description" content="Create professional payment receipts, rent receipts & donation receipts. Auto-calculate totals, add GST & download as PDF. Free tool for Indian businesses.">
@@ -356,10 +356,30 @@
       font-size: 13px; margin-top: 40px;
     }
 
+    /* Print styles - show preview only */
     @media print {
-      header, .page-title, .calculator-box, .info-section, footer { display: none !important; }
-      .preview-box { display: block !important; border: none !important; }
-      .receipt-preview { padding: 20px !important; }
+      header, .page-title, .calculator-box, .info-section, footer {
+        display: none !important;
+      }
+      .preview-box {
+        display: block !important;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        border: none !important;
+        border-radius: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+      }
+      .preview-header {
+        display: none !important;
+      }
+      .receipt-preview {
+        padding: 20px !important;
+      }
+      body {
+        background: white !important;
+      }
     }
   </style>
 
@@ -557,14 +577,14 @@
   <!-- Buttons -->
   <div class="btn-row" style="margin-top:24px;">
     <button class="calc-btn" onclick="generatePreview()">👁 Preview Receipt</button>
-    <button class="calc-btn secondary" onclick="window.print()">🖨 Print / Save PDF</button>
+    <button class="calc-btn secondary" onclick="printReceipt()">🖨 Print / Save PDF</button>
   </div>
 
   <!-- Preview -->
   <div class="preview-box" id="previewBox">
     <div class="preview-header">
       <span>Receipt Preview</span>
-      <button onclick="window.print()">Print / Save PDF</button>
+      <button onclick="printReceipt()">Print / Save PDF</button>
     </div>
     <div class="receipt-preview" id="receiptPreview"></div>
   </div>
@@ -633,6 +653,7 @@
 <script>
   var itemCount = 0;
   var currentType = 'payment';
+  var receiptPreviewHTML = '';
 
   function setTodayDate() {
     var today = new Date();
@@ -653,6 +674,7 @@
     var b = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
 
     function inWords(n) {
+      if (n === 0) return 'Zero';
       if (n < 20) return a[n];
       if (n < 100) return b[Math.floor(n / 10)] + (n % 10 !== 0 ? ' ' + a[n % 10] : '');
       if (n < 1000) return a[Math.floor(n / 100)] + ' Hundred' + (n % 100 !== 0 ? ' and ' + inWords(n % 100) : '');
@@ -665,14 +687,17 @@
     var rupees = Math.floor(num);
     var paise = Math.round((num - rupees) * 100);
     var result = inWords(rupees) + ' Rupees';
-    if (paise > 0) result += ' and ' + inWords(paise) + ' Paise';
-    result += ' Only';
+    if (paise > 0) result = result + ' and ' + inWords(paise) + ' Paise';
+    result = result + ' Only';
     return result;
   }
 
   function setReceiptType(type) {
     currentType = type;
-    document.querySelectorAll('.receipt-tab').forEach(function(t) { t.classList.remove('active'); });
+    var tabs = document.querySelectorAll('.receipt-tab');
+    for (var i = 0; i < tabs.length; i++) {
+      tabs[i].classList.remove('active');
+    }
     event.target.classList.add('active');
 
     var rentFields = document.getElementById('rentFields');
@@ -700,9 +725,19 @@
     var tr = document.createElement('tr');
     tr.id = 'itemRow' + itemCount;
 
-    var defaultDesc = currentType === 'rent' ? 'Rent for the month' : (currentType === 'donation' ? 'Donation' : 'Product ' + itemCount);
-    var defaultRate = currentType === 'rent' ? '25000' : (currentType === 'donation' ? '5000' : '1000');
-    var defaultGst = currentType === 'rent' ? '0' : (currentType === 'donation' ? '0' : '18');
+    var defaultDesc = 'Product ' + itemCount;
+    var defaultRate = '1000';
+    var defaultGst = '18';
+
+    if (currentType === 'rent') {
+      defaultDesc = 'Rent for the month';
+      defaultRate = '25000';
+      defaultGst = '0';
+    } else if (currentType === 'donation') {
+      defaultDesc = 'Donation';
+      defaultRate = '5000';
+      defaultGst = '0';
+    }
 
     tr.innerHTML =
       '<td class="sno">' + itemCount + '</td>' +
@@ -720,9 +755,9 @@
     var row = document.getElementById('itemRow' + id);
     if (row) row.remove();
     var rows = document.querySelectorAll('#itemsBody tr');
-    rows.forEach(function(r, idx) {
-      r.querySelector('.sno').textContent = idx + 1;
-    });
+    for (var i = 0; i < rows.length; i++) {
+      rows[i].querySelector('.sno').textContent = i + 1;
+    }
     calculateTotals();
   }
 
@@ -732,7 +767,8 @@
     var sgstTotal = 0;
 
     var rows = document.querySelectorAll('#itemsBody tr');
-    rows.forEach(function(row) {
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
       var id = row.id.replace('itemRow', '');
       var qty = parseFloat(document.getElementById('qty' + id).value) || 0;
       var rate = parseFloat(document.getElementById('rate' + id).value) || 0;
@@ -742,12 +778,12 @@
       var gstAmt = gross * (gst / 100);
       var total = gross + gstAmt;
 
-      subtotal += gross;
-      cgstTotal += gstAmt / 2;
-      sgstTotal += gstAmt / 2;
+      subtotal = subtotal + gross;
+      cgstTotal = cgstTotal + (gstAmt / 2);
+      sgstTotal = sgstTotal + (gstAmt / 2);
 
       document.getElementById('amt' + id).textContent = formatINR(total);
-    });
+    }
 
     var grandTotal = subtotal + cgstTotal + sgstTotal;
 
@@ -780,13 +816,15 @@
     var grandTotal = document.getElementById('grandTotal').textContent;
     var amountWords = document.getElementById('amountWords').textContent;
 
-    var typeLabel = currentType === 'rent' ? 'Rent Receipt' : (currentType === 'donation' ? 'Donation Receipt' : 'Payment Receipt');
-    var typeBadge = currentType === 'rent' ? 'RENT RECEIPT' : (currentType === 'donation' ? 'DONATION RECEIPT' : 'PAYMENT RECEIPT');
+    var typeBadge = 'PAYMENT RECEIPT';
+    if (currentType === 'rent') typeBadge = 'RENT RECEIPT';
+    if (currentType === 'donation') typeBadge = 'DONATION RECEIPT';
 
     // Build items table for preview
     var itemsHtml = '';
     var rows = document.querySelectorAll('#itemsBody tr');
-    rows.forEach(function(row, idx) {
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
       var id = row.id.replace('itemRow', '');
       var desc = document.getElementById('desc' + id).value;
       var qty = document.getElementById('qty' + id).value;
@@ -794,16 +832,16 @@
       var gst = document.getElementById('gst' + id).value;
       var amt = document.getElementById('amt' + id).textContent;
 
-      itemsHtml +=
+      itemsHtml = itemsHtml +
         '<tr>' +
-        '<td>' + (idx + 1) + '</td>' +
+        '<td>' + (i + 1) + '</td>' +
         '<td>' + desc + '</td>' +
         '<td class="num">' + qty + '</td>' +
         '<td class="num">Rs. ' + parseFloat(rate).toLocaleString('en-IN') + '</td>' +
         '<td class="num">' + gst + '%</td>' +
         '<td class="num">' + amt + '</td>' +
         '</tr>';
-    });
+    }
 
     // Rent-specific extra info
     var rentExtra = '';
@@ -833,7 +871,7 @@
         '</div>';
     }
 
-    var previewHtml =
+    receiptPreviewHTML =
       '<div class="rp-header">' +
       '<div class="rp-title">RECEIPT</div>' +
       '<div class="rp-subtitle">Official Payment Acknowledgement</div>' +
@@ -932,16 +970,28 @@
       'This is a computer-generated receipt and does not require a physical signature. Generated via Prime Tools — primetoolsapp.com' +
       '</div>';
 
-    document.getElementById('receiptPreview').innerHTML = previewHtml;
+    document.getElementById('receiptPreview').innerHTML = receiptPreviewHTML;
     document.getElementById('previewBox').classList.add('show');
     document.getElementById('previewBox').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function printReceipt() {
+    // If preview not generated yet, generate it first
+    var previewBox = document.getElementById('previewBox');
+    if (!previewBox.classList.contains('show')) {
+      generatePreview();
+    }
+    // Small delay to ensure DOM is updated
+    setTimeout(function() {
+      window.print();
+    }, 100);
   }
 
   // Init
   window.addEventListener('load', function() {
     setTodayDate();
     addItem();
-    if (currentType === 'payment') addItem();
+    addItem();
     calculateTotals();
   });
 </script>
