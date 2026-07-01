@@ -1064,6 +1064,20 @@
         row.innerHTML = '<td>' + s.name + '</td><td>' + s.freq + '</td><td>' + s.max + '</td><td>' + s.cap + '</td><td>' + s.nil + '</td>';
         tbody.appendChild(row);
       });
+      // Display results
+    document.getElementById('holdingPeriod').textContent = `${holdingYears} years (${holdingDays} days)`;
+    document.getElementById('gainType').textContent = isLongTerm ? 'Long Term (LTCG)' : 'Short Term (STCG)';
+    document.getElementById('gainType').className = isLongTerm ? 'val green' : 'val red';
+    document.getElementById('totalGain').textContent = '₹' + Math.round(totalGain).toLocaleString('en-IN');
+    document.getElementById('taxableGain').textContent = '₹' + Math.round(taxableGain).toLocaleString('en-IN');
+    document.getElementById('taxRate').textContent = taxRate;
+    document.getElementById('taxOnGains').textContent = '₹' + Math.round(taxAmount).toLocaleString('en-IN');
+    document.getElementById('cessAmount').textContent = '₹' + Math.round(cess).toLocaleString('en-IN');
+    document.getElementById('totalTax').textContent = '₹' + Math.round(totalTax).toLocaleString('en-IN');
+    document.getElementById('resultNote').textContent = note;
+
+    document.getElementById('resultBox').classList.add('show');
+
     }
   }
 </script>
